@@ -1,0 +1,21 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "date": 1748534400,
+    "text": "sample",
+    "html": "sample",
+    "tags": [
+      "sample"
+    ],
+    "votes": {
+      "abuse": 1,
+      "negative": 1,
+      "positive": 1
+    }
+  },
+  "relationships": {}
+}

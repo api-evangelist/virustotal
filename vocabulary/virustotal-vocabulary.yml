@@ -1,0 +1,464 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: VirusTotal
+  description: >-
+    Unified vocabulary for VirusTotal / Google Threat Intelligence API v3,
+    mapping the operational dimension (OpenAPI tags, resources, schemas)
+    onto the capability dimension (Naftiko workflows) so SOC, IR, and
+    threat-research teams can navigate the surface from either angle.
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+# ============================================================
+# OPERATIONAL DIMENSION (from OpenAPI)
+# ============================================================
+operational:
+  apis:
+    - name: VirusTotal Access Control
+      namespace: virustotal.access-control
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+    - name: VirusTotal IoC Feeds
+      namespace: virustotal.ioc-feeds
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+      tier: Premium
+    - name: VirusTotal IoC Investigation
+      namespace: virustotal.ioc-investigation
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+    - name: VirusTotal Private Scanning
+      namespace: virustotal.private-scanning
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+      tier: Premium
+    - name: VirusTotal Threat Graphs
+      namespace: virustotal.threat-graphs
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+    - name: VirusTotal Threat Landscape
+      namespace: virustotal.threat-landscape
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+      tier: Premium
+    - name: VirusTotal YARA Hunting
+      namespace: virustotal.yara-hunting
+      version: "3.0"
+      baseUrl: https://www.virustotal.com/api/v3
+      status: active
+      tier: Premium
+
+  resources:
+    - name: files
+      apis: [ioc-investigation, ioc-feeds, private-scanning]
+      actions: [submit, get, reanalyse, list, search, get-relationships, get-behaviour]
+      description: Files identified by SHA-256. Central object in the VT graph.
+    - name: urls
+      apis: [ioc-investigation, ioc-feeds, private-scanning]
+      actions: [submit, get, reanalyse, list, get-relationships]
+      description: URLs identified by base64url of the URL string.
+    - name: domains
+      apis: [ioc-investigation, ioc-feeds]
+      actions: [get, reanalyse, get-relationships, comment, vote]
+      description: DNS names with DNS records, WHOIS, certificates, popularity ranks.
+    - name: ip_addresses
+      apis: [ioc-investigation, ioc-feeds]
+      actions: [get, reanalyse, get-relationships, comment, vote]
+      description: IPv4 and IPv6 addresses with ASN, geolocation, reputation.
+    - name: analyses
+      apis: [ioc-investigation, private-scanning]
+      actions: [get, get-relationships]
+      description: Async scan lifecycle objects (queued / in-progress / completed).
+    - name: file_behaviours
+      apis: [ioc-investigation, private-scanning, ioc-feeds]
+      actions: [get, get-html, get-evtx, get-memdump, get-pcap, get-relationships]
+      description: Sandbox execution reports — processes, registry, network, MITRE techniques.
+    - name: comments
+      apis: [ioc-investigation]
+      actions: [list, get, post, delete, vote]
+      description: Community-contributed annotations on any IoC object.
+    - name: votes
+      apis: [ioc-investigation]
+      actions: [get, post]
+      description: Community verdicts (harmless / malicious).
+    - name: graphs
+      apis: [threat-graphs]
+      actions: [create, get, update, delete, search, share, comment]
+      description: Threat Graphs — node/edge visualisations of IoCs and relationships.
+    - name: collections
+      apis: [threat-landscape]
+      actions: [list, create, get, update, delete, add-items, remove-items, comment]
+      description: Curated IoC bundles — also Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities.
+    - name: livehunt_rulesets
+      apis: [yara-hunting]
+      actions: [create, list, get, update, delete, get-notifications, grant-editor, revoke-editor]
+      description: YARA rulesets that match in real time against incoming corpus.
+    - name: retrohunt_jobs
+      apis: [yara-hunting]
+      actions: [create, list, get, delete, abort, get-matching-files]
+      description: YARA scans against the historical corpus.
+    - name: ioc_stream
+      apis: [yara-hunting]
+      actions: [list, get, delete]
+      description: Real-time notification stream of IoC matches.
+    - name: yara_rules
+      apis: [yara-hunting]
+      actions: [list, get, get-relationships]
+      description: Crowdsourced YARA rules shared across the community.
+    - name: users
+      apis: [access-control]
+      actions: [get, update, delete, get-api-usage, get-quotas, get-relationships]
+      description: Individual VirusTotal / GTI user accounts.
+    - name: groups
+      apis: [access-control]
+      actions: [get, update, list-users, add-users, remove-user, list-admins, add-admin, list-service-accounts, get-api-usage]
+      description: Organisation tenants — groups of users with shared quota and ACL.
+    - name: service_accounts
+      apis: [access-control]
+      actions: [create, get, list]
+      description: Non-human API keys scoped to a group.
+    - name: attack_tactics
+      apis: [ioc-investigation]
+      actions: [get, get-relationships]
+      description: MITRE ATT&CK tactics (TA0001..TA0043).
+    - name: attack_techniques
+      apis: [ioc-investigation]
+      actions: [get, get-relationships]
+      description: MITRE ATT&CK techniques (T1059, T1566, ...).
+    - name: popular_threat_categories
+      apis: [ioc-investigation]
+      actions: [list]
+      description: Catalogue of widely-used threat categories (trojan, ransomware, downloader, ...).
+    - name: zip_files
+      apis: [ioc-investigation, private-scanning]
+      actions: [create, get, download]
+      description: Password-protected ZIP exports of selected samples.
+
+  actions:
+    - name: get
+      verb: GET
+      pattern: read
+      description: Retrieve a single object by id.
+    - name: list
+      verb: GET
+      pattern: query
+      description: Enumerate objects, usually with cursor pagination.
+    - name: search
+      verb: GET
+      pattern: query
+      description: Query the corpus with VT search syntax.
+    - name: submit
+      verb: POST
+      pattern: write
+      description: Submit a file / URL for analysis.
+    - name: create
+      verb: POST
+      pattern: write
+      description: Create a new object (graph, collection, ruleset, retrohunt job).
+    - name: update
+      verb: PATCH
+      pattern: write
+      description: Partially update an existing object.
+    - name: delete
+      verb: DELETE
+      pattern: destructive
+      description: Remove an object.
+    - name: comment
+      verb: POST
+      pattern: write
+      description: Add a comment to an IoC or graph.
+    - name: vote
+      verb: POST
+      pattern: write
+      description: Cast a community verdict.
+    - name: reanalyse
+      verb: POST
+      pattern: write
+      description: Trigger a fresh analysis of an existing IoC.
+    - name: get-relationships
+      verb: GET
+      pattern: query
+      description: Walk the graph from an object to related objects.
+    - name: abort
+      verb: POST
+      pattern: destructive
+      description: Cancel a running Retrohunt job.
+    - name: download
+      verb: GET
+      pattern: read
+      description: Stream binary content (samples, EVTX, PCAP, memdump, ZIP).
+
+  schemas:
+    core:
+      - name: FileObject
+      - name: UrlObject
+      - name: DomainObject
+      - name: IpAddressObject
+      - name: AnalysisObject
+      - name: CommentObject
+      - name: VoteObject
+    sandbox:
+      - name: FileBehaviourObject
+    hunting:
+      - name: LivehuntRulesetObject
+      - name: RetrohuntJobObject
+      - name: IocStreamNotificationObject
+      - name: YaraRuleObject
+    landscape:
+      - name: CollectionObject
+      - name: AttackTacticObject
+      - name: AttackTechniqueObject
+      - name: PopularThreatCategoryObject
+    visualisation:
+      - name: GraphObject
+    access:
+      - name: UserObject
+      - name: GroupObject
+
+  parameters:
+    pagination:
+      - name: limit
+        description: Page size cap (varies per endpoint).
+      - name: cursor
+        description: Opaque next-page cursor returned in links.next.
+    identifiers:
+      - name: id
+        description: Object id (SHA-256 for files, base64url for URLs, the domain itself for domains, the IP for ip_addresses).
+      - name: sandbox_id
+        description: Sandbox-prefixed file behaviour id (e.g. <sha256>_<sandbox>).
+    filters:
+      - name: filter
+        description: VT search syntax filter (e.g. type:peexe positives:5+).
+      - name: relationship
+        description: Named edge to traverse (contacted_domains, downloaded_files, etc.).
+    submission:
+      - name: file
+        description: Multipart file upload (POST /files).
+      - name: url
+        description: URL string (POST /urls).
+
+  enums:
+    analysis_status: [queued, in-progress, completed]
+    verdict_category: [harmless, type-unsupported, suspicious, confirmed-timeout, timeout, failure, malicious, undetected]
+    vote_verdict: [harmless, malicious]
+    retrohunt_status: [queued, starting, running, aborting, aborted, finished]
+    ioc_stream_source: [livehunt, retrohunt, intel_feed, subscription]
+    collection_type: [collection, campaign, malware-family, report, software-toolkit, threat-actor, vulnerability]
+    match_object_type: [file, url, domain, ip_address]
+    corpus: [main, goodware]
+
+  authentication:
+    schemes:
+      - name: VTApiKey
+        type: apiKey
+        in: header
+        headerName: x-apikey
+        appliesTo:
+          - access-control
+          - ioc-feeds
+          - ioc-investigation
+          - private-scanning
+          - threat-graphs
+          - threat-landscape
+          - yara-hunting
+    scopes:
+      - name: public
+        appliesTo: [ioc-investigation (read), comments, votes]
+      - name: premium
+        appliesTo: [ioc-feeds, private-scanning, threat-landscape, yara-hunting]
+      - name: enterprise
+        appliesTo: [gti-asm, gti-dtm]
+
+# ============================================================
+# CAPABILITY DIMENSION (from Naftiko)
+# ============================================================
+capability:
+  workflows:
+    - name: ioc-triage
+      description: Look up suspected IoCs (file hash, URL, domain, IP) and pull verdict + relationships.
+      apis: [ioc-investigation]
+      personas: [soc-analyst, ir-responder]
+      domains: [Triage]
+    - name: sample-detonation
+      description: Submit a file or URL for sandbox detonation, poll the analysis, retrieve behaviour.
+      apis: [ioc-investigation, private-scanning]
+      personas: [malware-analyst, soc-analyst]
+      domains: [Sandbox]
+    - name: corpus-search
+      description: Search the VT corpus with VT syntax to find similar samples / infrastructure.
+      apis: [ioc-investigation]
+      personas: [threat-researcher]
+      domains: [Hunt]
+    - name: livehunt-management
+      description: Author and manage YARA rulesets that match in real time against incoming corpus.
+      apis: [yara-hunting]
+      personas: [threat-researcher, detection-engineer]
+      domains: [Hunt]
+    - name: retrohunt-jobs
+      description: Run YARA scans against the historical corpus, monitor progress, fetch matching files.
+      apis: [yara-hunting]
+      personas: [threat-researcher]
+      domains: [Hunt]
+    - name: ioc-stream-consumption
+      description: Drain the IoC Stream into a SIEM / SOAR for downstream automation.
+      apis: [yara-hunting]
+      personas: [soc-engineer]
+      domains: [Hunt, Integration]
+    - name: feed-ingestion
+      description: Pull per-minute / hourly file / URL / domain / IP / sandbox feeds.
+      apis: [ioc-feeds]
+      personas: [data-engineer, soc-engineer]
+      domains: [Integration]
+    - name: threat-landscape-research
+      description: Pull Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities into a research workspace.
+      apis: [threat-landscape]
+      personas: [threat-intel-analyst]
+      domains: [Intelligence]
+    - name: graph-collaboration
+      description: Create and share Threat Graphs with the team or community.
+      apis: [threat-graphs]
+      personas: [threat-intel-analyst, ir-responder]
+      domains: [Intelligence, Collaboration]
+    - name: tenant-administration
+      description: Manage users, groups, service accounts, and quotas across the tenant.
+      apis: [access-control]
+      personas: [platform-admin]
+      domains: [Administration]
+
+  personas:
+    - id: soc-analyst
+      name: SOC Analyst (T1/T2)
+      description: First responder triaging alerts against the VT corpus.
+      workflows: [ioc-triage, sample-detonation]
+    - id: ir-responder
+      name: Incident Responder
+      description: Investigates active incidents and builds the threat picture.
+      workflows: [ioc-triage, graph-collaboration]
+    - id: malware-analyst
+      name: Malware Analyst
+      description: Reverse-engineers samples; consumes sandbox behaviour.
+      workflows: [sample-detonation, corpus-search]
+    - id: threat-researcher
+      name: Threat Researcher
+      description: Authors YARA rules and hunts across corpus and history.
+      workflows: [corpus-search, livehunt-management, retrohunt-jobs]
+    - id: detection-engineer
+      name: Detection Engineer
+      description: Builds and tunes detections; manages Livehunt rulesets.
+      workflows: [livehunt-management]
+    - id: soc-engineer
+      name: SOC Engineer
+      description: Pipes VT signals into SIEM / SOAR.
+      workflows: [ioc-stream-consumption, feed-ingestion]
+    - id: data-engineer
+      name: Data Engineer
+      description: Owns the bulk feed ingestion pipeline.
+      workflows: [feed-ingestion]
+    - id: threat-intel-analyst
+      name: Threat Intelligence Analyst
+      description: Curates landscape view; tracks actors, campaigns, vulns.
+      workflows: [threat-landscape-research, graph-collaboration]
+    - id: platform-admin
+      name: Platform / Tenant Admin
+      description: Owns users, groups, quotas, billing alignment.
+      workflows: [tenant-administration]
+
+  domains:
+    - name: Triage
+      description: Day-one IoC lookup and verdict.
+    - name: Sandbox
+      description: Detonation and behaviour analysis.
+    - name: Hunt
+      description: Active hunting via search, YARA, retro / live.
+    - name: Intelligence
+      description: Curated landscape — actors, malware, campaigns, vulns.
+    - name: Integration
+      description: Pipelines into downstream tooling (SIEM, SOAR, data lake).
+    - name: Collaboration
+      description: Shared graphs, comments, rulesets.
+    - name: Administration
+      description: Tenant / quota / user / group management.
+
+  namespaces:
+    - consumed: virustotal.access-control
+      rest: virustotal.access-control-rest
+      mcp: virustotal.access-control-mcp
+    - consumed: virustotal.ioc-feeds
+      rest: virustotal.ioc-feeds-rest
+      mcp: virustotal.ioc-feeds-mcp
+    - consumed: virustotal.ioc-investigation
+      rest: virustotal.ioc-investigation-rest
+      mcp: virustotal.ioc-investigation-mcp
+    - consumed: virustotal.private-scanning
+      rest: virustotal.private-scanning-rest
+      mcp: virustotal.private-scanning-mcp
+    - consumed: virustotal.threat-graphs
+      rest: virustotal.threat-graphs-rest
+      mcp: virustotal.threat-graphs-mcp
+    - consumed: virustotal.threat-landscape
+      rest: virustotal.threat-landscape-rest
+      mcp: virustotal.threat-landscape-mcp
+    - consumed: virustotal.yara-hunting
+      rest: virustotal.yara-hunting-rest
+      mcp: virustotal.yara-hunting-mcp
+
+  binds:
+    - namespace: env
+      keys:
+        VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+
+# ============================================================
+# CROSS-REFERENCE
+# ============================================================
+crossReference:
+  - resource: files
+    operations: [files-scan, file-info, file-reanalysis, files-search, get-file-comments, get-file-votes, files-relationships]
+    workflows: [ioc-triage, sample-detonation, corpus-search]
+    personas: [soc-analyst, malware-analyst, ir-responder, threat-researcher]
+  - resource: urls
+    operations: [scan-url, url-info, urls-analyse, get-url-comments, get-url-votes, urls-relationships]
+    workflows: [ioc-triage, sample-detonation]
+    personas: [soc-analyst, ir-responder]
+  - resource: domains
+    operations: [domain-info, domains-comments-get, domains-comments-post, domains-rescan, domains-relationships]
+    workflows: [ioc-triage]
+    personas: [soc-analyst, threat-researcher]
+  - resource: ip_addresses
+    operations: [ip-info, ip-comments-get, ip-comments-post, ip-rescan, ip-relationships]
+    workflows: [ioc-triage]
+    personas: [soc-analyst, threat-researcher]
+  - resource: livehunt_rulesets
+    operations: [create-hunting-ruleset, list-hunting-rulesets, get-hunting-ruleset, update-hunting-ruleset, delete-hunting-ruleset]
+    workflows: [livehunt-management]
+    personas: [threat-researcher, detection-engineer]
+  - resource: retrohunt_jobs
+    operations: [create-retrohunt-job, get-retrohunt-jobs, get-retrohunt-job, delete-retrohunt-job, abort-retrohunt-job]
+    workflows: [retrohunt-jobs]
+    personas: [threat-researcher]
+  - resource: ioc_stream
+    operations: [get-objects-from-the-ioc-stream, delete-an-ioc-stream-notification, delete-notifications-from-the-ioc-stream]
+    workflows: [ioc-stream-consumption]
+    personas: [soc-engineer]
+  - resource: collections
+    operations: [list-threats, get-threat, create-ioc-collection, add-items-to-collection, remove-items-from-collection]
+    workflows: [threat-landscape-research]
+    personas: [threat-intel-analyst]
+  - resource: graphs
+    operations: [graphs, create-graphs, get-graph, patch-graph, graphs-delete, graphs-add-editor, graphs-add-viewer]
+    workflows: [graph-collaboration]
+    personas: [threat-intel-analyst, ir-responder]
+  - resource: users
+    operations: [user, patch-user-id, user-api-usage, get-user-overall-quotas]
+    workflows: [tenant-administration]
+    personas: [platform-admin]
+  - resource: groups
+    operations: [groups, patch-group, get-group-users, add-users-to-group, get-group-administrators, group-api-usage]
+    workflows: [tenant-administration]
+    personas: [platform-admin]

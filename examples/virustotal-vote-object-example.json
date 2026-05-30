@@ -1,0 +1,13 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "date": 1748534400,
+    "verdict": "harmless",
+    "value": 1
+  },
+  "relationships": {}
+}

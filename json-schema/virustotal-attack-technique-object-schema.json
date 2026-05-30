@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-schema/AttackTechniqueObject-schema.json",
+  "title": "AttackTechniqueObject",
+  "description": "A MITRE ATT&CK technique (e.g. T1566 Phishing).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for AttackTechniqueObject.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Phishing"
+        },
+        "stix_id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tactics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tactic IDs this technique supports."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

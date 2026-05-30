@@ -1,0 +1,14 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "name": "Initial Access",
+    "stix_id": "x-mitre-tactic--xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "description": "sample",
+    "link": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "relationships": {}
+}

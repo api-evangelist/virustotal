@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-attack-tactic-object-structure.json",
+  "name": "AttackTacticObject",
+  "description": "A MITRE ATT&CK tactic (e.g. TA0001 Initial Access).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for AttackTacticObject.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Initial Access"
+        },
+        "stix_id": {
+          "type": "string",
+          "example": "x-mitre-tactic--xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        },
+        "description": {
+          "type": "string"
+        },
+        "link": {
+          "type": "uri"
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

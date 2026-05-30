@@ -1,0 +1,50 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "creation_date": 1748534400,
+    "expiration_date": 1748534400,
+    "last_update_date": 1748534400,
+    "last_dns_records": [
+      {
+        "type": "A",
+        "value": "10.0.0.1",
+        "ttl": 1
+      }
+    ],
+    "last_dns_records_date": 1748534400,
+    "last_https_certificate": {
+      "thumbprint": "sample",
+      "thumbprint_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "issuer": {},
+      "subject": {},
+      "validity": {
+        "not_after": "sample",
+        "not_before": "sample"
+      }
+    },
+    "last_analysis_stats": {
+      "harmless": 1,
+      "malicious": 1,
+      "suspicious": 1,
+      "undetected": 1,
+      "timeout": 1748534400
+    },
+    "categories": {},
+    "registrar": "GoDaddy",
+    "popularity_ranks": {},
+    "reputation": 1,
+    "total_votes": {
+      "harmless": 1,
+      "malicious": 1
+    },
+    "tags": [
+      "sample"
+    ],
+    "whois": "sample"
+  },
+  "relationships": {}
+}

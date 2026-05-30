@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - IoC Investigation — IoC Investigation - Popular Threat Categories
+  description: 'VirusTotal API v3 - IoC Investigation — IoC Investigation - Popular Threat Categories. 1 operations. Lead operation: Get a List of Popular Threat Categories. Self-contained Naftiko capability
+    covering one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - IoC Investigation
+  - Popular Threat Categories
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ioc-investigation-ioc-investigation-popular-threat-categories
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - IoC Investigation — IoC Investigation - Popular Threat Categories. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: popular-threat-categories
+      path: /popular_threat_categories
+      operations:
+      - name: popularThreatCategories
+        method: GET
+        description: VirusTotal Get a List of Popular Threat Categories
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ioc-investigation-ioc-investigation-popular-threat-categories-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Popular Threat Categories. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/popular_threat_categories
+      name: popular-threat-categories
+      description: REST surface for /popular_threat_categories.
+      operations:
+      - method: GET
+        name: popularThreatCategories
+        description: VirusTotal Get a List of Popular Threat Categories
+        call: ioc-investigation-ioc-investigation-popular-threat-categories.popularThreatCategories
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ioc-investigation-ioc-investigation-popular-threat-categories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Popular Threat Categories. One tool per consumed operation, routed inline through this capability's consumes
+      block.
+    tools:
+    - name: get-list-popular-threat-categories
+      description: VirusTotal Get a List of Popular Threat Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-popular-threat-categories.popularThreatCategories
+      outputParameters:
+      - type: object
+        mapping: $.

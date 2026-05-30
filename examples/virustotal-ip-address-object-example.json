@@ -1,0 +1,34 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "as_owner": "GOOGLE",
+    "asn": 15169,
+    "continent": "NA",
+    "country": "US",
+    "network": "10.0.0.0/16",
+    "regional_internet_registry": "ARIN",
+    "last_analysis_stats": {
+      "harmless": 1,
+      "malicious": 1,
+      "suspicious": 1,
+      "undetected": 1,
+      "timeout": 1748534400
+    },
+    "last_https_certificate_date": 1748534400,
+    "last_https_certificate": {},
+    "reputation": 1,
+    "total_votes": {
+      "harmless": 1,
+      "malicious": 1
+    },
+    "tags": [
+      "sample"
+    ],
+    "whois": "sample"
+  },
+  "relationships": {}
+}

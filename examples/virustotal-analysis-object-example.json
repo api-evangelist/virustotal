@@ -1,0 +1,20 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "date": 1748534400,
+    "status": "completed",
+    "stats": {
+      "harmless": 1,
+      "malicious": 1,
+      "suspicious": 1,
+      "undetected": 1,
+      "timeout": 1748534400
+    },
+    "results": {}
+  },
+  "relationships": {}
+}

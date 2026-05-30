@@ -1,0 +1,207 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - Private Scanning — Private Scanning - Zipping files
+  description: 'VirusTotal API v3 - Private Scanning — Private Scanning - Zipping files. 4 operations. Lead operation: Create a Password-protected ZIP with Google Threat Intelligence Files. Self-contained
+    Naftiko capability covering one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - Private Scanning
+  - Zipping files
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: private-scanning-private-scanning-zipping-files
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - Private Scanning — Private Scanning - Zipping files. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: private-zip-files
+      path: /private/zip_files
+      operations:
+      - name: privateScanningZipFiles
+        method: POST
+        description: VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-zip-files-id
+      path: /private/zip_files/{id}
+      operations:
+      - name: privateScanningGetZipFile
+        method: GET
+        description: VirusTotal Check a ZIP File’s Status
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: ZIP file identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-zip-files-id-download
+      path: /private/zip_files/{id}/download
+      operations:
+      - name: privateScanningDownloadZipFile
+        method: GET
+        description: VirusTotal Download a ZIP File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: ZIP file identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-zip-files-id-download-url
+      path: /private/zip_files/{id}/download_url
+      operations:
+      - name: privateScanningGetZipDownloadUrl
+        method: GET
+        description: VirusTotal Get a ZIP File’s Download URL
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: ZIP file identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: private-scanning-private-scanning-zipping-files-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Zipping files. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/private/zip_files
+      name: private-zip-files
+      description: REST surface for /private/zip_files.
+      operations:
+      - method: POST
+        name: privateScanningZipFiles
+        description: VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files
+        call: private-scanning-private-scanning-zipping-files.privateScanningZipFiles
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          body: rest.body
+    - path: /v1/private/zip_files/{id}
+      name: private-zip-files-id
+      description: REST surface for /private/zip_files/{id}.
+      operations:
+      - method: GET
+        name: privateScanningGetZipFile
+        description: VirusTotal Check a ZIP File’s Status
+        call: private-scanning-private-scanning-zipping-files.privateScanningGetZipFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/private/zip_files/{id}/download
+      name: private-zip-files-id-download
+      description: REST surface for /private/zip_files/{id}/download.
+      operations:
+      - method: GET
+        name: privateScanningDownloadZipFile
+        description: VirusTotal Download a ZIP File
+        call: private-scanning-private-scanning-zipping-files.privateScanningDownloadZipFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/private/zip_files/{id}/download_url
+      name: private-zip-files-id-download-url
+      description: REST surface for /private/zip_files/{id}/download_url.
+      operations:
+      - method: GET
+        name: privateScanningGetZipDownloadUrl
+        description: VirusTotal Get a ZIP File’s Download URL
+        call: private-scanning-private-scanning-zipping-files.privateScanningGetZipDownloadUrl
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: private-scanning-private-scanning-zipping-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Zipping files. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: create-password-protected-zip-google
+      description: VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: private-scanning-private-scanning-zipping-files.privateScanningZipFiles
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        body: tools.body
+    - name: check-zip-file-s-status
+      description: VirusTotal Check a ZIP File’s Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-zipping-files.privateScanningGetZipFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: download-zip-file
+      description: VirusTotal Download a ZIP File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-zipping-files.privateScanningDownloadZipFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-zip-file-s-download
+      description: VirusTotal Get a ZIP File’s Download URL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-zipping-files.privateScanningGetZipDownloadUrl
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

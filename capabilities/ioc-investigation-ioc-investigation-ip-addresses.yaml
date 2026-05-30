@@ -1,0 +1,396 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - IoC Investigation — IoC Investigation - IP addresses
+  description: 'VirusTotal API v3 - IoC Investigation — IoC Investigation - IP addresses. 7 operations. Lead operation: Get an IP Address Report. Self-contained Naftiko capability covering one VirusTotal
+    business surface.'
+  tags:
+  - VirusTotal
+  - IoC Investigation
+  - IP addresses
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ioc-investigation-ioc-investigation-ip-addresses
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - IoC Investigation — IoC Investigation - IP addresses. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: ip-addresses-ip
+      path: /ip_addresses/{ip}
+      operations:
+      - name: ipInfo
+        method: GET
+        description: VirusTotal Get an IP Address Report
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP address
+        - name: x-tool
+          in: header
+          type: string
+          required: false
+          description: The name of your tool or service. This is required to obtain the gti_assesment data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ip-addresses-ip-comments
+      path: /ip_addresses/{ip}/comments
+      operations:
+      - name: ipCommentsGet
+        method: GET
+        description: VirusTotal Get Comments on an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP address
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of comments to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: ipCommentsPost
+        method: POST
+        description: VirusTotal Add a Comment to an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP address
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ip-addresses-ip-relationships-relationship
+      path: /ip_addresses/{ip}/relationships/{relationship}
+      operations:
+      - name: ipRelationshipsIds
+        method: GET
+        description: VirusTotal Get Object Descriptors Related to an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP address
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:ip-object#relationships))
+        - name: limit
+          in: query
+          type: string
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ip-addresses-ip-votes
+      path: /ip_addresses/{ip}/votes
+      operations:
+      - name: ipVotes
+        method: GET
+        description: VirusTotal Get Votes on an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP Address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: ipVotesPost
+        method: POST
+        description: VirusTotal Add a Vote to an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP Address
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ip-addresses-ip-relationship
+      path: /ip_addresses/{ip}/{relationship}
+      operations:
+      - name: ipRelationships
+        method: GET
+        description: VirusTotal Get Objects Related to an IP Address
+        inputParameters:
+        - name: ip
+          in: path
+          type: string
+          required: true
+          description: IP address
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:ip-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ioc-investigation-ioc-investigation-ip-addresses-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - IP addresses. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ip_addresses/{ip}
+      name: ip-addresses-ip
+      description: REST surface for /ip_addresses/{ip}.
+      operations:
+      - method: GET
+        name: ipInfo
+        description: VirusTotal Get an IP Address Report
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipInfo
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          x-tool: rest.x-tool
+    - path: /v1/ip_addresses/{ip}/comments
+      name: ip-addresses-ip-comments
+      description: REST surface for /ip_addresses/{ip}/comments.
+      operations:
+      - method: GET
+        name: ipCommentsGet
+        description: VirusTotal Get Comments on an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipCommentsGet
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: ipCommentsPost
+        description: VirusTotal Add a Comment to an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipCommentsPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          body: rest.body
+    - path: /v1/ip_addresses/{ip}/relationships/{relationship}
+      name: ip-addresses-ip-relationships-relationship
+      description: REST surface for /ip_addresses/{ip}/relationships/{relationship}.
+      operations:
+      - method: GET
+        name: ipRelationshipsIds
+        description: VirusTotal Get Object Descriptors Related to an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipRelationshipsIds
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/ip_addresses/{ip}/votes
+      name: ip-addresses-ip-votes
+      description: REST surface for /ip_addresses/{ip}/votes.
+      operations:
+      - method: GET
+        name: ipVotes
+        description: VirusTotal Get Votes on an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipVotes
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+      - method: POST
+        name: ipVotesPost
+        description: VirusTotal Add a Vote to an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipVotesPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          body: rest.body
+    - path: /v1/ip_addresses/{ip}/{relationship}
+      name: ip-addresses-ip-relationship
+      description: REST surface for /ip_addresses/{ip}/{relationship}.
+      operations:
+      - method: GET
+        name: ipRelationships
+        description: VirusTotal Get Objects Related to an IP Address
+        call: ioc-investigation-ioc-investigation-ip-addresses.ipRelationships
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          ip: rest.ip
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+  - type: mcp
+    namespace: ioc-investigation-ioc-investigation-ip-addresses-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - IP addresses. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-ip-address-report
+      description: VirusTotal Get an IP Address Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipInfo
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        x-tool: tools.x-tool
+    - name: get-comments-ip-address
+      description: VirusTotal Get Comments on an IP Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipCommentsGet
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: add-comment-ip-address
+      description: VirusTotal Add a Comment to an IP Address
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipCommentsPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        body: tools.body
+    - name: get-object-descriptors-related-ip
+      description: VirusTotal Get Object Descriptors Related to an IP Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipRelationshipsIds
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-votes-ip-address
+      description: VirusTotal Get Votes on an IP Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipVotes
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+    - name: add-vote-ip-address
+      description: VirusTotal Add a Vote to an IP Address
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipVotesPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        body: tools.body
+    - name: get-objects-related-ip-address
+      description: VirusTotal Get Objects Related to an IP Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-ip-addresses.ipRelationships
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        ip: tools.ip
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor

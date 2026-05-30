@@ -1,0 +1,662 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "vt": "https://www.virustotal.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "mitre": "https://attack.mitre.org/",
+    "FileObject": "vt:FileObject",
+    "UrlObject": "vt:UrlObject",
+    "DomainObject": "vt:DomainObject",
+    "IpAddressObject": "vt:IpAddressObject",
+    "AnalysisObject": "vt:AnalysisObject",
+    "CommentObject": "vt:CommentObject",
+    "VoteObject": "vt:VoteObject",
+    "UserObject": "vt:UserObject",
+    "GroupObject": "vt:GroupObject",
+    "GraphObject": "vt:GraphObject",
+    "CollectionObject": "vt:CollectionObject",
+    "FileBehaviourObject": "vt:FileBehaviourObject",
+    "LivehuntRulesetObject": "vt:LivehuntRulesetObject",
+    "RetrohuntJobObject": "vt:RetrohuntJobObject",
+    "IocStreamNotificationObject": "vt:IocStreamNotificationObject",
+    "AttackTacticObject": "vt:AttackTacticObject",
+    "AttackTechniqueObject": "vt:AttackTechniqueObject",
+    "PopularThreatCategoryObject": "vt:PopularThreatCategoryObject",
+    "YaraRuleObject": "vt:YaraRuleObject",
+    "typeDescription": {
+      "@id": "vt:type_description",
+      "@type": "xsd:string"
+    },
+    "tlsh": {
+      "@id": "vt:tlsh",
+      "@type": "xsd:string"
+    },
+    "vhash": {
+      "@id": "vt:vhash",
+      "@type": "xsd:string"
+    },
+    "names": {
+      "@id": "vt:names",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "vt:size",
+      "@type": "xsd:integer"
+    },
+    "sha256": {
+      "@id": "vt:sha256",
+      "@type": "xsd:string"
+    },
+    "sha1": {
+      "@id": "vt:sha1",
+      "@type": "xsd:string"
+    },
+    "md5": {
+      "@id": "vt:md5",
+      "@type": "xsd:string"
+    },
+    "ssdeep": {
+      "@id": "vt:ssdeep",
+      "@type": "xsd:string"
+    },
+    "magic": {
+      "@id": "vt:magic",
+      "@type": "xsd:string"
+    },
+    "firstSubmissionDate": {
+      "@id": "vt:first_submission_date",
+      "@type": "xsd:integer"
+    },
+    "lastSubmissionDate": {
+      "@id": "vt:last_submission_date",
+      "@type": "xsd:integer"
+    },
+    "lastAnalysisDate": {
+      "@id": "vt:last_analysis_date",
+      "@type": "xsd:integer"
+    },
+    "timesSubmitted": {
+      "@id": "vt:times_submitted",
+      "@type": "xsd:integer"
+    },
+    "reputation": {
+      "@id": "vt:reputation",
+      "@type": "xsd:integer"
+    },
+    "totalVotes": {
+      "@id": "vt:total_votes"
+    },
+    "harmless": {
+      "@id": "vt:harmless",
+      "@type": "xsd:integer"
+    },
+    "malicious": {
+      "@id": "vt:malicious",
+      "@type": "xsd:integer"
+    },
+    "lastAnalysisStats": {
+      "@id": "vt:last_analysis_stats"
+    },
+    "type-unsupported": {
+      "@id": "vt:type-unsupported",
+      "@type": "xsd:integer"
+    },
+    "suspicious": {
+      "@id": "vt:suspicious",
+      "@type": "xsd:integer"
+    },
+    "confirmed-timeout": {
+      "@id": "vt:confirmed-timeout",
+      "@type": "xsd:integer"
+    },
+    "timeout": {
+      "@id": "vt:timeout",
+      "@type": "xsd:integer"
+    },
+    "failure": {
+      "@id": "vt:failure",
+      "@type": "xsd:integer"
+    },
+    "undetected": {
+      "@id": "vt:undetected",
+      "@type": "xsd:integer"
+    },
+    "lastAnalysisResults": {
+      "@id": "vt:last_analysis_results"
+    },
+    "meaningfulName": {
+      "@id": "vt:meaningful_name",
+      "@type": "xsd:string"
+    },
+    "popularThreatClassification": {
+      "@id": "vt:popular_threat_classification"
+    },
+    "suggestedThreatLabel": {
+      "@id": "vt:suggested_threat_label",
+      "@type": "xsd:string"
+    },
+    "popularThreatCategory": {
+      "@id": "vt:popular_threat_category",
+      "@container": "@set"
+    },
+    "count": {
+      "@id": "vt:count",
+      "@type": "xsd:integer"
+    },
+    "value": {
+      "@id": "vt:value",
+      "@type": "xsd:string"
+    },
+    "popularThreatName": {
+      "@id": "vt:popular_threat_name",
+      "@container": "@set"
+    },
+    "url": "schema:url",
+    "finalUrl": {
+      "@id": "vt:final_url",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "vt:title",
+      "@type": "xsd:string"
+    },
+    "lastHttpResponseCode": {
+      "@id": "vt:last_http_response_code",
+      "@type": "xsd:integer"
+    },
+    "lastHttpResponseContentLength": {
+      "@id": "vt:last_http_response_content_length",
+      "@type": "xsd:integer"
+    },
+    "lastHttpResponseContentSha256": {
+      "@id": "vt:last_http_response_content_sha256",
+      "@type": "xsd:string"
+    },
+    "lastHttpResponseHeaders": {
+      "@id": "vt:last_http_response_headers"
+    },
+    "lastHttpResponseCookies": {
+      "@id": "vt:last_http_response_cookies"
+    },
+    "categories": {
+      "@id": "vt:categories"
+    },
+    "tags": "schema:keywords",
+    "creation_date": "schema:dateCreated",
+    "expirationDate": {
+      "@id": "vt:expiration_date",
+      "@type": "xsd:integer"
+    },
+    "lastUpdateDate": {
+      "@id": "vt:last_update_date",
+      "@type": "xsd:integer"
+    },
+    "lastDnsRecords": {
+      "@id": "vt:last_dns_records",
+      "@container": "@set"
+    },
+    "type": {
+      "@id": "vt:type",
+      "@type": "xsd:string"
+    },
+    "ttl": {
+      "@id": "vt:ttl",
+      "@type": "xsd:integer"
+    },
+    "lastDnsRecordsDate": {
+      "@id": "vt:last_dns_records_date",
+      "@type": "xsd:integer"
+    },
+    "lastHttpsCertificate": {
+      "@id": "vt:last_https_certificate"
+    },
+    "thumbprint": {
+      "@id": "vt:thumbprint",
+      "@type": "xsd:string"
+    },
+    "thumbprintSha256": {
+      "@id": "vt:thumbprint_sha256",
+      "@type": "xsd:string"
+    },
+    "issuer": {
+      "@id": "vt:issuer"
+    },
+    "subject": {
+      "@id": "vt:subject"
+    },
+    "validity": {
+      "@id": "vt:validity"
+    },
+    "notAfter": {
+      "@id": "vt:not_after",
+      "@type": "xsd:string"
+    },
+    "notBefore": {
+      "@id": "vt:not_before",
+      "@type": "xsd:string"
+    },
+    "registrar": {
+      "@id": "vt:registrar",
+      "@type": "xsd:string"
+    },
+    "popularityRanks": {
+      "@id": "vt:popularity_ranks"
+    },
+    "whois": {
+      "@id": "vt:whois",
+      "@type": "xsd:string"
+    },
+    "asOwner": {
+      "@id": "vt:as_owner",
+      "@type": "xsd:string"
+    },
+    "asn": {
+      "@id": "vt:asn",
+      "@type": "xsd:integer"
+    },
+    "continent": {
+      "@id": "vt:continent",
+      "@type": "xsd:string"
+    },
+    "country": "schema:addressCountry",
+    "network": {
+      "@id": "vt:network",
+      "@type": "xsd:string"
+    },
+    "regionalInternetRegistry": {
+      "@id": "vt:regional_internet_registry",
+      "@type": "xsd:string"
+    },
+    "lastHttpsCertificateDate": {
+      "@id": "vt:last_https_certificate_date",
+      "@type": "xsd:integer"
+    },
+    "date": {
+      "@id": "vt:date",
+      "@type": "xsd:integer"
+    },
+    "status": {
+      "@id": "vt:status",
+      "@type": "xsd:string"
+    },
+    "stats": {
+      "@id": "vt:stats"
+    },
+    "results": {
+      "@id": "vt:results"
+    },
+    "text": {
+      "@id": "vt:text",
+      "@type": "xsd:string"
+    },
+    "html": {
+      "@id": "vt:html",
+      "@type": "xsd:string"
+    },
+    "votes": {
+      "@id": "vt:votes"
+    },
+    "abuse": {
+      "@id": "vt:abuse",
+      "@type": "xsd:integer"
+    },
+    "negative": {
+      "@id": "vt:negative",
+      "@type": "xsd:integer"
+    },
+    "positive": {
+      "@id": "vt:positive",
+      "@type": "xsd:integer"
+    },
+    "verdict": {
+      "@id": "vt:verdict",
+      "@type": "xsd:string"
+    },
+    "first_name": "schema:givenName",
+    "last_name": "schema:familyName",
+    "email": "schema:email",
+    "profilePhrase": {
+      "@id": "vt:profile_phrase",
+      "@type": "xsd:string"
+    },
+    "userSince": {
+      "@id": "vt:user_since",
+      "@type": "xsd:integer"
+    },
+    "lastLogin": {
+      "@id": "vt:last_login",
+      "@type": "xsd:integer"
+    },
+    "privileges": {
+      "@id": "vt:privileges"
+    },
+    "preferences": {
+      "@id": "vt:preferences"
+    },
+    "quotas": {
+      "@id": "vt:quotas"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "domain": {
+      "@id": "vt:domain",
+      "@type": "xsd:string"
+    },
+    "settings": {
+      "@id": "vt:settings"
+    },
+    "graphData": {
+      "@id": "vt:graph_data"
+    },
+    "private": {
+      "@id": "vt:private",
+      "@type": "xsd:boolean"
+    },
+    "lastModifiedDate": {
+      "@id": "vt:last_modified_date",
+      "@type": "xsd:integer"
+    },
+    "userCount": {
+      "@id": "vt:user_count",
+      "@type": "xsd:integer"
+    },
+    "owner": {
+      "@id": "vt:owner",
+      "@type": "xsd:string"
+    },
+    "commentsCount": {
+      "@id": "vt:comments_count",
+      "@type": "xsd:integer"
+    },
+    "viewsCount": {
+      "@id": "vt:views_count",
+      "@type": "xsd:integer"
+    },
+    "collectionType": {
+      "@id": "vt:collection_type",
+      "@type": "xsd:string"
+    },
+    "last_modification_date": "schema:dateModified",
+    "filesCount": {
+      "@id": "vt:files_count",
+      "@type": "xsd:integer"
+    },
+    "domainsCount": {
+      "@id": "vt:domains_count",
+      "@type": "xsd:integer"
+    },
+    "ipAddressesCount": {
+      "@id": "vt:ip_addresses_count",
+      "@type": "xsd:integer"
+    },
+    "urlsCount": {
+      "@id": "vt:urls_count",
+      "@type": "xsd:integer"
+    },
+    "targetedRegions": {
+      "@id": "vt:targeted_regions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "targetedIndustries": {
+      "@id": "vt:targeted_industries",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "motivations": {
+      "@id": "vt:motivations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "sandboxName": {
+      "@id": "vt:sandbox_name",
+      "@type": "xsd:string"
+    },
+    "analysisDate": {
+      "@id": "vt:analysis_date",
+      "@type": "xsd:integer"
+    },
+    "behash": {
+      "@id": "vt:behash",
+      "@type": "xsd:string"
+    },
+    "processesTree": {
+      "@id": "vt:processes_tree",
+      "@container": "@set"
+    },
+    "processesCreated": {
+      "@id": "vt:processes_created",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "processesInjected": {
+      "@id": "vt:processes_injected",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "processesKilled": {
+      "@id": "vt:processes_killed",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "commandExecutions": {
+      "@id": "vt:command_executions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "registryKeysOpened": {
+      "@id": "vt:registry_keys_opened",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "registryKeysSet": {
+      "@id": "vt:registry_keys_set",
+      "@container": "@set"
+    },
+    "filesOpened": {
+      "@id": "vt:files_opened",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "filesWritten": {
+      "@id": "vt:files_written",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "filesDeleted": {
+      "@id": "vt:files_deleted",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "filesDropped": {
+      "@id": "vt:files_dropped",
+      "@container": "@set"
+    },
+    "modulesLoaded": {
+      "@id": "vt:modules_loaded",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "mutexesCreated": {
+      "@id": "vt:mutexes_created",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "mutexesOpened": {
+      "@id": "vt:mutexes_opened",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dnsLookups": {
+      "@id": "vt:dns_lookups",
+      "@container": "@set"
+    },
+    "ipTraffic": {
+      "@id": "vt:ip_traffic",
+      "@container": "@set"
+    },
+    "httpConversations": {
+      "@id": "vt:http_conversations",
+      "@container": "@set"
+    },
+    "tls": {
+      "@id": "vt:tls",
+      "@container": "@set"
+    },
+    "mitreAttackTechniques": {
+      "@id": "vt:mitre_attack_techniques",
+      "@container": "@set"
+    },
+    "verdicts": {
+      "@id": "vt:verdicts",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "modification_date": "schema:dateModified",
+    "enabled": {
+      "@id": "vt:enabled",
+      "@type": "xsd:boolean"
+    },
+    "rules": {
+      "@id": "vt:rules",
+      "@type": "xsd:string"
+    },
+    "ruleNames": {
+      "@id": "vt:rule_names",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "numberOfRules": {
+      "@id": "vt:number_of_rules",
+      "@type": "xsd:integer"
+    },
+    "notificationEmails": {
+      "@id": "vt:notification_emails",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "limit": {
+      "@id": "vt:limit",
+      "@type": "xsd:integer"
+    },
+    "matchObjectType": {
+      "@id": "vt:match_object_type",
+      "@type": "xsd:string"
+    },
+    "notificationEmail": {
+      "@id": "vt:notification_email",
+      "@type": "xsd:string"
+    },
+    "corpus": {
+      "@id": "vt:corpus",
+      "@type": "xsd:string"
+    },
+    "scannedBytes": {
+      "@id": "vt:scanned_bytes",
+      "@type": "xsd:integer"
+    },
+    "numMatches": {
+      "@id": "vt:num_matches",
+      "@type": "xsd:integer"
+    },
+    "progress": {
+      "@id": "vt:progress",
+      "@type": "xsd:decimal"
+    },
+    "etaSeconds": {
+      "@id": "vt:eta_seconds",
+      "@type": "xsd:integer"
+    },
+    "startDate": {
+      "@id": "vt:start_date",
+      "@type": "xsd:integer"
+    },
+    "finishDate": {
+      "@id": "vt:finish_date",
+      "@type": "xsd:integer"
+    },
+    "timeRange": {
+      "@id": "vt:time_range"
+    },
+    "start": {
+      "@id": "vt:start",
+      "@type": "xsd:integer"
+    },
+    "end": {
+      "@id": "vt:end",
+      "@type": "xsd:integer"
+    },
+    "notificationDate": {
+      "@id": "vt:notification_date",
+      "@type": "xsd:integer"
+    },
+    "notificationTags": {
+      "@id": "vt:notification_tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "notificationSource": {
+      "@id": "vt:notification_source",
+      "@type": "xsd:string"
+    },
+    "notificationId": {
+      "@id": "vt:notification_id",
+      "@type": "xsd:string"
+    },
+    "sourceId": {
+      "@id": "vt:source_id",
+      "@type": "xsd:string"
+    },
+    "sourceType": {
+      "@id": "vt:source_type",
+      "@type": "xsd:string"
+    },
+    "sourceKey": {
+      "@id": "vt:source_key",
+      "@type": "xsd:string"
+    },
+    "match": {
+      "@id": "vt:match"
+    },
+    "stixId": {
+      "@id": "vt:stix_id",
+      "@type": "xsd:string"
+    },
+    "link": {
+      "@id": "vt:link",
+      "@type": "@id"
+    },
+    "tactics": {
+      "@id": "vt:tactics",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "vt:category",
+      "@type": "xsd:string"
+    },
+    "ruleName": {
+      "@id": "vt:rule_name",
+      "@type": "xsd:string"
+    },
+    "rulesetId": {
+      "@id": "vt:ruleset_id",
+      "@type": "xsd:string"
+    },
+    "rulesetName": {
+      "@id": "vt:ruleset_name",
+      "@type": "xsd:string"
+    },
+    "author": {
+      "@id": "vt:author",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "vt:source",
+      "@type": "xsd:string"
+    }
+  }
+}

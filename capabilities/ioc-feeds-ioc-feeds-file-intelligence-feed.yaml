@@ -1,0 +1,165 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - IoC Feeds — IoC Feeds - File intelligence feed
+  description: 'VirusTotal API v3 - IoC Feeds — IoC Feeds - File intelligence feed. 3 operations. Lead operation: Get a Hourly File Feed Batch. Self-contained Naftiko capability covering one VirusTotal
+    business surface.'
+  tags:
+  - VirusTotal
+  - IoC Feeds
+  - File intelligence feed
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ioc-feeds-ioc-feeds-file-intelligence-feed
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - IoC Feeds — IoC Feeds - File intelligence feed. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: feeds-files-hourly-time
+      path: /feeds/files/hourly/{time}
+      operations:
+      - name: feedsFileHourly
+        method: GET
+        description: VirusTotal Get a Hourly File Feed Batch
+        inputParameters:
+        - name: time
+          in: path
+          type: string
+          required: true
+          description: A string in format YYYYMMDDhh
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: feeds-files-time
+      path: /feeds/files/{time}
+      operations:
+      - name: feedsFile
+        method: GET
+        description: VirusTotal Get a Per-minute File Feed Batch
+        inputParameters:
+        - name: time
+          in: path
+          type: string
+          required: true
+          description: A string in format YYYYMMDDhhmm
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: feeds-files-token-download
+      path: /feeds/files/{token}/download
+      operations:
+      - name: fileFeedDownload
+        method: GET
+        description: VirusTotal Download a File Published in the File Feed
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+          description: Download token. It can be found inside the file's properties in the file feed.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ioc-feeds-ioc-feeds-file-intelligence-feed-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - IoC Feeds — IoC Feeds - File intelligence feed. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/feeds/files/hourly/{time}
+      name: feeds-files-hourly-time
+      description: REST surface for /feeds/files/hourly/{time}.
+      operations:
+      - method: GET
+        name: feedsFileHourly
+        description: VirusTotal Get a Hourly File Feed Batch
+        call: ioc-feeds-ioc-feeds-file-intelligence-feed.feedsFileHourly
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          time: rest.time
+    - path: /v1/feeds/files/{time}
+      name: feeds-files-time
+      description: REST surface for /feeds/files/{time}.
+      operations:
+      - method: GET
+        name: feedsFile
+        description: VirusTotal Get a Per-minute File Feed Batch
+        call: ioc-feeds-ioc-feeds-file-intelligence-feed.feedsFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          time: rest.time
+    - path: /v1/feeds/files/{token}/download
+      name: feeds-files-token-download
+      description: REST surface for /feeds/files/{token}/download.
+      operations:
+      - method: GET
+        name: fileFeedDownload
+        description: VirusTotal Download a File Published in the File Feed
+        call: ioc-feeds-ioc-feeds-file-intelligence-feed.fileFeedDownload
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          token: rest.token
+  - type: mcp
+    namespace: ioc-feeds-ioc-feeds-file-intelligence-feed-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - IoC Feeds — IoC Feeds - File intelligence feed. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-hourly-file-feed-batch
+      description: VirusTotal Get a Hourly File Feed Batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-feeds-ioc-feeds-file-intelligence-feed.feedsFileHourly
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        time: tools.time
+    - name: get-per-minute-file-feed
+      description: VirusTotal Get a Per-minute File Feed Batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-feeds-ioc-feeds-file-intelligence-feed.feedsFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        time: tools.time
+    - name: download-file-published-file-feed
+      description: VirusTotal Download a File Published in the File Feed
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-feeds-ioc-feeds-file-intelligence-feed.fileFeedDownload
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        token: tools.token

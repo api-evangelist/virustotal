@@ -1,0 +1,501 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - Private Scanning — Private Scanning - Files Behaviours
+  description: 'VirusTotal API v3 - Private Scanning — Private Scanning - Files Behaviours. 10 operations. Lead operation: Get the Behaviour Reports from a Private File. Self-contained Naftiko capability
+    covering one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - Private Scanning
+  - Files Behaviours
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: private-scanning-private-scanning-files-behaviours
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - Private Scanning — Private Scanning - Files Behaviours. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: private-file-id-behaviours
+      path: /private/file/{id}/behaviours
+      operations:
+      - name: getAllBehaviourReportsFromAPrivateFile
+        method: GET
+        description: VirusTotal Get the Behaviour Reports from a Private File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: id parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id
+      path: /private/file_behaviours/{sandbox_id}
+      operations:
+      - name: privatefileBehaviourssandboxId
+        method: GET
+        description: VirusTotal Get a Behaviour Report from a Private File
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-evtx
+      path: /private/file_behaviours/{sandbox_id}/evtx
+      operations:
+      - name: fileBehaviourssandboxIdevtx
+        method: GET
+        description: VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-html
+      path: /private/file_behaviours/{sandbox_id}/html
+      operations:
+      - name: privatefileBehaviourssandboxIdhtml
+        method: GET
+        description: VirusTotal Get a Detailed HTML Behaviour Report
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-memdump
+      path: /private/file_behaviours/{sandbox_id}/memdump
+      operations:
+      - name: privatefileBehaviourssandboxIdpcap
+        method: GET
+        description: VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-pcap
+      path: /private/file_behaviours/{sandbox_id}/pcap
+      operations:
+      - name: fileBehaviourssandboxIdmemdump
+        method: GET
+        description: VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-relationships-relationship
+      path: /private/file_behaviours/{sandbox_id}/relationships/{relationship}
+      operations:
+      - name: privatefileBehaviourssandboxIdrelationshipsrelationship
+        method: GET
+        description: VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID. See "Sandbox Report identifiers" section above for more info.
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:private-file-behaviours-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-file-behaviours-sandbox-id-relationship
+      path: /private/file_behaviours/{sandbox_id}/{relationship}
+      operations:
+      - name: privatefileBehaviourssandboxIdrelationship
+        method: GET
+        description: VirusTotal Get Objects Related to a Private File's Behaviour Report
+        inputParameters:
+        - name: sandbox_id
+          in: path
+          type: string
+          required: true
+          description: Sandbox report ID. See "Sandbox Report identifiers" section above for more info.
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:private-file-behaviours-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-id-behaviour-mitre-trees
+      path: /private/files/{id}/behaviour_mitre_trees
+      operations:
+      - name: getSummaryAllMitreAttackTechniquesObservedInAFile
+        method: GET
+        description: VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-id-behaviour-summary
+      path: /private/files/{id}/behaviour_summary
+      operations:
+      - name: privatefilesidbehaviourSummary
+        method: GET
+        description: VirusTotal Get a Summary of All Behavior Reports for a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: private-scanning-private-scanning-files-behaviours-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Files Behaviours. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/private/file/{id}/behaviours
+      name: private-file-id-behaviours
+      description: REST surface for /private/file/{id}/behaviours.
+      operations:
+      - method: GET
+        name: getAllBehaviourReportsFromAPrivateFile
+        description: VirusTotal Get the Behaviour Reports from a Private File
+        call: private-scanning-private-scanning-files-behaviours.getAllBehaviourReportsFromAPrivateFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/private/file_behaviours/{sandbox_id}
+      name: private-file-behaviours-sandbox-id
+      description: REST surface for /private/file_behaviours/{sandbox_id}.
+      operations:
+      - method: GET
+        name: privatefileBehaviourssandboxId
+        description: VirusTotal Get a Behaviour Report from a Private File
+        call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxId
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+    - path: /v1/private/file_behaviours/{sandbox_id}/evtx
+      name: private-file-behaviours-sandbox-id-evtx
+      description: REST surface for /private/file_behaviours/{sandbox_id}/evtx.
+      operations:
+      - method: GET
+        name: fileBehaviourssandboxIdevtx
+        description: VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis
+        call: private-scanning-private-scanning-files-behaviours.fileBehaviourssandboxIdevtx
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+    - path: /v1/private/file_behaviours/{sandbox_id}/html
+      name: private-file-behaviours-sandbox-id-html
+      description: REST surface for /private/file_behaviours/{sandbox_id}/html.
+      operations:
+      - method: GET
+        name: privatefileBehaviourssandboxIdhtml
+        description: VirusTotal Get a Detailed HTML Behaviour Report
+        call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdhtml
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+    - path: /v1/private/file_behaviours/{sandbox_id}/memdump
+      name: private-file-behaviours-sandbox-id-memdump
+      description: REST surface for /private/file_behaviours/{sandbox_id}/memdump.
+      operations:
+      - method: GET
+        name: privatefileBehaviourssandboxIdpcap
+        description: VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis
+        call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdpcap
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+    - path: /v1/private/file_behaviours/{sandbox_id}/pcap
+      name: private-file-behaviours-sandbox-id-pcap
+      description: REST surface for /private/file_behaviours/{sandbox_id}/pcap.
+      operations:
+      - method: GET
+        name: fileBehaviourssandboxIdmemdump
+        description: VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis
+        call: private-scanning-private-scanning-files-behaviours.fileBehaviourssandboxIdmemdump
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+    - path: /v1/private/file_behaviours/{sandbox_id}/relationships/{relationship}
+      name: private-file-behaviours-sandbox-id-relationships-relationship
+      description: REST surface for /private/file_behaviours/{sandbox_id}/relationships/{relationship}.
+      operations:
+      - method: GET
+        name: privatefileBehaviourssandboxIdrelationshipsrelationship
+        description: VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report
+        call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdrelationshipsrelationship
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/private/file_behaviours/{sandbox_id}/{relationship}
+      name: private-file-behaviours-sandbox-id-relationship
+      description: REST surface for /private/file_behaviours/{sandbox_id}/{relationship}.
+      operations:
+      - method: GET
+        name: privatefileBehaviourssandboxIdrelationship
+        description: VirusTotal Get Objects Related to a Private File's Behaviour Report
+        call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdrelationship
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sandbox_id: rest.sandbox_id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/private/files/{id}/behaviour_mitre_trees
+      name: private-files-id-behaviour-mitre-trees
+      description: REST surface for /private/files/{id}/behaviour_mitre_trees.
+      operations:
+      - method: GET
+        name: getSummaryAllMitreAttackTechniquesObservedInAFile
+        description: VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File
+        call: private-scanning-private-scanning-files-behaviours.getSummaryAllMitreAttackTechniquesObservedInAFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/private/files/{id}/behaviour_summary
+      name: private-files-id-behaviour-summary
+      description: REST surface for /private/files/{id}/behaviour_summary.
+      operations:
+      - method: GET
+        name: privatefilesidbehaviourSummary
+        description: VirusTotal Get a Summary of All Behavior Reports for a File
+        call: private-scanning-private-scanning-files-behaviours.privatefilesidbehaviourSummary
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: private-scanning-private-scanning-files-behaviours-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Files Behaviours. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-behaviour-reports-private-file
+      description: VirusTotal Get the Behaviour Reports from a Private File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.getAllBehaviourReportsFromAPrivateFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-behaviour-report-private-file
+      description: VirusTotal Get a Behaviour Report from a Private File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxId
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+    - name: get-evtx-file-generated-during
+      description: VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.fileBehaviourssandboxIdevtx
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+    - name: get-detailed-html-behaviour-report
+      description: VirusTotal Get a Detailed HTML Behaviour Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdhtml
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+    - name: get-memdump-file-generated-during
+      description: VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdpcap
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+    - name: get-pcap-file-generated-during
+      description: VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.fileBehaviourssandboxIdmemdump
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+    - name: get-object-descriptors-related-private
+      description: VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdrelationshipsrelationship
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-objects-related-private-file
+      description: VirusTotal Get Objects Related to a Private File's Behaviour Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefileBehaviourssandboxIdrelationship
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sandbox_id: tools.sandbox_id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-summary-all-mitre-att
+      description: VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.getSummaryAllMitreAttackTechniquesObservedInAFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-summary-all-behavior-reports
+      description: VirusTotal Get a Summary of All Behavior Reports for a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files-behaviours.privatefilesidbehaviourSummary
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-group-object-structure.json",
+  "name": "GroupObject",
+  "description": "A VirusTotal group (organisation tenant).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for GroupObject.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Acme Corp SOC"
+        },
+        "description": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "creation_date": {
+          "type": "int32"
+        },
+        "quotas": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "preferences": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

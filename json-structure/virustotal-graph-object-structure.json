@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-graph-object-structure.json",
+  "name": "GraphObject",
+  "description": "A Threat Graph (visualisation of IoCs and relationships).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for GraphObject.",
+      "properties": {
+        "graph_data": {
+          "type": "object",
+          "description": "Nodes/edges payload."
+        },
+        "private": {
+          "type": "boolean",
+          "description": "Whether the graph is private."
+        },
+        "creation_date": {
+          "type": "int32"
+        },
+        "last_modified_date": {
+          "type": "int32"
+        },
+        "user_count": {
+          "type": "int32"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "comments_count": {
+          "type": "int32"
+        },
+        "views_count": {
+          "type": "int32"
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

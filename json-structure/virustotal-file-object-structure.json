@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-file-object-structure.json",
+  "name": "FileObject",
+  "description": "A file analysed by VirusTotal \u2014 identified by SHA-256.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for FileObject.",
+      "properties": {
+        "type_description": {
+          "type": "string",
+          "description": "Human-readable file type.",
+          "example": "Win32 EXE"
+        },
+        "tlsh": {
+          "type": "string",
+          "description": "TLSH fuzzy hash."
+        },
+        "vhash": {
+          "type": "string",
+          "description": "VirusTotal in-house similarity hash."
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Names the file has been submitted with."
+        },
+        "size": {
+          "type": "int32",
+          "description": "File size in bytes.",
+          "example": 12345
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA-256 hash.",
+          "example": "44d88612fea8a8f36de82e1278abb02f44d88612fea8a8f36de82e1278abb02f"
+        },
+        "sha1": {
+          "type": "string",
+          "description": "SHA-1 hash."
+        },
+        "md5": {
+          "type": "string",
+          "description": "MD5 hash."
+        },
+        "ssdeep": {
+          "type": "string",
+          "description": "ssdeep fuzzy hash."
+        },
+        "magic": {
+          "type": "string",
+          "description": "libmagic file type signature."
+        },
+        "first_submission_date": {
+          "type": "int32",
+          "description": "Unix epoch (seconds) of first submission.",
+          "example": 1718153645
+        },
+        "last_submission_date": {
+          "type": "int32",
+          "description": "Unix epoch (seconds) of most recent submission.",
+          "example": 1718153645
+        },
+        "last_analysis_date": {
+          "type": "int32",
+          "description": "Unix epoch (seconds) of last AV analysis.",
+          "example": 1718153645
+        },
+        "times_submitted": {
+          "type": "int32",
+          "description": "Total number of submissions.",
+          "example": 42
+        },
+        "reputation": {
+          "type": "int32",
+          "description": "Aggregated community reputation score.",
+          "example": -10
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            }
+          },
+          "description": "Community vote tallies."
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "type-unsupported": {
+              "type": "int32"
+            },
+            "suspicious": {
+              "type": "int32"
+            },
+            "confirmed-timeout": {
+              "type": "int32"
+            },
+            "timeout": {
+              "type": "int32"
+            },
+            "failure": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            },
+            "undetected": {
+              "type": "int32"
+            }
+          },
+          "description": "Aggregated AV verdict counts."
+        },
+        "last_analysis_results": {
+          "type": "object",
+          "description": "Per-engine analysis results.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "engine_name": {
+                "type": "string"
+              },
+              "engine_version": {
+                "type": "string"
+              },
+              "engine_update": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "harmless",
+                  "type-unsupported",
+                  "suspicious",
+                  "confirmed-timeout",
+                  "timeout",
+                  "failure",
+                  "malicious",
+                  "undetected"
+                ]
+              },
+              "result": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "meaningful_name": {
+          "type": "string",
+          "description": "Most representative file name.",
+          "example": "invoice.pdf"
+        },
+        "popular_threat_classification": {
+          "type": "object",
+          "properties": {
+            "suggested_threat_label": {
+              "type": "string",
+              "example": "trojan.emotet"
+            },
+            "popular_threat_category": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "int32"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "popular_threat_name": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "int32"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

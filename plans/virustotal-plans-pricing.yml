@@ -1,0 +1,191 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: VirusTotal
+providerId: virustotal
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+tags:
+  - Threat Intelligence
+  - Anti-Malware
+  - Security
+  - File Analysis
+  - URL Analysis
+description: >-
+  VirusTotal (Google-owned, now also marketed as Google Threat Intelligence / GTI)
+  prices in three commercial shapes: (1) a free Public API for individuals and
+  open-source projects, capped at a documented 4 req/min / 500 req/day allowance;
+  (2) a Premium API offered on bespoke SLAs (no published rack rate) that lifts
+  the daily allowance and unlocks Premium-only surfaces — Livehunt, Retrohunt,
+  Feeds, Private Scanning, Threat Landscape (Threat Actors / Malware & Tools /
+  Campaigns / Reports / Vulnerabilities), Zip downloads, and the IoC Stream; and
+  (3) Google Threat Intelligence Enterprise, sold under the Google Cloud
+  contract, which adds DTM (Digital Threat Monitoring) and ASM (Attack Surface
+  Management). All paid tiers are "contact sales" — there is no self-service
+  upgrade.
+sources:
+  - https://docs.virustotal.com/reference/public-vs-premium-api
+  - https://docs.virustotal.com/reference/overview
+  - https://www.virustotal.com/gui/contact-us/premium-services
+  - https://gtidocs.virustotal.com/reference/openapi-specs
+
+plans:
+  - id: virustotal-public-api
+    name: Public API (Free)
+    type: freemium
+    description: >-
+      Free tier for personal use, education, and contributions to the community
+      corpus. Cannot be used commercially or in business workflows that don't
+      contribute new files. Multiple-account registration is prohibited.
+    entries:
+      - label: API requests
+        name: requests
+        type: quota
+        metric: request
+        limit: 500
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: API request rate
+        name: requests_per_minute
+        type: quota
+        metric: requests_per_minute
+        limit: 4
+        timeFrame: minute
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+    elements:
+      - name: File / URL / IP / Domain reports
+      - name: File scanning up to 32 MB (650 MB via upload_url)
+      - name: Comments and votes
+      - name: Basic relationships graph
+      - name: Crowdsourced YARA rule reads
+
+  - id: virustotal-premium-api
+    name: Premium API
+    type: enterprise
+    description: >-
+      Commercial tier for SOC, IR, MSSP, and threat-research teams. Pricing is
+      negotiated per SLA — no published rack rate. Unlocks Livehunt, Retrohunt,
+      Feeds (file / URL / IP / domain / sandbox), Private Scanning, the IoC
+      Stream, Threat Landscape (Threat Actors, Malware & Tools, Campaigns,
+      Reports, Vulnerabilities), full relationships graph, Zip downloads, and
+      submission-context metadata (first-submission date, submitter country,
+      filenames).
+    entries:
+      - label: API requests
+        name: requests
+        type: quota
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Daily allowance
+        name: daily_allowance
+        type: subscription
+        metric: request
+        limit: -1
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: per SLA
+        userMultiplied: false
+      - label: Livehunt rulesets
+        name: livehunt_rulesets
+        type: quota
+        metric: ruleset
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Retrohunt jobs
+        name: retrohunt_jobs
+        type: quota
+        metric: job
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Feed download
+        name: feed_download
+        type: metered
+        metric: gb
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: per SLA
+        userMultiplied: false
+    elements:
+      - name: All Public API features
+      - name: Livehunt (YARA real-time matching on incoming corpus)
+      - name: Retrohunt (YARA scans against historical corpus)
+      - name: IoC Stream subscriptions
+      - name: File / URL / Domain / IP feeds (per-minute and hourly)
+      - name: Sandbox behaviour feed
+      - name: Private Scanning (files, URLs, behaviours, zip)
+      - name: Threat Landscape — Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities
+      - name: Crowdsourced YARA rule writes
+      - name: Zipped, password-protected sample downloads
+      - name: Submission-context metadata
+      - name: Full relationships graph (contacted domains, embedded URLs, ITW URLs)
+      - name: Engine-by-engine sandbox results
+
+  - id: virustotal-gti-enterprise
+    name: Google Threat Intelligence (Enterprise)
+    type: enterprise
+    description: >-
+      The umbrella commercial product (formerly "Mandiant Advantage" + "VT
+      Enterprise"). Sold under the Google Cloud contract. Adds Digital Threat
+      Monitoring (DTM) and Attack Surface Management (ASM) on top of all
+      Premium API surfaces. Pricing is per-tenant via Google Cloud sales.
+    entries:
+      - label: Platform
+        name: platform
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: DTM (Digital Threat Monitoring)
+        name: dtm
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: ASM (Attack Surface Management)
+        name: asm
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: All Premium API features
+      - name: Mandiant-curated threat intelligence
+      - name: DTM — leaked credential / brand abuse / dark-web monitoring
+      - name: ASM — external attack surface discovery and rating
+      - name: Google Cloud SSO / IAM integration
+      - name: Enterprise SLAs and named support

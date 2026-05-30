@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-schema/CollectionObject-schema.json",
+  "title": "CollectionObject",
+  "description": "A curated collection of IoCs \u2014 also used for Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for CollectionObject.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Emotet Campaign 2026-04"
+        },
+        "description": {
+          "type": "string"
+        },
+        "collection_type": {
+          "type": "string",
+          "enum": [
+            "collection",
+            "campaign",
+            "malware-family",
+            "report",
+            "software-toolkit",
+            "threat-actor",
+            "vulnerability"
+          ]
+        },
+        "creation_date": {
+          "type": "integer"
+        },
+        "last_modification_date": {
+          "type": "integer"
+        },
+        "files_count": {
+          "type": "integer"
+        },
+        "domains_count": {
+          "type": "integer"
+        },
+        "ip_addresses_count": {
+          "type": "integer"
+        },
+        "urls_count": {
+          "type": "integer"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targeted_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "ISO country codes targeted."
+        },
+        "targeted_industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "motivations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Espionage, Financial, Hacktivism, etc."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

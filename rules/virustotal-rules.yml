@@ -1,0 +1,430 @@
+# VirusTotal API v3 — Spectral ruleset
+#
+# Enforces the conventions observed across the VirusTotal / Google Threat Intelligence
+# API v3 specs: snake_case paths, x-apikey header auth, "data" envelope responses,
+# tag prefixes (`IoC Investigation - ...`, `YARA Hunting - ...`), and the JSON:API-ish
+# object shape (id + type + attributes + relationships).
+#
+# Usage:
+#   spectral lint --ruleset rules/virustotal-rules.yml openapi/*.yml
+
+extends:
+  - spectral:oas
+
+rules:
+
+  # ============================================================
+  # INFO / METADATA
+  # ============================================================
+
+  vt-info-title-required:
+    description: Spec title must be present and start with "VirusTotal".
+    message: "{{property}} must start with 'VirusTotal'"
+    severity: error
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "^VirusTotal\\b"
+
+  vt-info-version-required:
+    description: Spec version must be declared and start with "3".
+    message: "info.version must start with '3' (VirusTotal API v3)."
+    severity: error
+    given: $.info.version
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3"
+
+  vt-info-description-required:
+    description: Spec description must be present and non-trivial.
+    message: "info.description must be a substantive paragraph (min 40 chars)."
+    severity: warn
+    given: $.info.description
+    then:
+      function: length
+      functionOptions:
+        min: 40
+
+  vt-info-contact-required:
+    description: Spec must declare a contact (VirusTotal / GTI).
+    severity: warn
+    given: $.info.contact
+    then:
+      function: truthy
+
+  vt-info-license-required:
+    description: Spec must declare a license (VirusTotal Terms of Service).
+    severity: warn
+    given: $.info.license
+    then:
+      function: truthy
+
+  # ============================================================
+  # OPENAPI VERSION + SERVERS
+  # ============================================================
+
+  vt-openapi-version:
+    description: Spec must be OpenAPI 3.x.
+    severity: error
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\."
+
+  vt-servers-required:
+    description: At least one server URL must be defined.
+    severity: error
+    given: $.servers
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  vt-servers-https:
+    description: Server URL must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  vt-servers-api-v3-host:
+    description: Server URL should point at api/v3 on virustotal.com or gtidocs subdomain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "/api/v3$"
+
+  # ============================================================
+  # PATHS — NAMING CONVENTIONS
+  # ============================================================
+
+  vt-paths-snake-case:
+    description: Path segments use snake_case (VirusTotal convention) — letters, digits, underscores, hyphens, and {param} placeholders only.
+    message: "Path '{{value}}' must use snake_case segments."
+    severity: warn
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9_]+(-[a-z0-9_]+)*|/\\{[a-zA-Z_]+\\})+$"
+
+  vt-paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  vt-paths-no-query-string:
+    description: Path keys must not contain '?' query strings.
+    severity: error
+    given: $.paths.*~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  # ============================================================
+  # OPERATIONS
+  # ============================================================
+
+  vt-operation-summary-required:
+    description: Every operation must have a summary.
+    severity: error
+    given: $.paths.*.[get,post,put,patch,delete].summary
+    then:
+      function: truthy
+
+  vt-operation-summary-virustotal-prefix:
+    description: Operation summaries must start with "VirusTotal " (per title-case-summaries skill).
+    message: "Summary should be prefixed with 'VirusTotal '."
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^VirusTotal "
+
+  vt-operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  vt-operation-operationid-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths.*.[get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  vt-operation-operationid-camelcase:
+    description: operationId should be camelCase.
+    message: "operationId '{{value}}' should be camelCase (no dashes, underscores, or spaces)."
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  vt-operation-tags-required:
+    description: Every operation must have at least one tag.
+    severity: error
+    given: $.paths.*.[get,post,put,patch,delete].tags
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  vt-operation-microcks-extension:
+    description: Operations should declare x-microcks-operation for Microcks mocking.
+    severity: info
+    given: $.paths.*.[get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ============================================================
+  # TAGS
+  # ============================================================
+
+  vt-tags-global-defined:
+    description: Spec must define a global tags array.
+    severity: warn
+    given: $.tags
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  vt-tags-virustotal-grouping:
+    description: |
+      Tag names should follow the VirusTotal grouping convention:
+      "<Area> - <Subject>" (e.g. "IoC Investigation - Files",
+      "YARA Hunting - Livehunt", "Access Control - User Management",
+      "Threat Graphs", "Threat Landscape & Vulnerability Intelligence & Reports & Analysis").
+    message: "Tag '{{value}}' should follow the '<Area> - <Subject>' or '<Area>' format used across VirusTotal v3."
+    severity: info
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(Access Control|IoC Feeds|IoC Investigation|Private Scanning|YARA Hunting|Threat Graphs|Threat Landscape)( - .+| & .+)?$"
+
+  # ============================================================
+  # PARAMETERS
+  # ============================================================
+
+  vt-parameter-description-required:
+    description: Every parameter must have a description.
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  vt-parameter-snake-case:
+    description: Parameter names should be snake_case (VirusTotal convention).
+    message: "Parameter '{{value}}' should be snake_case."
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([a-z][a-z0-9_]*|x-[a-z][a-z0-9-]*)$"
+
+  vt-parameter-no-apikey-as-query:
+    description: API key must be sent via the x-apikey header, not as a query parameter.
+    message: "API key parameter '{{value}}' must be in the x-apikey header, not the query string."
+    severity: error
+    given: $.paths.*.[get,post,put,patch,delete].parameters[?(@.in=='query')].name
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(apikey|api_key|apiKey)$"
+
+  vt-parameter-pagination-cursor:
+    description: List endpoints prefer cursor-based pagination via 'limit' + 'cursor'.
+    severity: info
+    given: $.paths.*.get.parameters[?(@.name=='page' || @.name=='offset')]
+    then:
+      function: undefined
+
+  # ============================================================
+  # REQUEST BODIES
+  # ============================================================
+
+  vt-requestbody-json-content:
+    description: Request bodies must offer application/json.
+    severity: warn
+    given: $.paths.*.[post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ============================================================
+  # RESPONSES
+  # ============================================================
+
+  vt-response-success-required:
+    description: Every operation must declare at least one 2xx response.
+    severity: error
+    given: $.paths.*.[get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^2[0-9][0-9]$": {}
+          required: []
+          minProperties: 1
+
+  vt-response-401-defined:
+    description: Operations should document the 401 response (missing/invalid API key).
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].responses
+    then:
+      field: "401"
+      function: truthy
+
+  vt-response-429-defined:
+    description: Operations should document the 429 response (rate limit / quota exceeded).
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].responses
+    then:
+      field: "429"
+      function: truthy
+
+  vt-response-json-content:
+    description: 2xx responses must be served as application/json.
+    severity: warn
+    given: $.paths.*.[get,post,put,patch,delete].responses[?(@property.match(/^2\d\d$/))].content
+    then:
+      field: application/json
+      function: truthy
+
+  # ============================================================
+  # SCHEMAS — PROPERTY NAMING
+  # ============================================================
+
+  vt-schema-property-snake-case:
+    description: Schema property names should be snake_case (VirusTotal convention).
+    message: "Property '{{property}}' should be snake_case."
+    severity: warn
+    given: $.components.schemas.*.properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  vt-schema-object-shape:
+    description: |
+      VirusTotal objects follow a JSON:API-ish shape: { id, type, attributes, relationships }.
+      Any schema whose name ends with "Object" should declare those four properties.
+    severity: info
+    given: "$.components.schemas[?(@property.match(/Object$/))]"
+    then:
+      field: properties
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [id, type, attributes]
+
+  vt-schema-data-envelope:
+    description: 'A DataEnvelope schema should be present to model the {"data": ...} response wrapper.'
+    severity: info
+    given: $.components.schemas
+    then:
+      field: DataEnvelope
+      function: truthy
+
+  vt-schema-error-envelope:
+    description: 'An ErrorResponse schema should be present to model {"error": {code, message}}.'
+    severity: info
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+
+  # ============================================================
+  # SECURITY
+  # ============================================================
+
+  vt-security-global-defined:
+    description: Spec must declare a global security requirement.
+    severity: error
+    given: $.security
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  vt-security-scheme-vtapikey:
+    description: The VTApiKey security scheme (apiKey in header named x-apikey) must be defined.
+    severity: error
+    given: $.components.securitySchemes.VTApiKey
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [type, in, name]
+          properties:
+            type:
+              const: apiKey
+            in:
+              const: header
+            name:
+              const: x-apikey
+
+  # ============================================================
+  # HTTP METHOD CONVENTIONS
+  # ============================================================
+
+  vt-get-no-requestbody:
+    description: GET operations must not declare a requestBody.
+    severity: error
+    given: $.paths.*.get.requestBody
+    then:
+      function: falsy
+
+  vt-delete-no-requestbody:
+    description: DELETE operations should not declare a requestBody.
+    severity: warn
+    given: $.paths.*.delete.requestBody
+    then:
+      function: falsy
+
+  # ============================================================
+  # GENERAL QUALITY
+  # ============================================================
+
+  vt-no-empty-description:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: "$..description"
+    then:
+      function: truthy
+
+  vt-deprecation-documented:
+    description: Deprecated operations should explain the deprecation in the description.
+    severity: warn
+    given: "$.paths.*[?(@.deprecated==true)]"
+    then:
+      field: description
+      function: truthy

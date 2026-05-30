@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-schema/FileBehaviourObject-schema.json",
+  "title": "FileBehaviourObject",
+  "description": "A file's behaviour report from one of VirusTotal's sandboxes.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for FileBehaviourObject.",
+      "properties": {
+        "sandbox_name": {
+          "type": "string",
+          "example": "VirusTotal Jujubox"
+        },
+        "analysis_date": {
+          "type": "integer"
+        },
+        "behash": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "processes_tree": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "processes_created": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "processes_injected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "processes_killed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "command_executions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registry_keys_opened": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "registry_keys_set": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "files_opened": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files_written": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files_deleted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files_dropped": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "modules_loaded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mutexes_created": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mutexes_opened": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dns_lookups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "ip_traffic": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "http_conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "tls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "mitre_attack_techniques": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "verdicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

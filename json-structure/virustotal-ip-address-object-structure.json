@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-ip-address-object-structure.json",
+  "name": "IpAddressObject",
+  "description": "An IPv4 or IPv6 address analysed by VirusTotal.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for IpAddressObject.",
+      "properties": {
+        "as_owner": {
+          "type": "string",
+          "description": "Autonomous System owner.",
+          "example": "GOOGLE"
+        },
+        "asn": {
+          "type": "int32",
+          "description": "Autonomous System Number.",
+          "example": 15169
+        },
+        "continent": {
+          "type": "string",
+          "example": "NA"
+        },
+        "country": {
+          "type": "string",
+          "example": "US"
+        },
+        "network": {
+          "type": "string",
+          "description": "CIDR network the IP belongs to.",
+          "example": "10.0.0.0/16"
+        },
+        "regional_internet_registry": {
+          "type": "string",
+          "example": "ARIN"
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            },
+            "suspicious": {
+              "type": "int32"
+            },
+            "undetected": {
+              "type": "int32"
+            },
+            "timeout": {
+              "type": "int32"
+            }
+          }
+        },
+        "last_https_certificate_date": {
+          "type": "int32"
+        },
+        "last_https_certificate": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "reputation": {
+          "type": "int32"
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whois": {
+          "type": "string"
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

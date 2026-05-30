@@ -1,0 +1,22 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "first_name": "Sample",
+    "last_name": "Sample",
+    "email": "analyst@example.com",
+    "profile_phrase": "sample",
+    "reputation": 1,
+    "status": "active",
+    "user_since": 1,
+    "last_login": 1,
+    "privileges": {},
+    "preferences": {},
+    "country": "US",
+    "quotas": {}
+  },
+  "relationships": {}
+}

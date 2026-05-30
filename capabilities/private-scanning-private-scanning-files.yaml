@@ -1,0 +1,450 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - Private Scanning — Private Scanning - Files
+  description: 'VirusTotal API v3 - Private Scanning — Private Scanning - Files. 8 operations. Lead operation: Upload a File. Self-contained Naftiko capability covering one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - Private Scanning
+  - Files
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: private-scanning-private-scanning-files
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - Private Scanning — Private Scanning - Files. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: private-files
+      path: /private/files
+      operations:
+      - name: uploadFilePrivateScanning
+        method: POST
+        description: VirusTotal Upload a File
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listPrivateFiles
+        method: GET
+        description: VirusTotal List Private Files
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of files to retrieve (40 max)
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-upload-url
+      path: /private/files/upload_url
+      operations:
+      - name: privateFilesUploadUrl
+        method: GET
+        description: VirusTotal Get a URL for Uploading Large Files
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-id
+      path: /private/files/{id}
+      operations:
+      - name: deleteFilePrivateScanning
+        method: DELETE
+        description: VirusTotal Delete a Private File Report
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        - name: only_from_storage
+          in: query
+          type: boolean
+          required: false
+          description: If true, only the file will be deleted from storage, but the generated reports and analyses won't.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: privateFilesInfo
+        method: GET
+        description: VirusTotal Get a Private File Report
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-id-relationships-relationship
+      path: /private/files/{id}/relationships/{relationship}
+      operations:
+      - name: privatefilesidrelationshipsrelationship
+        method: GET
+        description: VirusTotal Get Object Descriptors Related to a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:private-files-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-id-relationship
+      path: /private/files/{id}/{relationship}
+      operations:
+      - name: privateFilesRelationships
+        method: GET
+        description: VirusTotal Get Objects Related to a Private File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: File's SHA-256
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:private-files-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: private-files-sha256-analyse
+      path: /private/files/{sha256}/analyse
+      operations:
+      - name: rescanAPrivateFile
+        method: POST
+        description: VirusTotal Rescan a Private File
+        inputParameters:
+        - name: sha256
+          in: path
+          type: string
+          required: true
+          description: File's SHA256 hash
+        - name: command_line
+          in: query
+          type: string
+          required: false
+          description: Command line arguments to use when running the file in sandboxes.
+        - name: disable_sandbox
+          in: query
+          type: string
+          required: false
+          description: If true, then the file won't be detonated in sandbox environments. False by default.
+        - name: enable_internet
+          in: query
+          type: string
+          required: false
+          description: If the file should have internet access when running in sandboxes. False by default.
+        - name: intercept_tls
+          in: query
+          type: string
+          required: false
+          description: Intercept HTTPS/TLS/SSL communication. Intercept HTTPS to view encypted URLS, hostnames and HTTP headers.  This is detectable by any sample that checks certificates, and makes JA3
+            hashes unusable.
+        - name: interaction_sandbox
+          in: query
+          type: string
+          required: false
+          description: Select the sandbox desired for interactive use.
+        - name: interaction_timeout
+          in: query
+          type: integer
+          required: false
+          description: 'Interaction timeout in seconds, minimum value: 60. (1 minute.) Max value: 1800: (30 minutes).'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: private-scanning-private-scanning-files-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Files. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/private/files
+      name: private-files
+      description: REST surface for /private/files.
+      operations:
+      - method: POST
+        name: uploadFilePrivateScanning
+        description: VirusTotal Upload a File
+        call: private-scanning-private-scanning-files.uploadFilePrivateScanning
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          body: rest.body
+      - method: GET
+        name: listPrivateFiles
+        description: VirusTotal List Private Files
+        call: private-scanning-private-scanning-files.listPrivateFiles
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/private/files/upload_url
+      name: private-files-upload-url
+      description: REST surface for /private/files/upload_url.
+      operations:
+      - method: GET
+        name: privateFilesUploadUrl
+        description: VirusTotal Get a URL for Uploading Large Files
+        call: private-scanning-private-scanning-files.privateFilesUploadUrl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/private/files/{id}
+      name: private-files-id
+      description: REST surface for /private/files/{id}.
+      operations:
+      - method: DELETE
+        name: deleteFilePrivateScanning
+        description: VirusTotal Delete a Private File Report
+        call: private-scanning-private-scanning-files.deleteFilePrivateScanning
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          only_from_storage: rest.only_from_storage
+      - method: GET
+        name: privateFilesInfo
+        description: VirusTotal Get a Private File Report
+        call: private-scanning-private-scanning-files.privateFilesInfo
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/private/files/{id}/relationships/{relationship}
+      name: private-files-id-relationships-relationship
+      description: REST surface for /private/files/{id}/relationships/{relationship}.
+      operations:
+      - method: GET
+        name: privatefilesidrelationshipsrelationship
+        description: VirusTotal Get Object Descriptors Related to a File
+        call: private-scanning-private-scanning-files.privatefilesidrelationshipsrelationship
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/private/files/{id}/{relationship}
+      name: private-files-id-relationship
+      description: REST surface for /private/files/{id}/{relationship}.
+      operations:
+      - method: GET
+        name: privateFilesRelationships
+        description: VirusTotal Get Objects Related to a Private File
+        call: private-scanning-private-scanning-files.privateFilesRelationships
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/private/files/{sha256}/analyse
+      name: private-files-sha256-analyse
+      description: REST surface for /private/files/{sha256}/analyse.
+      operations:
+      - method: POST
+        name: rescanAPrivateFile
+        description: VirusTotal Rescan a Private File
+        call: private-scanning-private-scanning-files.rescanAPrivateFile
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          sha256: rest.sha256
+          command_line: rest.command_line
+          disable_sandbox: rest.disable_sandbox
+          enable_internet: rest.enable_internet
+          intercept_tls: rest.intercept_tls
+          interaction_sandbox: rest.interaction_sandbox
+          interaction_timeout: rest.interaction_timeout
+  - type: mcp
+    namespace: private-scanning-private-scanning-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - Private Scanning — Private Scanning - Files. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: upload-file
+      description: VirusTotal Upload a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: private-scanning-private-scanning-files.uploadFilePrivateScanning
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        body: tools.body
+    - name: list-private-files
+      description: VirusTotal List Private Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files.listPrivateFiles
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-url-uploading-large-files
+      description: VirusTotal Get a URL for Uploading Large Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files.privateFilesUploadUrl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-private-file-report
+      description: VirusTotal Delete a Private File Report
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: private-scanning-private-scanning-files.deleteFilePrivateScanning
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        only_from_storage: tools.only_from_storage
+    - name: get-private-file-report
+      description: VirusTotal Get a Private File Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files.privateFilesInfo
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-object-descriptors-related-file
+      description: VirusTotal Get Object Descriptors Related to a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files.privatefilesidrelationshipsrelationship
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-objects-related-private-file
+      description: VirusTotal Get Objects Related to a Private File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: private-scanning-private-scanning-files.privateFilesRelationships
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: rescan-private-file
+      description: VirusTotal Rescan a Private File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: private-scanning-private-scanning-files.rescanAPrivateFile
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        sha256: tools.sha256
+        command_line: tools.command_line
+        disable_sandbox: tools.disable_sandbox
+        enable_internet: tools.enable_internet
+        intercept_tls: tools.intercept_tls
+        interaction_sandbox: tools.interaction_sandbox
+        interaction_timeout: tools.interaction_timeout

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-retrohunt-job-object-structure.json",
+  "name": "RetrohuntJobObject",
+  "description": "A Retrohunt job \u2014 scans the VT corpus historically with a YARA ruleset.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for RetrohuntJobObject.",
+      "properties": {
+        "rules": {
+          "type": "string",
+          "description": "Raw YARA rule text."
+        },
+        "notification_email": {
+          "type": "string"
+        },
+        "corpus": {
+          "type": "string",
+          "enum": [
+            "main",
+            "goodware"
+          ],
+          "description": "Which corpus the retrohunt runs against."
+        },
+        "scanned_bytes": {
+          "type": "int32"
+        },
+        "num_matches": {
+          "type": "int32"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "starting",
+            "running",
+            "aborting",
+            "aborted",
+            "finished"
+          ]
+        },
+        "progress": {
+          "type": "double"
+        },
+        "eta_seconds": {
+          "type": "int32"
+        },
+        "creation_date": {
+          "type": "int32"
+        },
+        "start_date": {
+          "type": "int32"
+        },
+        "finish_date": {
+          "type": "int32"
+        },
+        "time_range": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "int32"
+            },
+            "end": {
+              "type": "int32"
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

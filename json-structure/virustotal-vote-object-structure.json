@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-vote-object-structure.json",
+  "name": "VoteObject",
+  "description": "A community vote (harmless or malicious) on a file, URL, IP, or domain.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for VoteObject.",
+      "properties": {
+        "date": {
+          "type": "int32"
+        },
+        "verdict": {
+          "type": "string",
+          "enum": [
+            "harmless",
+            "malicious"
+          ],
+          "description": "The voter's verdict."
+        },
+        "value": {
+          "type": "int32",
+          "description": "Signed value (-1 malicious, +1 harmless)."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

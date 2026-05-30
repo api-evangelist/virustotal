@@ -1,0 +1,402 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - Threat Graphs — Threat Graphs Permissions & ACL
+  description: 'VirusTotal API v3 - Threat Graphs — Threat Graphs Permissions & ACL. 8 operations. Lead operation: Get Users and Groups That Can Edit a Graph. Self-contained Naftiko capability covering
+    one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - Threat Graphs Permissions & ACL
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: threat-graphs-threat-graphs-permissions-acl
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - Threat Graphs — Threat Graphs Permissions & ACL. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: graphs-id-relationships-editors
+      path: /graphs/{id}/relationships/editors
+      operations:
+      - name: graphsEditors
+        method: GET
+        description: VirusTotal Get Users and Groups That Can Edit a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: limit
+          in: query
+          type: string
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: integer
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: graphsAddEditor
+        method: POST
+        description: VirusTotal Grant Users and Groups Permission to Edit a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: graphs-id-relationships-editors-user-or-group-id
+      path: /graphs/{id}/relationships/editors/{user_or_group_id}
+      operations:
+      - name: graphsDeleteEditor
+        method: DELETE
+        description: VirusTotal Revoke Edit Graph Permissions from a User or Group
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: user_or_group_id
+          in: path
+          type: string
+          required: true
+          description: User or group ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: graphsCheckEditor
+        method: GET
+        description: VirusTotal Check if a User or Group Can Edit a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: user_or_group_id
+          in: path
+          type: string
+          required: true
+          description: User or group ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: graphs-id-relationships-viewers-user-or-group-id
+      path: /graphs/{id}/relationships/viewers/{user_or_group_id}
+      operations:
+      - name: graphsDeleteViewer
+        method: DELETE
+        description: VirusTotal Revoke View Permission from a User or Group
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: user_or_group_id
+          in: path
+          type: string
+          required: true
+          description: User or group ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: graphsCheckViewer
+        method: GET
+        description: VirusTotal Check if a User or Group Can View a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: user_or_group_id
+          in: path
+          type: string
+          required: true
+          description: User or group ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: graphs-id-relationships-viewers
+      path: /graphs/{id}/relationships/viewers
+      operations:
+      - name: graphsViewers
+        method: GET
+        description: VirusTotal Get Users and Groups That Can View a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        - name: limit
+          in: query
+          type: string
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: integer
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: graphsAddViewer
+        method: POST
+        description: VirusTotal Grant Users and Groups Permission to See a Graph
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: A 65 char length id which uniquely identify the graph.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: threat-graphs-threat-graphs-permissions-acl-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - Threat Graphs — Threat Graphs Permissions & ACL. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/graphs/{id}/relationships/editors
+      name: graphs-id-relationships-editors
+      description: REST surface for /graphs/{id}/relationships/editors.
+      operations:
+      - method: GET
+        name: graphsEditors
+        description: VirusTotal Get Users and Groups That Can Edit a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsEditors
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: graphsAddEditor
+        description: VirusTotal Grant Users and Groups Permission to Edit a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsAddEditor
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/graphs/{id}/relationships/editors/{user_or_group_id}
+      name: graphs-id-relationships-editors-user-or-group-id
+      description: REST surface for /graphs/{id}/relationships/editors/{user_or_group_id}.
+      operations:
+      - method: DELETE
+        name: graphsDeleteEditor
+        description: VirusTotal Revoke Edit Graph Permissions from a User or Group
+        call: threat-graphs-threat-graphs-permissions-acl.graphsDeleteEditor
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          user_or_group_id: rest.user_or_group_id
+      - method: GET
+        name: graphsCheckEditor
+        description: VirusTotal Check if a User or Group Can Edit a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsCheckEditor
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          user_or_group_id: rest.user_or_group_id
+    - path: /v1/graphs/{id}/relationships/viewers/{user_or_group_id}
+      name: graphs-id-relationships-viewers-user-or-group-id
+      description: REST surface for /graphs/{id}/relationships/viewers/{user_or_group_id}.
+      operations:
+      - method: DELETE
+        name: graphsDeleteViewer
+        description: VirusTotal Revoke View Permission from a User or Group
+        call: threat-graphs-threat-graphs-permissions-acl.graphsDeleteViewer
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          user_or_group_id: rest.user_or_group_id
+      - method: GET
+        name: graphsCheckViewer
+        description: VirusTotal Check if a User or Group Can View a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsCheckViewer
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          user_or_group_id: rest.user_or_group_id
+    - path: /v1/graphs/{id}/relationships/viewers
+      name: graphs-id-relationships-viewers
+      description: REST surface for /graphs/{id}/relationships/viewers.
+      operations:
+      - method: GET
+        name: graphsViewers
+        description: VirusTotal Get Users and Groups That Can View a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsViewers
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: graphsAddViewer
+        description: VirusTotal Grant Users and Groups Permission to See a Graph
+        call: threat-graphs-threat-graphs-permissions-acl.graphsAddViewer
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: threat-graphs-threat-graphs-permissions-acl-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - Threat Graphs — Threat Graphs Permissions & ACL. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-users-groups-that-can
+      description: VirusTotal Get Users and Groups That Can Edit a Graph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsEditors
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: grant-users-groups-permission-edit
+      description: VirusTotal Grant Users and Groups Permission to Edit a Graph
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: threat-graphs-threat-graphs-permissions-acl.graphsAddEditor
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: revoke-edit-graph-permissions-user
+      description: VirusTotal Revoke Edit Graph Permissions from a User or Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsDeleteEditor
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        user_or_group_id: tools.user_or_group_id
+    - name: check-if-user-group-can
+      description: VirusTotal Check if a User or Group Can Edit a Graph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsCheckEditor
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        user_or_group_id: tools.user_or_group_id
+    - name: revoke-view-permission-user-group
+      description: VirusTotal Revoke View Permission from a User or Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsDeleteViewer
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        user_or_group_id: tools.user_or_group_id
+    - name: check-if-user-group-can-2
+      description: VirusTotal Check if a User or Group Can View a Graph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsCheckViewer
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        user_or_group_id: tools.user_or_group_id
+    - name: get-users-groups-that-can-2
+      description: VirusTotal Get Users and Groups That Can View a Graph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: threat-graphs-threat-graphs-permissions-acl.graphsViewers
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: grant-users-groups-permission-see
+      description: VirusTotal Grant Users and Groups Permission to See a Graph
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: threat-graphs-threat-graphs-permissions-acl.graphsAddViewer
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

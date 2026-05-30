@@ -1,32 +1,478 @@
 aid: virustotal
 name: VirusTotal
-description: "VirusTotal File/URL Analysis"
+description: >-
+  VirusTotal — the Google-owned (since 2012) threat intelligence platform that
+  aggregates anti-malware engines and URL scanners to analyse files, URLs, IP
+  addresses, and domains. The v3 API surfaces seven major areas: Access Control,
+  IoC Feeds, IoC Investigation, Private Scanning, Threat Graphs, Threat
+  Landscape & Vulnerability Intelligence, and YARA Hunting (Livehunt, Retrohunt,
+  IoC Stream). Now also branded "Google Threat Intelligence" (GTI) for
+  Enterprise customers, integrating Mandiant intelligence, Digital Threat
+  Monitoring (DTM), and Attack Surface Management (ASM).
 url: https://docs.virustotal.com/reference/overview
+image: https://www.virustotal.com/gui/images/vt-logo.svg
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-29'
 x-source: public-apis/public-apis
-x-category: "Anti-Malware"
-x-tier: 3
-x-tier-reason: bulk-registered-from-public-apis
+x-category: Anti-Malware
+x-type: company
+x-tier: 1
 tags:
-  - Anti Malware
-  - Public APIs
+  - Anti-Malware
+  - Threat Intelligence
+  - Security
+  - File Analysis
+  - URL Analysis
+  - YARA
+  - IoC
+  - Sandbox
+  - MITRE ATT&CK
+  - Google Cloud
+
 apis:
-  - name: VirusTotal
-    description: "VirusTotal File/URL Analysis"
+
+  - name: VirusTotal API v3 - Access Control
+    description: >-
+      Manage users, groups, service accounts, API quotas, and overall account
+      usage. The control plane that wraps every other VirusTotal API surface.
     humanURL: https://docs.virustotal.com/reference/overview
-    baseURL: https://docs.virustotal.com/reference/overview
+    baseURL: https://www.virustotal.com/api/v3
     tags:
-      - Anti Malware
+      - Access Control
+      - Administration
+      - Quotas
     properties:
       - type: Documentation
         url: https://docs.virustotal.com/reference/overview
+      - type: APIReference
+        url: https://gtidocs.virustotal.com/reference/overview
+      - type: OpenAPI
+        url: openapi/virustotal-access-control-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/access-control-access-control-group-management.yaml
+      - type: NaftikoCapability
+        url: capabilities/access-control-access-control-quota-management.yaml
+      - type: NaftikoCapability
+        url: capabilities/access-control-access-control-service-account-management.yaml
+      - type: NaftikoCapability
+        url: capabilities/access-control-access-control-user-management.yaml
+
+  - name: VirusTotal API v3 - IoC Feeds
+    description: >-
+      Per-minute and hourly intelligence feed batches for files, URLs, domains,
+      IP addresses, and sandbox analyses. Premium tier required. The bulk
+      pipeline behind SIEM / SOAR / data-lake integrations.
+    humanURL: https://docs.virustotal.com/reference/feeds
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - Feeds
+      - Sandbox
+      - Premium
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/feeds
+      - type: OpenAPI
+        url: openapi/virustotal-ioc-feeds-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/ioc-feeds-ioc-feeds-domain-intelligence-feed.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-feeds-ioc-feeds-file-intelligence-feed.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-feeds-ioc-feeds-ip-intelligence-feed.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-feeds-ioc-feeds-sandbox-analyses-feed.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-feeds-ioc-feeds-url-intelligence-feed.yaml
+
+  - name: VirusTotal API v3 - IoC Investigation
+    description: >-
+      Investigate files, URLs, IP addresses, and domains. Submit and analyse
+      samples, retrieve verdicts, traverse the relationships graph, fetch
+      sandbox behaviour, post comments and votes, search the corpus. The day-one
+      surface for SOC and incident response.
+    humanURL: https://docs.virustotal.com/reference/files
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - Investigation
+      - Files
+      - URLs
+      - Domains
+      - IP Addresses
+      - Sandbox
+      - MITRE ATT&CK
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/files
+      - type: OpenAPI
+        url: openapi/virustotal-ioc-investigation-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-analyses-submissions-operations.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-attack-tactics.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-attack-techniques.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-comments.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-domains-resolutions.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-files.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-files-behaviours.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-ip-addresses.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-popular-threat-categories.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-search-metadata.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-urls.yaml
+      - type: NaftikoCapability
+        url: capabilities/ioc-investigation-ioc-investigation-zipping-files.yaml
+
+  - name: VirusTotal API v3 - Private Scanning
+    description: >-
+      Submit files and URLs for analysis without sharing the artefact with the
+      VirusTotal community. Mirrors the public scanning surface (Files / URLs /
+      Analyses / Behaviours / Zip Files). Premium tier required.
+    humanURL: https://docs.virustotal.com/reference/private-scanning
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - Private Scanning
+      - Premium
+      - Sandbox
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/private-scanning
+      - type: OpenAPI
+        url: openapi/virustotal-private-scanning-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/private-scanning-private-scanning-analyses.yaml
+      - type: NaftikoCapability
+        url: capabilities/private-scanning-private-scanning-files.yaml
+      - type: NaftikoCapability
+        url: capabilities/private-scanning-private-scanning-files-behaviours.yaml
+      - type: NaftikoCapability
+        url: capabilities/private-scanning-private-scanning-urls.yaml
+      - type: NaftikoCapability
+        url: capabilities/private-scanning-private-scanning-zipping-files.yaml
+
+  - name: VirusTotal API v3 - Threat Graphs
+    description: >-
+      Create, share, edit, and search Threat Graphs — visualisations of how
+      IoCs and threats relate. Includes the editor / viewer ACL surface for
+      collaboration.
+    humanURL: https://docs.virustotal.com/reference/graphs
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - Graphs
+      - Collaboration
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/graphs
+      - type: OpenAPI
+        url: openapi/virustotal-threat-graphs-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/threat-graphs-threat-graphs.yaml
+      - type: NaftikoCapability
+        url: capabilities/threat-graphs-threat-graphs-permissions-acl.yaml
+
+  - name: VirusTotal API v3 - Threat Landscape & Vulnerability Intelligence
+    description: >-
+      Threat Landscape — Collections, Threat Actors, Malware & Tools,
+      Campaigns, Reports, Vulnerabilities, and the curated IoC catalogue.
+      Premium tier; this is where Mandiant-curated intelligence surfaces.
+    humanURL: https://docs.virustotal.com/reference/collections
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - Threat Actors
+      - Malware Families
+      - Campaigns
+      - Vulnerabilities
+      - Premium
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/collections
+      - type: OpenAPI
+        url: openapi/virustotal-threat-landscape-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/threat-landscape-threat-landscape-vulnerability-intelligence-reports-analysis.yaml
+
+  - name: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream)
+    description: >-
+      Livehunt (real-time YARA matching on incoming corpus), Retrohunt
+      (historical YARA scans), the IoC Stream, and crowdsourced YARA rules.
+      The hunting and notification surface. Premium tier required for write
+      operations; rule reads are free.
+    humanURL: https://docs.virustotal.com/reference/livehunt
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Threat Intelligence
+      - YARA
+      - Hunting
+      - Premium
+    properties:
+      - type: Documentation
+        url: https://docs.virustotal.com/reference/livehunt
+      - type: OpenAPI
+        url: openapi/virustotal-yara-hunting-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/yara-hunting-yara-hunting-ioc-stream.yaml
+      - type: NaftikoCapability
+        url: capabilities/yara-hunting-yara-hunting-livehunt.yaml
+      - type: NaftikoCapability
+        url: capabilities/yara-hunting-yara-hunting-retrohunt.yaml
+      - type: NaftikoCapability
+        url: capabilities/yara-hunting-yara-hunting-rules.yaml
+
+  - name: Google Threat Intelligence - Attack Surface Management (ASM)
+    description: >-
+      Enterprise add-on (formerly Mandiant Advantage ASM). Discovers and
+      monitors an organisation's external attack surface, scoring exposures
+      and prioritising remediation.
+    humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Attack Surface Management
+      - Enterprise
+      - GTI
+    properties:
+      - type: APIReference
+        url: https://gtidocs.virustotal.com/openapi/asm-attack-surface-management.json
+      - type: ProductPage
+        url: https://cloud.google.com/security/products/threat-intelligence
+
+  - name: Google Threat Intelligence - Digital Threat Monitoring (DTM)
+    description: >-
+      Enterprise add-on (formerly Mandiant Advantage DTM). Monitors the open,
+      deep, and dark web for credential leaks, brand abuse, and adversary
+      chatter referencing the customer.
+    humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
+    baseURL: https://www.virustotal.com/api/v3
+    tags:
+      - Digital Threat Monitoring
+      - Dark Web
+      - Brand Protection
+      - Enterprise
+      - GTI
+    properties:
+      - type: APIReference
+        url: https://gtidocs.virustotal.com/openapi/dtm-digital-threat-monitoring.json
+      - type: ProductPage
+        url: https://cloud.google.com/security/products/threat-intelligence
+
+# ============================================================
+# Common properties — tools, SDKs, integrations, plans, rate-limits, finops,
+# rules, vocabulary, MCP servers, plugins.
+# ============================================================
 common:
+
+  # --- Documentation / homepage ---
   - type: Website
+    url: https://www.virustotal.com
+  - type: Documentation
     url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: GitHubOrganization
+    url: https://github.com/VirusTotal
+  - type: Blog
+    url: https://blog.virustotal.com/
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+
+  # --- Official OpenAPI specs published by VirusTotal / GTI ---
+  - type: OpenAPI
+    title: GTI API v3 — Full Spec (official, upstream)
+    url: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  - type: OpenAPI
+    title: GTI ASM — Attack Surface Management
+    url: https://gtidocs.virustotal.com/openapi/asm-attack-surface-management.json
+  - type: OpenAPI
+    title: GTI DTM — Digital Threat Monitoring
+    url: https://gtidocs.virustotal.com/openapi/dtm-digital-threat-monitoring.json
+
+  # --- Official SDKs ---
+  - type: SDK
+    title: Python SDK (vt-py)
+    url: https://github.com/VirusTotal/vt-py
+  - type: SDK
+    title: Go SDK (vt-go)
+    url: https://github.com/VirusTotal/vt-go
+  - type: SDK
+    title: Graph API Python (vt-graph-api)
+    url: https://github.com/VirusTotal/vt-graph-api
+
+  # --- CLI ---
+  - type: CLI
+    title: vt-cli — Official VirusTotal Command Line Interface (Go)
+    url: https://github.com/VirusTotal/vt-cli
+
+  # --- MCP Servers and AI Agent Tools ---
+  - type: Tools
+    title: MCP Server (BurtTheCoder/mcp-virustotal — community)
+    url: https://github.com/BurtTheCoder/mcp-virustotal
+  - type: Tools
+    title: MCP Server (alephnan/MCP-VirusTotal — community)
+    url: https://github.com/alephnan/MCP-VirusTotal
+  - type: Tools
+    title: MCP Server (barvhaim/virustotal-mcp-server — community, Python)
+    url: https://github.com/barvhaim/virustotal-mcp-server
+
+  # --- VirusTotal's own developer tools / utilities ---
+  - type: Tools
+    title: YARA (the pattern matching swiss knife)
+    url: https://github.com/VirusTotal/yara
+  - type: Tools
+    title: YARA-X (Rust rewrite of YARA)
+    url: https://github.com/VirusTotal/yara-x
+  - type: Tools
+    title: yara-python (Python interface for YARA)
+    url: https://github.com/VirusTotal/yara-python
+  - type: Tools
+    title: yara-x-benchmarks
+    url: https://github.com/VirusTotal/yara-x-benchmarks
+  - type: Tools
+    title: go-yara (Go bindings for YARA)
+    url: https://github.com/VirusTotal/go-yara
+  - type: Tools
+    title: protoc-gen-yara (YARA modules from protobufs)
+    url: https://github.com/VirusTotal/protoc-gen-yara
+  - type: Tools
+    title: CAPEv2 (Malware Configuration And Payload Extraction)
+    url: https://github.com/VirusTotal/CAPEv2
+  - type: Tools
+    title: vt-ida-plugin (Official VirusTotal plugin for IDA Pro)
+    url: https://github.com/VirusTotal/vt-ida-plugin
+  - type: Tools
+    title: vt-windows-event-stream
+    url: https://github.com/VirusTotal/vt-windows-event-stream
+  - type: Tools
+    title: qt-virustotal-uploader (Qt desktop uploader)
+    url: https://github.com/VirusTotal/qt-virustotal-uploader
+
+  # --- Integrations published by VirusTotal / GTI ---
+  - type: Integration
+    title: GTI Integration — Microsoft Defender
+    url: https://github.com/VirusTotal/gti-Microsoft-Defender
+  - type: Integration
+    title: GTI Integration — AWS GuardDuty
+    url: https://github.com/VirusTotal/gti-aws-GuardDuty
+  - type: Integration
+    title: GTI Integration — Google Secops SIEM
+    url: https://github.com/VirusTotal/gti-google-secops-siem
+  - type: Integration
+    title: GTI Integration — MISP connector
+    url: https://github.com/VirusTotal/gti-misp-connector
+  - type: Integration
+    title: GTI SOAR Playbooks
+    url: https://github.com/VirusTotal/gti-soar-playbooks
+  - type: Integration
+    title: GTI Integrations — User Guides
+    url: https://github.com/VirusTotal/GTI-Integrations-UserGuides
+  - type: Tutorials
+    title: GTI Developer Kit (example integration code)
+    url: https://github.com/VirusTotal/gti-dev-kit
+
+  # --- Plans, rate limits, FinOps ---
+  - type: Plans
+    url: plans/virustotal-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/virustotal-rate-limits.yml
+  - type: FinOps
+    url: finops/virustotal-finops.yml
+
+  # --- Rules / vocabulary / JSON-LD ---
+  - type: SpectralRuleset
+    url: rules/virustotal-rules.yml
+  - type: Vocabulary
+    url: vocabulary/virustotal-vocabulary.yml
+  - type: JSONLDContext
+    url: json-ld/virustotal-context.jsonld
+
+# ============================================================
+# Use cases, features, integrations data tables, solutions.
+# ============================================================
+features:
+  - name: File / URL / IP / Domain reports
+    description: Look up any IoC and pull aggregated AV verdicts, reputation, community votes, and the relationships graph.
+  - name: Sandbox detonation
+    description: Submit files (up to 32 MB direct, 650 MB via signed URL) to multiple sandboxes; pull behaviour reports including processes, registry, network, MITRE techniques.
+  - name: Private scanning
+    description: Premium-only — submit samples that are not shared with the VT community.
+  - name: Livehunt
+    description: YARA rules that match in real time against the inbound corpus, with email and IoC Stream notifications.
+  - name: Retrohunt
+    description: Run YARA scans across the historical corpus over a chosen time range and fetch matching files.
+  - name: IoC Stream
+    description: Real-time notification stream from Livehunt / Retrohunt / Intel feeds — drain into SIEM / SOAR.
+  - name: Intel Feeds
+    description: Per-minute and hourly batches of files, URLs, domains, IPs, and sandbox analyses for bulk ingestion.
+  - name: Threat Landscape
+    description: Curated Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities (Mandiant-backed under GTI).
+  - name: Threat Graphs
+    description: Visual graph of how IoCs relate, with editor / viewer ACLs for team collaboration.
+  - name: Crowdsourced YARA
+    description: Community-contributed YARA rules visible against every file report.
+  - name: MITRE ATT&CK mapping
+    description: Tactic and technique objects with relationships back to files, behaviours, and malware families.
+
+useCases:
+  - name: SOC alert triage
+    description: Hash, URL, or IP arrives in a SIEM alert; SOC analyst calls /files/{id} or /urls/{id} to get a verdict in seconds.
+  - name: Incident response IoC enrichment
+    description: IR pulls every IoC in scope and the relationships graph (contacted_domains, downloaded_files, embedded_urls) to build the threat picture.
+  - name: Detection engineering
+    description: Detection engineer authors a YARA ruleset, deploys to Livehunt, monitors notifications, and ports to in-line tooling once tuned.
+  - name: Threat hunting
+    description: Threat researcher runs Retrohunt jobs against the corpus to find historical artefacts of a newly discovered TTP.
+  - name: Threat intelligence enrichment
+    description: TI team consumes Threat Landscape collections (Actors, Malware, Campaigns) into MISP / their TIP.
+  - name: Attack surface monitoring
+    description: Enterprise GTI customer uses ASM to discover and rate the org's external footprint.
+  - name: Brand and credential monitoring
+    description: Enterprise GTI customer uses DTM to monitor open / deep / dark web for credential dumps and brand abuse.
+  - name: Sample sharing pipeline
+    description: Malware analyst submits samples via vt-py / vt-cli, pulls behaviour, and archives via /intelligence/zip_files.
+
+integrations:
+  - name: Microsoft Defender
+    description: GTI integration repo with playbooks for enriching Defender alerts.
+  - name: AWS GuardDuty
+    description: GTI integration repo for cross-referencing GuardDuty findings against VT.
+  - name: Google Secops SIEM
+    description: GTI integration repo for pumping VT signals into Google Secops.
+  - name: MISP
+    description: GTI MISP connector pulls VT IoCs / Collections into a MISP instance.
+  - name: SOAR platforms
+    description: GTI SOAR playbooks repository covering common orchestration patterns.
+  - name: IDA Pro
+    description: Official VirusTotal plugin for IDA Pro reverse-engineering workflows.
+  - name: Shuffle (open source SOAR)
+    description: Community Shuffle apps wrap the VT v3 API.
+  - name: Microsoft Power Platform
+    description: Archived but historically-shipped Power Automate / Power Apps / Logic Apps connectors.
+
+solutions:
+  - name: Security Operations Center (SOC)
+    description: Day-one triage, IoC enrichment, automated playbooks via IoC Stream and SOAR.
+  - name: Incident Response (IR)
+    description: Relationships traversal, sandbox behaviour, threat-actor attribution, graph collaboration.
+  - name: Threat Intelligence (TI)
+    description: Threat Landscape collections, IoC corpus search, custom collections, vulnerability tracking.
+  - name: Threat Hunting / Detection Engineering
+    description: Livehunt + Retrohunt + crowdsourced YARA + sandbox behaviour feeds.
+  - name: MSSP / Managed Detection
+    description: Multi-tenant via Groups + Service Accounts; per-key quota visibility for chargeback.
+  - name: Enterprise Security (GTI)
+    description: Mandiant intelligence + DTM (dark web) + ASM (external attack surface).
+
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

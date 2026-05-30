@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-schema/UserObject-schema.json",
+  "title": "UserObject",
+  "description": "A VirusTotal / Google Threat Intelligence user account.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for UserObject.",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "example": "analyst@example.com"
+        },
+        "profile_phrase": {
+          "type": "string"
+        },
+        "reputation": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        },
+        "user_since": {
+          "type": "integer"
+        },
+        "last_login": {
+          "type": "integer"
+        },
+        "privileges": {
+          "type": "object",
+          "description": "Map of feature name \u2192 granted state.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "granted": {
+                "type": "boolean"
+              },
+              "expiration_date": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "inherited_from": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "preferences": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "country": {
+          "type": "string"
+        },
+        "quotas": {
+          "type": "object",
+          "description": "Per-feature quota usage and allowance.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

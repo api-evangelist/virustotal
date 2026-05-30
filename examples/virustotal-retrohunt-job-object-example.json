@@ -1,0 +1,25 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "rules": "sample",
+    "notification_email": "analyst@example.com",
+    "corpus": "goodware",
+    "scanned_bytes": 1,
+    "num_matches": 1,
+    "status": "starting",
+    "progress": 1.0,
+    "eta_seconds": 1,
+    "creation_date": 1748534400,
+    "start_date": 1748534400,
+    "finish_date": 1748534400,
+    "time_range": {
+      "start": 1,
+      "end": 1
+    }
+  },
+  "relationships": {}
+}

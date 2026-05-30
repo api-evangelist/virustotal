@@ -1,0 +1,17 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "rule_name": "Mal_Emotet_Loader",
+    "ruleset_id": "sample",
+    "ruleset_name": "Sample",
+    "author": "sample",
+    "description": "sample",
+    "source": "sample",
+    "rules": "sample"
+  },
+  "relationships": {}
+}

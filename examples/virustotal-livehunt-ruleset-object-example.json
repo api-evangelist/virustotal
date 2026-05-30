@@ -1,0 +1,27 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "name": "emotet-loaders",
+    "creation_date": 1748534400,
+    "modification_date": 1748534400,
+    "enabled": true,
+    "rules": "sample",
+    "rule_names": [
+      "Sample"
+    ],
+    "number_of_rules": 1,
+    "notification_emails": [
+      "analyst@example.com"
+    ],
+    "limit": 1,
+    "match_object_type": "ip_address",
+    "tags": [
+      "sample"
+    ]
+  },
+  "relationships": {}
+}

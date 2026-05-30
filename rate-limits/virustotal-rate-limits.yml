@@ -1,0 +1,150 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: VirusTotal
+providerId: virustotal
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Threat Intelligence
+  - Anti-Malware
+description: >-
+  VirusTotal enforces rate limits per API key. The Public (free) API publishes
+  hard numbers — 4 requests per minute and 500 requests per day. Premium and
+  GTI Enterprise keys are governed by the customer's SLA rather than a public
+  cap, and individual Premium surfaces (Livehunt, Retrohunt, Feeds, Private
+  Scanning) carry their own per-feature quotas which are visible via the
+  `/users/{id}/overall_quotas` and `/users/{id}/api_usage` endpoints. Limits
+  apply per API key — the key carries all of the user's privileges and quota
+  pool.
+sources:
+  - https://docs.virustotal.com/reference/public-vs-premium-api
+  - https://docs.virustotal.com/reference/overview
+  - https://docs.virustotal.com/reference/getting-started
+  - https://gtidocs.virustotal.com/reference/getting-started
+
+headers:
+  retryAfter: Retry-After
+  requestId: X-Request-Id
+
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  unauthorized: 401
+  forbidden: 403
+
+limits:
+  - name: Public API — request rate
+    scope: key
+    metric: requests_per_minute
+    limit: 4
+    timeFrame: minute
+    notes: Hard rate cap enforced per API key. Exceeding returns 429.
+
+  - name: Public API — daily allowance
+    scope: key
+    metric: requests_per_day
+    limit: 500
+    timeFrame: day
+    notes: Daily quota resets at 00:00 UTC. Exceeding returns 429 until reset.
+
+  - name: Public API — monthly allowance
+    scope: key
+    metric: requests_per_month
+    limit: 15500
+    timeFrame: month
+    notes: Approximate roll-up of the daily cap (500 × 31). Resets on the 1st of the month UTC.
+
+  - name: Premium API — request rate
+    scope: key
+    metric: requests_per_minute
+    limit: per SLA
+    notes: No public per-minute cap; defined in the customer's Premium contract.
+
+  - name: Premium API — daily / monthly allowance
+    scope: key
+    metric: requests_per_day
+    limit: per SLA
+    notes: Daily / monthly quota set per Premium contract. Visible via /users/{id}/overall_quotas.
+
+  - name: Livehunt — daily notification limit per ruleset
+    scope: ruleset
+    metric: notifications_per_day
+    limit: per ruleset config
+    notes: Configurable via the ruleset's `limit` field. Premium API only.
+
+  - name: Retrohunt — concurrent jobs
+    scope: key
+    metric: concurrent_jobs
+    limit: per SLA
+    notes: Bounded by the Premium contract; check /users/{id}/overall_quotas for current allocation.
+
+  - name: Feeds — backfill window
+    scope: key
+    metric: minutes
+    limit: per SLA
+    notes: Premium feed batches are available for a rolling window (typically 7 days). Older batches return 404.
+
+  - name: File upload size
+    scope: key
+    metric: bytes_per_request
+    limit: 33554432
+    timeFrame: usage
+    notes: Direct POST /files cap at 32 MB. Use /files/upload_url for files up to 650 MB.
+
+  - name: Large file upload size
+    scope: key
+    metric: bytes_per_request
+    limit: 681574400
+    timeFrame: usage
+    notes: Files > 32 MB and ≤ 650 MB must use the pre-signed URL flow.
+
+policies:
+  - name: Header-based throttling signal
+    description: >-
+      On 429 responses, honour the Retry-After header where present. If absent,
+      back off exponentially starting at 60s (matches the per-minute Public
+      cap).
+
+  - name: Per-key scoping
+    description: >-
+      Every API key carries its own quota pool and privileges. Sharing keys
+      across services double-counts against the same pool; provision separate
+      keys per integration to avoid contention.
+
+  - name: Quota visibility
+    description: >-
+      Inspect current usage via GET /users/{id}/api_usage and current
+      allowances via GET /users/{id}/overall_quotas. For group-managed
+      accounts, use the /groups/{id} equivalents.
+
+  - name: No multi-account workaround
+    description: >-
+      VirusTotal explicitly prohibits creating multiple accounts to multiply the
+      Public API quota. Use Premium for higher throughput.
+
+  - name: Commercial use restriction (Public API)
+    description: >-
+      The Public API cannot be used in commercial products or business
+      workflows that don't contribute new files to the community. Commercial
+      deployments must use Premium.
+
+  - name: Idempotency by content hash
+    description: >-
+      File reports are content-addressed by SHA-256. Re-submitting the same
+      bytes yields the same id and consumes minimal quota — fetch by hash
+      first, then submit only if absent.
+
+  - name: Burst-aware client design
+    description: >-
+      The Public API's 4 req/min cap means a naïve threaded client will be
+      throttled within seconds. Insert a 15-second floor between requests, or
+      use a token-bucket limiter sized at 4/min.
+
+  - name: Sandbox-feature quotas separate
+    description: >-
+      Livehunt notifications, Retrohunt scans, Private Scanning submissions,
+      and Feed downloads each have their own per-feature quotas that are
+      orthogonal to the per-minute / per-day request cap.

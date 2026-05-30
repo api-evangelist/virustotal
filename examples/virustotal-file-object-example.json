@@ -1,0 +1,58 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "type_description": "Win32 EXE",
+    "tlsh": "sample",
+    "vhash": "sample",
+    "names": [
+      "Sample"
+    ],
+    "size": 12345,
+    "sha256": "44d88612fea8a8f36de82e1278abb02f44d88612fea8a8f36de82e1278abb02f",
+    "sha1": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "md5": "44d88612fea8a8f36de82e1278abb02f",
+    "ssdeep": "sample",
+    "magic": "sample",
+    "first_submission_date": 1718153645,
+    "last_submission_date": 1718153645,
+    "last_analysis_date": 1718153645,
+    "times_submitted": 42,
+    "reputation": -10,
+    "total_votes": {
+      "harmless": 1,
+      "malicious": 1
+    },
+    "last_analysis_stats": {
+      "harmless": 1,
+      "type-unsupported": 1,
+      "suspicious": 1,
+      "confirmed-timeout": 1748534400,
+      "timeout": 1748534400,
+      "failure": 1,
+      "malicious": 1,
+      "undetected": 1
+    },
+    "last_analysis_results": {},
+    "meaningful_name": "invoice.pdf",
+    "popular_threat_classification": {
+      "suggested_threat_label": "trojan.emotet",
+      "popular_threat_category": [
+        {
+          "count": {},
+          "value": {}
+        }
+      ],
+      "popular_threat_name": [
+        {
+          "count": {},
+          "value": {}
+        }
+      ]
+    }
+  },
+  "relationships": {}
+}

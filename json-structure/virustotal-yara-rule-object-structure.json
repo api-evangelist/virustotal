@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-yara-rule-object-structure.json",
+  "name": "YaraRuleObject",
+  "description": "A crowdsourced YARA rule contributed to the VirusTotal community.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for YaraRuleObject.",
+      "properties": {
+        "rule_name": {
+          "type": "string",
+          "example": "Mal_Emotet_Loader"
+        },
+        "ruleset_id": {
+          "type": "string"
+        },
+        "ruleset_name": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source URL of the rule."
+        },
+        "rules": {
+          "type": "string",
+          "description": "Raw YARA rule text."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

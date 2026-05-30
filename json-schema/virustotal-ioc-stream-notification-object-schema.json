@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-schema/IocStreamNotificationObject-schema.json",
+  "title": "IocStreamNotificationObject",
+  "description": "A notification produced by Livehunt, Retrohunt, or other IoC feed subscriptions.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for IocStreamNotificationObject.",
+      "properties": {
+        "notification_date": {
+          "type": "integer"
+        },
+        "notification_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notification_source": {
+          "type": "string",
+          "enum": [
+            "livehunt",
+            "retrohunt",
+            "intel_feed",
+            "subscription"
+          ]
+        },
+        "notification_id": {
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_key": {
+          "type": "string"
+        },
+        "match": {
+          "type": "object",
+          "description": "Details of the matched rule / object.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

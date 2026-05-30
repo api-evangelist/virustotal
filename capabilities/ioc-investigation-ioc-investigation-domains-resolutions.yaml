@@ -1,0 +1,438 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - IoC Investigation — IoC Investigation - Domains & Resolutions
+  description: 'VirusTotal API v3 - IoC Investigation — IoC Investigation - Domains & Resolutions. 8 operations. Lead operation: Get a Domain Report. Self-contained Naftiko capability covering one VirusTotal
+    business surface.'
+  tags:
+  - VirusTotal
+  - IoC Investigation
+  - Domains & Resolutions
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ioc-investigation-ioc-investigation-domains-resolutions
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - IoC Investigation — IoC Investigation - Domains & Resolutions. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: domains-domain
+      path: /domains/{domain}
+      operations:
+      - name: domainInfo
+        method: GET
+        description: VirusTotal Get a Domain Report
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: Domain name
+        - name: x-tool
+          in: header
+          type: string
+          required: false
+          description: The name of your tool or service. This is required to obtain the gti_assesment data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: domains-domain-comments
+      path: /domains/{domain}/comments
+      operations:
+      - name: domainsCommentsGet
+        method: GET
+        description: VirusTotal Get Comments on a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: Domain name
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of comments to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: domainsCommentsPost
+        method: POST
+        description: VirusTotal Add a Comment to a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: Domain name
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: domains-domain-relationships-relationship
+      path: /domains/{domain}/relationships/{relationship}
+      operations:
+      - name: domainsRelationshipsIds
+        method: GET
+        description: VirusTotal Get Object Descriptors Related to a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: Domain name
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:domains-object#relationships))
+        - name: limit
+          in: query
+          type: string
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: domains-domain-votes
+      path: /domains/{domain}/votes
+      operations:
+      - name: domainsVotesGet
+        method: GET
+        description: VirusTotal Get Votes on a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: domain parameter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: domainVotesPost
+        method: POST
+        description: VirusTotal Add a Vote to a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: hostname or domain name
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: domains-domain-relationship
+      path: /domains/{domain}/{relationship}
+      operations:
+      - name: domainsRelationships
+        method: GET
+        description: VirusTotal Get Objects Related to a Domain
+        inputParameters:
+        - name: domain
+          in: path
+          type: string
+          required: true
+          description: Domain name
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:domains-object#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resolutions-id
+      path: /resolutions/{id}
+      operations:
+      - name: getResolutionById
+        method: GET
+        description: VirusTotal Get a DNS Resolution Object
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Resolution object ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ioc-investigation-ioc-investigation-domains-resolutions-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Domains & Resolutions. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/domains/{domain}
+      name: domains-domain
+      description: REST surface for /domains/{domain}.
+      operations:
+      - method: GET
+        name: domainInfo
+        description: VirusTotal Get a Domain Report
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainInfo
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          x-tool: rest.x-tool
+    - path: /v1/domains/{domain}/comments
+      name: domains-domain-comments
+      description: REST surface for /domains/{domain}/comments.
+      operations:
+      - method: GET
+        name: domainsCommentsGet
+        description: VirusTotal Get Comments on a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainsCommentsGet
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: domainsCommentsPost
+        description: VirusTotal Add a Comment to a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainsCommentsPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          body: rest.body
+    - path: /v1/domains/{domain}/relationships/{relationship}
+      name: domains-domain-relationships-relationship
+      description: REST surface for /domains/{domain}/relationships/{relationship}.
+      operations:
+      - method: GET
+        name: domainsRelationshipsIds
+        description: VirusTotal Get Object Descriptors Related to a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainsRelationshipsIds
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/domains/{domain}/votes
+      name: domains-domain-votes
+      description: REST surface for /domains/{domain}/votes.
+      operations:
+      - method: GET
+        name: domainsVotesGet
+        description: VirusTotal Get Votes on a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainsVotesGet
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+      - method: POST
+        name: domainVotesPost
+        description: VirusTotal Add a Vote to a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainVotesPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          body: rest.body
+    - path: /v1/domains/{domain}/{relationship}
+      name: domains-domain-relationship
+      description: REST surface for /domains/{domain}/{relationship}.
+      operations:
+      - method: GET
+        name: domainsRelationships
+        description: VirusTotal Get Objects Related to a Domain
+        call: ioc-investigation-ioc-investigation-domains-resolutions.domainsRelationships
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          domain: rest.domain
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/resolutions/{id}
+      name: resolutions-id
+      description: REST surface for /resolutions/{id}.
+      operations:
+      - method: GET
+        name: getResolutionById
+        description: VirusTotal Get a DNS Resolution Object
+        call: ioc-investigation-ioc-investigation-domains-resolutions.getResolutionById
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: ioc-investigation-ioc-investigation-domains-resolutions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Domains & Resolutions. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-domain-report
+      description: VirusTotal Get a Domain Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainInfo
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        x-tool: tools.x-tool
+    - name: get-comments-domain
+      description: VirusTotal Get Comments on a Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainsCommentsGet
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: add-comment-domain
+      description: VirusTotal Add a Comment to a Domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainsCommentsPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        body: tools.body
+    - name: get-object-descriptors-related-domain
+      description: VirusTotal Get Object Descriptors Related to a Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainsRelationshipsIds
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-votes-domain
+      description: VirusTotal Get Votes on a Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainsVotesGet
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+    - name: add-vote-domain
+      description: VirusTotal Add a Vote to a Domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainVotesPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        body: tools.body
+    - name: get-objects-related-domain
+      description: VirusTotal Get Objects Related to a Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.domainsRelationships
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        domain: tools.domain
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-dns-resolution-object
+      description: VirusTotal Get a DNS Resolution Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-domains-resolutions.getResolutionById
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

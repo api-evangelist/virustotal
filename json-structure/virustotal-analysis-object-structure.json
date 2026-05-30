@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-analysis-object-structure.json",
+  "name": "AnalysisObject",
+  "description": "An analysis (scan execution) tracking the lifecycle of a file or URL submission.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for AnalysisObject.",
+      "properties": {
+        "date": {
+          "type": "int32",
+          "description": "Unix epoch when the analysis was created."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "in-progress",
+            "completed"
+          ],
+          "description": "Current analysis state."
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            },
+            "suspicious": {
+              "type": "int32"
+            },
+            "undetected": {
+              "type": "int32"
+            },
+            "timeout": {
+              "type": "int32"
+            }
+          }
+        },
+        "results": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "engine_name": {
+                "type": "string"
+              },
+              "engine_version": {
+                "type": "string"
+              },
+              "engine_update": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              },
+              "result": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

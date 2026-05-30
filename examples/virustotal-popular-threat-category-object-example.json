@@ -1,0 +1,12 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "category": "trojan",
+    "count": 42
+  },
+  "relationships": {}
+}

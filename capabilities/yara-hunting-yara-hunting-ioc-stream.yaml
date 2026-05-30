@@ -1,0 +1,222 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream) — YARA Hunting - IoC Stream
+  description: 'VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream) — YARA Hunting - IoC Stream. 4 operations. Lead operation: Delete Notifications from the IoC Stream. Self-contained Naftiko
+    capability covering one VirusTotal business surface.'
+  tags:
+  - VirusTotal
+  - YARA Hunting
+  - IoC Stream
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: yara-hunting-yara-hunting-ioc-stream
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream) — YARA Hunting - IoC Stream. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: ioc-stream
+      path: /ioc_stream
+      operations:
+      - name: deleteNotificationsFromTheIocStream
+        method: DELETE
+        description: VirusTotal Delete Notifications from the IoC Stream
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: Filter string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getObjectsFromTheIocStream
+        method: GET
+        description: VirusTotal Get Objects from the IoC Stream
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Number of objects to retrieve (max 40)
+        - name: descriptors_only
+          in: query
+          type: boolean
+          required: false
+          description: The response returns only objects descriptors instead of whole VT objects
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: Filter string
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        - name: order
+          in: query
+          type: string
+          required: false
+          description: Sort order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ioc-stream-notifications-id
+      path: /ioc_stream_notifications/{id}
+      operations:
+      - name: deleteAnIocStreamNotification
+        method: DELETE
+        description: VirusTotal Delete an IoC Stream Notification
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: The ID of the IoC Stream notification
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getAnIocStreamNotification
+        method: GET
+        description: VirusTotal Get an IoC Stream Notification
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: The ID of the IoC Stream notification
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: yara-hunting-yara-hunting-ioc-stream-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream) — YARA Hunting - IoC Stream. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ioc_stream
+      name: ioc-stream
+      description: REST surface for /ioc_stream.
+      operations:
+      - method: DELETE
+        name: deleteNotificationsFromTheIocStream
+        description: VirusTotal Delete Notifications from the IoC Stream
+        call: yara-hunting-yara-hunting-ioc-stream.deleteNotificationsFromTheIocStream
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          filter: rest.filter
+      - method: GET
+        name: getObjectsFromTheIocStream
+        description: VirusTotal Get Objects from the IoC Stream
+        call: yara-hunting-yara-hunting-ioc-stream.getObjectsFromTheIocStream
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          limit: rest.limit
+          descriptors_only: rest.descriptors_only
+          filter: rest.filter
+          cursor: rest.cursor
+          order: rest.order
+    - path: /v1/ioc_stream_notifications/{id}
+      name: ioc-stream-notifications-id
+      description: REST surface for /ioc_stream_notifications/{id}.
+      operations:
+      - method: DELETE
+        name: deleteAnIocStreamNotification
+        description: VirusTotal Delete an IoC Stream Notification
+        call: yara-hunting-yara-hunting-ioc-stream.deleteAnIocStreamNotification
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+      - method: GET
+        name: getAnIocStreamNotification
+        description: VirusTotal Get an IoC Stream Notification
+        call: yara-hunting-yara-hunting-ioc-stream.getAnIocStreamNotification
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: yara-hunting-yara-hunting-ioc-stream-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream) — YARA Hunting - IoC Stream. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: delete-notifications-ioc-stream
+      description: VirusTotal Delete Notifications from the IoC Stream
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: yara-hunting-yara-hunting-ioc-stream.deleteNotificationsFromTheIocStream
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        filter: tools.filter
+    - name: get-objects-ioc-stream
+      description: VirusTotal Get Objects from the IoC Stream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: yara-hunting-yara-hunting-ioc-stream.getObjectsFromTheIocStream
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        limit: tools.limit
+        descriptors_only: tools.descriptors_only
+        filter: tools.filter
+        cursor: tools.cursor
+        order: tools.order
+    - name: delete-ioc-stream-notification
+      description: VirusTotal Delete an IoC Stream Notification
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: yara-hunting-yara-hunting-ioc-stream.deleteAnIocStreamNotification
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-ioc-stream-notification
+      description: VirusTotal Get an IoC Stream Notification
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: yara-hunting-yara-hunting-ioc-stream.getAnIocStreamNotification
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

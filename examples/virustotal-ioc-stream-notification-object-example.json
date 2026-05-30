@@ -1,0 +1,20 @@
+{
+  "id": "sample",
+  "type": "sample",
+  "links": {
+    "self": "https://www.virustotal.com/gui/file/44d88612"
+  },
+  "attributes": {
+    "notification_date": 1748534400,
+    "notification_tags": [
+      "sample"
+    ],
+    "notification_source": "subscription",
+    "notification_id": "sample",
+    "source_id": "sample",
+    "source_type": "sample",
+    "source_key": "sample",
+    "match": {}
+  },
+  "relationships": {}
+}

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-url-object-structure.json",
+  "name": "UrlObject",
+  "description": "A URL analysed by VirusTotal \u2014 identified by base64url of the URL.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for UrlObject.",
+      "properties": {
+        "url": {
+          "type": "uri",
+          "description": "Submitted URL.",
+          "example": "https://example.com/path"
+        },
+        "final_url": {
+          "type": "uri",
+          "description": "Final URL after redirects."
+        },
+        "name": {
+          "type": "string",
+          "description": "HTML <title> of the URL when fetched."
+        },
+        "first_submission_date": {
+          "type": "int32",
+          "description": "Unix epoch of first submission."
+        },
+        "last_submission_date": {
+          "type": "int32",
+          "description": "Unix epoch of most recent submission."
+        },
+        "last_analysis_date": {
+          "type": "int32",
+          "description": "Unix epoch of last analysis."
+        },
+        "last_http_response_code": {
+          "type": "int32",
+          "description": "HTTP status from the last fetch.",
+          "example": 200
+        },
+        "last_http_response_content_length": {
+          "type": "int32"
+        },
+        "last_http_response_content_sha256": {
+          "type": "string"
+        },
+        "last_http_response_headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "last_http_response_cookies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reputation": {
+          "type": "int32"
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            }
+          }
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            },
+            "suspicious": {
+              "type": "int32"
+            },
+            "undetected": {
+              "type": "int32"
+            },
+            "timeout": {
+              "type": "int32"
+            }
+          }
+        },
+        "last_analysis_results": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "engine_name": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              },
+              "result": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "categories": {
+          "type": "object",
+          "description": "Category assignments per categorisation engine.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Community / engine tags."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

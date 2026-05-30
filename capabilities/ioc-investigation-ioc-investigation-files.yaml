@@ -1,0 +1,695 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: VirusTotal API v3 - IoC Investigation — IoC Investigation - Files
+  description: 'VirusTotal API v3 - IoC Investigation — IoC Investigation - Files. 14 operations. Lead operation: Get a URL for Uploading Large Files. Self-contained Naftiko capability covering one VirusTotal
+    business surface.'
+  tags:
+  - VirusTotal
+  - IoC Investigation
+  - Files
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    VIRUSTOTAL_API_KEY: VIRUSTOTAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ioc-investigation-ioc-investigation-files
+    baseUri: https://www.virustotal.com/api/v3
+    description: VirusTotal API v3 - IoC Investigation — IoC Investigation - Files. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: x-apikey
+      value: '{{env.VIRUSTOTAL_API_KEY}}'
+      placement: header
+    resources:
+    - name: files-upload-url
+      path: /files/upload_url
+      operations:
+      - name: filesUploadUrl
+        method: GET
+        description: VirusTotal Get a URL for Uploading Large Files
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files
+      path: /files
+      operations:
+      - name: filesScan
+        method: POST
+        description: VirusTotal Upload a File
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id
+      path: /files/{id}
+      operations:
+      - name: fileInfo
+        method: GET
+        description: VirusTotal Get a File Report
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: x-tool
+          in: header
+          type: string
+          required: false
+          description: The name of your tool or service. This is required to obtain the gti_assesment data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-analyse
+      path: /files/{id}/analyse
+      operations:
+      - name: filesAnalyse
+        method: POST
+        description: VirusTotal Request a File Rescan (re-analyze)
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-comments
+      path: /files/{id}/comments
+      operations:
+      - name: filesCommentsGet
+        method: GET
+        description: VirusTotal Get Comments on a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of comments to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: filesCommentsPost
+        method: POST
+        description: VirusTotal Add a Comment to a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-download
+      path: /files/{id}/download
+      operations:
+      - name: filesDownload
+        method: GET
+        description: VirusTotal Download a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-download-url
+      path: /files/{id}/download_url
+      operations:
+      - name: filesDownloadUrl
+        method: GET
+        description: VirusTotal Get a File’s Download URL
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-relationships-relationship
+      path: /files/{id}/relationships/{relationship}
+      operations:
+      - name: filesRelationshipsIds
+        method: GET
+        description: VirusTotal Get Object Descriptors Related to a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:object-files#relationships))
+        - name: limit
+          in: query
+          type: string
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-votes
+      path: /files/{id}/votes
+      operations:
+      - name: filesVotesGet
+        method: GET
+        description: VirusTotal Get Votes on a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of votes to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: filesVotesPost
+        method: POST
+        description: VirusTotal Add a Vote on a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: files-id-relationship
+      path: /files/{id}/{relationship}
+      operations:
+      - name: filesRelationships
+        method: GET
+        description: VirusTotal Get Objects Related to a File
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: SHA-256, SHA-1 or MD5 identifying the file
+        - name: relationship
+          in: path
+          type: string
+          required: true
+          description: Relationship name (see [table](ref:object-files#relationships))
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of related objects to retrieve
+        - name: cursor
+          in: query
+          type: string
+          required: false
+          description: Continuation cursor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sigma-rules-id
+      path: /sigma_rules/{id}
+      operations:
+      - name: getSigmaRules
+        method: GET
+        description: VirusTotal Get a Crowdsourced Sigma Rule Object
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Rule ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: yara-rulesets-id
+      path: /yara_rulesets/{id}
+      operations:
+      - name: getYaraRulesets
+        method: GET
+        description: VirusTotal Get a Crowdsourced YARA Ruleset
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Ruleset ID to fetch.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ioc-investigation-ioc-investigation-files-rest
+    port: 8080
+    description: REST adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Files. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/files/upload_url
+      name: files-upload-url
+      description: REST surface for /files/upload_url.
+      operations:
+      - method: GET
+        name: filesUploadUrl
+        description: VirusTotal Get a URL for Uploading Large Files
+        call: ioc-investigation-ioc-investigation-files.filesUploadUrl
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/files
+      name: files
+      description: REST surface for /files.
+      operations:
+      - method: POST
+        name: filesScan
+        description: VirusTotal Upload a File
+        call: ioc-investigation-ioc-investigation-files.filesScan
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          body: rest.body
+    - path: /v1/files/{id}
+      name: files-id
+      description: REST surface for /files/{id}.
+      operations:
+      - method: GET
+        name: fileInfo
+        description: VirusTotal Get a File Report
+        call: ioc-investigation-ioc-investigation-files.fileInfo
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          x-tool: rest.x-tool
+    - path: /v1/files/{id}/analyse
+      name: files-id-analyse
+      description: REST surface for /files/{id}/analyse.
+      operations:
+      - method: POST
+        name: filesAnalyse
+        description: VirusTotal Request a File Rescan (re-analyze)
+        call: ioc-investigation-ioc-investigation-files.filesAnalyse
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/files/{id}/comments
+      name: files-id-comments
+      description: REST surface for /files/{id}/comments.
+      operations:
+      - method: GET
+        name: filesCommentsGet
+        description: VirusTotal Get Comments on a File
+        call: ioc-investigation-ioc-investigation-files.filesCommentsGet
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: filesCommentsPost
+        description: VirusTotal Add a Comment to a File
+        call: ioc-investigation-ioc-investigation-files.filesCommentsPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          body: rest.body
+    - path: /v1/files/{id}/download
+      name: files-id-download
+      description: REST surface for /files/{id}/download.
+      operations:
+      - method: GET
+        name: filesDownload
+        description: VirusTotal Download a File
+        call: ioc-investigation-ioc-investigation-files.filesDownload
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/files/{id}/download_url
+      name: files-id-download-url
+      description: REST surface for /files/{id}/download_url.
+      operations:
+      - method: GET
+        name: filesDownloadUrl
+        description: VirusTotal Get a File’s Download URL
+        call: ioc-investigation-ioc-investigation-files.filesDownloadUrl
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/files/{id}/relationships/{relationship}
+      name: files-id-relationships-relationship
+      description: REST surface for /files/{id}/relationships/{relationship}.
+      operations:
+      - method: GET
+        name: filesRelationshipsIds
+        description: VirusTotal Get Object Descriptors Related to a File
+        call: ioc-investigation-ioc-investigation-files.filesRelationshipsIds
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/files/{id}/votes
+      name: files-id-votes
+      description: REST surface for /files/{id}/votes.
+      operations:
+      - method: GET
+        name: filesVotesGet
+        description: VirusTotal Get Votes on a File
+        call: ioc-investigation-ioc-investigation-files.filesVotesGet
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          limit: rest.limit
+          cursor: rest.cursor
+      - method: POST
+        name: filesVotesPost
+        description: VirusTotal Add a Vote on a File
+        call: ioc-investigation-ioc-investigation-files.filesVotesPost
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          body: rest.body
+    - path: /v1/files/{id}/{relationship}
+      name: files-id-relationship
+      description: REST surface for /files/{id}/{relationship}.
+      operations:
+      - method: GET
+        name: filesRelationships
+        description: VirusTotal Get Objects Related to a File
+        call: ioc-investigation-ioc-investigation-files.filesRelationships
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+          relationship: rest.relationship
+          limit: rest.limit
+          cursor: rest.cursor
+    - path: /v1/sigma_rules/{id}
+      name: sigma-rules-id
+      description: REST surface for /sigma_rules/{id}.
+      operations:
+      - method: GET
+        name: getSigmaRules
+        description: VirusTotal Get a Crowdsourced Sigma Rule Object
+        call: ioc-investigation-ioc-investigation-files.getSigmaRules
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+    - path: /v1/yara_rulesets/{id}
+      name: yara-rulesets-id
+      description: REST surface for /yara_rulesets/{id}.
+      operations:
+      - method: GET
+        name: getYaraRulesets
+        description: VirusTotal Get a Crowdsourced YARA Ruleset
+        call: ioc-investigation-ioc-investigation-files.getYaraRulesets
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          id: rest.id
+  - type: mcp
+    namespace: ioc-investigation-ioc-investigation-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for VirusTotal API v3 - IoC Investigation — IoC Investigation - Files. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-url-uploading-large-files
+      description: VirusTotal Get a URL for Uploading Large Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesUploadUrl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file
+      description: VirusTotal Upload a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-files.filesScan
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        body: tools.body
+    - name: get-file-report
+      description: VirusTotal Get a File Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.fileInfo
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        x-tool: tools.x-tool
+    - name: request-file-rescan-re-analyze
+      description: VirusTotal Request a File Rescan (re-analyze)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-files.filesAnalyse
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-comments-file
+      description: VirusTotal Get Comments on a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesCommentsGet
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: add-comment-file
+      description: VirusTotal Add a Comment to a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-files.filesCommentsPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        body: tools.body
+    - name: download-file
+      description: VirusTotal Download a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesDownload
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-file-s-download-url
+      description: VirusTotal Get a File’s Download URL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesDownloadUrl
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-object-descriptors-related-file
+      description: VirusTotal Get Object Descriptors Related to a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesRelationshipsIds
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-votes-file
+      description: VirusTotal Get Votes on a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesVotesGet
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: add-vote-file
+      description: VirusTotal Add a Vote on a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ioc-investigation-ioc-investigation-files.filesVotesPost
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        body: tools.body
+    - name: get-objects-related-file
+      description: VirusTotal Get Objects Related to a File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.filesRelationships
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+        relationship: tools.relationship
+        limit: tools.limit
+        cursor: tools.cursor
+    - name: get-crowdsourced-sigma-rule-object
+      description: VirusTotal Get a Crowdsourced Sigma Rule Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.getSigmaRules
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id
+    - name: get-crowdsourced-yara-ruleset
+      description: VirusTotal Get a Crowdsourced YARA Ruleset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ioc-investigation-ioc-investigation-files.getYaraRulesets
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        id: tools.id

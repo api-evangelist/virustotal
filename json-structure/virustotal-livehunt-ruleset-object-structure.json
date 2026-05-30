@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-livehunt-ruleset-object-structure.json",
+  "name": "LivehuntRulesetObject",
+  "description": "A YARA ruleset deployed to Livehunt (real-time hunting on incoming corpus).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for LivehuntRulesetObject.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "emotet-loaders"
+        },
+        "creation_date": {
+          "type": "int32"
+        },
+        "modification_date": {
+          "type": "int32"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "rules": {
+          "type": "string",
+          "description": "Raw YARA rule text."
+        },
+        "rule_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "number_of_rules": {
+          "type": "int32"
+        },
+        "notification_emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "type": "int32",
+          "description": "Daily notification limit."
+        },
+        "match_object_type": {
+          "type": "string",
+          "enum": [
+            "file",
+            "url",
+            "domain",
+            "ip_address"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

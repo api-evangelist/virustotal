@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-comment-object-structure.json",
+  "name": "CommentObject",
+  "description": "A user-contributed comment attached to a file, URL, IP, domain, graph, or collection.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for CommentObject.",
+      "properties": {
+        "date": {
+          "type": "int32",
+          "description": "Unix epoch when posted."
+        },
+        "text": {
+          "type": "string",
+          "description": "Comment body (markdown)."
+        },
+        "html": {
+          "type": "string",
+          "description": "Rendered HTML of the comment."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "votes": {
+          "type": "object",
+          "properties": {
+            "abuse": {
+              "type": "int32"
+            },
+            "negative": {
+              "type": "int32"
+            },
+            "positive": {
+              "type": "int32"
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

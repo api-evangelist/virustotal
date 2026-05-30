@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/virustotal/refs/heads/main/json-structure/virustotal-domain-object-structure.json",
+  "name": "DomainObject",
+  "description": "A domain analysed by VirusTotal.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Object identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Object type discriminator."
+    },
+    "links": {
+      "type": "object",
+      "description": "Hypermedia links.",
+      "properties": {
+        "self": {
+          "type": "uri"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Type-specific attributes for DomainObject.",
+      "properties": {
+        "creation_date": {
+          "type": "int32",
+          "description": "Unix epoch of WHOIS creation date."
+        },
+        "expiration_date": {
+          "type": "int32",
+          "description": "Unix epoch of WHOIS expiration date."
+        },
+        "last_update_date": {
+          "type": "int32",
+          "description": "Unix epoch of last WHOIS update."
+        },
+        "last_dns_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "A"
+              },
+              "value": {
+                "type": "string",
+                "example": "10.0.0.1"
+              },
+              "ttl": {
+                "type": "int32"
+              }
+            }
+          }
+        },
+        "last_dns_records_date": {
+          "type": "int32"
+        },
+        "last_https_certificate": {
+          "type": "object",
+          "description": "Last observed TLS certificate.",
+          "properties": {
+            "thumbprint": {
+              "type": "string"
+            },
+            "thumbprint_sha256": {
+              "type": "string"
+            },
+            "issuer": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "subject": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "validity": {
+              "type": "object",
+              "properties": {
+                "not_after": {
+                  "type": "string"
+                },
+                "not_before": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            },
+            "suspicious": {
+              "type": "int32"
+            },
+            "undetected": {
+              "type": "int32"
+            },
+            "timeout": {
+              "type": "int32"
+            }
+          }
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "registrar": {
+          "type": "string",
+          "example": "GoDaddy"
+        },
+        "popularity_ranks": {
+          "type": "object",
+          "description": "Popularity ranks across multiple rankers (Cisco Umbrella, Majestic, etc.).",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "rank": {
+                "type": "int32"
+              },
+              "timestamp": {
+                "type": "int32"
+              }
+            }
+          }
+        },
+        "reputation": {
+          "type": "int32"
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "int32"
+            },
+            "malicious": {
+              "type": "int32"
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whois": {
+          "type": "string",
+          "description": "Raw WHOIS record."
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Pre-expanded relationships, keyed by relationship name.",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "attributes"
+  ]
+}

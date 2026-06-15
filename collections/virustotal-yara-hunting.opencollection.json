@@ -1,0 +1,983 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream)",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "YARA Hunting - IoC Stream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get Objects from the IoC Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ioc_stream",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of objects to retrieve (max 40)"
+              },
+              {
+                "name": "descriptors_only",
+                "value": "",
+                "type": "query",
+                "description": "The response returns only objects descriptors instead of whole VT objects"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter string"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The IoC stream endpoint returns different types of objects (files, URLs, domains, IP addresses) coming from multiple origins (you can restrict the returned types by using the filters explained below). In addition, depending on the origin of the notification there will be different context attributes added to these objects.\n\nThe possible context attributes in IoC Stream objects are:\n\n- `notification_id`: \\<_string_> Always present. This string identifies the notification, and can be used to retri"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete Notifications from the IoC Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/ioc_stream",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter string"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Uses the same filters than the IoC Stream ([GET /ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream)) to delete all the matching notifications.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get an IoC Stream Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ioc_stream_notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the IoC Stream notification"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns an IoC Stream notification.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete an IoC Stream Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/ioc_stream_notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the IoC Stream notification"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an IoC Stream notification.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "YARA Hunting - Livehunt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Retrieve File Objects for Livehunt Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_notification_files",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "String to search with in the hunting notification tags"
+              },
+              {
+                "name": "count_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications counted (meta.count in the response) 10,000 max"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> ❗️ Important\n> \n> Hunting notifications files are no longer showed in the web interface. Use the [/api/v3/ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream) endpoint instead to retrieve objects from IoC-Stream notifications.\n\nEach file object returned, _in addition to all the file details_, has a `context_attributes` property that contains information about the Google Threat Intelligence Hunting Livehunt notification tied to the file, this is an example:\n\n```"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Livehunt Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_notifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the notifications matching the given criteria only"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "count_limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of notifications counted (meta.count in the response) 10,000 max"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> ❗️ Important\n> \n> Hunting notifications are no longer showed in the web interface. Use the [/api/v3/ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream) endpoint (with `descriptors_only=true`) instead to retrieve IoC-Stream notifications.\n\n> 🚧 Retrieving matching files rather than just notifications\n> \n> This API endpoint retrieves lists of hunting notification objects, but you may be more interested in retrieving the actual file objects tied to those notifica"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete Livehunt Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_notifications",
+            "params": [
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Delete notifications with the given tag"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes Google Threat Intelligence Hunting Livehunt notifications in bulk. If the `tag` parameter is specified all your notifications with the given tag will be deleted. If the `tag` parameter is not specified all your notifications will be deleted.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Livehunt Notification Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Notification identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get a Livehunt Notification Object"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Livehunt Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Notification identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Delete a Livehunt Notification"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Livehunt Rulesets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rulesets to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the rulesets matching the given criteria only"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns the Google Threat Intelligence Hunting Livehunt rulesets viewable by the user making the request. A ruleset is viewable by a user either if it was created by the user or if it was shared with him by someone else. This endpoint is equivalent to `GET /users/{user}/hunting_rulesets`, where `{user}` is the username of the user owning the API key. In fact, if you look carefully at the example response below you'll notice that the `self` and `next` links do not point to `/intelli"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Create a New Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new Google Threat Intelligence Hunting Livehunt ruleset. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"hunting_ruleset\",\n    \"attributes\": {\n      \"name\": \"foobar\",\n      \"enabled\": true,\n      \"limit\": 100,\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_emails\": [\"wcoyte@acme.com\", \"rrunner@acme.com\"],\n      \"match_object_type\": \"file\"\n    }\n  }\n}\n```\n\nUse th"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Remove All Livehunt Rulesets",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets",
+            "headers": [
+              {
+                "name": "x-confirm-delete",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This API call deletes all rulesets owned by the user and removes the user from the list of editors in rules shared with them. This operation is asynchronous: the handler launches a background job and returns immediately. This API endpoint returns a [Operation](https://gtidocs.virustotal.com/reference/operation-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Hunting Ruleset](https://gtidocs.virustotal.com/reference/hunting-ruleset-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Update a Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "```json Example request\n{\n  \"data\": {\n    \"type\": \"hunting_ruleset\",\n    \"id\": \"{id}\",\n    \"attributes\": {\n      \"enabled\": true,\n      \"limit\": 10,\n      \"name\": \"bar\",\n      \"notification_emails\": [\"notifications@acme.com\"],\n      \"rules\": \"rule foo {condition: false}\"\n    }\n  }\n}\n```\n\nReturns the updated [Hunting Ruleset](https://gtidocs.virustotal.com/reference/hunting-ruleset-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Delete a Livehunt Ruleset"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Grant Livehunt Ruleset Edit Permissions for a User or Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/relationships/editors",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Grant Livehunt Ruleset Edit Permissions for a User or Group"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check if a User or Group is a Livehunt Ruleset Editor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/relationships/editors/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns true if the user has editing access to the Hunting ruleset.\n\n```json Response example\n{\n    \"data\": true\n}\n```\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Revoke Livehunt Ruleset Edit Permission from a User or Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/relationships/editors/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Revoke Livehunt Ruleset Edit Permission from a User or Group"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Transfer Livehunt Ruleset to Another User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/relationships/owner",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Note: The new owner must be a member of the same group the ruleset was created with.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:hunting-ruleset-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Same as [/hunting_rulesets/{id}/{relationships}](https://gtidocs.virustotal.com/reference/get-hunting-ruleset-full-relationships) except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Livehunt Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:hunting-ruleset-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Hunting Rulesets objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by Hunting Rulesets objects are documented in the [Hunting Rulesets](https://gtidocs.virustotal.com/reference/hunting-ruleset-object#relationships) API object page.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "YARA Hunting - Retrohunt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a List of Retrohunt Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number jobs to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the jobs matching the given criteria only"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Create a New Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"retrohunt_job\",\n    \"attributes\": {\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_email\": \"notifications@acme.com\",\n      \"corpus\": \"main\",\n      \"time_range\": {\n        \"start\": 1545145761,\n        \"end\": 1547737720\n      }\n    }\n  }\n}\n```\n\nThe `rules` attribute is required, but `notification_e"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Retrohunt Job Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Delete a Retrohunt Job"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Abort a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id/abort",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Abort a Retrohunt Job"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Retrieve Matches for a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id/matching_files",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of matching files to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrohunt jobs are related to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships URL.\n\nThe supported relationships for Retrohunt jobs are described in the [Retrohunt Jobs](https://gtidocs.virustotal.com/reference/retrohunt-job-object) API object page.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "YARA Hunting - Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal List Crowdsourced YARA Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rules to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the rules matching the given criteria only"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"name\": \"PK_AXA_fun\",\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"AXA\"\n\t\t\t\t],\n\t\t\t\t\"matches\": 0,\n\t\t\t\t\"author\": \"Thomas Damonneville\",\n\t\t\t\t\"enabled\": true,\n\t\t\t\t\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n    meta:\\n        description = \\\"Phis"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [YARA rule](https://gtidocs.virustotal.com/reference/yara-rule-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:yara-rule-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Same as [/yara_rules/{id}/{relationships}](https://gtidocs.virustotal.com/reference/crowdsourced-yara-rule-relationship-endpoint) except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:yara-rule-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "YARA rule objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by YARA rule objects are documented in the [YARA Rules](https://gtidocs.virustotal.com/reference/yara-rule-object#relationships) API object page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

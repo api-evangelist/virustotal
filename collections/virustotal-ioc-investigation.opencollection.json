@@ -1,0 +1,2406 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - IoC Investigation",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IoC Investigation - Analyses, Submissions & Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a URL / File Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/analyses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to an Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/analyses/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:analyses-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analyses-get-objects) except it returns just the related object's descriptors (ID and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to an Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/analyses/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:analyses-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [analysis](https://gtidocs.virustotal.com/reference/analyses-object) object documentation.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Submission Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/submission/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Submission object ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Submission](https://gtidocs.virustotal.com/reference/submission-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get an Operation Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/operations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Operation ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns an [Operation](https://gtidocs.virustotal.com/reference/operation-object) object.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Attack Tactics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Attack Tactic Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_tactics/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack tactic's ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get an Attack Tactic Object"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to an Attack Tactic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_tactics/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack tactic's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-attack-tactics#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/attack_tactics/{id}/{relationship}](https://gtidocs.virustotal.com/reference/attack_tacticsidrelationship) except it returns just the related object's descriptor instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to an Attack Tactic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_tactics/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack tactic's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-attack-tactics#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available relationships are described in the [Attack Tactic](https://gtidocs.virustotal.com/reference/attack-tactics) object documentation.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Attack Techniques",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Attack Technique Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_techniques/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack technique's ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get an Attack Technique Object"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to an Attack Technique",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_techniques/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack technique's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-attack-techniques#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/attack_techniques/{id}/{relationship}](https://gtidocs.virustotal.com/reference/attack_techniqueidrelationship) except it returns just the related object's descriptor instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to an Attack Technique",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/attack_techniques/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Attack technique's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-attack-techniques#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available relationships are described in the [Attack Technique](https://gtidocs.virustotal.com/reference/attack-techniques) object documentation.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get Latest Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/comments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter returned elements"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves information about the latest comments added to Google Threat Intelligence.  \nYou can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).\n\n```json Response example\n{\n  \"meta\": {\n    \"cursor\": \"Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Comment Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/comments/:id",
+            "params": [
+              {
+                "name": "relationships",
+                "value": "",
+                "type": "query",
+                "description": "Relationship name (see [table](ref:comment-object#relationships))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comment ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get a Comment Object"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comment ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Delete a Comment"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/comments/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comment identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:comment-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/comments/{id}/{relationship}](https://gtidocs.virustotal.com/reference/comments-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Vote to a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/comments/:id/vote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "```json Example response\n{\n    \"data\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\": 1\n    }\n}\n```\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/comments/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Comment identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:comment-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.\n\nAll available relationships are documented in the [Comment](https://gtidocs.virustotal.com/reference/comment-object) API object page.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Domains & Resolutions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a Domain Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain",
+            "headers": [
+              {
+                "name": "x-tool",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Domain name"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Comments on a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/comments",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Domain name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of comments to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Comment to a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/comments",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Domain name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a comment for a given domain. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor s"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/relationships/:relationship",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Domain name"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:domains-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/domains/{domain}/{relationship}](https://gtidocs.virustotal.com/reference/domains-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Votes on a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/votes",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "domain parameter"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Vote to a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/votes",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "hostname or domain name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a vote for a given domain. The body for the POST request must be the JSON representation of a [vote object](https://gtidocs.virustotal.com/reference/vote-object). Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/domains/:domain/:relationship",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Domain name"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:domains-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Domain objects have number of relationships to other Domains and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAll available relationships are documented in the [domain](https://gtidocs.virustotal.com/reference/domains-object) API object page.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a DNS Resolution Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/resolutions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resolution object ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a [Resolution](https://gtidocs.virustotal.com/reference/resolution-object) object by its ID. A resolution object ID is made by appending the IP and the domain it resolves to together.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a URL for Uploading Large Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/upload_url",
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "For uploading files smaller than 32MB you can simply use the [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint, but for larger files you need to obtain a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/files`. The `POST` request should have the same format expected by the  [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint. Each upload URL can be used only once.\n\n> 📘 Files larger than 200M"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/files",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload and analyse a file\n\n> 📘 File size\n> \n> If the file to be uploaded is bigger than 32MB, please use the [/files/upload_url](https://gtidocs.virustotal.com/reference/files-upload-url) endpoint instead which admits files up to 650MB."
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a File Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id",
+            "headers": [
+              {
+                "name": "x-tool",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Request a File Rescan (re-analyze)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/files/:id/analyse",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> ❗️ Caution\n> \n> This API endpoint has the potential to produce a denial of service on the scanning infrastructure if abused. Please contact us if you are going to be rescanning more than 50K files per day.\n\nFiles that have been already uploaded to Google TI can be re-analysed without uploading them again, you can use this endpoint for that purpose. The response is an object descriptor for the new analysis as in the [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint. Th"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Comments on a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of comments to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Comment to a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a comment for a given file. The body for the `POST` request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comment-object) object.\n\n```json Example request\n{\n  \""
+        },
+        {
+          "info": {
+            "name": "VirusTotal Download a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is similar to [GET /files/{id}/download_url](https://gtidocs.virustotal.com/reference/files-download-url), but it redirects you to the download URL. The download URL you are redirected to can be reused as many times as you want for a period of 1 hour. After that period the URL expires and can't be used anymore.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a File’s Download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/download_url",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a signed URL from where you can download the specified file. Getting the URL counts as a file download in your quota, even if you don't actually download the file, but once you have the URL you can use it to download the file multiple times without consuming any quota at all. The URL expires after 1 hour.\n\n```json Example response\n{\n  \"data\": \"https://vtsamples.commondatastorage.googleapis.com/275a..fd0f?GoogleAccessId=758681729565-rc7fcckv235v1@developer.gserviceaccount.co"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-files#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/files/{id}/{relationship}](https://gtidocs.virustotal.com/reference/files-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Votes on a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/votes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of votes to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Vote on a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/files/:id/votes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a vote for a given file. The body for the `POST` request must be the JSON representation of a vote object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either `harmless` or `malicious`.\n\nReturns a [Vote](https://gtidocs.virustotal.com/reference/vote-object) object.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:object-files#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "File objects have many relationships to other files and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nSome relationships are accessible only to users who have access to VirusTotal Enterprise package.\n\nMore common relationships are described in the [File](https://gtidocs.virustotal.com/reference/object-files) object documentation and you can u"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Crowdsourced Sigma Rule Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/sigma_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Sigma Rule](https://gtidocs.virustotal.com/reference/sigma-rule-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Crowdsourced YARA Ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Ruleset ID to fetch."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [YARA Ruleset](https://gtidocs.virustotal.com/reference/yara-rulesets-object) object used in our crowdsourced YARA results.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Files Behaviours",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a File Behavior Report from a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID. See \"Sandbox Report identifiers\" section below for more info."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetches a [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object by ID.\n\n> 📘 This API call only fetches the behaviour report for a single behavioural analysis you can fetch all of them with [https://gtidocs.virustotal.com/reference/file-all-behaviours-summary](https://gtidocs.virustotal.com/reference/file-all-behaviours-summary)\n\n## Sandbox Report identifiers\n\nA Sandbox report ID has two main components: the **analysed file's SHA256** and the **sandbox n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the EVTX File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/evtx",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the EVTX file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Detailed HTML Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/html",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object as an HTML report.\n\n## Sandbox Report identifiers\n\nA Sandbox report ID has two main components: the **analysed file's SHA256** and the **sandbox name**. These two components are joined by a `_` character. For example, ID `5353e23f3653402339c93a8565307c6308ff378e03fcf23a4378f31c434030b0_VirusTotal Jujubox` fetches the sandbox report for a file having a SHA256 `5353e23f3653402339c93a8565307c63"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the Memdump File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/memdump",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the memdump file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the PCAP File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/pcap",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the PCAP file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/relationships/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:file-behaviour-summary-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/file_behaviours/{sandbox_id}/{relationship}](https://gtidocs.virustotal.com/reference/file_behaviourssandbox_idrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:file-behaviour-summary-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object documentation.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviour_mitre_trees",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a summary of MITRE ATT&CK tactics and techniques observed in each of the sandbox reports of a file.\n\nThe resulting structure is the following one:\n\n```json\n{\n  sandbox_name: {\n    \"tactics\": [\n      {\n        \"id\": tactic_id,\n        \"name\": tactic_name,\n        \"description\": tactic_description,\n        \"link\": tactic_mitre_url,\n        \"techniques\": [\n          {\n            \"id\": technique_id,\n            \"name\": technique_name,\n            \"description\": technique_descr"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviour_summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a summary with behavioural information about the file. The summary consists in merging together the reports produced by the multiple sandboxes we have integrated in VirusTotal. \n\nThis API call returns all fields contained in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object, except the ones that make sense only for individual sandboxes:\n\n- `analysis_date`\n- `behash`\n- `has_html_report`\n- `has_pcap`\n- `last_modification_date`"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get All Behavior Reports for a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviours",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns behavioural information from each sandbox about the file. \n\nThis API call returns all fields contained in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object.\n\nNote some of the entries have \n\n- `has_html_report` if true you may fech the HTML [File behaviour](https://gtidocs.virustotal.com/reference/get-file-behaviour-html).\n- `has_pcap` if true you may fech the PCAP [File behaviour](https://gtidocs.virustotal.com/reference/fil"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - IP addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an IP Address Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip",
+            "headers": [
+              {
+                "name": "x-tool",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP address"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Comments on an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/comments",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP address"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of comments to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Comment to an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/comments",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP address"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a comment for a given IP address. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dol"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/relationships/:relationship",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP address"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:ip-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/ip_addresses/{ip}/{relationship}](https://gtidocs.virustotal.com/reference/ip-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Votes on an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/votes",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP Address"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Vote to an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/votes",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP Address"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "With this endpoint you can post a vote for a given file. The body for the POST request must be the JSON representation of a [vote object](https://gtidocs.virustotal.com/reference/vote-object). Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n\nR"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to an IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/ip_addresses/:ip/:relationship",
+            "params": [
+              {
+                "name": "ip",
+                "value": "",
+                "type": "path",
+                "description": "IP address"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:ip-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "IP addresses have number of relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAll available relationships are documented in the [IP address](https://gtidocs.virustotal.com/reference/ip-object) API object page.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Popular Threat Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a List of Popular Threat Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/popular_threat_categories",
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get a List of Popular Threat Categories"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Search & Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Advanced Corpus Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query using URL Safe encoding"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (see table in the description above)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (Max. 300)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "descriptors_only",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return full object information or just object descriptors."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Searches using a fuzzy hash (ssdeep, TLSH, ...) are throttled due to performance reasons. The typical throttler is 15 searches / minute.\n\nThis endpoint allows to search for files in the Google Threat Intelligence's dataset, using the same query syntax that you would use in the Google TI user interface. **URL Safe encoding must be used when using this endpoint programatically.**\n\nThe result from this endpoint is a collection of file objects that match the given query. If the `descriptors_onl"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get File Content Search Snippets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/search/snippets/:snippet",
+            "params": [
+              {
+                "name": "snippet",
+                "value": "",
+                "type": "path",
+                "description": "Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This request returns file content snippets that matched a query in the [`/search`](https://gtidocs.virustotal.com/reference/intelligence-search) endpoint. The response is a list of strings containing both content hexdump and plain text. Matched content is found between `*` characters, more file content is returned to provide additional context about the match.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Google Threat Intel Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/metadata",
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a dictionary with metadata related to Google Threat Intelligence, which includes a full list of engines in use, a list of existing privileges, etc.\n\n```json Example\n{\n  \"data\": {\n    \"engines\": {\n      \"ALYac\": {},\n      \"APEX\": {},\n      \"AVG\": {},\n      \"AVware\": {},\n      \"Acronis\": {},\n      \"Ad-Aware\": {},\n      \"AegisLab\": {},\n      \"AhnLab-V3\": {},\n      \"Alibaba\": {},\n      \"Antiy-AVL\": {},\n      \"Arcabit\": {},\n      \"Avast\": {},\n      \"Avast-Mobile\": {},\n      \"Avi"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Search for Files, URLs, Domains, IPs and Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint searches any of the following:\n\n- A file hash - Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.\n- A URL - Returns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n- A domain - Returns [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n- A IP address - Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n- Comments by tags - Returns a list of [Comment](https://gtidocs.virustotal"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Scan URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/urls",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "url",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) ID. The analysis can be retrieved by using the [Analysis](https://gtidocs.virustotal.com/reference/analysis) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a URL Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/urls/:id",
+            "headers": [
+              {
+                "name": "x-tool",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier or base64 representation of URL to scan (w/o padding)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘\n>\n> See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Request a URL Rescan (re-analyze)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/analyse",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) object descriptor which can be used in the [GET/analyses/{id}](https://gtidocs.virustotal.com/reference/analysis) API endpoint to get further information about the analysis status.\n\n```json Example response\n{\n    \"data\": {\n        \"id\": \"u-a354494a7338"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Comments on a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of comments to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comments) objects.  \nCheck comments done in VT Community regarding a specific URL.\n\n> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\n- `data`: list of (\"comment\" objects)[ref:comment-object].\n- `links`: contains \"self\" with a reference to this group of comments and \"next\", with a reference to the next group.\n-"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Comment on a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a comment for a given URL. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:url-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/urls/{id}/{relationship}](https://gtidocs.virustotal.com/reference/relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Votes on a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/votes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of votes to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Vote on a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/votes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a vote for a given URL. The body for the `POST` request must be the JSON representation of a vote object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either `harmless` or `malicious`.\n\n```"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/urls/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:url-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by URL objects are documented in the [URL]"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Investigation - Zipping files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/zip_files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"password\": \"mysecretpassword\", \n    \"hashes\":[\n      \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \n      \"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\",\n      \"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\"]"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check a ZIP File’s Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/zip_files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"zip_file\",\n    \"id\": \"4939392292\",\n    \"attributes\": {\n      \"status\": \"creating\",\n      \"progress\": 45,\n      \"files_ok\": 3,\n      \"files_error\": 0\n    }  \n  }\n}\n```\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is `finished` you may proceed to download the file.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Download a ZIP File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/zip_files/:id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is similar to [GET /zip_files/{id}/download_url](https://gtidocs.virustotal.com/reference/zip-files-download-url), but it redirects you to the download URL. The download URL you are redirected to can be reused as many times as you want for a period of 1 hour. After that period the URL expires and can't be used anymore.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a ZIP File’s Download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/zip_files/:id/download_url",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a signed URL from where you can download the specified ZIP file. The URL expires after 1 hour.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

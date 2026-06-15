@@ -1,0 +1,1024 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Private Scanning",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Private Scanning - Analyses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal List Private Analyses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/analyses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to retrieve (40 max)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sorting order"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a list of the last [private analyses](https://gtidocs.virustotal.com/reference/private-analyses-object). The analyses are sorted by most recent first. You can use `?order=date-` to reverse the order.\n\n```json /api/v3/private/analyses\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Private Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/analyses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nWith this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the [POST /private/files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, and will return a private analysis object with information about the analysis.\n\n```json Example r"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Private Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/analyses/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-analyses-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/private/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analysesidrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Private Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/analyses/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Analysis identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-analyses-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Private Scanning - Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal List Private Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to retrieve (40 max)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a list of previously analysed [private files](https://gtidocs.virustotal.com/reference/private-files-object). The files are always ordered by SHA256.\n\n```json /api/v3/private/files\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_FILE_OBJECT>,\n    <PRIVATE_FILE_OBJECT>"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Upload a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/private/files",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "command_line",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "disable_sandbox",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "enable_internet",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "intercept_tls",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "retention_period_days",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "storage_region",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "interaction_sandbox",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "interaction_timeout",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload and analyse a file with Private Scanning\n> 📘 File size\n> \n> If the file to be uploaded is bigger than 32MB, please use the [/private/files/upload_url](https://gtidocs.virustotal.com/reference/private-files-upload-url) endpoint instead which admits files up to 650MB.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a URL for Uploading Large Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/upload_url",
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFor uploading files smaller than 32MB you can simply use the [POST /files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, but for larger files you need to obtain a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/private/files"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Private File Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint return information about a file scanned privately. Notice that it only accepts SHA-256 as the file's ID, MD5 and SHA-1 are not supported like in its [GET /files/{id}](https://gtidocs.virustotal.com/reference/file-info) public counterpart. The SHA-256 for the analysed file can be computed by yourself "
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Private File Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              },
+              {
+                "name": "only_from_storage",
+                "value": "",
+                "type": "query",
+                "description": "If true, only the file will be deleted from storage, but the generated reports and analyses won't."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint deletes a private file from storage, as well as all the PrivateFile and PrivateAnalysis associated with it (unless `only_from_storage=true` is used.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-files-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/files/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-files-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Private File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-files-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private file](https://gtidocs.virustotal.com/reference/private-files-object)"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Rescan a Private File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/private/files/:sha256/analyse",
+            "params": [
+              {
+                "name": "sha256",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA256 hash"
+              },
+              {
+                "name": "command_line",
+                "value": "",
+                "type": "query",
+                "description": "Command line arguments to use when running the file in sandboxes."
+              },
+              {
+                "name": "disable_sandbox",
+                "value": "",
+                "type": "query",
+                "description": "If true, then the file won't be detonated in sandbox environments. False by default."
+              },
+              {
+                "name": "enable_internet",
+                "value": "",
+                "type": "query",
+                "description": "If the file should have internet access when running in sandboxes. False by default."
+              },
+              {
+                "name": "intercept_tls",
+                "value": "",
+                "type": "query",
+                "description": "Intercept HTTPS/TLS/SSL communication. Intercept HTTPS to view encypted URLS, hostnames and HTTP headers.  This is detectable by any sample that checks certificates, and makes JA3 hashes unusable."
+              },
+              {
+                "name": "interaction_sandbox",
+                "value": "",
+                "type": "query",
+                "description": "Select the sandbox desired for interactive use."
+              },
+              {
+                "name": "interaction_timeout",
+                "value": "",
+                "type": "query",
+                "description": "Interaction timeout in seconds, minimum value: 60. (1 minute.) Max value: 1800: (30 minutes)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReanalyses a private file. The same params from [/files](https://gtidocs.virustotal.com/reference/post_files) (other than the file) are accepted. Returns a [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object).\n\n```json Example\n{\n\t\"data\": {\n\t\t\"type\": \"private_analysis\",\n\t\t\"id\": \"ZmI5"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Private Scanning - Files Behaviours",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get the Behaviour Reports from a Private File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file/:id/behaviours",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id parameter"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetches all the [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) reports available for a private file.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Behaviour Report from a Private File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetches a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object by ID. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file) endpoint.\n\n```json Example"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/evtx",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the EVTX file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Detailed HTML Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/html",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object as an HTML report. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file) endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/memdump",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the PCAP file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/pcap",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the memdump file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/relationships/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/private/file_behaviours/{sandbox_id}/{relationship}](https://gtidocs.virustotal.com/reference/privatefile-behaviourssandbox-idrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Private File's Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/file_behaviours/:sandbox_id/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private file behaviour](https://gtidocs.virustotal.com/reference/private-fil"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id/behaviour_mitre_trees",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint returns a summary of MITRE ATT&CK tactics and techniques observed in each of the behaviour reports of a file.\n\nThe resulting structure is the following one:\n\n```json\n{\n  sandbox_name: {\n    \"tactics\": [\n      {\n        \"id\": tactic_id,\n        \"name\": tactic_name,\n        \"description\": tactic_descri"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/files/:id/behaviour_summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File's SHA-256"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint returns a summary with behavioural information about the private file. The summary consists in merging together the reports produced by the multiple sandboxes we have integrated in VirusTotal. \n\nThis API call returns all fields contained in the [Private File Behaviour](https://gtidocs.virustotal.com/"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Private Scanning - URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Private Scan URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/private/urls",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "url",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) ID. The analysis can be retrieved by using the [Analysis](https://gtidocs.virustotal.com/reference/get-a-private-url-analysis-report) endpoint."
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a URL Analysis Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/urls/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier or base64 representation of URL to scan (w/o padding)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\n\nReturns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Private URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/urls/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-urls-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 📘\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nSome relationships are accessible only to users who ha"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Private URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/urls/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "URL ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:private-urls-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/private/urls/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-get-objects-related-to-a-url) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Private Scanning - Zipping files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/private/zip_files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure: \n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n  \\\"hashes\\\":[\n   \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n   \\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n   \\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n  }\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check a ZIP File’s Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/zip_files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \\\"data\\\": {\n    \\\"type\\\": \\\"zip_file\\\",\n    \\\"id\\\": \\\"4939392292\\\",\n    \\\"attributes\\\": {\n      \\\"status\\\": \\\"creating\\\",\n      \\\"progress\\\": 45,\n      \\\"files_ok\\\": 3,\n      \\\"files_error\\\": 0\n    }\n  }\n}\n``` \n\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to down"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Download a ZIP File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/zip_files/:id/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Download a ZIP File"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a ZIP File’s Download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/private/zip_files/:id/download_url",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ZIP file identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get a ZIP File’s Download URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

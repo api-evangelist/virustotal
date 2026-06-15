@@ -1,0 +1,433 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - IoC Feeds",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IoC Feeds - Domain intelligence feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Hourly Domain Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/domains/hourly/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhh"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Domain feeds endpoints are only available to users with a Domain feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [`/feeds/domains/{time}`](https://gtidocs.virustotal.com/reference/feedsdomains2time) endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided ti"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Minutely Domain Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/domains/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhhmm"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Domain feeds endpoints are only available to users with a Domain feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has al"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Feeds - File intelligence feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a Hourly File Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/files/hourly/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhh"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [/feeds/files/{time}](https://gtidocs.virustotal.com/reference/feeds-file) endpoint for a given hour. The returned file is a `.tar.bz2` file which contains the 60 minutely feeds for that hour.\n\nThe provided `time` argument"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Per-minute File Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/files/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhhmm"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a `time` consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has alwa"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Download a File Published in the File Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/files/:token/download",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download token. It can be found inside the file's properties in the file feed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. For this particular endpoint, download file privilege is also required. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file feed packages include a URL to this API endpoint to download the corresponding file. The link only works during the feed's lifetime, which is 7 days. Check [/feeds/files/{time}](https://gtidocs.v"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Feeds - IP intelligence feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Hourly IP Address Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/ip_addresses/hourly/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhh"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> IP feeds endpoints are only available to users with a IP feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [`/feeds/ip_addresses/{time}`](https://gtidocs.virustotal.com/reference/feedsip_addressestime) endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided t"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Minutely IP Address Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/ip_addresses/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhhmm"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> IP feeds endpoints are only available to users with a IP feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 6"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Feeds - Sandbox analyses feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Hourly File Behaviour Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/hourly/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhh"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [/feeds/file_behaviours/{time}](https://gtidocs.virustotal.com/reference/feeds-file-behaviour) endpoint for a given hour. The returned file is a `.tar.bz2` file which contains the 60 minutely feeds for that "
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Per-minute File Behaviour Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhhmm"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batches by providing a `time` consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most rece"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the EVTX File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/:token/evtx",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download token. It is included the \"evtx\" context attribute at the file behaviour feed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file behaviour feed packages include a link to this API endpoint to download the extracted EVTX from the file's Windows sandbox execution. The available in the feed link already includes the download token required by this endpoint. The following snippet re"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a File Behaviour's Detailed HTML Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/:token/html",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download token. It can be found inside the behaviour object's properties in the file behaviour feed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file behaviour feed packages include a URL to this API endpoint to download the the file's sandbox execution HTML report. The available in the feed link already includes the download token required by this endpoint. The following snippet represents the JSON"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the Memdump File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/:token/memdump",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download token. It can be found inside the behaviour object's properties in the behaviour feed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file behaviour feed packages include a URL to this API endpoint to download the extracted memdump from the file's sandbox execution. The available in the feed link already includes the download token required by this endpoint. The following snippet represen"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the PCAP File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/file_behaviours/:token/pcap",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Download token. It can be found inside the behaviour object's properties in the behaviour feed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Sandbox analyses feeds endpoints are only available to users with a Sandbox feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file behaviour feed packages include a URL to this API endpoint to download the extracted PCAP from the file's sandbox execution. The available in the feed link already includes the download token required by this endpoint. The following snippet represents "
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IoC Feeds - URL intelligence feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get an Hourly URL Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/urls/hourly/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhh"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> URL feeds endpoints are only available to users with a URL feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [`/feeds/urls/{time}`](https://gtidocs.virustotal.com/reference/feeds-url) endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided time argument must "
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Minutely URL Feed Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/feeds/urls/:time",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "path",
+                "description": "A string in format YYYYMMDDhhmm"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> URL feeds endpoints are only available to users with a URL feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

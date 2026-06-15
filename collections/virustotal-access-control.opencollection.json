@@ -1,0 +1,771 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Control - Group Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a Group Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get a Group Object"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Update a Group Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://www.virustotal.com/api/v3/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This request accepts a JSON body containing the group attributes to update. Attributes not present in the request body remain the same. It returns the updated [Group](https://gtidocs.virustotal.com/reference/group-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Administrators for a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/administrators",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [User](https://gtidocs.virustotal.com/reference/user-object) objects.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Grant Group Admin Permissions to a List of Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/administrators",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update group administrator list. User emails must be used. If a username is used, a 400 error is returned.\n\nNo admins are removed by using this endpoint. To revoke admin privileges from a certain user, use [DELETE/groups/{id}/relationships/administrators/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-group-administrator).\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check if a User is a Group Admin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/administrators/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group id"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User ID to check."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Check if a User is a Group Admin"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Revoke Group Admin Permissions from a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/administrators/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group id"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User ID to remove."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Revoke Group Admin Permissions from a User"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Group Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Get Group Users"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add Users to a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update the group's user list. User emails must be used, if a username is used a 400 error is returned.\n\nNo users are removed by using this endpoint. To remove group membership from a certain user, use [DELETE/groups/{id}/relationships/users/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-from-group).\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check if a User is a Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/users/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User to check."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Check if a User is a Group Member"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Remove a User from a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/users/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User to remove."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Remove a User from a Group"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:group-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/groups/{id}/{relationship}](https://gtidocs.virustotal.com/reference/groups-relationships) except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:group-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Group objects have relationships to other objects. As mentioned in the  [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by group objects are described in the [Group object section](https://gtidocs.virustotal.com/reference/group-object).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Control - Quota Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a User’s API Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/users/:id/api_usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID or API key"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "A string in format YYYYMMDD"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "A string in format YYYYMMDD"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves information about a the API usage, broken down by endpoint, of an user in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> 🚧 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a great"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a User’s Quota Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/users/:id/overall_quotas",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID or API key"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a summary of a user's overall quotas including:\n\n- `allowed`: \\<_integer_> quota limit.\n- `inherited_from`: \\<_string_> group from which the quota is inherited.\n- `used`: \\<_integer_> how many quota has been used.\n\nConsumption data based on natural month and UTC.\n\n```json Example\n{\n  \"data\": {\n    \"api_requests_daily\": {\n      \"group\": {\n        \"allowed\": 99000000,\n        \"inherited_from\": \"company\",\n        \"used\": 45073\n      },\n      \"user\": {\n        \"allowed\": 100000"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Group’s API Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/api_usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "A string in format YYYYMMDD"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "A string in format YYYYMMDD"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves information about a the API usage, broken down by endpoint, of a group in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API V3 usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> 🚧 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a gr"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Control - Service Account Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get Service Accounts of a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/service_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all the Service Accounts belonging to your Google Threat Intelligence group.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Create a New Service Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/groups/:id/relationships/service_accounts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new Service Account inside your Google Threat Intelligence group by only providing a descriptive identifier which must be unique inside your group.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Service Account Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/service_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Service Account ID (with the form <group ID>_<service account ID>"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the information about a [Service Account](https://gtidocs.virustotal.com/reference/service-accounts-object) object.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Control - User Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a User Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID or API key"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves information about a user, including the privileges and quotas associated to the user. The user can be retrieved either by user ID or by API key, but the former only works if the requester is the user himself or an administrator of a group the user belongs to.\n\nReturns an [User](https://gtidocs.virustotal.com/reference/user-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Update a User Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://www.virustotal.com/api/v3/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID or API key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated [User](https://gtidocs.virustotal.com/reference/user-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/users/:id",
+            "headers": [
+              {
+                "name": "x-user-password",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID or API key"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This request deletes a given user. A user account can only be deleted by its owner, a 403 error is returned otherwise.\n\nAn additional `x-user-password` header is required, which is used as confirmation.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/users/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Username or API key"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:user-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/users/{id}/{relationship}](https://gtidocs.virustotal.com/reference/users-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/users/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Username or API key"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:user-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Users are related to other objects in our dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to this API endpoint.\n\nSome relationships are only accessible to their account's owners and their group's admins.\n\nThe supported relationships are documented in the [User](https://gtidocs.virustotal.com/reference/user-object#relationships) API object page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

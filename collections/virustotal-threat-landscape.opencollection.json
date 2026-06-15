@@ -1,0 +1,576 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Threat Landscape and Vulnerability Intelligence",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Landscape & Vulnerability Intelligence & Reports & Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal List Threat Objects (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of threat objects to retrieve (max 40)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter threat objects by different properties"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sorting order"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint allows us to search and filter Threat Intelligence objects effectively. It returns a list of Threat objects with a `collection_type` parameter whose value can be one of the followings:\n\n- **`collection`**: [Collections](https://gtidocs.virustotal.com/reference/ioc-c"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Create a New IoC Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/collections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use this endpoint to create new IoC collections. In the request body, send a collection object containing its name, description and the elements it will contain (for URLs you can either use the URL or its ID). All IOCs must be described as relationships of a newly created Collection object. This is an example request body:\n\n```json Create an IoC collection from relationship descriptors\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Test IoC collection\",\n\t\t\t\"description\": \"This is how to create a new"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Threat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns a [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkit Actor"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Update an IoC Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://www.virustotal.com/api/v3/collections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "IoC Collection's ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows updating an IoC collection's attributes (such as name or description) and adding new elements to the IoC collection by using a raw text.\n\nThe following request body shows an example of how to update an IoC collection's name and add new IOCs to it by using a raw text:\n\n```json Example request body\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Updating the name\"\n\t\t},\n\t\t\"raw_items\": \"This is a text containing a IoC, www.virustotal.com\",\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n\n## Examples"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete an IoC Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/collections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "IoC Collection's ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "\n## Examples\n\nDelete a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>\n}\nresponse = requests.delete(url, headers=headers)\n```"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint is the same as /collections/{id}/{relationship} for [actors, campaigns, malware and IoC collections](https://gtidocs.virustotal.com/reference/get-threat-relationships), [reports](https://gtidocs.virustotal.com/reference/get-report-relationships) or [vulnerabilities]"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns available relationships that are described in the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object#relationships), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object#relationships), [Malware Family](https://gtidocs"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add New Items to an IoC Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "IoC Collection's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:ioc-collection-object#relationships))"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"id\": <an IP address>}`.\n\n## Examples\n\nAdd new elements, ```google.com``` and ```virustotal.com``` domains, to an existing IoC collection.\n\n```py"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete Items from an IoC Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "IoC Collection's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:ioc-collection-object#relationships))"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"id\": <an IP address>}`.\n\n## Examples\n\nDelete an element, ```google.com``` domain, from an existing IoC collection.\n\n```python\nimport requests\n\no"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Comments from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of comments to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of [Comments](https://gtidocs.virustotal.com/reference/comment-object) objects.\n\n## Examples\n\nGet 3 community comments from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nlimit = 3\nurl = f\""
+        },
+        {
+          "info": {
+            "name": "VirusTotal Add a Comment to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report) Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nWith this endpoint you can post a comment for a given threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability). The body for the `POST` request must be the JSON representation of a comment object. Notice however that you don't need to provide"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get MITRE Tactics and Techniques Associated with a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/mitre_tree",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of MITRE tactics with their correspondent techniques that are associated with the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object),[Malware family](https://gtidocs.vir"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Search IoCs Inside a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/search",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Intelligence query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of IoCs to retrieve (max 40)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sorting order"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated attributes to return from the resulting IoCs"
+              },
+              {
+                "name": "relationships",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated name of relationships descriptors to return from the IoCs"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nAllows to search IoCs inside a threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability) using advanced intelligence queries.\n\nThe expected input is the same as [/intelligence/search](https://gtidocs.virustotal.com/reference/intelligence-searc"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Export IOCs from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/download/:format",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path",
+                "description": "Export format (one of `json`, `csv`, or `stix`)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport IoCs from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"appl"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Export Aggregations / Commonalities from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/aggregations/download/:format",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path",
+                "description": "Export format (one of `json` or `csv`)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available to users with Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport commonalities from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Export IOCs from a Given Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)'s Relationship",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/collections/:id/:relationship/download/:format",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Threat object's ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaign](ref:campaign-object#relationships), [malware family](ref:malware-family-object#relationships), [software toolkit](ref:software-toolkit-object#relationships), [ioc collections](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "path",
+                "description": "Export format (one of `json`, `csv`, or `stix`)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport files related to a given threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

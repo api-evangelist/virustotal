@@ -1,0 +1,3456 @@
+{
+  "item": [
+    {
+      "id": "6c540cc7-d531-408e-82f9-a53b26797f4c",
+      "name": "Threat Landscape & Vulnerability Intelligence & Reports & Analysis",
+      "description": {
+        "content": "Threat Landscape & Vulnerability Intelligence & Reports & Analysis",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bf81636-fab9-4645-8765-75d858cfc076",
+          "name": "VirusTotal List Threat Objects (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal List Threat Objects (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint allows us to search and filter Threat Intelligence objects effectively. It returns a list of Threat objects with a `collection_type` parameter whose value can be one of the followings:\n\n- **`collection`**: [Collections](https://gtidocs.virustotal.com/reference/ioc-collection-object) of Indicators of Compromise are grouped together based on their observed usage in the wild in malicious campaigns or their association with specific malware families. This OSINT and also curated information is provided by our users and certain trusted partners and security researchers, automatically created based on Reports from the cybersecurity community or by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/ioc-collections)\n- **`threat-actor`**: [Threat Actors](https://gtidocs.virustotal.com/reference/threat-actor-object) curated information exposed by our Google TI experts tracking them or by certain trusted partners and security researchers. [UI](https://www.virustotal.com/gui/threat-landscape/threat-actors)\n- **`malware-family`**: Curated information related to [malware families](https://gtidocs.virustotal.com/reference/malware-family-object). This information is provided by our Google TI experts and certain trusted partners and security researchers. [UI](https://www.virustotal.com/gui/threat-landscape/malware-and-tools?filter=(collection_type:malware-family))\n- **`software-toolkit`**: Curated information related to malicious [software or toolkits](https://gtidocs.virustotal.com/reference/software-toolkit-object) used in threat campaigns. This information is provided by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/malware-and-tools?filter=(collection_type:software-toolkit))\n- **`campaign`**: Curated information related to threat [campaigns](https://gtidocs.virustotal.com/reference/campaign-object). This information is provided by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/campaigns)\n- **`report`**: OSINT and curated threats related [reports](https://gtidocs.virustotal.com/reference/report-object). They could be crowdsourced references created by the cybersecurity industry, curated reports created by certain trusted partners and security researchers or our Google TI experts. [UI](https://www.virustotal.com/gui/reports)\n- **`vulnerability`**: Curated information of [vulnerabilities](https://gtidocs.virustotal.com/reference/vulnerability-object) and exploitations coming from our Google TI experts analysis. [UI](https://www.virustotal.com/gui/vulnerabilities)\n\n### Searches observations:\n\n- if you don't filter by the `collection_type` this endpoint will return a single list with all the objects that meet the filters and of any of the following types grouped together: [Vulnerabilities](https://gtidocs.virustotal.com/reference/vulnerability-object), [Reports](https://gtidocs.virustotal.com/reference/report-object), [Threat Actors](https://gtidocs.virustotal.com/reference/threat-actor-object), [Malware families](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkits](https://gtidocs.virustotal.com/reference/software-toolkit-object), [Campaigns](https://gtidocs.virustotal.com/reference/campaign-object) or [IoC Collections](https://gtidocs.virustotal.com/reference/ioc-collection-object).\n- filers' values are case-insensitive\n- several filters can be combined together in a more complex and specific search\n- boolean operators can be used in more complex searches: `AND`, `OR`, `NOT`\n- quotes are needed for filters' values with spaces: `description:\"Phishing campaign\"`\n- wildcards (\\*) can be used for partial matches: `name:Ransom*`\n- date filters formats: `YYYY-MM-DD`, `YYYY-MM-DDTHH-mm-ss`\n- date relative formats: `60d` (for days), `10m` (for minutes)\n- date ranges can be specified with `+` or `-`: `last_modification_date:7d+`, `creation_date:2024-01-01-`\n\n## Allowed filters by object `collection_type`:\n\n| filters                  | `collection` | `threat-actor` | `malware-family` | `software-toolkit` | `campaign` | filter description |\n| ------------------------ | ------------ | -------------- | ---------------- | ------------------ | ---------- | -------- |\n| Open search              | ✓            | ✓              | ✓                | ✓                  | ✓          | Text without modifiers matching against object's name or description|\n| `name`                   | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's name |\n| `description`            | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's description |\n| `creation_date`          | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's creation date  |\n| `last_modification_date` | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's last modification date  |\n| `origin`                 | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's origin. Available options: **Partner** for objects curated by trusted partners and security researchers , **Crowdsourced** for OSINT objects from the community or **Google Threat Intelligence** for objects curated by our Google TI experts|\n| `owner`                  | ✓            | ✓              | ✓                | ✓                  | ✓           | Owner's username |\n| `suspected_threat_actor` |              | ✓              |                  |                    |             | Threat actor suspected to be part of a larger group  |\n| `merged_actor`           |              | ✓              |                  |                    |             | Threat actors confirmed to be part of a larger group   |\n| `motivation`             | ✓            | ✓              |                  |                    |             | Threat actors and IoC collection's campaigns motivations |\n| `source_region`          | ✓            | ✓              |                  |                    | ✓           | Region from which the threat actor or the an IoC collection's campaign are known to originate |\n| `targeted_region`        | ✓            | ✓              |                  |                    | ✓           | Region targeted by a specific campaign, threat actor or an IoC collection's malicious activity   |\n| `targeted_industry`      | ✓            | ✓              | ✓                | ✓                  | ✓           | Industry targeted by a specific campaign, malware family, software or toolkit, threat actor or by an IoC collection's malicious activity  |\n| `targeted_industry_group`| ✓            | ✓              | ✓                | ✓                  | ✓           | Group of industries targeted by a specific campaign, malware family, software or toolkit, threat actor or by an IoC collection's malicious activity |\n| `capability`             |              | ✓              | ✓                |                    |             | Capabilities associated to threat actors' or malware families' associated files   |\n| `operating_system`       |              |                | ✓                | ✓                  |             | Operating system affected by a malware family or a software and toolkit  |\n| `detection`              |              |                | ✓                | ✓                  |             | Detections associated to a malware family's or a software or toolkit's associated files    |\n| `malware_role`           |              |                | ✓                | ✓                  |             | Object's associated malware role     |\n| `software_toolkit`       |              | ✓              | ✓                | ✓                  | ✓           | Software or Toolkit name associated to the object |\n| `shared_with_me`         | ✓            |                |                  |                    |             | Private IoC Collection objects that are shared with me or my group |\n\n## Allowed filters by object `collection_type`:`report`:\n\n| filters                    | filter description |\n| -------------------------- | ------------------ |\n| Open search                | Text without modifiers matching against object's name or description |\n| `name`                     | Object's name |\n| `description`              | Object's description|\n| `creation_date`            | Object's creation date |\n| `last_modification_date`   | Object's last modification date |\n| `origin`                   | Object's origin. Available options: **Partner** for objects curated by trusted partners and security researchers , **Crowdsourced** for OSINT objects from the community or **Google Threat Intelligence** for objects curated by our Google TI experts |\n| `owner`                    | Owner's username |\n| `motivation`               | Motivation behind the malicious activity described in the report |\n| `source_region`            | Regions from where the malicious activity described in the report is originated |\n| `targeted_region`          | Region targeted by the malicious activity described in the report |\n| `targeted_industry`        | Industry targeted by the malicious activity described in the report |\n| `targeted_industry_group`  | Groups of industries targeted by the malicious activity described in the report |\n| `operating_system`         | Affected operating system |\n| `malware_role`             | Report's associated malware role |\n| `software_toolkit`         | Software or Toolkit's name, associated to the report |\n\n## Allowed filters by object `collection_type`:`vulnerability`:\n\n| filters                        | filter description |\n| ----------------------------   | --------------- | \n| Open search                    | Text without modifiers matching against object's name or description     |\n| `name`                         | Object's name |\n| `description`                  | Object's description|\n| `creation_date`                | Object's creation date  |\n| `last_modification_date`       | Object's last modification date  |\n| `cvss_3x_base_score`           | Vulnerability objects with numeric CVSS 3.X base score   |\n| `cvss_3x_temporal_score`       | Vulnerability objects with numeric CVSS 3.X temporal score     |\n| `cvss_2x_base_score`           | Vulnerability objects with numeric CVSS 2.0 base score   |\n| `cvss_2x_temporal_score`       | Vulnerability objects with numeric CVSS 2.0 temporal score     |\n| `exploitation_consequence`     | Exploitation consequence of a Vulnerability. Ex: Code Execution, Command Execution, Container Escape, Data Loss, Data Manipulation, Denial-of-Service (DoS), Information Disclosure, Privilege Escalation, Sandbox Escape, Security Bypass, Spoofing, Unauthorized Access    |\n| `exploitation_state`           | Exploitation state of a Vulnerability. Possible values: Confirmed, No Known, Reported, Suspected |\n| `exploitation_vector`          | Exploitation vector of a Vulnerability. Possible values: Administrative Interface, Bluetooth Access, Browser, Email, Exposed Web Application, File Share, General Network Connectivity, Local Access, Local Network Access, Malicious Application, Malicious File, Malicious Server, Open Port, Physical Access, Short Range Radio, Unspecified Local Vector, Unspecified Remote Vector, VPN Access, Web, WiFi Access |\n| `vulnerable_cpe`                | Vulnerability objects with specific standardized product naming scheme - cpe   |\n| `vulnerable_product`            | Vulnerability objects of known security flaw of specific product. Ex: Apache Log4j  |\n| `vulnerable_vendor`             | Vulnerability objects affecting specific vendors. Ex: Apache   |\n| `vulnerability_filter`          | Specific Vulnerability Filters. Possible values: Affects Cloud, Affects Operational Technology, CISA Exploited, Has Exploits, Observed In The Wild, Requires User Interaction, Zero Day   |\n| `risk_rating`                   | Vulnerability objects based on Vulnerability Risk Rating. Possible values: Critical, High, Medium, Low   |\n| `targeted_industry`             | Industry targeted by the vulnerability   |\n| `targeted_industry_group`       | Groups of industries targeted by the vulnerability  |\n| `software_toolkit`              | SoftwareToolkit name associated to the object  |\n\n## Allowed orders:\n\n- `order:name+`: sorts objects alphabetically by name, ascending `+` or descending `-`.\n- `order:creation_date-`: sorts objects descending `-` (default) by most recent created objects first, or ascending `+` by oldest objects first.\n- `order:last_modification_date-`: sorts objects descending `-` by most recently modified objects first, or ascending `+` by firstly modified objects first.\n- `order:lookups_trend-`: sorts objects ascending `+` or descending `-` based on the trend of the daily distinct-user lookups over the IoCs of the object in the last 14 days.\n- `order:submissions_trend-`: sorts objects ascending `+` or descending `-` based on the trend of the daily distinct-user submissions of IoCs of the object in the last 14 days.\n- `order:relevance+`: sorts objects ascending `+` or descending `-` based on the relevance of the object.\n- `order:exploitation_state+`: sorts objects ascending `+` or descending `-` based on the exploitation state of the vulnerability.\n- `order:risk_rating+`: sorts objects ascending `+` or descending `-` based on the risk rating of the vulnerability.\n\n\n## Examples\n\nGet the list of all Threat, [Reports](https://gtidocs.virustotal.com/reference/report-object) and [Vulnerbilities](https://gtidocs.virustotal.com/reference/vulnerability-object) objects created in the last week. Note that in this fisrts example, the collection_type filter is not used as in the rest of the examples.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"creation_date:7d+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all private IoC collections that are shared with me or my Google TI group.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:collection (shared_with_me:true or owner:my_user_id)\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all IoC Collections describing malicious activity espionage motivated and targeting the Canada governments.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:collection motivation:espionage targeted_industry:government targeted_region:CA\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all russian financially motivated Threat Actors utilizing backdoors in their attacks and sort the results by relevance.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:threat-actor motivation:financial source_region:RU threat_category:backdoor\"\norder = \"relevance-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Malware families curated by the Google TI specialists, targeting the Linux operating system and whose information was updated in the last 60 days. Then sort results by the last modification date.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:malware-family operating_system:linux owner:'Google Threat Intelligence' last_modification_date:60d+\"\norder = \"last_modification_date-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Software or Toolkits targeting the Windows operating system which are backdoors used in botnets. Then sort results by relevance providing first the most relevant objects.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:software-toolkit operating_system:windows detection:backdoor malware_role:botnet\"\norder = \"relevance-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Campaigns targeting China and whose name or description mention the \"ransomware\" word. Then sort results ascending based on their last modification date.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:campaign (name:ransomware or description:ransomware) targeted_region:CN\"\norder = \"last_modification_date+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\n\nGet the list of all crowdsourced Reports created from the beginning of 2024 whose name contains the \"phishing\" word and sort results descending by creation date (FIFO order).\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:report name:phishing creation_date:2024-01-01+ origin:Crowdsourced\"\norder = \"creation_date-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Vulnerabilities from 2024 sorted by creation date (FIFO order).\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:vulnerability name:CVE-2024\"\norder = \"creation_date+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Vulnerabilities with cvss_3x base score equal or greater than 4 and with confirmed or suspected exploitation state. Then sort results descending based on their risk rating value.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:vulnerability cvss_3x_base_score:4+ (exploitation_state:Confirmed or exploitation_state:Suspected)\"\norder = \"risk_rating-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of threat objects to retrieve (max 40)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter threat objects by different properties"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sorting order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7ddfc319-9e09-4c75-924b-5a9677c0f5d3",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n\\\"meta\\\": {\\n  \\\"cursor\\\": <string>\\n},\\n\\\"data\\\": [\\n  <THREAT_OBJ>,\\n  <THREAT_OBJ>,\\n  ...\\n],\\n\\\"links\\\": {\\n  \\\"self\\\": <string>,\\n  \\\"next\\\": <string>\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48c460f2-246e-417a-89f7-ef3f2a5b1546",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1da8cb1e-1d3b-485f-8638-eecf1e875513",
+          "name": "VirusTotal Create a New IoC Collection",
+          "request": {
+            "name": "VirusTotal Create a New IoC Collection",
+            "description": {
+              "content": "Use this endpoint to create new IoC collections. In the request body, send a collection object containing its name, description and the elements it will contain (for URLs you can either use the URL or its ID). All IOCs must be described as relationships of a newly created Collection object. This is an example request body:\n\n```json Create an IoC collection from relationship descriptors\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Test IoC collection\",\n\t\t\t\"description\": \"This is how to create a new IoC collection via API.\"\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"domains\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"domain\",\n\t\t\t\t\t\t\"id\": \"www.virustotal.com\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"domain\",\n\t\t\t\t\t\t\"id\": \"www.hooli.com\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"urls\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"url\",\n\t\t\t\t\t\t\"url\": \"https://www.virustotal.com/\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"url\",\n\t\t\t\t\t\t\"id\": \"f11f7cc900638fae209f68498a90158fbfb067fc4191549ddb657e39cc4428c2\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"ip_addresses\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"ip_address\",\n\t\t\t\t\t\t\"id\": \"8.8.8.8\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"files\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"file\",\n\t\t\t\t\t\t\"id\": \"ecc0f2aa29b102bf8d67b7d7173e8698c0341ddfdf9757be17595460fbf1791a\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t},\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n```json Create an IoC collection from raw text\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Test IoC collection\",\n\t\t\t\"description\": \"This is how to create a new IoC collection via API.\"\n\t\t},\n\t\t\"raw_items\": \"This is a text containing an IoC, www.virustotal.com\",\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n\nTo modify the IoC collection's attributes or add more elements to an IoC collection using a raw text, refer to the [PATCH/collections/{id}](https://gtidocs.virustotal.com/reference/update-ioc-collection) endpoint.  \nTo add new elements to the IoC collection refer to the [POST /collections/{id}/{relationship}](https://gtidocs.virustotal.com/reference/add-element-to-ioc-collection) endpoint.  \nTo remove elements from the IoC collection refer to the [DELETE /collections/{id}/{relationship}](https://gtidocs.virustotal.com/reference/delete-element-from-ioc-collection) endpoint.\n\n## Examples\n\nCreate a new private IoC collection with 2 IoCs which are ```google.com``` and ```virustotal.com``` domains.\n\n```python\nimport requests\n\nurl = \"https://www.virustotal.com/api/v3/collections\"\npayload = {\n    \"data\":\n    {\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"name\": \"Test IoC collection\",\n            \"description\": \"This is how to create a new collection via API.\",\n            \"private\": True\n        },\n        \"raw_items\": \"google.com, google.com\"\n    }\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.text)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9764a105-10e8-4667-96ac-e2628b6bd8c6",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"data\\\": {\\n    \\\"attributes\\\": {\\n      \\\"name\\\": \\\"Test IoC collection\\\",\\n      \\\"description\\\": \\\"This is how to create a new collection via API.\\\",\\n      \\\"top_icon_md5\\\": [\\n        \\\"1bc1faf71106e964e44cb17ab4dd8d11\\\"\\n      ],\\n      \\\"tags\\\": [],\\n      \\\"ip_addresses_count\\\": 0,\\n      \\\"domains_count\\\": 1,\\n      \\\"creation_date\\\": 1614784765,\\n      \\\"last_modification_date\\\": 1614784765,\\n      \\\"references_count\\\": 0,\\n      \\\"alt_names\\\": [],\\n      \\\"urls_count\\\": 0,\\n      \\\"autogenerated_tags\\\": [],\\n      \\\"files_count\\\": 0\\n    },\\n    \\\"type\\\": \\\"collection\\\",\\n    \\\"id\\\": \\\"<ID>\\\",\\n    \\\"links\\\": {\\n      \\\"self\\\": \\\"https://www.virustotal.com/api/v3/collections/<ID>\\\"\\n    }\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb6fc9b4-e938-4251-84fd-440c6878cfab",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29bedf29-032d-493c-8073-0c350db9715e",
+          "name": "VirusTotal Get a Threat",
+          "request": {
+            "name": "VirusTotal Get a Threat",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns a [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkit Actor](https://gtidocs.virustotal.com/reference/software-toolkit-object), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object), [Report](https://gtidocs.virustotal.com/reference/report-object) or a [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object) object.\n\n## Examples\n\nGet a threat actor report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a malware or toolkit report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a campaign report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a IoC collection report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a vulnerability report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7bd71fb0-6d8c-405f-ba89-c55119f42f1a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32b89f43-fbcf-4d51-960d-f72e7e138fc2",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8d00fd2-1eff-45e8-8463-19c9056fb581",
+          "name": "VirusTotal Delete an IoC Collection",
+          "request": {
+            "name": "VirusTotal Delete an IoC Collection",
+            "description": {
+              "content": "\n## Examples\n\nDelete a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>\n}\nresponse = requests.delete(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) IoC Collection's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "42a4ec00-ccdb-4406-bb6a-b3a54cb6a847",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dfcc1a1-7c14-4bf6-856c-4bc2c00dc9ee",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f07bd4ca-f1cb-4c63-8071-dc3ee0b26807",
+          "name": "VirusTotal Update an IoC Collection",
+          "request": {
+            "name": "VirusTotal Update an IoC Collection",
+            "description": {
+              "content": "This endpoint allows updating an IoC collection's attributes (such as name or description) and adding new elements to the IoC collection by using a raw text.\n\nThe following request body shows an example of how to update an IoC collection's name and add new IOCs to it by using a raw text:\n\n```json Example request body\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Updating the name\"\n\t\t},\n\t\t\"raw_items\": \"This is a text containing a IoC, www.virustotal.com\",\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n\n## Examples\n\nChange the name and description of a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\npayload = { \"data\": \n\t{\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"name\": \"New name\",\n            \"description\": \"New description.\"\n        }\n    }\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.patch(url, json=payload, headers=headers)\n```\n\nMake public a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\npayload = { \"data\": \n\t{\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"private\": False\n        }\n    }\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.patch(url, json=payload, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) IoC Collection's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bc7520d2-6edf-401a-a38c-9747923bb05b",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"data\\\": {\\n    \\\"attributes\\\": {\\n      \\\"name\\\": \\\"Updating the name\\\",\\n      \\\"description\\\": \\\"This is how to modify a collection via API.\\\",\\n      \\\"top_icon_md5\\\": [\\n        \\\"1bc1faf71106e964e44cb17ab4dd8d11\\\"\\n      ],\\n      \\\"tags\\\": [],\\n      \\\"ip_addresses_count\\\": 1,\\n      \\\"domains_count\\\": 2,\\n      \\\"creation_date\\\": 1614784765,\\n      \\\"last_modification_date\\\": 1614784765,\\n      \\\"references_count\\\": 0,\\n      \\\"alt_names\\\": [],\\n      \\\"urls_count\\\": 2,\\n      \\\"autogenerated_tags\\\": [\\n        \\\"cve-2017-5753\\\"\\n      ],\\n      \\\"files_count\\\": 1\\n    },\\n    \\\"type\\\": \\\"collection\\\",\\n    \\\"id\\\": \\\"{id}\\\",\\n    \\\"links\\\": {\\n      \\\"self\\\": \\\"https://www.virustotal.com/api/v3/collections/{id}\\\"\\n    }\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a515fde-2df9-4466-8d8a-e3e59c2b60e4",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aec27ff8-2e9c-4b73-9442-a5e7436743f4",
+          "name": "VirusTotal Get Object Descriptors Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Get Object Descriptors Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint is the same as /collections/{id}/{relationship} for [actors, campaigns, malware and IoC collections](https://gtidocs.virustotal.com/reference/get-threat-relationships), [reports](https://gtidocs.virustotal.com/reference/get-report-relationships) or [vulnerabilities](https://gtidocs.virustotal.com/reference/get-vulnerability-relationships) except it returns just the related object's descriptor instead of returning all attributes.\n\nAvailable relationships are described in the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object#relationships), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object#relationships), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object#relationships), [Software or Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object#relationships), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object#relationships), [Reports](https://gtidocs.virustotal.com/reference/report-object#relationships) and [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object#relationships) objects documentation.\n\n## Examples\n\nGet 10 files descriptors related to the Kimsuky threat actor `threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 4 domains descriptors related to a given malware or toolkit`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nrelationship = \"files\"\nlimit = 4\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 9 URL descriptors related to a given campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nrelationship = \"urls\"\nlimit = 9\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet files descriptors related to a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "relationships",
+                ":relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of related objects to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "relationship",
+                  "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "97f5b642-dea8-44b4-8f8b-01c318228a92",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "relationships",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b0a8ab1-3781-4f53-a8b1-119ba6819b76",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "relationships",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a483cc06-122a-4f7c-ae78-d111d01de202",
+          "name": "VirusTotal Get Objects Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Get Objects Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns available relationships that are described in the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object#relationships), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object#relationships), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object#relationships), [Software or Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object#relationships), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object#relationships), [Reports](https://gtidocs.virustotal.com/reference/report-object#relationships) and [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object#relationships) objects documentation.\n\n## Examples\n\nGet 10 files related to the Kimsuky threat actor `threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to the malware family with ID `malware--76feb45b-e63a-5a34-8596-da3ce148e776`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--76feb45b-e63a-5a34-8596-da3ce148e776\"\nrelationship = \"associations\"\nrelationship_attributes = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 15 files related to the Zarya Hacktivist Group `report--24-10072685`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"report--24-10072685\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to this Blizzard related report `report--42da08f2694dbad8af81281fa3ccc83a44891c13bb56134ca54098127977c222`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"report--42da08f2694dbad8af81281fa3ccc83a44891c13bb56134ca54098127977c222\"\nrelationship = \"associations\"\nrelationship_attributes = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 5 files related to the `vulnerability--cve-2024-6387` vulnerability\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2024-6387\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to the Follina vulnerability `vulnerability--cve-2022-30190`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"associations\"\nrelationship_attributes = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                ":relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of related objects to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "relationship",
+                  "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3c04057e-ae37-427e-b7a9-a180487e848f",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "917738dd-d314-4cc1-bb69-b5242f54ade1",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships), [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58a2e291-1aa5-4324-a56d-c89e261a50b7",
+          "name": "VirusTotal Delete Items from an IoC Collection",
+          "request": {
+            "name": "VirusTotal Delete Items from an IoC Collection",
+            "description": {
+              "content": "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"id\": <an IP address>}`.\n\n## Examples\n\nDelete an element, ```google.com``` domain, from an existing IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nrelationship = \"domains\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}\"\npayload = { \"data\": \n    [\n        {\n            \"type\": \"domain\",\n            \"id\": \"google.com\"\n        }\n    ]\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.delete(url, json=payload, headers=headers)\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                ":relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) IoC Collection's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "relationship",
+                  "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa65caac-18f1-45d9-a47b-7a6977095c53",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "624dde5b-6cc4-4ad7-9d3f-920672042119",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35aee125-9a71-4be0-b07e-1dd874c85b65",
+          "name": "VirusTotal Add New Items to an IoC Collection",
+          "request": {
+            "name": "VirusTotal Add New Items to an IoC Collection",
+            "description": {
+              "content": "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"id\": <an IP address>}`.\n\n## Examples\n\nAdd new elements, ```google.com``` and ```virustotal.com``` domains, to an existing IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nrelationship = \"domains\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}\"\n\npayload = { \"data\": \n    [\n        {\n            \"type\": \"domain\",\n            \"id\": \"google.com\"\n        },\n        {\n            \"type\": \"domain\",\n            \"id\": \"virustotal.com\"\n        }\n    ]\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                ":relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) IoC Collection's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "relationship",
+                  "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea013201-9fbe-4b3c-ab6a-4153e252a62d",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "576cc5b0-f46b-4348-abef-74ba7fb5be2e",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) IoC Collection's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [table](ref:ioc-collection-object#relationships))"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19e686f5-9283-47a2-bfa9-f3dc643d578b",
+          "name": "VirusTotal Get Comments from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Get Comments from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of [Comments](https://gtidocs.virustotal.com/reference/comment-object) objects.\n\n## Examples\n\nGet 3 community comments from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nlimit =3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of comments to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "21239a93-7211-43f2-b732-0c61853ddf5f",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14fdf470-5e2d-4704-a1bb-42791e9b2c15",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f8f6c9e-e3fe-4d96-a57b-38cc2e0bddcc",
+          "name": "VirusTotal Add a Comment to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report) Object",
+          "request": {
+            "name": "VirusTotal Add a Comment to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report) Object",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nWith this endpoint you can post a comment for a given threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability). The body for the `POST` request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"id\": \"<comment's ID>\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/comments/<comment's ID>\"\n    },\n    \"attributes\": {\n      \"date\": 1521725475,\n      \"tags\": [\"ipsum\"],\n      \"html\": \"Lorem #ipsum dolor sit ...\",\n      \"text\": \"Lorem #ipsum dolor sit ...\",\n      \"votes\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\": 0\n      }\n    }\n  }\n}\n```\n\n## Examples\n\nAdd a comment to a threat actor object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--eaeae8e9-cc4b-4be8-82fd-8edc65ff9a5e\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a malware or toolkit object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malpedia_win_remexi\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a campaign object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a IoC collection object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"cobaltstrikebot_614a3b996769300a3b3132cf\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd6987d9-cd3f-4b19-a36e-f1d09accd812",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "830ae07e-01e9-451d-b7d1-f7e5fdb67112",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed6aac15-cd0e-4e86-8e8b-52901fb8c06c",
+          "name": "VirusTotal Get MITRE Tactics and Techniques Associated with a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Get MITRE Tactics and Techniques Associated with a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of MITRE tactics with their correspondent techniques that are associated with the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object),[Malware family](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object), [Report](https://gtidocs.virustotal.com/reference/report-object) or [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object) as follows:\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\": \\<_list of dictionaries_> the list of associated tactics.\n        [\n            \"id\": \\<_string_> the MITRE tactic identifier.\n            \"name\": \\<_string_> the name of the tactic.\n            \"link\": \\<_string_> the link to the tactic's MITRE webpage.\n            \"description\": \\<_string_> the description of the tactic.\n            \"techniques\": \\<_list of dictionaries_> the list of associated techniques that belong to the tactic and are associated with the threat object.\n                [\n                    {\n                        \"id\": \\<_string_> the MITRE technique identifier.\n                        \"name\": \\<_string_> the name of the technique.\n                        \"link\": \\<_string_> the link to the technique's MITRE webpage.\n                        \"description\": \\<_string_> the description of the technique.\n                        \"source\": \\<_list of strings_> whether the technique association comes from the IoCs related to the threat object (seen_in_iocs) or is intrinsic to it (operational).\n                        \"context_attribute\": \\<_dictionary_> the date when the technique was associated with the threat object.\n                        {\n                            \"timestamp\": \\<_integer_> (UTC timestamp).\n                        }\n                    }\n                ]\n        ]\n    }\n}\n```\n\n## Example response\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\":\n        [\n            \"id\": \"TA0005\",\n                \"name\": \"Defense Evasion\",\n                \"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n                \"description\": \"The adversary is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses. \",\n                \"techniques\":\n                [\n                    {\n                        \"id\": \"T1564\",\n                        \"name\": \"Hide Artifacts\",\n                        \"link\": \"https://attack.mitre.org/techniques/T1564/\",\n                        \"description\": \"Adversaries may attempt to hide artifacts associated with their behaviors to evade detection. Operating systems may have features to hide various artifacts, such as important system files and administrative task execution, to avoid disrupting user work environments and prevent users from changing files or features on the system. Adversaries may abuse these features to hide artifacts such as files, directories, user accounts, or other system activity to evade detection.\\nAdversaries may also attempt to hide artifacts associated with malicious behavior by creating computing regions that are isolated from common security instrumentation, such as through the use of virtualization technology.\",\n                        \"source\":\n                        [\n                            \"operational\"\n                        ],\n                        \"context_attribute\":\n                        {\n                            \"timestamp\": 1732728093\n                        }\n                    }\n                ]\n        ]\n    }\n}\n```\n\n\n## Examples\n\nGet the MITRE tree associated with a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\":\n        [\n            \"id\": \"TA0005\",\n                \"name\": \"Defense Evasion\",\n                \"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n                \"description\": \"The adversary is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses. \",\n                \"techniques\":\n                [\n                    {\n                        \"id\": \"T1564\",\n                        \"name\": \"Hide Artifacts\",\n                        \"link\": \"https://attack.mitre.org/techniques/T1564/\",\n                        \"description\": \"Adversaries may attempt to hide artifacts associated with their behaviors to evade detection. Operating systems may have features to hide various artifacts, such as important system files and administrative task execution, to avoid disrupting user work environments and prevent users from changing files or features on the system. Adversaries may abuse these features to hide artifacts such as files, directories, user accounts, or other system activity to evade detection.\\nAdversaries may also attempt to hide artifacts associated with malicious behavior by creating computing regions that are isolated from common security instrumentation, such as through the use of virtualization technology.\",\n                        \"source\":\n                        [\n                            \"operational\"\n                        ],\n                        \"context_attribute\":\n                        {\n                            \"timestamp\": 1732728093\n                        }\n                    }\n                ]\n        ]\n    }\n}\n```\n\nGet the MITRE tree associated with a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "mitre_tree"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e40761b1-6553-498c-8952-184bf1e647fb",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "mitre_tree"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5259c784-e24a-4098-845a-9f763147b7db",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "mitre_tree"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e08476b-e55f-4a75-9ed1-c291f7005b5c",
+          "name": "VirusTotal Search IoCs Inside a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Search IoCs Inside a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\nAllows to search IoCs inside a threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability) using advanced intelligence queries.\n\nThe expected input is the same as [/intelligence/search](https://gtidocs.virustotal.com/reference/intelligence-search). By default it searches files, in order to search other entities use `entity:domain/ip/url`.\n\n## Examples\n\nSearch for IoCs related to a threat actor that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nquery = \"tag%3Aexploit\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a malware or toolkit that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nquery = \"p%3A5+\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a campaign that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nquery = \"have%3Ayara_rules\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a IoC collection that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nquery = \"have%3Asigma_rules\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a vulnerability that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nquery = \"tag%3Acve-2022-30190\"\nattributes = \"name\nlimit = \"2\"\nrelationships = \"files\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}&relationships={relationships}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Intelligence query"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of IoCs to retrieve (max 40)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sorting order"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated attributes to return from the resulting IoCs"
+                },
+                {
+                  "disabled": false,
+                  "key": "relationships",
+                  "value": "<string>",
+                  "description": "Comma-separated name of relationships descriptors to return from the IoCs"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b9e00950-c2f3-48b0-8a54-aea7a9c330a5",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n\\\"meta\\\": {\\n  \\\"cursor\\\": <string>,\\n  \\\"total_hits\\\": <int>,\\n  \\\"allowed_orders\\\": [<string>, ...]\\n},\\n\\\"data\\\": [\\n  <IOC>,\\n  <IOC>,\\n  ...\\n],\\n\\\"links\\\": {\\n  \\\"self\\\": <string>,\\n  \\\"next\\\": <string>\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c035fed0-041e-4db2-ae5c-1ea99888d050",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2785ed53-030a-4e53-934f-25daa5bf3c38",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4e2ff9a-76c4-44ce-ac74-ef66a24bcbff",
+              "name": "Object not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98d7e34c-bce2-412d-9028-21685d782be7",
+              "name": "Rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bdb54b3-7928-4744-9880-4ed9e41d20af",
+          "name": "VirusTotal Export IOCs from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Export IOCs from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport IoCs from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "download",
+                ":format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a69a35e-1d9a-4e58-9cae-128fa018bdd5",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"files\\\": [\\n    \\\"009cc0f34f60467552ef79c3892c501043c972be55fe936efb30584975d45ec0\\\",\\n    \\\"153117aa54492ca955b540ac0a8c21c1be98e9f7dd8636a36d73581ec1ddcf58\\\",\\n    \\\"18479a93fc2d5acd7d71d596f27a5834b2b236b44219bb08f6ca06cf760b74f6\\\"\\n  ],\\n  \\\"threat_actors\\\": [\\n    \\\"muddywater\\\"\\n  ],\\n  \\\"references\\\": [\\n    \\\"153590cf5677a6ab5b5103382d41d4d8868a878a04104e86e936db63e4d186b8\\\"\\n  ],\\n  \\\"urls\\\": [\\n    \\\"http://abrahamseed.co.za/db_template.php\\\",\\n    \\\"http://absfinancialplanning.co.za/images/db_template.php\\\"\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1c579c1-a330-4530-a48e-74d5e4a65d71",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a07e9b2-3f7b-41c0-83e5-d8e97810a036",
+          "name": "VirusTotal Export Aggregations / Commonalities from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+          "request": {
+            "name": "VirusTotal Export Aggregations / Commonalities from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> This endpoint is only available to users with Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport commonalities from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                "aggregations",
+                "download",
+                ":format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) Export format (one of `json` or `csv`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9da85268-ad2d-4b06-8a8c-9b0ba02ac76a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "aggregations",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json` or `csv`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n\\t\\\"files\\\": {\\n\\t\\t\\\"contacted_urls\\\": [\\n\\t\\t\\t{\\n\\t\\t\\t\\t\\\"count\\\": 2,\\n\\t\\t\\t\\t\\\"value\\\": \\\"http://ocsp.digicert.com/\\\"\\n\\t\\t\\t},\\n\\t\\t\\t{\\n\\t\\t\\t\\t\\\"count\\\": 2,\\n\\t\\t\\t\\t\\\"value\\\": \\\"http://crl3.digicert.com/Omniroot2025.crl\\\"\\n\\t\\t\\t}\\n      ...\\n\\t\\t],\\n\\t\\t\\\"contacted_domains\\\": [\\n\\t\\t\\t{\\n\\t\\t\\t\\t\\\"count\\\": 4,\\n\\t\\t\\t\\t\\\"value\\\": \\\"nexusrules.officeapps.live.com\\\"\\n\\t\\t\\t},\\n\\t\\t\\t{\\n\\t\\t\\t\\t\\\"count\\\": 4,\\n\\t\\t\\t\\t\\\"value\\\": \\\"officeclient.microsoft.com\\\"\\n\\t\\t\\t},\\n      ...\\n\\t\\t],\\n    ...\\n\\t},\\n  ...\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4f7949c-c7c3-43af-a9e2-668cb3e9a7df",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    "aggregations",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json` or `csv`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62787e80-bd7b-4a11-a84c-5502830c6206",
+          "name": "VirusTotal Export IOCs from a Given Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)'s Relationship",
+          "request": {
+            "name": "VirusTotal Export IOCs from a Given Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)'s Relationship",
+            "description": {
+              "content": "> 🚧 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport files related to a given threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given vulnerability\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id",
+                ":relationship",
+                "download",
+                ":format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Threat object's ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "relationship",
+                  "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaign](ref:campaign-object#relationships), [malware family](ref:malware-family-object#relationships), [software toolkit](ref:software-toolkit-object#relationships), [ioc collections](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7eb86eeb-22bc-42c3-afe2-2d06273dd697",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaign](ref:campaign-object#relationships), [malware family](ref:malware-family-object#relationships), [software toolkit](ref:software-toolkit-object#relationships), [ioc collections](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"files\\\": [\\n    \\\"009cc0f34f60467552ef79c3892c501043c972be55fe936efb30584975d45ec0\\\",\\n    \\\"153117aa54492ca955b540ac0a8c21c1be98e9f7dd8636a36d73581ec1ddcf58\\\",\\n    \\\"18479a93fc2d5acd7d71d596f27a5834b2b236b44219bb08f6ca06cf760b74f6\\\"\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "322e1cb6-0e7d-4354-8b19-3316e83d426a",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id",
+                    ":relationship",
+                    "download",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Threat object's ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "relationship",
+                      "description": "(Required) Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaign](ref:campaign-object#relationships), [malware family](ref:malware-family-object#relationships), [software toolkit](ref:software-toolkit-object#relationships), [ioc collections](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) Export format (one of `json`, `csv`, or `stix`)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.virustotal.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "55790abe-6b9d-4095-b562-bf2265346171",
+    "name": "VirusTotal API v3 - Threat Landscape and Vulnerability Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Threat Landscape & Vulnerability Intelligence — Collections, Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities, and the curated IoC catalogue.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+      "type": "text/plain"
+    }
+  }
+}

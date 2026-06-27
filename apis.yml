@@ -201,13 +201,13 @@ common:
   - type: OpenAPI
     title: GTI DTM — Digital Threat Monitoring
     url: https://gtidocs.virustotal.com/openapi/dtm-digital-threat-monitoring.json
-  - type: SDK
+  - type: SDKs
     title: Python SDK (vt-py)
     url: https://github.com/VirusTotal/vt-py
-  - type: SDK
+  - type: SDKs
     title: Go SDK (vt-go)
     url: https://github.com/VirusTotal/vt-go
-  - type: SDK
+  - type: SDKs
     title: Graph API Python (vt-graph-api)
     url: https://github.com/VirusTotal/vt-graph-api
   - type: CLI
@@ -252,22 +252,22 @@ common:
   - type: Tools
     title: qt-virustotal-uploader (Qt desktop uploader)
     url: https://github.com/VirusTotal/qt-virustotal-uploader
-  - type: Integration
+  - type: Integrations
     title: GTI Integration — Microsoft Defender
     url: https://github.com/VirusTotal/gti-Microsoft-Defender
-  - type: Integration
+  - type: Integrations
     title: GTI Integration — AWS GuardDuty
     url: https://github.com/VirusTotal/gti-aws-GuardDuty
-  - type: Integration
+  - type: Integrations
     title: GTI Integration — Google Secops SIEM
     url: https://github.com/VirusTotal/gti-google-secops-siem
-  - type: Integration
+  - type: Integrations
     title: GTI Integration — MISP connector
     url: https://github.com/VirusTotal/gti-misp-connector
-  - type: Integration
+  - type: Integrations
     title: GTI SOAR Playbooks
     url: https://github.com/VirusTotal/gti-soar-playbooks
-  - type: Integration
+  - type: Integrations
     title: GTI Integrations — User Guides
     url: https://github.com/VirusTotal/GTI-Integrations-UserGuides
   - type: Tutorials

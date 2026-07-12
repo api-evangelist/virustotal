@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/virustotal-access-control-openapi.yml, openapi/virustotal-ioc-feeds-openapi.yml,
+  openapi/virustotal-ioc-investigation-openapi.yml, openapi/virustotal-private-scanning-openapi.yml,
+  openapi/virustotal-threat-graphs-openapi.yml, openapi/virustotal-threat-landscape-openapi.yml,
+  openapi/virustotal-yara-hunting-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: VTApiKey
+  type: apiKey
+  in: header
+  parameter: x-apikey
+  description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal
+    account.
+  sources:
+  - openapi/virustotal-access-control-openapi.yml
+  - openapi/virustotal-ioc-feeds-openapi.yml
+  - openapi/virustotal-ioc-investigation-openapi.yml
+  - openapi/virustotal-private-scanning-openapi.yml
+  - openapi/virustotal-threat-graphs-openapi.yml
+  - openapi/virustotal-threat-landscape-openapi.yml
+  - openapi/virustotal-yara-hunting-openapi.yml

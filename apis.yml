@@ -180,6 +180,10 @@ apis:
       - type: ProductPage
         url: https://cloud.google.com/security/products/threat-intelligence
 common:
+  - type: DomainSecurity
+    url: security/virustotal-domain-security.yml
+  - type: Authentication
+    url: authentication/virustotal-authentication.yml
   - type: Website
     url: https://www.virustotal.com
   - type: Documentation

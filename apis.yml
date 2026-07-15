@@ -180,6 +180,8 @@ apis:
       - type: ProductPage
         url: https://cloud.google.com/security/products/threat-intelligence
 common:
+  - type: AgenticAccess
+    url: agentic-access/virustotal-agentic-access.yml
   - type: DomainSecurity
     url: security/virustotal-domain-security.yml
   - type: Authentication

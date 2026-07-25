@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Attack Tactics API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Investigation - Attack Tactics
+  description: IoC Investigation - Attack Tactics
+paths:
+  /attack_tactics/{id}:
+    get:
+      tags:
+      - IoC Investigation - Attack Tactics
+      deprecated: false
+      description: VirusTotal Get an Attack Tactic Object
+      operationId: attackTacticsid
+      parameters:
+      - description: Attack tactic's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get an Attack Tactic Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /attack_tactics/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Attack Tactics
+      deprecated: false
+      description: 'This endpoint is the same as [/attack_tactics/{id}/{relationship}](https://gtidocs.virustotal.com/reference/attack_tacticsidrelationship) except it returns just the related object''s descriptor instead of returning all attributes.
+
+        '
+      operationId: attackTacticsidrelationshipsrelationship
+      parameters:
+      - description: Attack tactic's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:object-attack-tactics#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to an Attack Tactic
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /attack_tactics/{id}/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Attack Tactics
+      deprecated: false
+      description: 'Available relationships are described in the [Attack Tactic](https://gtidocs.virustotal.com/reference/attack-tactics) object documentation.
+
+        '
+      operationId: attackTacticsidrelationship
+      parameters:
+      - description: Attack tactic's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:object-attack-tactics#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to an Attack Tactic
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

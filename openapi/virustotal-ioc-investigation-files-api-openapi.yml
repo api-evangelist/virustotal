@@ -1,0 +1,743 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Files API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Investigation - Files
+  description: IoC Investigation - Files
+paths:
+  /files/upload_url:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "For uploading files smaller than 32MB you can simply use the [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint, but for larger files you need to obtain a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/files`. The `POST` request should have the same format expected by the  [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint. Each upload URL can be used only once.\n\n> \U0001F4D8 Files larger than 200MBs\n> \n> Notice that although the actual size limit is 650MBs, files larger than 200MBs tend to be bundles of some sort, (compressed files, ISO images, etc.) in these cases it makes sense to upload the inner individual files instead for several reasons, as an example:\n> \n> - Engines tend to have performance issues on big files (timeouts, some may not even scan them).\n> - Some engines are not able to inspect certain file types whereas they will be able to inspect the inner files if submitted.\n> - When scanning a big bundle you lose context on which specific inner file is causing the detection.\n\n```json Example response\n{\n  \"data\": \"http://www.virustotal.com/_ah/upload/AMmfu6b-_DXUeFe36Sb3b0F4B8mH9Nb-CHbRoUNVOPwG/\"\n}\n```\n"
+      operationId: filesUploadUrl
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a URL for Uploading Large Files
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files:
+    post:
+      tags:
+      - IoC Investigation - Files
+      description: "Upload and analyse a file\n\n> \U0001F4D8 File size\n> \n> If the file to be uploaded is bigger than 32MB, please use the [/files/upload_url](https://gtidocs.virustotal.com/reference/files-upload-url) endpoint instead which admits files up to 650MB."
+      operationId: filesScan
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              file:
+                contentType: application/octet-stream
+            example: /path/to/file
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+                password:
+                  description: Optional, password to decompress and scan a file contained in a protected ZIP file.
+                  type: string
+              type: object
+        description: File to scan
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n    \"type\": \"analysis\",\n    \"id\": \"OTdiYWM4MjI0NGE2ZjhlNTk4NDZmZDY1YTliMWYwYjM6YzlhNzBhNDM1NzlmZjc5M2E2NGI5Mzk0NmJjNjVhOWE6MTczNzYzMjk2MQ==\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/private/analyses/OTdiYWM4MjI0NGE2ZjhlNTk4NDZmZDY1YTliMWYwYjM6YzlhNzBhNDM1NzlmZjc5M2E2NGI5Mzk0NmJjNjVhOWE6MTczNzYzMjk2MQ==\"\n    }\n  }}"
+              schema:
+                properties:
+                  data:
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        properties:
+                          self:
+                            type: string
+                    type: object
+                type: object
+          description: The analysis ID. Use [/analyses/<analysis_ID>](ref:analysis) API call to check the analysis status.
+        '401':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"WrongCredentialsError\",\n    \"message\": \"Wrong API key\"\n  }}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: If password was provided and the file isn't a ZIP, it contains more than one file, the password is incorrect, or the file is corrupt.
+      summary: VirusTotal Upload a File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.
+
+        '
+      operationId: fileInfo
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: The name of your tool or service. This is required to obtain the gti_assesment data
+        in: header
+        name: x-tool
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a File Report
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/analyse:
+    post:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "> ❗️ Caution\n> \n> This API endpoint has the potential to produce a denial of service on the scanning infrastructure if abused. Please contact us if you are going to be rescanning more than 50K files per day.\n\nFiles that have been already uploaded to Google TI can be re-analysed without uploading them again, you can use this endpoint for that purpose. The response is an object descriptor for the new analysis as in the [POST /files](https://gtidocs.virustotal.com/reference/files-scan) endpoint. The ID contained in the descriptor can be used with the [GET /analyses/{id}](https://gtidocs.virustotal.com/reference/analysis) endpoint to get information about the analysis.\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"analysis\",\n    \"id\": \"NjY0MjRlOTFjMDIyYTkyNWM0NjU2NWQzYWNlMzFmZmI6MTQ3NTA0ODI3Nw==\"\n  }\n}\n```\n"
+      operationId: filesAnalyse
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Request a File Rescan (re-analyze)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/comments:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.
+
+        '
+      operationId: filesCommentsGet
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of comments to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Comments on a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "With this endpoint you can post a comment for a given file. The body for the `POST` request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comment-object) object.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n"
+      operationId: filesCommentsPost
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{"type": "comment", "attributes": {"text": "Lorem ipsum dolor sit ..."}}'
+                  description: A comment object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add a Comment to a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/download:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'This endpoint is similar to [GET /files/{id}/download_url](https://gtidocs.virustotal.com/reference/files-download-url), but it redirects you to the download URL. The download URL you are redirected to can be reused as many times as you want for a period of 1 hour. After that period the URL expires and can''t be used anymore.
+
+        '
+      operationId: filesDownload
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Download a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/download_url:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "This endpoint returns a signed URL from where you can download the specified file. Getting the URL counts as a file download in your quota, even if you don't actually download the file, but once you have the URL you can use it to download the file multiple times without consuming any quota at all. The URL expires after 1 hour.\n\n```json Example response\n{\n  \"data\": \"https://vtsamples.commondatastorage.googleapis.com/275a..fd0f?GoogleAccessId=758681729565-rc7fcckv235v1@developer.gserviceaccount.com&Expires=1524733537&Signature=GRs9WLy...oHA%3D\"\n}\n```\n"
+      operationId: filesDownloadUrl
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a File’s Download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'This endpoint is the same as [/files/{id}/{relationship}](https://gtidocs.virustotal.com/reference/files-relationships) except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: filesRelationshipsIds
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:object-files#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: '10'
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/votes:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.
+
+        '
+      operationId: filesVotesGet
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of votes to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Votes on a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "With this endpoint you can post a vote for a given file. The body for the `POST` request must be the JSON representation of a vote object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either `harmless` or `malicious`.\n\nReturns a [Vote](https://gtidocs.virustotal.com/reference/vote-object) object.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n"
+      operationId: filesVotesPost
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{"type": "vote", "attributes": {"verdict": "malicious"}}'
+                  description: A vote object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+        '409':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"AlreadyExistsError\",\n    \"message\": \"User \\\"username\\\" already voted \\\"malicious\\\" for this file\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '409'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add a Vote on a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /files/{id}/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: "File objects have many relationships to other files and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nSome relationships are accessible only to users who have access to VirusTotal Enterprise package.\n\nMore common relationships are described in the [File](https://gtidocs.virustotal.com/reference/object-files) object documentation and you can use the [metadata](https://gtidocs.virustotal.com/reference/metadata)  endpoint to get the full list of relationships.\n"
+      operationId: filesRelationships
+      parameters:
+      - description: SHA-256, SHA-1 or MD5 identifying the file
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:object-files#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /sigma_rules/{id}:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'Returns a [Sigma Rule](https://gtidocs.virustotal.com/reference/sigma-rule-object) object.
+
+        '
+      operationId: getSigmaRules
+      parameters:
+      - description: Rule ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Crowdsourced Sigma Rule Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rulesets/{id}:
+    get:
+      tags:
+      - IoC Investigation - Files
+      deprecated: false
+      description: 'Returns a [YARA Ruleset](https://gtidocs.virustotal.com/reference/yara-rulesets-object) object used in our crowdsourced YARA results.
+
+        '
+      operationId: getYaraRulesets
+      parameters:
+      - description: Ruleset ID to fetch.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Crowdsourced YARA Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

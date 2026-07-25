@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Feeds - IP intelligence feed API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Feeds - IP intelligence feed
+  description: IoC Feeds - IP intelligence feed
+paths:
+  /feeds/ip_addresses/hourly/{time}:
+    get:
+      tags:
+      - IoC Feeds - IP intelligence feed
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> IP feeds endpoints are only available to users with a IP feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [`/feeds/ip_addresses/{time}`](https://gtidocs.virustotal.com/reference/feedsip_addressestime) endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided time argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n"
+      operationId: feedsipAddresseshourly2time
+      parameters:
+      - description: A string in format YYYYMMDDhh
+        in: path
+        name: time
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get an Hourly IP Address Feed Batch
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /feeds/ip_addresses/{time}:
+    get:
+      tags:
+      - IoC Feeds - IP intelligence feed
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> IP feeds endpoints are only available to users with a IP feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag with respect with to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> \U0001F6A7 Missing batches\n> \n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any IP addresses in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a URL object as returned by the [GET /ip_addresses/{ip}](https://gtidocs.virustotal.com/reference/ip-info) endpoint.\n"
+      operationId: feedsipAddressestime
+      parameters:
+      - description: A string in format YYYYMMDDhhmm
+        in: path
+        name: time
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Minutely IP Address Feed Batch
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

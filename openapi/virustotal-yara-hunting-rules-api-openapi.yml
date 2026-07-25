@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Rules API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: YARA Hunting - Rules
+  description: YARA Hunting - Rules
+paths:
+  /yara_rules:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"name\": \"PK_AXA_fun\",\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"AXA\"\n\t\t\t\t],\n\t\t\t\t\"matches\": 0,\n\t\t\t\t\"author\": \"Thomas Damonneville\",\n\t\t\t\t\"enabled\": true,\n\t\t\t\t\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n    meta:\\n        description = \\\"Phishing Kit impersonating AXA banque\\\"\\n        licence = \\\"GPL-3.0\\\"\\n        author = \\\"Thomas Damonneville\\\"\\n        reference = \\\"\\\"\\n        date = \\\"2023-05-02\\\"\\n        comment = \\\"Phishing Kit - AXA - using a fun.php page\\\"\\n\\n    strings:\\n        // the zipfile working on\\n        $zip_file = { 50 4b 03 04 }\\n        $spec_dir = \\\"css\\\"\\n        $spec_dir2 = \\\"images\\\"\\n        // specific file found in PhishingKit\\n        $spec_file = \\\"detail.html\\\"\\n        $spec_file2 = \\\"fun.php\\\"\\n        $spec_file3 = \\\"fin.html\\\"\\n        $spec_file4 = \\\"axa_pp_blanc.min.css\\\"\\n\\n    condition:\\n        // look for the ZIP header\\n        uint32(0) == 0x04034b50 and\\n        // make sure we have a local file header\\n        $zip_file and\\n        // check for file\\n        all of ($spec_file*) and\\n        all of ($spec_dir*)\\n}\",\n\t\t\t\t\"creation_date\": 1682985600,\n\t\t\t\t\"meta\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"description\",\n\t\t\t\t\t\t\"value\": \"Phishing Kit impersonating AXA banque\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"licence\",\n\t\t\t\t\t\t\"value\": \"GPL-3.0\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"author\",\n\t\t\t\t\t\t\"value\": \"Thomas Damonneville\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"reference\",\n\t\t\t\t\t\t\"value\": \"\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"date\",\n\t\t\t\t\t\t\"value\": \"2023-05-02\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"comment\",\n\t\t\t\t\t\t\"value\": \"Phishing Kit - AXA - using a fun.php page\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"last_modification_date\": 1683185194\n\t\t\t},\n\t\t\t\"type\": \"yara_rule\",\n\t\t\t\"id\": \"003e1c51ef|PK_AXA_fun\",\n\t\t\t\"links\": {\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/yara_rules/003e1c51ef|PK_AXA_fun\"\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/yara_rules?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/yara_rules?cursor=Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB&limit=1\"\n\t}\n}\n```\n\nThe `filter` parameter allows to filter the rules according to the values of certain attributes. For example you can get only the enabled rules with `enabled:true`. With `name:foo` and `foo` you can search for rules having the word \"foo\" in their names or in their meta values. Notice however that this only works with full words (words delimited by non-alphanumeric characters), if the rule's name is \"foobar\" it won't appear if you filter with `name:foo`. You can combine multiple filters separating them with spaces, for example: `filter=enabled:true name:foo`.\n\nAll the accepted filters are: `author`, `creation_date`, `enabled`, `included_date`, `last_modification_date`, `name`, `tag`, `threat_category`.\n\nThe `order` parameters control the order in which rulesets are returned, accepted orders are: `matches`, `creation_date`, `included_date` and `modification_date`. You can prepend `+` and `-` suffixes to specify ascending and descending orders (examples: `name-`, `creation_date+`, ). If not suffix is specified the order is ascending by default.\n"
+      operationId: listCrowdsourcedYaraRules
+      parameters:
+      - description: Maximum number of rules to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Return the rules matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Sort order
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal List Crowdsourced YARA Rules
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: 'Returns a [YARA rule](https://gtidocs.virustotal.com/reference/yara-rule-object) object.
+
+        '
+      operationId: getACrowdsourcedYaraRule
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: 'Same as [/yara_rules/{id}/{relationships}](https://gtidocs.virustotal.com/reference/crowdsourced-yara-rule-relationship-endpoint) except it returns just the related object''s descriptor (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: crowdsourcedYaraRuleRelationshipDescriptorsEndpoint
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:yara-rule-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: "YARA rule objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by YARA rule objects are documented in the [YARA Rules](https://gtidocs.virustotal.com/reference/yara-rule-object#relationships) API object page.\n"
+      operationId: crowdsourcedYaraRuleRelationshipEndpoint
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:yara-rule-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

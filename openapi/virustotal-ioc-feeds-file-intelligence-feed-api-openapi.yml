@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Feeds - File intelligence feed API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Feeds - File intelligence feed
+  description: IoC Feeds - File intelligence feed
+paths:
+  /feeds/files/hourly/{time}:
+    get:
+      tags:
+      - IoC Feeds - File intelligence feed
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [/feeds/files/{time}](https://gtidocs.virustotal.com/reference/feeds-file) endpoint for a given hour. The returned file is a `.tar.bz2` file which contains the 60 minutely feeds for that hour.\n\nThe provided `time` argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\nThe downloaded file is a bzip2 tar file which include 60 files, one for each minute, these are UTF-8 text file which contains one JSON structure per line, where the structure represents a file object as returned by the GET /files/{id} endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: download_url and submitter. The download_url attribute is a link that can be used to download the file itself, while submitter is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that submitter is not present in all files as some files are re-analyzed by Google TI without being submitted by some external user.\n"
+      operationId: feedsFileHourly
+      parameters:
+      - description: A string in format YYYYMMDDhh
+        in: path
+        name: time
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Hourly File Feed Batch
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /feeds/files/{time}:
+    get:
+      tags:
+      - IoC Feeds - File intelligence feed
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a `time` consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag respecting to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> \U0001F6A7 Missing batches\n> \n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any files in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a file object as returned by the [GET /files/{id}](https://gtidocs.virustotal.com/reference/file-info) endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: `download_url` and `submitter`. The `download_url` attribute is a link that can be used to download the file itself, while `submitter` is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that `submitter` is not present in all files, it will be absent when files are submitted via the web interface without triggering a new analysis due to recent submissions, or when files are re-analyzed by Google TI without being submitted by some external user.\n"
+      operationId: feedsFile
+      parameters:
+      - description: A string in format YYYYMMDDhhmm
+        in: path
+        name: time
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Per-minute File Feed Batch
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /feeds/files/{token}/download:
+    get:
+      tags:
+      - IoC Feeds - File intelligence feed
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. For this particular endpoint, download file privilege is also required. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file feed packages include a URL to this API endpoint to download the corresponding file. The link only works during the feed's lifetime, which is 7 days. Check [/feeds/files/{time}](https://gtidocs.virustotal.com/reference/feeds-file) for more information.\n"
+      operationId: fileFeedDownload
+      parameters:
+      - description: Download token. It can be found inside the file's properties in the file feed.
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Download a File Published in the File Feed
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

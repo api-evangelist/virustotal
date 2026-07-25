@@ -1,0 +1,706 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Access Control - Group Management
+  description: Access Control - Group Management
+paths:
+  /groups/{id}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Get a Group Object
+      operationId: groups
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Group Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'This request accepts a JSON body containing the group attributes to update. Attributes not present in the request body remain the same. It returns the updated [Group](https://gtidocs.virustotal.com/reference/group-object) object.
+
+        '
+      operationId: patchGroup
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A partial group object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update a Group Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/administrators:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Returns a list of [User](https://gtidocs.virustotal.com/reference/user-object) objects.
+
+        '
+      operationId: getGroupAdministrators
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Administrators for a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Update group administrator list. User emails must be used. If a username is used, a 400 error is returned.
+
+
+        No admins are removed by using this endpoint. To revoke admin privileges from a certain user, use [DELETE/groups/{id}/relationships/administrators/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-group-administrator).
+
+        '
+      operationId: postGroupAdministrators
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: List of user objects.
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"InvalidArgumentError\",\n    \"message\": \"Invalid email address: \\\"spellman\\\"\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Grant Group Admin Permissions to a List of Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/administrators/{user_id}:
+    delete:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Revoke Group Admin Permissions from a User
+      operationId: deleteUserGroupAdministrator
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User ID to remove.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Revoke Group Admin Permissions from a User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Check if a User is a Group Admin
+      operationId: checkUserGroupAdministrator
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User ID to check.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User is a Group Admin
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/users:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Get Group Users
+      operationId: getGroupUsers
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Group Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Update the group''s user list. User emails must be used, if a username is used a 400 error is returned.
+
+
+        No users are removed by using this endpoint. To remove group membership from a certain user, use [DELETE/groups/{id}/relationships/users/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-from-group).
+
+        '
+      operationId: updateGroupUsers
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: List of user objects
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"InvalidArgumentError\",\n    \"message\": \"Invalid email address: \\\"spellman\\\"\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add Users to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/users/{user_id}:
+    delete:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Remove a User from a Group
+      operationId: deleteUserFromGroup
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User to remove.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Remove a User from a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Check if a User is a Group Member
+      operationId: checkUserInGroup
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User to check.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User is a Group Member
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'This endpoint is the same as [/groups/{id}/{relationship}](https://gtidocs.virustotal.com/reference/groups-relationships) except it returns just the related object''s descriptor (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: groupsRelationshipsIds
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:group-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/{relationship}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: "Group objects have relationships to other objects. As mentioned in the  [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by group objects are described in the [Group object section](https://gtidocs.virustotal.com/reference/group-object).\n"
+      operationId: groupsRelationships
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:group-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

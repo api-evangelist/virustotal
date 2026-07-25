@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Popular Threat Categories API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Investigation - Popular Threat Categories
+  description: IoC Investigation - Popular Threat Categories
+paths:
+  /popular_threat_categories:
+    get:
+      tags:
+      - IoC Investigation - Popular Threat Categories
+      deprecated: false
+      description: VirusTotal Get a List of Popular Threat Categories
+      operationId: popularThreatCategories
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\"data\": [\n  \"adware\", \"banker\", \"downloader\",\n  \"dropper\", \"fakeav\", \"hacktool\",\n  \"miner\", \"phising\", \"pua\",\n  \"ransomware\", \"spyware\", \"trojan\",\n  \"virus\", \"worm\"]}"
+              schema:
+                properties:
+                  data:
+                    items:
+                      type: string
+                    type: array
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a List of Popular Threat Categories
+      parameters: []
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

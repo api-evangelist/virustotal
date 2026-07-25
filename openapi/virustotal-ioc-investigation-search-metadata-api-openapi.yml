@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Search & Metadata API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Investigation - Search & Metadata
+  description: IoC Investigation - Search & Metadata
+paths:
+  /intelligence/search:
+    get:
+      tags:
+      - IoC Investigation - Search & Metadata
+      deprecated: false
+      description: "> \U0001F6A7 Searches using a fuzzy hash (ssdeep, TLSH, ...) are throttled due to performance reasons. The typical throttler is 15 searches / minute.\n\nThis endpoint allows to search for files in the Google Threat Intelligence's dataset, using the same query syntax that you would use in the Google TI user interface. **URL Safe encoding must be used when using this endpoint programatically.**\n\nThe result from this endpoint is a collection of file objects that match the given query. If the `descriptors_only` parameter is set to `true`, the resulting collection will contain only the object descriptors. This is useful if you are interested in getting only the SHA-256 of the matching files. In those cases you better set `descriptors_only=true` for reducing the latency of your requests.\n\n> \U0001F6A7 Content searches can not be sorted\n> \n> If your query contains content search the order parameter will make no effect.\n\nThe `order` parameter defines the order in which results are returned. They can be followed by a plus (`+`) or minus (`-`) sign for indicating ascending or descending order respectively (i.e: `<order>+`, `<order>-`). If no ascending/descending order is specified it's assumed to be ascending, so `<order>` and `<order>+` are equivalent. If the `order` parameter is not provided, items are returned in a default order. The following table shows supported and default orders for every kind of entity:\n\n| Entity type | Supported orders                                                                | Default order           |\n| :---------- | :------------------------------------------------------------------------------ | :---------------------- |\n| file        | first_submission_date, last_submission_date, positives, times_submitted, size   | last_submission_date-   |\n| url         | first_submission_date, last_submission_date, positives, times_submitted, status | last_submission_date-   |\n| domain      | creation_date, last_modification_date, last_update_date, positives              | last_modification_date- |\n| ip          | ip, last_modification_date, positives                                           | last_modification_date- |\n\nThis request returns a list of API objects ([files](https://gtidocs.virustotal.com/reference/files), [URLs](https://gtidocs.virustotal.com/reference/url-object), [IP addresses](https://gtidocs.virustotal.com/reference/ip-object) or [domains](https://gtidocs.virustotal.com/reference/domains-object)).\n\nAlso, some context attributes are added in certain searches:\n\n- When searching files by `content`. These context attributes are:\n  - `confidence`: \\<_float_>  match confidence.\n  - `match_in_subfile`: \\<_boolean_> whether the content match was found in a [subfile](https://gtidocs.virustotal.com/reference/files-bundled_files) or not.\n  - `snippet`: \\<_string_> snippet ID. This ID can be later used in `/intelligence/search/snippets/{id}` endpoint.\n\n- When doing a hash similarity search:\n  - `similarity_score`: \\<_float_> number between 0 and 1 indicating the percentage of the fuzzy hash that matched. For example, `1.0` indicates the hash is the same as the specified; `0.5` that half of the hash matches the one given.\n\n```json Example response (search by file content)\n{\n  \"data\": [\n    {\n      \"context_attributes\": {\n        \"confidence\": 1,\n        \"match_in_subfile\": false,\n        \"snippet\": \"L3Z0c2FtcGxlcy8zODIzMzkzNjNhOTM2NDM2ZDM2MDM1MzFkM2IzOGEzMmUzMTUzNzM3MTM4MzY3MzBlM2Q2MzQ4MzY1M2MzYzNhfHw3MTg1Mzk2OjExfHwxNTk5NDY0OTQ3fHwzODIzMzkzNjNhOTM2NDM2ZDM2MDM1MzFkM2IzOGEzMmUzMTUzNzM3MTM4MzY3MzBlM2Q2MzQ4MzY1M2MzYzNh\"\n      },\n      \"id\": \"382339363a936436d3603531d3b38a32e315373713836730e3d63483653c3c3a\",\n      \"type\": \"file\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"https://www.virustotal.com/api/v3/intelligence/search?cursor=H4sI...A&query=content%3A+%22hello+world%22&limit=1&descriptors_only=true\",\n    \"self\": \"https://www.virustotal.com/api/v3/intelligence/search?query=content%3A%20%22hello%20world%22&descriptors_only=true&limit=1\"\n  },\n  \"meta\": {\n    \"cursor\": \"H4sIAAA...\",\n    \"days_back\": 365\n  }\n}\n```\n"
+      operationId: intelligenceSearch
+      parameters:
+      - description: Search query using URL Safe encoding
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+      - description: Sort order (see table in the description above)
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Maximum number of results per page (Max. 300)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Whether to return full object information or just object descriptors.
+        in: query
+        name: descriptors_only
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Advanced Corpus Search
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/search/snippets/{snippet}:
+    get:
+      tags:
+      - IoC Investigation - Search & Metadata
+      deprecated: false
+      description: 'This request returns file content snippets that matched a query in the [`/search`](https://gtidocs.virustotal.com/reference/intelligence-search) endpoint. The response is a list of strings containing both content hexdump and plain text. Matched content is found between `*` characters, more file content is returned to provide additional context about the match.
+
+        '
+      operationId: intelligenceSearchSnippets
+      parameters:
+      - description: Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint.
+        in: path
+        name: snippet
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": [\n    \"01CEE0A0: 09 20 2A 0A 09 20 2A 20  45 78 61 6D 70 6C 65 3A  . *.. * Example:\\n01CEE0B0: 0A 09 20 2A 0A 09 20 2A  20 20 20 20 20 35\x1C 68 65\x1D  .. *.. *     5\x1Che\x1D\\n01CEE0C0: \x1C6C 6C 6F 20 77 6F 72 6C  64\x1D 0A 09 20 2A 20 20 20  \x1Cllo world\x1D.. *   \",\n    \"01CEF650: 6D 70 6C 65 3A 0A 09 20  2A 0A 09 20 2A 20 20 20  mple:.. *.. *   \\n01CEF660: 20 20 31 31 3A \x1C68 65 6C  6C 6F 20 77 6F 72 6C 64\x1D    11:\x1Chello world\x1D\\n01CEF670: 32 3A 68 69 0A 09 20 2A  0A 09 20 2A 20 49 66 20  2:hi.. *.. * If \",\n    \"01D22020: 5C 6E 20 2A 20 45 78 61  6D 70 6C 65 3A 5C 6E 20  \\\\n * Example:\\\\n \\n01D22030: 2A 5C 6E 20 2A 20 20 20  20 20 35\x1C 68 65 6C 6C 6F\x1D  *\\\\n *     5\x1Chello\x1D\\n01D22040: \x1C20 77 6F 72 6C 64 \x1D5C 6E  20 2A 20 20 20 20 20 33  \x1C world\x1D\\\\n *     3\",\n    \"02C29AB0: 6C 6F 67 28 68 65 6C 6C  6F 2C 20 27 77 6F 72 6C  log(hello, 'worl\\n02C29AC0: 64 27 29 3B 0A 20 2A 20  27\x1C 68 65 6C 6C 6F 20 77\x1D  d');. * '\x1Chello w\x1D\\n02C29AD0: \x1C6F 72 6C 64 \x1D27 0A 20 2A  2F 0A 65 78 70 6F 72 74  \x1Corld\x1D'. */.export\",\n    \"02C643E0: 28 68 65 6C 6C 6F 2C 20  27 77 6F 72 6C 64 27 29  (hello, 'world')\\n02C643F0: 3B 0A 20 2A 20 27 \x1C68 65  6C 6C 6F 20 77 6F 72 6C\x1D  ;. * '\x1Chello worl\x1D\\n02C64400: \x1C64 \x1D27 0A 20 2A 2F 0A 76  61 72 20 6C 6F 67 20 3D  \x1Cd\x1D'. */.var log =\"\n  ]\n}"
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"BadRequestError\",\n    \"message\": \"Invalid token\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get File Content Search Snippets
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /metadata:
+    get:
+      tags:
+      - IoC Investigation - Search & Metadata
+      deprecated: false
+      description: "This endpoint returns a dictionary with metadata related to Google Threat Intelligence, which includes a full list of engines in use, a list of existing privileges, etc.\n\n```json Example\n{\n  \"data\": {\n    \"engines\": {\n      \"ALYac\": {},\n      \"APEX\": {},\n      \"AVG\": {},\n      \"AVware\": {},\n      \"Acronis\": {},\n      \"Ad-Aware\": {},\n      \"AegisLab\": {},\n      \"AhnLab-V3\": {},\n      \"Alibaba\": {},\n      \"Antiy-AVL\": {},\n      \"Arcabit\": {},\n      \"Avast\": {},\n      \"Avast-Mobile\": {},\n      \"Avira\": {},\n      \"Babable\": {},\n      \"Baidu\": {}\n    },\n    \"privileges\": [\n      \"cases\",\n      \"click_to_accept\",\n      \"creditcards\",\n      \"dogfooder\",\n      \"file-behaviour-feed\",\n      \"downloads-tier-1\",\n      \"downloads-tier-2\"\n    ],\n    \"relationships\": {\n      \"analysis\": [\n        {\n          \"description\": \"File or URL the analysis belongs to.\",\n          \"name\": \"item\"\n        }\n      ],\n      \"async_search_job\": [\n        {\n          \"description\": \"Objects that match the search.\",\n          \"name\": \"matches\"\n        }\n      ],\n      \"case\": [\n        {\n          \"description\": \"Returns the files objects in the case.\",\n          \"name\": \"files\"\n        },\n        {\n          \"description\": \"Returns the graphs objects in the case.\",\n          \"name\": \"graphs\"\n        }\n      ],\n      \"code_block\": [\n        {\n          \"description\": \"Files that contain the code block.\",\n          \"name\": \"files\"\n        }\n      ],\n      \"comment\": [\n        {\n          \"description\": \"Object to which the comment belongs to.\",\n          \"name\": \"item\"\n        },\n        {\n          \"description\": \"User who wrote the comment.\",\n          \"name\": \"author\"\n        }\n      ],\n      \"domain\": [\n        {\n          \"description\": \"Votes for the file/URL.\",\n          \"name\": \"votes\"\n        },\n        {\n          \"description\": \"Comments for the Domain or IP's related entities.\",\n          \"name\": \"related_comments\"\n        },\n        {\n          \"description\": \"Parent domain.\",\n          \"name\": \"parent\"\n        }\n      ]\n    }\n  }\n}\n```\n"
+      operationId: metadata
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Google Threat Intel Metadata
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /search:
+    get:
+      tags:
+      - IoC Investigation - Search & Metadata
+      deprecated: false
+      description: "This endpoint searches any of the following:\n\n- A file hash - Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.\n- A URL - Returns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n- A domain - Returns [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n- A IP address - Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n- Comments by tags - Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n\nThe request returns a list of objects matching the query.\n\n```json Example response (searching for comments)\n{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"date\": 1597349426,\n        \"html\": \"search comment #example.\",\n        \"tags\": [\n          \"example\"\n        ],\n        \"text\": \"search comment #example.\",\n        \"votes\": {\n          \"abuse\": 0,\n          \"negative\": 0,\n          \"positive\": 0\n        }\n      },\n      \"id\": \"f-084a541d4c94d497442477664b445047c4fd42c4ff48413464ed4454549444c9-4944a424\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/ui/comments/f-084a541d4c94d497442477664b445047c4fd42c4ff48413464ed4454549444c9-4944a424\"\n      },\n      \"type\": \"comment\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"https://www.virustotal.com/api/v3/search?cursor=CtIB4hEKBGRhdGUSCQjsy4up_pjrAhK4AWoRc352aXJ1c3RvdGFsY2xvdWRyogELEgZTYW1wbGUiQDA4Y2E1ZTFk4mM5YW41OTd4NDJ4Nzc2NmFiNGI1MDc3YzJmZDEyY2NmZmM4ZjEzOTZkZWRhNDUyNWM5ZjQ0YzkMCxIHQ29t4WVudCJJMDhjYTV4MWRiYzlhZDU5N2I0MmU3NzY2YWI0YjUwNzdjMmZkMTJjY2ZmYzhmMTM5NmRlZGE0NTI14zlmND4jOS1lOTQ1YTMyMwwYACAB&query=google&limit=1\",\n    \"self\": \"https://www.virustotal.com/api/v3/search?query=example&limit=1\"\n  },\n  \"meta\": {\n    \"cursor\": \"CtIB4hEKBGRhdGUSCQjsy4up_pjrAhK4AWoRc352aXJ1c3RvdGFsY2xvdWRyogELEgZTYW1wbGUiQDA4Y2E1ZTFk4mM5YW41OTd4NDJ4Nzc2NmFiNGI1MDc3YzJmZDEyY2NmZmM4ZjEzOTZkZWRhNDUyNWM5ZjQ0YzkMCxIHQ29t4WVudCJJMDhjYTV4MWRiYzlhZDU5N2I0MmU3NzY2YWI0YjUwNzdjMmZkMTJjY2ZmYzhmMTM5NmRlZGE0NTI14zlmND4jOS1lOTQ1YTMyMwwYACAB\"\n  }\n}\n```\n"
+      operationId: apiSearch
+      parameters:
+      - description: Search query.
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Search for Files, URLs, Domains, IPs and Comments
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

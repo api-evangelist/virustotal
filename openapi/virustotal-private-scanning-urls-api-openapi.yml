@@ -1,0 +1,233 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - URLs API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Private Scanning - URLs
+  description: Private Scanning - URLs
+paths:
+  /private/urls:
+    post:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Private Scan URL
+      description: This returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) ID. The analysis can be retrieved by using the [Analysis](https://gtidocs.virustotal.com/reference/get-a-private-url-analysis-report) endpoint.
+      operationId: privateScanUrl
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                  description: URL to scan
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get a URL Analysis Report
+      description: "> \U0001F4D8\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\n\nReturns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n"
+      operationId: getAPrivateUrlAnalysisReport
+      parameters:
+      - name: id
+        in: path
+        description: URL identifier or base64 representation of URL to scan (w/o padding)
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}/{relationship}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get Objects Related to a Private URL
+      description: "> \U0001F4D8\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nSome relationships are accessible only to users who have access to VirusTotal Enterprise package.\n\nThe relationships supported by URL objects are documented in the [URL](https://gtidocs.virustotal.com/reference/private-urls-object) API object page.\n"
+      operationId: privateGetObjectsRelatedToAUrl
+      parameters:
+      - name: id
+        in: path
+        description: URL identifier
+        schema:
+          type: string
+        required: true
+      - name: relationship
+        in: path
+        description: Relationship name (see [table](ref:private-urls-object#relationships))
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: Maximum number of related objects to retrieve
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: cursor
+        in: query
+        description: Continuation cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get Object Descriptors Related to a Private URL
+      description: This endpoint is the same as [/private/urls/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-get-objects-related-to-a-url) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.
+      operationId: privateGetObjectDescriptorsRelatedToAUrl
+      parameters:
+      - name: id
+        in: path
+        description: URL ID
+        schema:
+          type: string
+        required: true
+      - name: relationship
+        in: path
+        description: Relationship name (see [table](ref:private-urls-object#relationships))
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: Maximum number of related objects to retrieve
+        schema:
+          type: string
+          default: '10'
+      - name: cursor
+        in: query
+        description: Continuation cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

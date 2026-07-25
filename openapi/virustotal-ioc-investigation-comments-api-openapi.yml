@@ -1,0 +1,369 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Comments API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: IoC Investigation - Comments
+  description: IoC Investigation - Comments
+paths:
+  /comments:
+    get:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: "This endpoint retrieves information about the latest comments added to Google Threat Intelligence.  \nYou can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).\n\n```json Response example\n{\n  \"meta\": {\n    \"cursor\": \"Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB\"\n  },\n  \"data\": [\n    {\n      \"attributes\": {\n        \"votes\": {\n          \"positive\": 0,\n          \"abuse\": 0,\n          \"negative\": 0\n        },\n        \"tags\": [\n          \"_:api\",\n          \"_:public\",\n          \"aicc\",\n          \"monitorapp\",\n          \"malware\"\n        ],\n        \"text\": \"#aicc #monitorapp #malware\",\n        \"html\": \"#aicc #monitorapp #malware\",\n        \"date\": 1619424604\n      },\n      \"type\": \"comment\",\n      \"id\": \"u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/comments/u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&limit=1\",\n    \"next\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&cursor=Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB&limit=1\"\n  }\n}\n```\n"
+      operationId: getComments
+      parameters:
+      - description: Number of items to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Filter returned elements
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Latest Comments
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/{id}:
+    delete:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: VirusTotal Delete a Comment
+      operationId: commentIdDelete
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a Comment
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: VirusTotal Get a Comment Object
+      operationId: getComment
+      parameters:
+      - description: Relationship name (see [table](ref:comment-object#relationships))
+        in: query
+        name: relationships
+        schema:
+          type: string
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Comment Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: 'This endpoint is the same as [/comments/{id}/{relationship}](https://gtidocs.virustotal.com/reference/comments-relationships) except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: commentsRelationshipsIds
+      parameters:
+      - description: Comment identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:comment-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: '10'
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Comment
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/{id}/vote:
+    post:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: "```json Example response\n{\n    \"data\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\": 1\n    }\n}\n```\n"
+      operationId: voteComment
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: Vote type. Can be either `positive`, `negative` or `abuse`
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add a Vote to a Comment
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/{id}/{relationship}:
+    get:
+      tags:
+      - IoC Investigation - Comments
+      deprecated: false
+      description: 'Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.
+
+
+        All available relationships are documented in the [Comment](https://gtidocs.virustotal.com/reference/comment-object) API object page.
+
+        '
+      operationId: commentsRelationships
+      parameters:
+      - description: Comment identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:comment-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Comment
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

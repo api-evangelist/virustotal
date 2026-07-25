@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Zipping files API
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Private Scanning - Zipping files
+  description: Private Scanning - Zipping files
+paths:
+  /private/zip_files:
+    post:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure: \n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n  \\\"hashes\\\":[\n   \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n   \\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n   \\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n  }\n}\n```\nThe response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that's why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n  \\\"data\\\": {\n   \\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"starting\\\",\n\\\"progress\\\": 0,\n    \\\"files_ok\\\": 0,\n\\\"files_error\\\": 0\n} \n}\n}\n```\n\n\nThe GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it's finished.\n"
+      operationId: privateScanningZipFiles
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{"password": "<password>", "hashes":["<hash1>", "<hash2>"]}'
+                  description: A list of hashes (SHA-256, SHA-1, or MD5) for the files included in the ZIP
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \\\"data\\\": {\n    \\\"type\\\": \\\"zip_file\\\",\n    \\\"id\\\": \\\"4939392292\\\",\n    \\\"attributes\\\": {\n      \\\"status\\\": \\\"creating\\\",\n      \\\"progress\\\": 45,\n      \\\"files_ok\\\": 3,\n      \\\"files_error\\\": 0\n    }\n  }\n}\n``` \n\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to download the file.\n"
+      operationId: privateScanningGetZipFile
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check a ZIP File’s Status
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}/download:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: VirusTotal Download a ZIP File
+      operationId: privateScanningDownloadZipFile
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Download a ZIP File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}/download_url:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: VirusTotal Get a ZIP File’s Download URL
+      operationId: privateScanningGetZipDownloadUrl
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a ZIP File’s Download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.

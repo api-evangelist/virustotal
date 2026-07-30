@@ -7,6 +7,19 @@ description: >-
   Hunting (Livehunt, Retrohunt, IoC Stream). Now also branded "Google Threat Intelligence" (GTI) for Enterprise
   customers, integrating Mandiant intelligence, Digital Threat Monitoring (DTM), and Attack Surface Management (ASM).
 url: https://docs.virustotal.com/reference/overview
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.virustotal.com/gui/images/vt-logo.svg
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -27,158 +40,897 @@ tags:
   - MITRE ATT&CK
   - Google Cloud
 apis:
-  - name: VirusTotal API v3 - Access Control
-    description: >-
-      Manage users, groups, service accounts, API quotas, and overall account usage. The control plane that wraps every
-      other VirusTotal API surface.
-    humanURL: https://docs.virustotal.com/reference/overview
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Access Control
-      - Administration
-      - Quotas
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/overview
-      - type: APIReference
-        url: https://gtidocs.virustotal.com/reference/overview
-      - type: OpenAPI
-        url: openapi/virustotal-access-control-openapi.yml
-  - name: VirusTotal API v3 - IoC Feeds
-    description: >-
-      Per-minute and hourly intelligence feed batches for files, URLs, domains, IP addresses, and sandbox analyses.
-      Premium tier required. The bulk pipeline behind SIEM / SOAR / data-lake integrations.
-    humanURL: https://docs.virustotal.com/reference/feeds
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - Feeds
-      - Sandbox
-      - Premium
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/feeds
-      - type: OpenAPI
-        url: openapi/virustotal-ioc-feeds-openapi.yml
-  - name: VirusTotal API v3 - IoC Investigation
-    description: >-
-      Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve verdicts, traverse the
-      relationships graph, fetch sandbox behaviour, post comments and votes, search the corpus. The day-one surface for
-      SOC and incident response.
-    humanURL: https://docs.virustotal.com/reference/files
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - Investigation
-      - Files
-      - URLs
-      - Domains
-      - IP Addresses
-      - Sandbox
-      - MITRE ATT&CK
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/files
-      - type: OpenAPI
-        url: openapi/virustotal-ioc-investigation-openapi.yml
-  - name: VirusTotal API v3 - Private Scanning
-    description: >-
-      Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public
-      scanning surface (Files / URLs / Analyses / Behaviours / Zip Files). Premium tier required.
-    humanURL: https://docs.virustotal.com/reference/private-scanning
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - Private Scanning
-      - Premium
-      - Sandbox
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/private-scanning
-      - type: OpenAPI
-        url: openapi/virustotal-private-scanning-openapi.yml
-  - name: VirusTotal API v3 - Threat Graphs
-    description: >-
-      Create, share, edit, and search Threat Graphs — visualisations of how IoCs and threats relate. Includes the editor
-      / viewer ACL surface for collaboration.
-    humanURL: https://docs.virustotal.com/reference/graphs
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - Graphs
-      - Collaboration
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/graphs
-      - type: OpenAPI
-        url: openapi/virustotal-threat-graphs-openapi.yml
-  - name: VirusTotal API v3 - Threat Landscape & Vulnerability Intelligence
-    description: >-
-      Threat Landscape — Collections, Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities, and the
-      curated IoC catalogue. Premium tier; this is where Mandiant-curated intelligence surfaces.
-    humanURL: https://docs.virustotal.com/reference/collections
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - Threat Actors
-      - Malware Families
-      - Campaigns
-      - Vulnerabilities
-      - Premium
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/collections
-      - type: OpenAPI
-        url: openapi/virustotal-threat-landscape-openapi.yml
-  - name: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream)
-    description: >-
-      Livehunt (real-time YARA matching on incoming corpus), Retrohunt (historical YARA scans), the IoC Stream, and
-      crowdsourced YARA rules. The hunting and notification surface. Premium tier required for write operations; rule
-      reads are free.
-    humanURL: https://docs.virustotal.com/reference/livehunt
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Threat Intelligence
-      - YARA
-      - Hunting
-      - Premium
-    properties:
-      - type: Documentation
-        url: https://docs.virustotal.com/reference/livehunt
-      - type: OpenAPI
-        url: openapi/virustotal-yara-hunting-openapi.yml
-  - name: Google Threat Intelligence - Attack Surface Management (ASM)
-    description: >-
-      Enterprise add-on (formerly Mandiant Advantage ASM). Discovers and monitors an organisation's external attack
-      surface, scoring exposures and prioritising remediation.
-    humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Attack Surface Management
-      - Enterprise
-      - GTI
-    properties:
-      - type: APIReference
-        url: https://gtidocs.virustotal.com/openapi/asm-attack-surface-management.json
-      - type: ProductPage
-        url: https://cloud.google.com/security/products/threat-intelligence
-  - name: Google Threat Intelligence - Digital Threat Monitoring (DTM)
-    description: >-
-      Enterprise add-on (formerly Mandiant Advantage DTM). Monitors the open, deep, and dark web for credential leaks,
-      brand abuse, and adversary chatter referencing the customer.
-    humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
-    baseURL: https://www.virustotal.com/api/v3
-    tags:
-      - Digital Threat Monitoring
-      - Dark Web
-      - Brand Protection
-      - Enterprise
-      - GTI
-    properties:
-      - type: APIReference
-        url: https://gtidocs.virustotal.com/openapi/dtm-digital-threat-monitoring.json
-      - type: ProductPage
-        url: https://cloud.google.com/security/products/threat-intelligence
+- name: Google Threat Intelligence - Attack Surface Management (ASM)
+  description: >-
+    Enterprise add-on (formerly Mandiant Advantage ASM). Discovers and monitors an organisation's external
+    attack surface, scoring exposures and prioritising remediation.
+  humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Attack Surface Management
+  - Enterprise
+  - GTI
+  properties:
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/openapi/asm-attack-surface-management.json
+  - type: ProductPage
+    url: https://cloud.google.com/security/products/threat-intelligence
+- name: Google Threat Intelligence - Digital Threat Monitoring (DTM)
+  description: >-
+    Enterprise add-on (formerly Mandiant Advantage DTM). Monitors the open, deep, and dark web for credential
+    leaks, brand abuse, and adversary chatter referencing the customer.
+  humanURL: https://gtidocs.virustotal.com/reference/openapi-specs
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Digital Threat Monitoring
+  - Dark Web
+  - Brand Protection
+  - Enterprise
+  - GTI
+  properties:
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/openapi/dtm-digital-threat-monitoring.json
+  - type: ProductPage
+    url: https://cloud.google.com/security/products/threat-intelligence
+- aid: virustotal:virustotal-access-control-group-management-api
+  name: VirusTotal Access Control - Group Management API
+  description: Access Control - Group Management
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Access Control - Group Management
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-access-control-group-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-access-control-quota-management-api
+  name: VirusTotal Access Control - Quota Management API
+  description: Access Control - Quota Management
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Access Control - Quota Management
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-access-control-quota-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-access-control-service-account-management-api
+  name: VirusTotal Access Control - Service Account Management API
+  description: Access Control - Service Account Management
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Access Control - Service Account Management
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-access-control-service-account-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-access-control-user-management-api
+  name: VirusTotal Access Control - User Management API
+  description: Access Control - User Management
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Access Control - User Management
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-access-control-user-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-feeds-domain-intelligence-feed-api
+  name: VirusTotal IoC Feeds - Domain intelligence feed API
+  description: IoC Feeds - Domain intelligence feed
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Feeds - Domain intelligence feed
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-feeds-domain-intelligence-feed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-feeds-file-intelligence-feed-api
+  name: VirusTotal IoC Feeds - File intelligence feed API
+  description: IoC Feeds - File intelligence feed
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Feeds - File intelligence feed
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-feeds-file-intelligence-feed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-feeds-ip-intelligence-feed-api
+  name: VirusTotal IoC Feeds - IP intelligence feed API
+  description: IoC Feeds - IP intelligence feed
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Feeds - IP intelligence feed
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-feeds-ip-intelligence-feed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-feeds-sandbox-analyses-feed-api
+  name: VirusTotal IoC Feeds - Sandbox analyses feed API
+  description: IoC Feeds - Sandbox analyses feed
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Feeds - Sandbox analyses feed
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-feeds-sandbox-analyses-feed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-feeds-url-intelligence-feed-api
+  name: VirusTotal IoC Feeds - URL intelligence feed API
+  description: IoC Feeds - URL intelligence feed
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Feeds - URL intelligence feed
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-feeds-url-intelligence-feed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-analyses-submissions-operations-api
+  name: VirusTotal IoC Investigation - Analyses, Submissions & Operations API
+  description: IoC Investigation - Analyses, Submissions & Operations
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Analyses, Submissions & Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-analyses-submissions-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-attack-tactics-api
+  name: VirusTotal IoC Investigation - Attack Tactics API
+  description: IoC Investigation - Attack Tactics
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Attack Tactics
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-attack-tactics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-attack-techniques-api
+  name: VirusTotal IoC Investigation - Attack Techniques API
+  description: IoC Investigation - Attack Techniques
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Attack Techniques
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-attack-techniques-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-comments-api
+  name: VirusTotal IoC Investigation - Comments API
+  description: IoC Investigation - Comments
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-comments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-domains-resolutions-api
+  name: VirusTotal IoC Investigation - Domains & Resolutions API
+  description: IoC Investigation - Domains & Resolutions
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Domains & Resolutions
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-domains-resolutions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-files-api
+  name: VirusTotal IoC Investigation - Files API
+  description: IoC Investigation - Files
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-files-behaviours-api
+  name: VirusTotal IoC Investigation - Files Behaviours API
+  description: IoC Investigation - Files Behaviours
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Files Behaviours
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-files-behaviours-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-ip-addresses-api
+  name: VirusTotal IoC Investigation - IP addresses API
+  description: IoC Investigation - IP addresses
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - IP addresses
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-ip-addresses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-popular-threat-categories-api
+  name: VirusTotal IoC Investigation - Popular Threat Categories API
+  description: IoC Investigation - Popular Threat Categories
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Popular Threat Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-popular-threat-categories-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-search-metadata-api
+  name: VirusTotal IoC Investigation - Search & Metadata API
+  description: IoC Investigation - Search & Metadata
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Search & Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-search-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-urls-api
+  name: VirusTotal IoC Investigation - URLs API
+  description: IoC Investigation - URLs
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - URLs
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-urls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-ioc-investigation-zipping-files-api
+  name: VirusTotal IoC Investigation - Zipping files API
+  description: IoC Investigation - Zipping files
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - IoC Investigation - Zipping files
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-ioc-investigation-zipping-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-private-scanning-analyses-api
+  name: VirusTotal Private Scanning - Analyses API
+  description: Private Scanning - Analyses
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Private Scanning - Analyses
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-private-scanning-analyses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-private-scanning-files-api
+  name: VirusTotal Private Scanning - Files API
+  description: Private Scanning - Files
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Private Scanning - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-private-scanning-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-private-scanning-files-behaviours-api
+  name: VirusTotal Private Scanning - Files Behaviours API
+  description: Private Scanning - Files Behaviours
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Private Scanning - Files Behaviours
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-private-scanning-files-behaviours-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-private-scanning-urls-api
+  name: VirusTotal Private Scanning - URLs API
+  description: Private Scanning - URLs
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Private Scanning - URLs
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-private-scanning-urls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-private-scanning-zipping-files-api
+  name: VirusTotal Private Scanning - Zipping files API
+  description: Private Scanning - Zipping files
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Private Scanning - Zipping files
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-private-scanning-zipping-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-threat-graphs-api
+  name: VirusTotal Threat Graphs API
+  description: Threat Graphs
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Threat Graphs
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-threat-graphs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-threat-graphs-permissions-acl-api
+  name: VirusTotal Threat Graphs Permissions & ACL API
+  description: Threat Graphs Permissions & ACL
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Threat Graphs Permissions & ACL
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-threat-graphs-permissions-acl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-threat-landscape-vulnerability-intelligence-reports-analysis-api
+  name: VirusTotal Threat Landscape & Vulnerability Intelligence & Reports & Analysis API
+  description: Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/virustotal-threat-landscape-vulnerability-intelligence-reports-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-yara-hunting-ioc-stream-api
+  name: VirusTotal YARA Hunting - IoC Stream API
+  description: YARA Hunting - IoC Stream
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - YARA Hunting - IoC Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-yara-hunting-ioc-stream-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-yara-hunting-livehunt-api
+  name: VirusTotal YARA Hunting - Livehunt API
+  description: YARA Hunting - Livehunt
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - YARA Hunting - Livehunt
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-yara-hunting-livehunt-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-yara-hunting-retrohunt-api
+  name: VirusTotal YARA Hunting - Retrohunt API
+  description: YARA Hunting - Retrohunt
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - YARA Hunting - Retrohunt
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-yara-hunting-retrohunt-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
+- aid: virustotal:virustotal-yara-hunting-rules-api
+  name: VirusTotal YARA Hunting - Rules API
+  description: YARA Hunting - Rules
+  humanURL: https://docs.virustotal.com/reference/overview
+  baseURL: https://www.virustotal.com/api/v3
+  tags:
+  - YARA Hunting - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/virustotal-yara-hunting-rules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/overview
+  - type: APIReference
+    url: https://gtidocs.virustotal.com/reference/overview
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/feeds
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/files
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/private-scanning
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/graphs
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/collections
+  - type: Documentation
+    url: https://docs.virustotal.com/reference/livehunt
 common:
   - type: AgenticAccess
     url: agentic-access/virustotal-agentic-access.yml

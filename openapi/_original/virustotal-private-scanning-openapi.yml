@@ -1,0 +1,1787 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Private Scanning
+  version: '3.0'
+  description: Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Private Scanning - Analyses
+  description: Private Scanning - Analyses
+- name: Private Scanning - Files
+  description: Private Scanning - Files
+- name: Private Scanning - Files Behaviours
+  description: Private Scanning - Files Behaviours
+- name: Private Scanning - URLs
+  description: Private Scanning - URLs
+- name: Private Scanning - Zipping files
+  description: Private Scanning - Zipping files
+paths:
+  /private/analyses:
+    get:
+      tags:
+      - Private Scanning - Analyses
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nReturns a list of the last [private analyses](https://gtidocs.virustotal.com/reference/private-analyses-object). The analyses are sorted by most recent first. You can use `?order=date-` to reverse\
+        \ the order.\n\n```json /api/v3/private/analyses\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_ANALYSIS_OBJECT>,\n    <PRIVATE_ANALYSIS_OBJECT>,\n\
+        \    ...\n  },\n  \"links\": {\n    \"self\": <string>,\n    \"next\": <string>\n  }\n}\n```\n```json\n{\n\t\"meta\": {\n\t\t\"count\": 90,\n\t\t\"cursor\": \"1\"\n\t},\n\t\"data\": [\n\t\t{\n\t\
+        \t\t\"attributes\": {\n\t\t\t\t\"status\": \"completed\",\n\t\t\t\t\"sandbox_status\": {\n\t\t\t\t\t\"Zenbox\": {\n\t\t\t\t\t\t\"status\": \"finished\",\n\t\t\t\t\t\t\"in_progress_percent\": 100\n\
+        \t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"sandbox_configuration\": {\n\t\t\t\t\t\"enable_internet\": false,\n\t\t\t\t\t\"command_line\": \"\"\n\t\t\t\t},\n\t\t\t\t\"date\": 1666170912\n\t\t\t},\n\t\t\t\
+        \"type\": \"private_analysis\",\n\t\t\t\"id\": \"NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\",\n\t\t\t\"links\": {\n\t\t\t\t\"item\"\
+        : \"https://www.virustotal.com/api/v3/private/files/16f6c6439c5b971218b9cd1d616ba40c7cad08c94984ecfde443dfa3c61c6152\",\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses/NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\"\
+        \n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/private/analyses?cursor=1&limit=1\"\
+        \n\t}\n}\n```\n"
+      operationId: listPrivateAnalyses
+      parameters:
+      - description: Maximum number of files to retrieve (40 max)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Sorting order
+        in: query
+        name: order
+        schema:
+          default: date-
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal List Private Analyses
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/analyses/{id}:
+    get:
+      tags:
+      - Private Scanning - Analyses
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nWith this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the [POST /private/files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning)\
+        \ endpoint, and will return a private analysis object with information about the analysis.\n\n```json Example response\n{\n  \"meta\": {\n    \"file_info\": {\n      \"size\": 5,\n      \"sha256\"\
+        : \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n      \"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n      \"md5\": \"e5828c564f71fea3a12dde8bd5d27063\"\n    }\n\
+        \  },\n  \"data\": {\n    \"attributes\": {\n      \"date\": 1620127014,\n      \"status\": \"completed\"\n    },\n    \"type\": \"private_analysis\",\n    \"id\": \"ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\"\
+        ,\n    \"links\": {\n      \"self\": \"https://virustotal.com/api/v3/private/analyses/ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\"\n    }\n  }\n}\n```\n\nThe `status` attribute\
+        \ in the private analysis object can be either \"queued\" or \"completed\", once it gets completed, you can use the `sha256` in the `file_info` section with the [GET /private/files/{id}](https://gtidocs.virustotal.com/reference/private-files-info)\
+        \ for getting all the information that VirusTotal has generated for the analysed file. Alternatively you could use [GET /private/analyses/{id}/item](https://gtidocs.virustotal.com/reference/analysesidrelationship)\
+        \ for the same purpose.\n"
+      operationId: privateAnalysis
+      parameters:
+      - description: Analysis identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Private Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/analyses/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Analyses
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint is the same as [/private/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analysesidrelationship) except it returns just the related object's IDs (and context\
+        \ attributes, if any) instead of returning all attributes.\n"
+      operationId: analysesidrelationshipsrelationship
+      parameters:
+      - description: Analysis identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-analyses-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Object Descriptors Related to a Private Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/analyses/{id}/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Analyses
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\
+        \nAvailable relationships are described in the [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object) object documentation.\n"
+      operationId: analysesidrelationship
+      parameters:
+      - description: Analysis identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-analyses-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Objects Related to a Private Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files:
+    post:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "Upload and analyse a file with Private Scanning\n> \U0001F4D8 File size\n> \n> If the file to be uploaded is bigger than 32MB, please use the [/private/files/upload_url](https://gtidocs.virustotal.com/reference/private-files-upload-url)\
+        \ endpoint instead which admits files up to 650MB.\n"
+      operationId: uploadFilePrivateScanning
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              file:
+                contentType: application/octet-stream
+            example: /path/to/file
+            schema:
+              properties:
+                command_line:
+                  description: Command line arguments to use when running the file in sandboxes.
+                  type: string
+                disable_sandbox:
+                  default: false
+                  description: If true, then the file won't be detonated in sandbox environments. False by default.
+                  type: string
+                enable_internet:
+                  default: false
+                  description: If the file should have internet access when running in sandboxes. False by default.
+                  type: string
+                file:
+                  format: binary
+                  type: string
+                intercept_tls:
+                  default: false
+                  description: Intercept HTTPS/TLS/SSL communication. Intercept HTTPS to view encypted URLS, hostnames and HTTP headers.  This is detectable by any sample that checks certificates, and makes
+                    JA3 hashes unusable.
+                  type: string
+                password:
+                  description: Optional, password to decompress and scan a file contained in a protected ZIP file.
+                  type: string
+                retention_period_days:
+                  description: Optional, number of days the report and file are kept in VT (between 1 and 28). If not set it defaults to the group's retention policy preference (1 day by default).
+                  type: integer
+                storage_region:
+                  description: Optional, storage region where the file will be stored. By default uses the group's private_scanning.storage_region preference. Allowed values are US, EU.
+                  type: string
+                interaction_sandbox:
+                  default: cape
+                  description: Select the sandbox desired for interactive use.
+                  type: string
+                interaction_timeout:
+                  default: '60'
+                  description: 'interaction timeout in seconds, minimum value: 60. (1 minute.) Max value: 1800: (30 minutes)'
+                  type: string
+              required:
+              - file
+              type: object
+        description: File to scan
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n    \"type\": \"private_analysis\",\n    \"id\": \"OTdiYWM4MjI0NGE2ZjhlNTk4NDZmZDY1YTliMWYwYjM6YzlhNzBhNDM1NzlmZjc5M2E2NGI5Mzk0NmJjNjVhOWE6MTczNzYzMjk2MQ==\"\
+                    ,\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/private/analyses/OTdiYWM4MjI0NGE2ZjhlNTk4NDZmZDY1YTliMWYwYjM6YzlhNzBhNDM1NzlmZjc5M2E2NGI5Mzk0NmJjNjVhOWE6MTczNzYzMjk2MQ==\"\
+                    \n    }\n  }}"
+              schema:
+                properties:
+                  data:
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      links:
+                        properties:
+                          self:
+                            type: string
+                    type: object
+                type: object
+          description: The analysis ID. Use [/analyses/<analysis_ID>](ref:private-analysis) API call to check the analysis status.
+        '401':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"WrongCredentialsError\",\n    \"message\": \"Wrong API key\"\n  }}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: If password was provided and the file isn't a ZIP, it contains more than one file, the password is incorrect, or the file is corrupt.
+      summary: VirusTotal Upload a File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nReturns a list of previously analysed [private files](https://gtidocs.virustotal.com/reference/private-files-object). The files are always ordered by SHA256.\n\n```json /api/v3/private/files\n\
+        {\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_FILE_OBJECT>,\n    <PRIVATE_FILE_OBJECT>,\n    ...\n  },\n  \"links\": {\n    \"self\": <string>,\n\
+        \    \"next\": <string>\n  }\n}\n```\n```json\n{\n\t\"meta\": {\n\t\t\"cursor\": \"079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\",\n\t\t\"count\": 19\n\t},\n\t\"data\": [\n\t\
+        \t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"type_description\": \"Windows Installer\",\n        ...\n      },\n      \"type\": \"private_file\",\n      \"id\": \"079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\"\
+        ,\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/private/files/079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\"\n      }\n    },\n    ...\n  ],\n  \"\
+        links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/files?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/private/files?cursor=079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678&limit=1\"\
+        \n\t}\n}\n```\n"
+      operationId: listPrivateFiles
+      parameters:
+      - description: Maximum number of files to retrieve (40 max)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal List Private Files
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/upload_url:
+    get:
+      tags:
+      - Private Scanning - Files
+      parameters: []
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFor uploading files smaller than 32MB you can simply use the [POST /files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, but for larger files you need to obtain\
+        \ a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/private/files`. The `POST` request should have the same format expected by the  [POST\
+        \ /files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint. Each upload URL can be used only once.\n"
+      operationId: privateFilesUploadUrl
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a URL for Uploading Large Files
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{id}:
+    delete:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint deletes a private file from storage, as well as all the PrivateFile and PrivateAnalysis associated with it (unless `only_from_storage=true` is used.\n"
+      operationId: deleteFilePrivateScanning
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: If true, only the file will be deleted from storage, but the generated reports and analyses won't.
+        in: query
+        name: only_from_storage
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Delete a Private File Report
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint return information about a file scanned privately. Notice that it only accepts SHA-256 as the file's ID, MD5 and SHA-1 are not supported like in its [GET /files/{id}](https://gtidocs.virustotal.com/reference/file-info)\
+        \ public counterpart. The SHA-256 for the analysed file can be computed by yourself or obtained from the response to the call to [GET /analyses/{id}](https://gtidocs.virustotal.com/reference/private-analysis).\n\
+        \n```json Example response\n{\n  \"data\": {\n    \"attributes\": {\n      \"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n      \"magic\": \"ASCII text\",\n      \"tags\": [\n        \"\
+        text\"\n      ],\n      \"exiftool\": {\n        \"MIMEType\": \"text/plain\",\n        \"LineCount\": \"1\",\n        \"MIMEEncoding\": \"us-ascii\",\n        \"FileTypeExtension\": \"txt\",\n\
+        \        \"FileType\": \"TXT\",\n        \"WordCount\": \"1\",\n        \"Newlines\": \"Unix LF\"\n      },\n      \"trid\": [\n        {\n          \"file_type\": \"file seems to be plain text/ASCII\"\
+        ,\n          \"probability\": 0.0\n        }\n      ],\n      \"vhash\": \"9eecb7db59d16c80417c72d1e1f4fbf1\",\n      \"sha256\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\"\
+        ,\n      \"ssdeep\": \"3:tdn:T\",\n      \"md5\": \"e5828c564f71fea3a12dde8bd5d27063\",\n      \"size\": 5\n    },\n    \"type\": \"private_file\",\n    \"id\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\"\
+        ,\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/private/files/11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\"\n    }\n  }\n}\n```\n"
+      operationId: privateFilesInfo
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Private File Report
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint is the same as [/files/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-files-relationships) except it returns just the related object's IDs (and context attributes,\
+        \ if any) instead of returning all attributes.\n"
+      operationId: privatefilesidrelationshipsrelationship
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-files-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Object Descriptors Related to a File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{id}/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\
+        \nAvailable relationships are described in the [private file](https://gtidocs.virustotal.com/reference/private-files-object) object documentation.\n"
+      operationId: privateFilesRelationships
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-files-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Objects Related to a Private File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{sha256}/analyse:
+    post:
+      tags:
+      - Private Scanning - Files
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nReanalyses a private file. The same params from [/files](https://gtidocs.virustotal.com/reference/post_files) (other than the file) are accepted. Returns a [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object).\n\
+        \n```json Example\n{\n\t\"data\": {\n\t\t\"type\": \"private_analysis\",\n\t\t\"id\": \"ZmI5Y2VmNGJmZDIwZTkzNmQ5MzY0NTcwMGI2Nzc2M2Q6Tm9uZToxNjYwODI1NDE1\"\n\t}\n}\n```\n"
+      operationId: rescanAPrivateFile
+      parameters:
+      - description: File's SHA256 hash
+        in: path
+        name: sha256
+        required: true
+        schema:
+          type: string
+      - description: Command line arguments to use when running the file in sandboxes.
+        in: query
+        name: command_line
+        required: false
+        schema:
+          type: string
+      - description: If true, then the file won't be detonated in sandbox environments. False by default.
+        in: query
+        name: disable_sandbox
+        required: false
+        schema:
+          type: string
+          default: 'false'
+      - description: If the file should have internet access when running in sandboxes. False by default.
+        in: query
+        name: enable_internet
+        required: false
+        schema:
+          type: string
+          default: 'false'
+      - description: Intercept HTTPS/TLS/SSL communication. Intercept HTTPS to view encypted URLS, hostnames and HTTP headers.  This is detectable by any sample that checks certificates, and makes JA3 hashes
+          unusable.
+        in: query
+        name: intercept_tls
+        required: false
+        schema:
+          type: string
+          default: 'false'
+      - description: Select the sandbox desired for interactive use.
+        in: query
+        name: interaction_sandbox
+        required: false
+        schema:
+          type: string
+          default: cape
+      - description: 'Interaction timeout in seconds, minimum value: 60. (1 minute.) Max value: 1800: (30 minutes).'
+        in: query
+        name: interaction_timeout
+        required: false
+        schema:
+          type: integer
+          default: 60
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Rescan a Private File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file/{id}/behaviours:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFetches all the [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) reports available for a private file.\n"
+      operationId: getAllBehaviourReportsFromAPrivateFile
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: id parameter
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get the Behaviour Reports from a Private File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFetches a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object by ID. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file)\
+        \ endpoint.\n\n```json Example response\n{\n    \"data\": {\n        \"attributes\": {\n            \"behash\": \"3f4a02b305dde56c7c606849289bb194\",\n            \"calls_highlighted\": [\n    \
+        \            \"GetTickCount\"\n            ],\n            \"files_opened\": [\n                \"C:\\\\Windows\\\\system32\\\\ws2_32.dll\",\n                \"C:\\\\Windows\\\\system32\\\\UxTheme.dll\"\
+        ,\n                \"C:\\\\Windows\\\\system32\\\\ole32.dll\",\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.hlp\",\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.cnt\"\
+        ,\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.chm\",\n                \"C:\\\\Windows\\\\system32\\\\user32.dll\",\n                \"C:\\\\Windows\\\\system32\\\\advapi32.dll\"\
+        ,\n                \"C:\\\\Windows\\\\system32\\\\ntmarta.dll\",\n                \"C:\\\\Windows\\\\WinSxS\\\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_41e855142bd5705d\"\
+        ,\n                \"C:\\\\Windows\\\\Fonts\\\\staticcache.dat\"\n            ],\n            \"has_html_report\": true,\n            \"has_pcap\": true,\n            \"modules_loaded\": [\n   \
+        \             \"UxTheme.dll\",\n                \"IMM32.dll\",\n                \"SspiCli.dll\",\n                \"ADVAPI32.dll\"\n            ],\n            \"processes_tree\": [\n          \
+        \      {\n                    \"name\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91.exe\",\n                    \"process_id\": \"2340\"\n                }\n            ],\n\
+        \            \"registry_keys_opened\": [\n                \"HKCU\\\\Software\\\\SimonTatham\\\\PuTTY\\\\Sessions\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\
+        \\FontLink\\\\SystemLink\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\
+        \\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\\Disable\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\
+        \\DataFilePath\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows\
+        \ NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\\\\MS Shell Dlg\"\n            ],\n            \"sandbox_name\": \"VirusTotal Jujubox\",\n            \"tags\": [\n                \"\
+        DIRECT_CPU_CLOCK_ACCESS\",\n                \"RUNTIME_MODULES\"\n            ],\n            \"text_highlighted\": [\n                \"PuTTY Configuration\",\n                \"&Open\",\n     \
+        \           \"Cate&gory:\",\n                \"C:\\\\Windows\\\\system32\\\\cmd.exe\"\n            ]\n        },\n        \"id\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal\
+        \ Jujubox-1658933614\",\n        \"links\": {\n            \"self\": \"https://www.virustotal.com/api/v3/private/file_behaviours/9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal\
+        \ Jujubox-1658933614\"\n        },\n        \"type\": \"private_file_behaviour\"\n    }\n}\n```\n"
+      operationId: privatefileBehaviourssandboxId
+      parameters:
+      - description: Sandbox report ID.
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Behaviour Report from a Private File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/evtx:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFetch the EVTX file associated with the sandbox execution.\n"
+      operationId: fileBehaviourssandboxIdevtx
+      parameters:
+      - description: Sandbox report ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/html:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nReturns a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object as an HTML report. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file)\
+        \ endpoint.\n"
+      operationId: privatefileBehaviourssandboxIdhtml
+      parameters:
+      - description: Sandbox report ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "<!DOCTYPE html>\n<html lang=\"en\">\n  ..."
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Detailed HTML Behaviour Report
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/memdump:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFetch the PCAP file associated with the sandbox execution.\n"
+      operationId: privatefileBehaviourssandboxIdpcap
+      parameters:
+      - description: Sandbox report ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/pcap:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nFetch the memdump file associated with the sandbox execution.\n"
+      operationId: fileBehaviourssandboxIdmemdump
+      parameters:
+      - description: Sandbox report ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/relationships/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint is the same as [/private/file_behaviours/{sandbox_id}/{relationship}](https://gtidocs.virustotal.com/reference/privatefile-behaviourssandbox-idrelationship) except it returns just\
+        \ the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+      operationId: privatefileBehaviourssandboxIdrelationshipsrelationship
+      parameters:
+      - description: Sandbox report ID. See "Sandbox Report identifiers" section above for more info.
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-file-behaviours-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/file_behaviours/{sandbox_id}/{relationship}:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\
+        \nAvailable relationships are described in the [private file behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object documentation.\n"
+      operationId: privatefileBehaviourssandboxIdrelationship
+      parameters:
+      - description: Sandbox report ID. See "Sandbox Report identifiers" section above for more info.
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:private-file-behaviours-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get Objects Related to a Private File's Behaviour Report
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{id}/behaviour_mitre_trees:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint returns a summary of MITRE ATT&CK tactics and techniques observed in each of the behaviour reports of a file.\n\nThe resulting structure is the following one:\n\n```json\n{\n  sandbox_name:\
+        \ {\n    \"tactics\": [\n      {\n        \"id\": tactic_id,\n        \"name\": tactic_name,\n        \"description\": tactic_description,\n        \"link\": tactic_mitre_url,\n        \"techniques\"\
+        : [\n          {\n            \"id\": technique_id,\n            \"name\": technique_name,\n            \"description\": technique_description,\n            \"link\": technique_mitre_url,\n    \
+        \        \"signatures\": [\n              {\n                \"severity\": severity (\"HIGH\" / \"MEDIUM\" / \"LOW\" / \"INFO\" / \"UNKNOWN\"),\n                \"description\": signature_description\n\
+        \              }, ...\n            ]\n          }, ...\n        ]\n      }, ...\n    ]\n  }, ...  \n}\n```\n\n```json Example response\n{\n\t\"data\": {\n\t\t\"VirusTotal Observer\": {\n\t\t\t\"\
+        tactics\": []\n\t\t},\n\t\t\"Zenbox\": {\n\t\t\t\"tactics\": [\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to figure out your environment.\\n\\nDiscovery consists of techniques\
+        \ an adversary may use to gain knowledge about the system and internal network. These techniques help adversaries observe the environment and orient themselves before deciding how to act. They also\
+        \ allow adversaries to explore what they can control and what’s around their entry point in order to discover how it could benefit their current objective. Native operating system tools are often\
+        \ used toward this post-compromise information-gathering objective. \",\n\t\t\t\t\t\"techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"An adversary may attempt to get detailed information\
+        \ about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System Information Discovery during automated\
+        \ discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\\nTools such as Systeminfo can be used to gather detailed\
+        \ system information. If running with privileged access, a breakdown of system data can be gathered through the systemsetup configuration tool on macOS. As an example, adversaries with user-level\
+        \ access can execute the df -aH command to obtain currently mounted disks and associated freely available space. Adversaries may also leverage a Network Device CLI on network devices to gather detailed\
+        \ system information. System Information Discovery combined with information gathered from other forms of discovery and reconnaissance can drive payload development and concealment.\\nInfrastructure\
+        \ as a Service (IaaS) cloud providers such as AWS, GCP, and Azure allow access to instance and virtual machine information via APIs. Successful authenticated API calls can return data such as the\
+        \ operating system platform and status of a particular instance or the model view of a virtual machine.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"\
+        INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Reads software policies\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1082/\",\n\t\t\t\t\t\t\
+        \t\"id\": \"T1082\",\n\t\t\t\t\t\t\t\"name\": \"System Information Discovery\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may enumerate files and directories or\
+        \ may search in specific locations of a host or network share for certain information within a file system. Adversaries may use the information from File and Directory Discovery during automated\
+        \ discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\\nMany command shell utilities can be used to obtain this\
+        \ information. Examples include dir, tree, ls, find, and locate. Custom tools may also be used to gather file and directory information and interact with the Native API. Adversaries may also leverage\
+        \ a Network Device CLI on network devices to gather file and directory information.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\
+        \t\t\t\"description\": \"Reads ini files\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1083/\",\n\t\t\t\t\t\t\t\"id\": \"T1083\",\n\t\t\t\
+        \t\t\t\t\"name\": \"File and Directory Discovery\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0007/\",\n\t\t\t\t\t\"id\": \"TA0007\",\n\t\t\t\t\t\"name\"\
+        : \"Discovery\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques that adversaries use to avoid detection\
+        \ throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse\
+        \ trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses. \",\n\t\t\t\t\t\"\
+        techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges. Process\
+        \ injection is a method of executing arbitrary code in the address space of a separate live process. Running code in the context of another process may allow access to the process's memory, system/network\
+        \ resources, and possibly elevated privileges. Execution via process injection may also evade detection from security products since the execution is masked under a legitimate process. \\nThere\
+        \ are many different ways to inject code into a process, many of which abuse legitimate functionalities. These implementations exist for every major OS but are typically platform specific. \\nMore\
+        \ sophisticated samples may perform multiple process injections to segment modules and further evade detection, utilizing named pipes or other inter-process communication (IPC) mechanisms as a communication\
+        \ channel. \",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Spawns processes\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\
+        \t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1055/\",\n\t\t\t\t\t\t\t\"id\": \"T1055\",\n\t\t\t\t\t\t\t\"name\": \"Process Injection\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\
+        \t\t\t\t\t\t\t\"description\": \"Adversaries may attempt to manipulate features of their artifacts to make them appear legitimate or benign to users and/or security tools. Masquerading occurs when\
+        \ the name or location of an object, legitimate or malicious, is manipulated or abused for the sake of evading defenses and observation. This may include manipulating file metadata, tricking users\
+        \ into misidentifying the file type, and giving legitimate task or service names.\\nRenaming abusable system utilities to evade security monitoring is also a form of Masquerading.\",\n\t\t\t\t\t\
+        \t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Creates files inside the user directory\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\
+        \t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1036/\",\n\t\t\t\t\t\t\t\"id\": \"T1036\",\n\t\t\t\t\t\t\t\"name\": \"Masquerading\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\
+        \t\t\t\t\"description\": \"Adversaries may delete files left behind by the actions of their intrusion activity. Malware, tools, or other non-native files dropped or created on a system by an adversary\
+        \ (ex: Ingress Tool Transfer) may leave traces to indicate to what was done within a network and how. Removal of these files can occur during an intrusion, or as part of a post-intrusion process\
+        \ to minimize the adversary's footprint.\\nThere are tools available from the host operating system to perform cleanup, but adversaries may use other tools as well. Examples of built-in Command\
+        \ and Scripting Interpreter functions include del on Windows and rm or unlink on Linux and macOS.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\"\
+        ,\n\t\t\t\t\t\t\t\t\t\"description\": \"Deletes files inside the Windows folder\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1070/004/\"\
+        ,\n\t\t\t\t\t\t\t\"id\": \"T1070.004\",\n\t\t\t\t\t\t\t\"name\": \"File Deletion\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n\t\t\t\t\t\"id\"\
+        : \"TA0005\",\n\t\t\t\t\t\"name\": \"Defense Evasion\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to gain higher-level permissions.\\n\\nPrivilege Escalation consists\
+        \ of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions\
+        \ to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities. Examples of elevated access include: \\n\\n* SYSTEM/root\
+        \ level\\n* local administrator\\n* user account with admin-like access \\n* user accounts with access to specific system or perform specific function\\n\\nThese techniques often overlap with Persistence\
+        \ techniques, as OS features that let an adversary persist can execute in an elevated context.  \",\n\t\t\t\t\t\"techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may\
+        \ inject code into processes in order to evade process-based defenses as well as possibly elevate privileges. Process injection is a method of executing arbitrary code in the address space of a\
+        \ separate live process. Running code in the context of another process may allow access to the process's memory, system/network resources, and possibly elevated privileges. Execution via process\
+        \ injection may also evade detection from security products since the execution is masked under a legitimate process. \\nThere are many different ways to inject code into a process, many of which\
+        \ abuse legitimate functionalities. These implementations exist for every major OS but are typically platform specific. \\nMore sophisticated samples may perform multiple process injections to segment\
+        \ modules and further evade detection, utilizing named pipes or other inter-process communication (IPC) mechanisms as a communication channel. \",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\
+        \t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Spawns processes\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1055/\"\
+        ,\n\t\t\t\t\t\t\t\"id\": \"T1055\",\n\t\t\t\t\t\t\t\"name\": \"Process Injection\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0004/\",\n\t\t\t\t\t\"id\"\
+        : \"TA0004\",\n\t\t\t\t\t\"name\": \"Privilege Escalation\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t\"VirusTotal Jujubox\": {\n\t\t\t\"tactics\": []\n\t\t}\n\t},\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/files/bb04b55bc87b4bb4d2543bf50ff46ec840d653ca9311e9b40d9933e484719a91/behaviour_mitre_trees\"\
+        \n\t}\n}\n```\n"
+      operationId: getSummaryAllMitreAttackTechniquesObservedInAFile
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/files/{id}/behaviour_summary:
+    get:
+      tags:
+      - Private Scanning - Files Behaviours
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\
+        \nThis endpoint returns a summary with behavioural information about the private file. The summary consists in merging together the reports produced by the multiple sandboxes we have integrated\
+        \ in VirusTotal. \n\nThis API call returns all fields contained in the [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object, except the ones that\
+        \ make sense only for individual sandboxes:\n\n- `behash`\n- `has_html_report`\n- `has_pcap`\n- `last_modification_date`\n- `sandbox_name`\n\n```json Example response\n{\n    \"data\": {\n     \
+        \   \"calls_highlighted\": [\n            \"GetTickCount\"\n        ],\n        \"files_opened\": [\n            \"C:\\\\WINDOWS\\\\system32\\\\winime32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\
+        \\ws2_32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\ws2help.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\psapi.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\imm32.dll\",\n   \
+        \         \"C:\\\\WINDOWS\\\\system32\\\\lpk.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\usp10.dll\",\n            \"C:\\\\WINDOWS\\\\WinSxS\\\\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.5512_x-ww_35d4ce83\\\
+        \\comctl32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\winmm.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\winspool.drv\",\n            \"C:\\\\WINDOWS\\\\WindowsShell.Manifest\",\n\
+        \            \"C:\\\\WINDOWS\\\\system32\\\\shell32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\MSCTF.dll\"\n        ],\n        \"modules_loaded\": [\n            \"comctl32.dll\",\n   \
+        \         \"C:\\\\WINDOWS\\\\system32\\\\ws2_32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\MSCTF.dll\",\n            \"version.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\msctfime.ime\"\
+        ,\n            \"C:\\\\WINDOWS\\\\system32\\\\ole32.dll\",\n            \"USER32.dll\",\n            \"IMM32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\user32.dll\"\n        ],\n       \
+        \ \"mutexes_created\": [\n            \"CTF.LBES.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.Compart.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\"\
+        ,\n            \"CTF.Asm.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.Layouts.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.TMD.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\"\
+        ,\n            \"CTF.TimListCache.FMPDefaultS-1-5-21-1482476501-1645522239-1417001333-500MUTEX.DefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"MSCTF.Shared.MUTEX.EBH\"\n \
+        \       ],\n        \"mutexes_opened\": [\n            \"ShimCacheMutex\"\n        ],\n        \"processes_terminated\": [\n            \"C:\\\\Documents and Settings\\\\Administrator\\\\Local Settings\\\
+        \\Temp\\\\EB93A6\\\\996E.exe\"\n        ],\n        \"processes_tree\": [\n            {\n                \"name\": \"****.exe\",\n                \"process_id\": \"1036\"\n            },\n    \
+        \        {\n                \"name\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91.exe\",\n                \"process_id\": \"2340\"\n            }\n        ],\n        \"registry_keys_opened\"\
+        : [\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\996E.exe\",\n            \"\\\\Registry\\\\MACHINE\\\\System\\\
+        \\CurrentControlSet\\\\Control\\\\SafeBoot\\\\Option\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\",\n            \"\\\\\
+        REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\\\\TransparentEnabled\",\n            \"\\\\REGISTRY\\\\USER\\\\S-1-5-21-1482476501-1645522239-1417001333-500\\\
+        \\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution\
+        \ Options\\\\COMCTL32.dll\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\SHELL32.dll\",\n            \"\\\\\
+        Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\comdlg32.dll\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\\
+        Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\WINMM.dll\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave\"\
+        ,\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave1\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows\
+        \ NT\\\\CurrentVersion\\\\Drivers32\\\\wave2\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave3\",\n            \"\\\\REGISTRY\\\
+        \\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave4\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\
+        \\wave5\"\n        ],\n        \"tags\": [\n            \"DIRECT_CPU_CLOCK_ACCESS\",\n            \"RUNTIME_MODULES\"\n        ],\n        \"text_highlighted\": [\n            \"&Open\",\n     \
+        \       \"&Cancel\",\n            \"&About\",\n            \"Cate&gory:\",\n            \"Host &Name (or IP address)\",\n            \"&Port\",\n            \"22\",\n            \"Connection type:\"\
+        ,\n            \"Ra&w\",\n            \"&Telnet\",\n            \"Rlog&in\"\n        ]\n    }\n}\n```\n"
+      operationId: privatefilesidbehaviourSummary
+      parameters:
+      - description: File's SHA-256
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get a Summary of All Behavior Reports for a File
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls:
+    post:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Private Scan URL
+      description: This returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) ID. The analysis can be retrieved by using the [Analysis](https://gtidocs.virustotal.com/reference/get-a-private-url-analysis-report)
+        endpoint.
+      operationId: privateScanUrl
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                  description: URL to scan
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get a URL Analysis Report
+      description: "> \U0001F4D8\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier\
+        \ for a URL.\n\n\nReturns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n"
+      operationId: getAPrivateUrlAnalysisReport
+      parameters:
+      - name: id
+        in: path
+        description: URL identifier or base64 representation of URL to scan (w/o padding)
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}/{relationship}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get Objects Related to a Private URL
+      description: "> \U0001F4D8\n> \n> See [URL identifiers](https://gtidocs.virustotal.com/reference/private-urls-api#url-identifiers) from more information about how to generate a valid URL identifier\
+        \ for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related\
+        \ objects can be retrieved by sending `GET` requests to the relationship URL.\n\nSome relationships are accessible only to users who have access to VirusTotal Enterprise package.\n\nThe relationships\
+        \ supported by URL objects are documented in the [URL](https://gtidocs.virustotal.com/reference/private-urls-object) API object page.\n"
+      operationId: privateGetObjectsRelatedToAUrl
+      parameters:
+      - name: id
+        in: path
+        description: URL identifier
+        schema:
+          type: string
+        required: true
+      - name: relationship
+        in: path
+        description: Relationship name (see [table](ref:private-urls-object#relationships))
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: Maximum number of related objects to retrieve
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: cursor
+        in: query
+        description: Continuation cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/urls/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Private Scanning - URLs
+      summary: VirusTotal Get Object Descriptors Related to a Private URL
+      description: This endpoint is the same as [/private/urls/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-get-objects-related-to-a-url) except it returns just the related object's
+        IDs (and context attributes, if any) instead of returning all attributes.
+      operationId: privateGetObjectDescriptorsRelatedToAUrl
+      parameters:
+      - name: id
+        in: path
+        description: URL ID
+        schema:
+          type: string
+        required: true
+      - name: relationship
+        in: path
+        description: Relationship name (see [table](ref:private-urls-object#relationships))
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: Maximum number of related objects to retrieve
+        schema:
+          type: string
+          default: '10'
+      - name: cursor
+        in: query
+        description: Continuation cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files:
+    post:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure:\
+        \ \n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n  \\\"hashes\\\":[\n   \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n \
+        \  \\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n   \\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n  }\n}\n```\nThe response from this endpoint\
+        \ is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for\
+        \ you, that's why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n\
+        \  \\\"data\\\": {\n   \\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"starting\\\",\n\\\"progress\\\": 0,\n    \\\"files_ok\\\": 0,\n\
+        \\\"files_error\\\": 0\n} \n}\n}\n```\n\n\nThe GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it's finished.\n"
+      operationId: privateScanningZipFiles
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{"password": "<password>", "hashes":["<hash1>", "<hash2>"]}'
+                  description: A list of hashes (SHA-256, SHA-1, or MD5) for the files included in the ZIP
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \\\"data\\\": {\n    \\\"type\\\": \\\"zip_file\\\",\n    \\\"id\\\": \\\"4939392292\\\",\n    \\\
+        \"attributes\\\": {\n      \\\"status\\\": \\\"creating\\\",\n      \\\"progress\\\": 45,\n      \\\"files_ok\\\": 3,\n      \\\"files_error\\\": 0\n    }\n  }\n}\n``` \n\n\nThe `status` attribute\
+        \ contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to download\
+        \ the file.\n"
+      operationId: privateScanningGetZipFile
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check a ZIP File’s Status
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}/download:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: VirusTotal Download a ZIP File
+      operationId: privateScanningDownloadZipFile
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Download a ZIP File
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /private/zip_files/{id}/download_url:
+    get:
+      tags:
+      - Private Scanning - Zipping files
+      deprecated: false
+      description: VirusTotal Get a ZIP File’s Download URL
+      operationId: privateScanningGetZipDownloadUrl
+      parameters:
+      - description: ZIP file identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a ZIP File’s Download URL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Object:
+      type: object
+      description: Base shape of a VirusTotal object (file, url, domain, ip_address, comment, vote, graph, collection, analysis, etc.).
+      properties:
+        id:
+          type: string
+          description: Object identifier. For files this is the SHA-256; for URLs the base64url of the URL; for domains the domain; for IPs the address.
+          example: 44d88612fea8a8f36de82e1278abb02f
+        type:
+          type: string
+          description: Object type discriminator.
+          example: file
+        links:
+          type: object
+          description: Hypermedia links for this object.
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Canonical URL for this object.
+          additionalProperties: true
+        attributes:
+          type: object
+          description: Type-specific attributes payload.
+          additionalProperties: true
+        context_attributes:
+          type: object
+          description: Optional context-specific attributes when the object is returned as part of a relationship.
+          additionalProperties: true
+        relationships:
+          type: object
+          description: Pre-expanded relationships to other VirusTotal objects, keyed by relationship name.
+          additionalProperties: true
+      required:
+      - id
+      - type

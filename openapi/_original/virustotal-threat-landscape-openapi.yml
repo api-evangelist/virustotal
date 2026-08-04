@@ -1,0 +1,1448 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Threat Landscape and Vulnerability Intelligence
+  version: '3.0'
+  description: Threat Landscape & Vulnerability Intelligence — Collections, Threat Actors, Malware & Tools, Campaigns, Reports, Vulnerabilities, and the curated IoC catalogue.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+  description: Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+paths:
+  /collections:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint allows us to search and filter Threat Intelligence objects effectively. It returns a list of Threat objects with a `collection_type`\
+        \ parameter whose value can be one of the followings:\n\n- **`collection`**: [Collections](https://gtidocs.virustotal.com/reference/ioc-collection-object) of Indicators of Compromise are grouped\
+        \ together based on their observed usage in the wild in malicious campaigns or their association with specific malware families. This OSINT and also curated information is provided by our users\
+        \ and certain trusted partners and security researchers, automatically created based on Reports from the cybersecurity community or by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/ioc-collections)\n\
+        - **`threat-actor`**: [Threat Actors](https://gtidocs.virustotal.com/reference/threat-actor-object) curated information exposed by our Google TI experts tracking them or by certain trusted partners\
+        \ and security researchers. [UI](https://www.virustotal.com/gui/threat-landscape/threat-actors)\n- **`malware-family`**: Curated information related to [malware families](https://gtidocs.virustotal.com/reference/malware-family-object).\
+        \ This information is provided by our Google TI experts and certain trusted partners and security researchers. [UI](https://www.virustotal.com/gui/threat-landscape/malware-and-tools?filter=(collection_type:malware-family))\n\
+        - **`software-toolkit`**: Curated information related to malicious [software or toolkits](https://gtidocs.virustotal.com/reference/software-toolkit-object) used in threat campaigns. This information\
+        \ is provided by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/malware-and-tools?filter=(collection_type:software-toolkit))\n- **`campaign`**: Curated information related\
+        \ to threat [campaigns](https://gtidocs.virustotal.com/reference/campaign-object). This information is provided by our Google TI experts. [UI](https://www.virustotal.com/gui/threat-landscape/campaigns)\n\
+        - **`report`**: OSINT and curated threats related [reports](https://gtidocs.virustotal.com/reference/report-object). They could be crowdsourced references created by the cybersecurity industry,\
+        \ curated reports created by certain trusted partners and security researchers or our Google TI experts. [UI](https://www.virustotal.com/gui/reports)\n- **`vulnerability`**: Curated information\
+        \ of [vulnerabilities](https://gtidocs.virustotal.com/reference/vulnerability-object) and exploitations coming from our Google TI experts analysis. [UI](https://www.virustotal.com/gui/vulnerabilities)\n\
+        \n### Searches observations:\n\n- if you don't filter by the `collection_type` this endpoint will return a single list with all the objects that meet the filters and of any of the following types\
+        \ grouped together: [Vulnerabilities](https://gtidocs.virustotal.com/reference/vulnerability-object), [Reports](https://gtidocs.virustotal.com/reference/report-object), [Threat Actors](https://gtidocs.virustotal.com/reference/threat-actor-object),\
+        \ [Malware families](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkits](https://gtidocs.virustotal.com/reference/software-toolkit-object), [Campaigns](https://gtidocs.virustotal.com/reference/campaign-object)\
+        \ or [IoC Collections](https://gtidocs.virustotal.com/reference/ioc-collection-object).\n- filers' values are case-insensitive\n- several filters can be combined together in a more complex and specific\
+        \ search\n- boolean operators can be used in more complex searches: `AND`, `OR`, `NOT`\n- quotes are needed for filters' values with spaces: `description:\"Phishing campaign\"`\n- wildcards (\\\
+        *) can be used for partial matches: `name:Ransom*`\n- date filters formats: `YYYY-MM-DD`, `YYYY-MM-DDTHH-mm-ss`\n- date relative formats: `60d` (for days), `10m` (for minutes)\n- date ranges can\
+        \ be specified with `+` or `-`: `last_modification_date:7d+`, `creation_date:2024-01-01-`\n\n## Allowed filters by object `collection_type`:\n\n| filters                  | `collection` | `threat-actor`\
+        \ | `malware-family` | `software-toolkit` | `campaign` | filter description |\n| ------------------------ | ------------ | -------------- | ---------------- | ------------------ | ---------- | --------\
+        \ |\n| Open search              | ✓            | ✓              | ✓                | ✓                  | ✓          | Text without modifiers matching against object's name or description|\n| `name`\
+        \                   | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's name |\n| `description`            | ✓            | ✓              | ✓       \
+        \         | ✓                  | ✓          | Object's description |\n| `creation_date`          | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's creation\
+        \ date  |\n| `last_modification_date` | ✓            | ✓              | ✓                | ✓                  | ✓          | Object's last modification date  |\n| `origin`                 | ✓  \
+        \          | ✓              | ✓                | ✓                  | ✓          | Object's origin. Available options: **Partner** for objects curated by trusted partners and security researchers\
+        \ , **Crowdsourced** for OSINT objects from the community or **Google Threat Intelligence** for objects curated by our Google TI experts|\n| `owner`                  | ✓            | ✓         \
+        \     | ✓                | ✓                  | ✓           | Owner's username |\n| `suspected_threat_actor` |              | ✓              |                  |                    |           \
+        \  | Threat actor suspected to be part of a larger group  |\n| `merged_actor`           |              | ✓              |                  |                    |             | Threat actors confirmed\
+        \ to be part of a larger group   |\n| `motivation`             | ✓            | ✓              |                  |                    |             | Threat actors and IoC collection's campaigns\
+        \ motivations |\n| `source_region`          | ✓            | ✓              |                  |                    | ✓           | Region from which the threat actor or the an IoC collection's\
+        \ campaign are known to originate |\n| `targeted_region`        | ✓            | ✓              |                  |                    | ✓           | Region targeted by a specific campaign, threat\
+        \ actor or an IoC collection's malicious activity   |\n| `targeted_industry`      | ✓            | ✓              | ✓                | ✓                  | ✓           | Industry targeted by a specific\
+        \ campaign, malware family, software or toolkit, threat actor or by an IoC collection's malicious activity  |\n| `targeted_industry_group`| ✓            | ✓              | ✓                | ✓ \
+        \                 | ✓           | Group of industries targeted by a specific campaign, malware family, software or toolkit, threat actor or by an IoC collection's malicious activity |\n| `capability`\
+        \             |              | ✓              | ✓                |                    |             | Capabilities associated to threat actors' or malware families' associated files   |\n| `operating_system`\
+        \       |              |                | ✓                | ✓                  |             | Operating system affected by a malware family or a software and toolkit  |\n| `detection`        \
+        \      |              |                | ✓                | ✓                  |             | Detections associated to a malware family's or a software or toolkit's associated files    |\n| `malware_role`\
+        \           |              |                | ✓                | ✓                  |             | Object's associated malware role     |\n| `software_toolkit`       |              | ✓        \
+        \      | ✓                | ✓                  | ✓           | Software or Toolkit name associated to the object |\n| `shared_with_me`         | ✓            |                |                 \
+        \ |                    |             | Private IoC Collection objects that are shared with me or my group |\n\n## Allowed filters by object `collection_type`:`report`:\n\n| filters             \
+        \       | filter description |\n| -------------------------- | ------------------ |\n| Open search                | Text without modifiers matching against object's name or description |\n| `name`\
+        \                     | Object's name |\n| `description`              | Object's description|\n| `creation_date`            | Object's creation date |\n| `last_modification_date`   | Object's last\
+        \ modification date |\n| `origin`                   | Object's origin. Available options: **Partner** for objects curated by trusted partners and security researchers , **Crowdsourced** for OSINT\
+        \ objects from the community or **Google Threat Intelligence** for objects curated by our Google TI experts |\n| `owner`                    | Owner's username |\n| `motivation`               | Motivation\
+        \ behind the malicious activity described in the report |\n| `source_region`            | Regions from where the malicious activity described in the report is originated |\n| `targeted_region` \
+        \         | Region targeted by the malicious activity described in the report |\n| `targeted_industry`        | Industry targeted by the malicious activity described in the report |\n| `targeted_industry_group`\
+        \  | Groups of industries targeted by the malicious activity described in the report |\n| `operating_system`         | Affected operating system |\n| `malware_role`             | Report's associated\
+        \ malware role |\n| `software_toolkit`         | Software or Toolkit's name, associated to the report |\n\n## Allowed filters by object `collection_type`:`vulnerability`:\n\n| filters          \
+        \              | filter description |\n| ----------------------------   | --------------- | \n| Open search                    | Text without modifiers matching against object's name or description\
+        \     |\n| `name`                         | Object's name |\n| `description`                  | Object's description|\n| `creation_date`                | Object's creation date  |\n| `last_modification_date`\
+        \       | Object's last modification date  |\n| `cvss_3x_base_score`           | Vulnerability objects with numeric CVSS 3.X base score   |\n| `cvss_3x_temporal_score`       | Vulnerability objects\
+        \ with numeric CVSS 3.X temporal score     |\n| `cvss_2x_base_score`           | Vulnerability objects with numeric CVSS 2.0 base score   |\n| `cvss_2x_temporal_score`       | Vulnerability objects\
+        \ with numeric CVSS 2.0 temporal score     |\n| `exploitation_consequence`     | Exploitation consequence of a Vulnerability. Ex: Code Execution, Command Execution, Container Escape, Data Loss,\
+        \ Data Manipulation, Denial-of-Service (DoS), Information Disclosure, Privilege Escalation, Sandbox Escape, Security Bypass, Spoofing, Unauthorized Access    |\n| `exploitation_state`          \
+        \ | Exploitation state of a Vulnerability. Possible values: Confirmed, No Known, Reported, Suspected |\n| `exploitation_vector`          | Exploitation vector of a Vulnerability. Possible values:\
+        \ Administrative Interface, Bluetooth Access, Browser, Email, Exposed Web Application, File Share, General Network Connectivity, Local Access, Local Network Access, Malicious Application, Malicious\
+        \ File, Malicious Server, Open Port, Physical Access, Short Range Radio, Unspecified Local Vector, Unspecified Remote Vector, VPN Access, Web, WiFi Access |\n| `vulnerable_cpe`                |\
+        \ Vulnerability objects with specific standardized product naming scheme - cpe   |\n| `vulnerable_product`            | Vulnerability objects of known security flaw of specific product. Ex: Apache\
+        \ Log4j  |\n| `vulnerable_vendor`             | Vulnerability objects affecting specific vendors. Ex: Apache   |\n| `vulnerability_filter`          | Specific Vulnerability Filters. Possible values:\
+        \ Affects Cloud, Affects Operational Technology, CISA Exploited, Has Exploits, Observed In The Wild, Requires User Interaction, Zero Day   |\n| `risk_rating`                   | Vulnerability objects\
+        \ based on Vulnerability Risk Rating. Possible values: Critical, High, Medium, Low   |\n| `targeted_industry`             | Industry targeted by the vulnerability   |\n| `targeted_industry_group`\
+        \       | Groups of industries targeted by the vulnerability  |\n| `software_toolkit`              | SoftwareToolkit name associated to the object  |\n\n## Allowed orders:\n\n- `order:name+`: sorts\
+        \ objects alphabetically by name, ascending `+` or descending `-`.\n- `order:creation_date-`: sorts objects descending `-` (default) by most recent created objects first, or ascending `+` by oldest\
+        \ objects first.\n- `order:last_modification_date-`: sorts objects descending `-` by most recently modified objects first, or ascending `+` by firstly modified objects first.\n- `order:lookups_trend-`:\
+        \ sorts objects ascending `+` or descending `-` based on the trend of the daily distinct-user lookups over the IoCs of the object in the last 14 days.\n- `order:submissions_trend-`: sorts objects\
+        \ ascending `+` or descending `-` based on the trend of the daily distinct-user submissions of IoCs of the object in the last 14 days.\n- `order:relevance+`: sorts objects ascending `+` or descending\
+        \ `-` based on the relevance of the object.\n- `order:exploitation_state+`: sorts objects ascending `+` or descending `-` based on the exploitation state of the vulnerability.\n- `order:risk_rating+`:\
+        \ sorts objects ascending `+` or descending `-` based on the risk rating of the vulnerability.\n\n\n## Examples\n\nGet the list of all Threat, [Reports](https://gtidocs.virustotal.com/reference/report-object)\
+        \ and [Vulnerbilities](https://gtidocs.virustotal.com/reference/vulnerability-object) objects created in the last week. Note that in this fisrts example, the collection_type filter is not used as\
+        \ in the rest of the examples.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"creation_date:7d+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all private IoC collections that are shared with me\
+        \ or my Google TI group.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:collection (shared_with_me:true or owner:my_user_id)\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all IoC Collections describing malicious activity espionage\
+        \ motivated and targeting the Canada governments.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:collection motivation:espionage targeted_industry:government targeted_region:CA\"\
+        \nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url,\
+        \ headers=headers)\n```\n\nGet the list of all russian financially motivated Threat Actors utilizing backdoors in their attacks and sort the results by relevance.\n\n```python\nimport requests\n\
+        import urllib\n\nfilters = \"collection_type:threat-actor motivation:financial source_region:RU threat_category:backdoor\"\norder = \"relevance-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Malware families curated by the Google TI specialists,\
+        \ targeting the Linux operating system and whose information was updated in the last 60 days. Then sort results by the last modification date.\n\n```python\nimport requests\nimport urllib\n\nfilters\
+        \ = \"collection_type:malware-family operating_system:linux owner:'Google Threat Intelligence' last_modification_date:60d+\"\norder = \"last_modification_date-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Software or Toolkits targeting the Windows operating\
+        \ system which are backdoors used in botnets. Then sort results by relevance providing first the most relevant objects.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:software-toolkit\
+        \ operating_system:windows detection:backdoor malware_role:botnet\"\norder = \"relevance-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Campaigns targeting China and whose name or description\
+        \ mention the \"ransomware\" word. Then sort results ascending based on their last modification date.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:campaign (name:ransomware\
+        \ or description:ransomware) targeted_region:CN\"\norder = \"last_modification_date+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\n\nGet the list of all crowdsourced Reports created from the beginning\
+        \ of 2024 whose name contains the \"phishing\" word and sort results descending by creation date (FIFO order).\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:report\
+        \ name:phishing creation_date:2024-01-01+ origin:Crowdsourced\"\norder = \"creation_date-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Vulnerabilities from 2024 sorted by creation date\
+        \ (FIFO order).\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:vulnerability name:CVE-2024\"\norder = \"creation_date+\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the list of all Vulnerabilities with cvss_3x base score equal or\
+        \ greater than 4 and with confirmed or suspected exploitation state. Then sort results descending based on their risk rating value.\n\n```python\nimport requests\nimport urllib\n\nfilters = \"collection_type:vulnerability\
+        \ cvss_3x_base_score:4+ (exploitation_state:Confirmed or exploitation_state:Suspected)\"\norder = \"risk_rating-\"\nurl = f\"https://www.virustotal.com/api/v3/collections?filter={urllib.parse.quote(filters)}&order={order}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: listThreats
+      parameters:
+      - description: Maximum number of threat objects to retrieve (max 40)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Filter threat objects by different properties
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Sorting order
+        in: query
+        name: order
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\"meta\": {\n  \"cursor\": <string>\n},\n\"data\": [\n  <THREAT_OBJ>,\n  <THREAT_OBJ>,\n  ...\n],\n\"links\": {\n  \"self\": <string>,\n  \"next\": <string>\n}"
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal List Threat Objects (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "Use this endpoint to create new IoC collections. In the request body, send a collection object containing its name, description and the elements it will contain (for URLs you can either\
+        \ use the URL or its ID). All IOCs must be described as relationships of a newly created Collection object. This is an example request body:\n\n```json Create an IoC collection from relationship\
+        \ descriptors\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Test IoC collection\",\n\t\t\t\"description\": \"This is how to create a new IoC collection via API.\"\n\t\t},\n\t\t\"relationships\"\
+        : {\n\t\t\t\"domains\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"domain\",\n\t\t\t\t\t\t\"id\": \"www.virustotal.com\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"domain\"\
+        ,\n\t\t\t\t\t\t\"id\": \"www.hooli.com\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"urls\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"url\",\n\t\t\t\t\t\t\"url\": \"https://www.virustotal.com/\"\
+        \n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"url\",\n\t\t\t\t\t\t\"id\": \"f11f7cc900638fae209f68498a90158fbfb067fc4191549ddb657e39cc4428c2\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"\
+        ip_addresses\": {\n\t\t\t\t\"data\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"ip_address\",\n\t\t\t\t\t\t\"id\": \"8.8.8.8\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t\"files\": {\n\t\t\t\t\"data\"\
+        : [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"file\",\n\t\t\t\t\t\t\"id\": \"ecc0f2aa29b102bf8d67b7d7173e8698c0341ddfdf9757be17595460fbf1791a\"\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t},\n\t\t\"type\"\
+        : \"collection\"\n\t}\n}\n```\n```json Create an IoC collection from raw text\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Test IoC collection\",\n\t\t\t\"description\": \"This is\
+        \ how to create a new IoC collection via API.\"\n\t\t},\n\t\t\"raw_items\": \"This is a text containing an IoC, www.virustotal.com\",\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n\nTo modify the\
+        \ IoC collection's attributes or add more elements to an IoC collection using a raw text, refer to the [PATCH/collections/{id}](https://gtidocs.virustotal.com/reference/update-ioc-collection) endpoint.\
+        \  \nTo add new elements to the IoC collection refer to the [POST /collections/{id}/{relationship}](https://gtidocs.virustotal.com/reference/add-element-to-ioc-collection) endpoint.  \nTo remove\
+        \ elements from the IoC collection refer to the [DELETE /collections/{id}/{relationship}](https://gtidocs.virustotal.com/reference/delete-element-from-ioc-collection) endpoint.\n\n## Examples\n\n\
+        Create a new private IoC collection with 2 IoCs which are ```google.com``` and ```virustotal.com``` domains.\n\n```python\nimport requests\n\nurl = \"https://www.virustotal.com/api/v3/collections\"\
+        \npayload = {\n    \"data\":\n    {\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"name\": \"Test IoC collection\",\n            \"description\": \"This is\
+        \ how to create a new collection via API.\",\n            \"private\": True\n        },\n        \"raw_items\": \"google.com, google.com\"\n    }\n}\nheaders = {\n    \"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.text)\n```"
+      operationId: createIocCollection
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: IoC Collection object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Test IoC collection\",\n      \"description\": \"This is how to create a new collection via API.\",\n      \"top_icon_md5\"\
+                    : [\n        \"1bc1faf71106e964e44cb17ab4dd8d11\"\n      ],\n      \"tags\": [],\n      \"ip_addresses_count\": 0,\n      \"domains_count\": 1,\n      \"creation_date\": 1614784765,\n\
+                    \      \"last_modification_date\": 1614784765,\n      \"references_count\": 0,\n      \"alt_names\": [],\n      \"urls_count\": 0,\n      \"autogenerated_tags\": [],\n      \"files_count\"\
+                    : 0\n    },\n    \"type\": \"collection\",\n    \"id\": \"<ID>\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/collections/<ID>\"\n    }\n  }\n}"
+              schema:
+                properties:
+                  data:
+                    properties:
+                      attributes:
+                        properties:
+                          alt_names:
+                            type: array
+                          autogenerated_tags:
+                            type: array
+                          creation_date:
+                            default: 0
+                            type: integer
+                          description:
+                            type: string
+                          domains_count:
+                            default: 0
+                            type: integer
+                          files_count:
+                            default: 0
+                            type: integer
+                          ip_addresses_count:
+                            default: 0
+                            type: integer
+                          last_modification_date:
+                            default: 0
+                            type: integer
+                          name:
+                            type: string
+                          references_count:
+                            default: 0
+                            type: integer
+                          tags:
+                            type: array
+                          top_icon_md5:
+                            items:
+                              type: string
+                            type: array
+                          urls_count:
+                            default: 0
+                            type: integer
+                        type: object
+                      id:
+                        type: string
+                      links:
+                        properties:
+                          self:
+                            type: string
+                        type: object
+                      type:
+                        type: string
+                    type: object
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a New IoC Collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns a [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object), [Campaign](https://gtidocs.virustotal.com/reference/campaign-object),\
+        \ [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkit Actor](https://gtidocs.virustotal.com/reference/software-toolkit-object), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object),\
+        \ [Report](https://gtidocs.virustotal.com/reference/report-object) or a [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object) object.\n\n## Examples\n\nGet a threat actor\
+        \ report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a malware or toolkit report.\n\n```python\nimport requests\nimport\
+        \ urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\"\
+        : <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a campaign report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\
+        \nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\
+        \nGet a IoC collection report.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet a vulnerability report.\n\n```python\nimport requests\nimport urllib\n\
+        \nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse\
+        \ = requests.get(url, headers=headers)\n```"
+      operationId: getThreat
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Threat
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "\n## Examples\n\nDelete a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\
+        \nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>\n}\nresponse = requests.delete(url, headers=headers)\n```"
+      operationId: deleteIocCollection
+      parameters:
+      - description: IoC Collection's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete an IoC Collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "This endpoint allows updating an IoC collection's attributes (such as name or description) and adding new elements to the IoC collection by using a raw text.\n\nThe following request\
+        \ body shows an example of how to update an IoC collection's name and add new IOCs to it by using a raw text:\n\n```json Example request body\n{\n\t\"data\": {\n\t\t\"attributes\": {\n\t\t\t\"name\"\
+        : \"Updating the name\"\n\t\t},\n\t\t\"raw_items\": \"This is a text containing a IoC, www.virustotal.com\",\n\t\t\"type\": \"collection\"\n\t}\n}\n```\n\n## Examples\n\nChange the name and description\
+        \ of a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\
+        \npayload = { \"data\": \n\t{\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"name\": \"New name\",\n            \"description\": \"New description.\"\n   \
+        \     }\n    }\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.patch(url, json=payload, headers=headers)\n\
+        ```\n\nMake public a private IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}\"\
+        \npayload = { \"data\": \n\t{\n        \"type\": \"collection\",\n        \"attributes\":\n        {\n            \"private\": False\n        }\n    }\n}\nheaders = {\n    \"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.patch(url, json=payload, headers=headers)\n```"
+      operationId: updateIocCollection
+      parameters:
+      - description: IoC Collection's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: IoC Collection object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Updating the name\",\n      \"description\": \"This is how to modify a collection via API.\",\n      \"top_icon_md5\"\
+                    : [\n        \"1bc1faf71106e964e44cb17ab4dd8d11\"\n      ],\n      \"tags\": [],\n      \"ip_addresses_count\": 1,\n      \"domains_count\": 2,\n      \"creation_date\": 1614784765,\n\
+                    \      \"last_modification_date\": 1614784765,\n      \"references_count\": 0,\n      \"alt_names\": [],\n      \"urls_count\": 2,\n      \"autogenerated_tags\": [\n        \"cve-2017-5753\"\
+                    \n      ],\n      \"files_count\": 1\n    },\n    \"type\": \"collection\",\n    \"id\": \"{id}\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/collections/{id}\"\
+                    \n    }\n  }\n}"
+              schema:
+                properties:
+                  data:
+                    properties:
+                      attributes:
+                        properties:
+                          alt_names:
+                            type: array
+                          autogenerated_tags:
+                            items:
+                              type: string
+                            type: array
+                          creation_date:
+                            default: 0
+                            type: integer
+                          description:
+                            type: string
+                          domains_count:
+                            default: 0
+                            type: integer
+                          files_count:
+                            default: 0
+                            type: integer
+                          ip_addresses_count:
+                            default: 0
+                            type: integer
+                          last_modification_date:
+                            default: 0
+                            type: integer
+                          name:
+                            type: string
+                          references_count:
+                            default: 0
+                            type: integer
+                          tags:
+                            type: array
+                          top_icon_md5:
+                            items:
+                              type: string
+                            type: array
+                          urls_count:
+                            default: 0
+                            type: integer
+                        type: object
+                      id:
+                        type: string
+                      links:
+                        properties:
+                          self:
+                            type: string
+                        type: object
+                      type:
+                        type: string
+                    type: object
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update an IoC Collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint is the same as /collections/{id}/{relationship} for [actors, campaigns, malware and IoC collections](https://gtidocs.virustotal.com/reference/get-threat-relationships),\
+        \ [reports](https://gtidocs.virustotal.com/reference/get-report-relationships) or [vulnerabilities](https://gtidocs.virustotal.com/reference/get-vulnerability-relationships) except it returns just\
+        \ the related object's descriptor instead of returning all attributes.\n\nAvailable relationships are described in the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object#relationships),\
+        \ [Campaign](https://gtidocs.virustotal.com/reference/campaign-object#relationships), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object#relationships), [Software or\
+        \ Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object#relationships), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object#relationships), [Reports](https://gtidocs.virustotal.com/reference/report-object#relationships)\
+        \ and [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object#relationships) objects documentation.\n\n## Examples\n\nGet 10 files descriptors related to the Kimsuky threat\
+        \ actor `threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"\
+        files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\n\
+        response = requests.get(url, headers=headers)\n```\n\nGet 4 domains descriptors related to a given malware or toolkit`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\
+        \nrelationship = \"files\"\nlimit = 4\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\nheaders = {\"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 9 URL descriptors related to a given campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"\
+        campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nrelationship = \"urls\"\nlimit = 9\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet files descriptors related to a vulnerability.\n\n```python\nimport\
+        \ requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/relationships/{relationship}?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n"
+      operationId: getThreatRelatedDescriptors
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships),
+          [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/{relationship}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nThis endpoint returns available relationships that are described in the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object#relationships),\
+        \ [Campaign](https://gtidocs.virustotal.com/reference/campaign-object#relationships), [Malware Family](https://gtidocs.virustotal.com/reference/malware-family-object#relationships), [Software or\
+        \ Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object#relationships), [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object#relationships), [Reports](https://gtidocs.virustotal.com/reference/report-object#relationships)\
+        \ and [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object#relationships) objects documentation.\n\n## Examples\n\nGet 10 files related to the Kimsuky threat actor `threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3`\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to the\
+        \ malware family with ID `malware--76feb45b-e63a-5a34-8596-da3ce148e776`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--76feb45b-e63a-5a34-8596-da3ce148e776\"\nrelationship\
+        \ = \"associations\"\nrelationship_attributes = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 15 files related to the Zarya Hacktivist Group `report--24-10072685`\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"report--24-10072685\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to this\
+        \ Blizzard related report `report--42da08f2694dbad8af81281fa3ccc83a44891c13bb56134ca54098127977c222`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"report--42da08f2694dbad8af81281fa3ccc83a44891c13bb56134ca54098127977c222\"\
+        \nrelationship = \"associations\"\nrelationship_attributes = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 5 files related to the `vulnerability--cve-2024-6387` vulnerability\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2024-6387\"\nrelationship = \"files\"\nlimit = 10\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the names and descriptions of all the objects associated to the\
+        \ Follina vulnerability `vulnerability--cve-2022-30190`\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"associations\"\nrelationship_attributes\
+        \ = \"name,description\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}?relationships={relationship}&relationship_attributes={relationship_attributes}\"\nheaders = {\"accept\"\
+        : \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: getThreatRelationships
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaigns](ref:campaign-object#relationships), [malware](ref:malware-family-object#relationships), [toolkits](ref:software-toolkit-object#relationships),
+          [ioc collectins](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships)) relationships section
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"\
+        type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"\
+        id\": <an IP address>}`.\n\n## Examples\n\nDelete an element, ```google.com``` domain, from an existing IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\
+        \nrelationship = \"domains\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}\"\npayload = { \"data\": \n    [\n        {\n            \"type\": \"domain\",\n \
+        \           \"id\": \"google.com\"\n        }\n    ]\n}\nheaders = {\n    \"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.delete(url,\
+        \ json=payload, headers=headers)\n```\n"
+      operationId: deleteElementFromIocCollection
+      parameters:
+      - description: IoC Collection's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:ioc-collection-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: Object's descriptors
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete Items from an IoC Collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "As explained in [/collections](https://gtidocs.virustotal.com/reference/list-threats), for the `urls` relationship you either use `{\"type\": \"url\", \"url\": <a URL string>}` or `{\"\
+        type\": \"url\", \"id\": <a sha256 URL identifier>}` as object descriptors. For domains and IP addresses you can use `{\"type\": \"domain\", \"id\": <a domain>}` or `{\"type\": \"ip_address\", \"\
+        id\": <an IP address>}`.\n\n## Examples\n\nAdd new elements, ```google.com``` and ```virustotal.com``` domains, to an existing IoC collection.\n\n```python\nimport requests\n\nobject_id = \"bd4dbd7a189ca9a31cb1b0bdbe64aaba6aa1454ddcfde707518b811d2bc5b363\"\
+        \nrelationship = \"domains\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}\"\n\npayload = { \"data\": \n    [\n        {\n            \"type\": \"domain\",\n\
+        \            \"id\": \"google.com\"\n        },\n        {\n            \"type\": \"domain\",\n            \"id\": \"virustotal.com\"\n        }\n    ]\n}\nheaders = {\n    \"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\n}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n"
+      operationId: addElementToIocCollection
+      parameters:
+      - description: IoC Collection's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:ioc-collection-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: Object's descriptors
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add New Items to an IoC Collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/comments:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of [Comments](https://gtidocs.virustotal.com/reference/comment-object) objects.\n\n## Examples\n\nGet 3 community comments from a\
+        \ threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a malware or toolkit.\n\n```python\nimport\
+        \ requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a campaign.\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders =\
+        \ {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a IoC collection.\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nlimit = 3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\"\
+        : \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet 3 community comments from a vulnerability.\n\n```python\nimport requests\nimport urllib\n\
+        \nobject_id = \"vulnerability--cve-2022-30190\"\nlimit =3\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments?limit={limit}\"\nheaders = {\"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: getThreatComments
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of comments to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Comments from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nWith this endpoint you can post a comment for a given threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability).\
+        \ The body for the `POST` request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for\
+        \ new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\"\
+        : \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"id\": \"\
+        <comment's ID>\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/comments/<comment's ID>\"\n    },\n    \"attributes\": {\n      \"date\": 1521725475,\n      \"tags\": [\"\
+        ipsum\"],\n      \"html\": \"Lorem #ipsum dolor sit ...\",\n      \"text\": \"Lorem #ipsum dolor sit ...\",\n      \"votes\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\"\
+        : 0\n      }\n    }\n  }\n}\n```\n\n## Examples\n\nAdd a comment to a threat actor object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--eaeae8e9-cc4b-4be8-82fd-8edc65ff9a5e\"\
+        \nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor\
+        \ sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n\
+        ```\n\nAdd a comment to a malware or toolkit object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malpedia_win_remexi\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\
+        \npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\"\
+        : <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a campaign object.\n\n```python\nimport requests\nimport\
+        \ urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\"\
+        : \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"\
+        }\nresponse = requests.post(url, json=payload, headers=headers)\n```\n\nAdd a comment to a IoC collection object.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"cobaltstrikebot_614a3b996769300a3b3132cf\"\
+        \nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor\
+        \ sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n\
+        ```\n\nAdd a comment to a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/comments\"\
+        \npayload = { \"data\": {\n        \"type\": \"comment\",\n        \"attributes\": { \"text\": \"Lorem #ipsum dolor sit ...\" }\n    } }\nheaders = {\"accept\": \"application/json\",\"x-apikey\"\
+        : <api-key>,\"content-type\": \"application/json\"}\nresponse = requests.post(url, json=payload, headers=headers)\n```\n"
+      operationId: createThreatComment
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A comment object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add a Comment to a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report) Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/mitre_tree:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nReturns a list of MITRE tactics with their correspondent techniques that are associated with the [Threat Actor](https://gtidocs.virustotal.com/reference/threat-actor-object),\
+        \ [Campaign](https://gtidocs.virustotal.com/reference/campaign-object),[Malware family](https://gtidocs.virustotal.com/reference/malware-family-object), [Software or Toolkit](https://gtidocs.virustotal.com/reference/software-toolkit-object),\
+        \ [IoC Collection](https://gtidocs.virustotal.com/reference/ioc-collection-object), [Report](https://gtidocs.virustotal.com/reference/report-object) or [Vulnerability](https://gtidocs.virustotal.com/reference/vulnerability-object)\
+        \ as follows:\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\": \\<_list of dictionaries_> the list of associated tactics.\n        [\n            \"id\": \\<_string_> the MITRE tactic identifier.\n\
+        \            \"name\": \\<_string_> the name of the tactic.\n            \"link\": \\<_string_> the link to the tactic's MITRE webpage.\n            \"description\": \\<_string_> the description\
+        \ of the tactic.\n            \"techniques\": \\<_list of dictionaries_> the list of associated techniques that belong to the tactic and are associated with the threat object.\n                [\n\
+        \                    {\n                        \"id\": \\<_string_> the MITRE technique identifier.\n                        \"name\": \\<_string_> the name of the technique.\n                \
+        \        \"link\": \\<_string_> the link to the technique's MITRE webpage.\n                        \"description\": \\<_string_> the description of the technique.\n                        \"source\"\
+        : \\<_list of strings_> whether the technique association comes from the IoCs related to the threat object (seen_in_iocs) or is intrinsic to it (operational).\n                        \"context_attribute\"\
+        : \\<_dictionary_> the date when the technique was associated with the threat object.\n                        {\n                            \"timestamp\": \\<_integer_> (UTC timestamp).\n    \
+        \                    }\n                    }\n                ]\n        ]\n    }\n}\n```\n\n## Example response\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\":\n        [\n         \
+        \   \"id\": \"TA0005\",\n                \"name\": \"Defense Evasion\",\n                \"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n                \"description\": \"The adversary\
+        \ is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include\
+        \ uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’\
+        \ techniques are cross-listed here when those techniques include the added benefit of subverting defenses. \",\n                \"techniques\":\n                [\n                    {\n      \
+        \                  \"id\": \"T1564\",\n                        \"name\": \"Hide Artifacts\",\n                        \"link\": \"https://attack.mitre.org/techniques/T1564/\",\n                \
+        \        \"description\": \"Adversaries may attempt to hide artifacts associated with their behaviors to evade detection. Operating systems may have features to hide various artifacts, such as important\
+        \ system files and administrative task execution, to avoid disrupting user work environments and prevent users from changing files or features on the system. Adversaries may abuse these features\
+        \ to hide artifacts such as files, directories, user accounts, or other system activity to evade detection.\\nAdversaries may also attempt to hide artifacts associated with malicious behavior by\
+        \ creating computing regions that are isolated from common security instrumentation, such as through the use of virtualization technology.\",\n                        \"source\":\n             \
+        \           [\n                            \"operational\"\n                        ],\n                        \"context_attribute\":\n                        {\n                            \"\
+        timestamp\": 1732728093\n                        }\n                    }\n                ]\n        ]\n    }\n}\n```\n\n\n## Examples\n\nGet the MITRE tree associated with a threat actor.\n\n\
+        ```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\n\
+        headers = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a malware or toolkit.\n\n```python\n\
+        import requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\"\
+        : \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a campaign.\n\n```python\nimport requests\nimport urllib\n\
+        \nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"\
+        x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nGet the MITRE tree associated with a IoC collection.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"\
+        alienvault_64edfc5ab93abb1407070292\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse\
+        \ = requests.get(url, headers=headers)\n```\n\n```json\n{\n    \"data\":\n    {\n        \"tactics\":\n        [\n            \"id\": \"TA0005\",\n                \"name\": \"Defense Evasion\",\n\
+        \                \"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n                \"description\": \"The adversary is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques\
+        \ that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts.\
+        \ Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting\
+        \ defenses. \",\n                \"techniques\":\n                [\n                    {\n                        \"id\": \"T1564\",\n                        \"name\": \"Hide Artifacts\",\n  \
+        \                      \"link\": \"https://attack.mitre.org/techniques/T1564/\",\n                        \"description\": \"Adversaries may attempt to hide artifacts associated with their behaviors\
+        \ to evade detection. Operating systems may have features to hide various artifacts, such as important system files and administrative task execution, to avoid disrupting user work environments\
+        \ and prevent users from changing files or features on the system. Adversaries may abuse these features to hide artifacts such as files, directories, user accounts, or other system activity to evade\
+        \ detection.\\nAdversaries may also attempt to hide artifacts associated with malicious behavior by creating computing regions that are isolated from common security instrumentation, such as through\
+        \ the use of virtualization technology.\",\n                        \"source\":\n                        [\n                            \"operational\"\n                        ],\n            \
+        \            \"context_attribute\":\n                        {\n                            \"timestamp\": 1732728093\n                        }\n                    }\n                ]\n     \
+        \   ]\n    }\n}\n```\n\nGet the MITRE tree associated with a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/mitre_tree\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: getThreatMitreTree
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get MITRE Tactics and Techniques Associated with a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/search:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\nAllows to search IoCs inside a threat object (threat actor, campaign,malware & tool, IoC collection, report or vulnerability) using advanced intelligence\
+        \ queries.\n\nThe expected input is the same as [/intelligence/search](https://gtidocs.virustotal.com/reference/intelligence-search). By default it searches files, in order to search other entities\
+        \ use `entity:domain/ip/url`.\n\n## Examples\n\nSearch for IoCs related to a threat actor that meet certain conditions.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\
+        \nquery = \"tag%3Aexploit\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a malware or toolkit that meet certain conditions.\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nquery = \"p%3A5+\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a campaign that meet certain conditions.\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nquery = \"have%3Ayara_rules\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a IoC collection that meet certain conditions.\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nquery = \"have%3Asigma_rules\"\nattributes = \"name\"\nlimit = \"2\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nSearch for IoCs related to a vulnerability that meet certain conditions.\n\
+        \n```python\nimport requests\nimport urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nquery = \"tag%3Acve-2022-30190\"\nattributes = \"name\nlimit = \"2\"\nrelationships = \"files\"\nurl\
+        \ = f\"https://www.virustotal.com/api/v3/collections/{object_id}/search?query={query}&limit={limit}&attributes={attributes}&relationships={relationships}\"\nheaders = {\"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n"
+      operationId: searchIocsInsideAThreat
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Intelligence query
+        in: query
+        name: query
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of IoCs to retrieve (max 40)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Sorting order
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Comma-separated attributes to return from the resulting IoCs
+        in: query
+        name: attributes
+        schema:
+          type: string
+      - description: Comma-separated name of relationships descriptors to return from the IoCs
+        in: query
+        name: relationships
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\"meta\": {\n  \"cursor\": <string>,\n  \"total_hits\": <int>,\n  \"allowed_orders\": [<string>, ...]\n},\n\"data\": [\n  <IOC>,\n  <IOC>,\n  ...\n],\n\"links\": {\n  \"self\"\
+                    : <string>,\n  \"next\": <string>\n}"
+            text/plain:
+              examples:
+                Example:
+                  value: "{\n\t\"meta\": {\n\t\t\"cursor\": \"eJwNyTEOgzAMBdAroZSVhYJQkOwo6ANK1nao7GTqAFgcvn3ru3cbHZtvGOkIw_j1z7kS-k9GvMh6IZslQx__t7RvkiqdjEUTuNCwtlm0ZbwcybsQ9ODqHVm8AoqEiTVMq7HE05emu381USYK\"\
+                    ,\n\t\t\"total_hits\": 138,\n\t\t\"allowed_orders\": [\n\t\t\t\"first_submission_date\",\n\t\t\t\"last_submission_date\",\n\t\t\t\"positives\",\n\t\t\t\"times_submitted\",\n\t\t\t\"\
+                    size\",\n\t\t\t\"unique_sources\"\n\t\t]\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"names\": [\n\t\t\t\t\t\"%windir%\\\\system32\\\\ZHANcETwJnzF\\\\jKbD.dll\",\n\
+                    \t\t\t\t\t\"08039481f17de1a125763d6dadc9a91615fa027ad42a4f42d886b94063a94822.exe\",\n\t\t\t\t\t\"%windir%\\\\system32\\\\GRygLTtvoipYdeQ\\\\ooKzoWPK.dll\",\n\t\t\t\t\t\"emotet_epoch4.dll\"\
+                    \n\t\t\t\t]\n\t\t\t},\n\t\t\t\"type\": \"file\",\n\t\t\t\"id\": \"08039481f17de1a125763d6dadc9a91615fa027ad42a4f42d886b94063a94822\",\n\t\t\t\"links\": {\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/files/08039481f17de1a125763d6dadc9a91615fa027ad42a4f42d886b94063a94822\"\
+                    \n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"names\": [\n\t\t\t\t\t\"E:\\\\\\\\2019\\\\\\\\VirusShare_371\\\\\\\\VirusShare_5e9e1b4354594e0e787c7a03afa0e677\",\n\t\t\t\
+                    \t\t\"Trojan-Banker.Win32.Emotet.dilb.5e9e1b4354594e0e787c7a03afa0e677\",\n\t\t\t\t\t\"EncPEConstKey_OFS_0002d425_KEY_00000000_Emotet_InternetFile_dec_165.227.213.173_00000000.decompressed.cut\"\
+                    \n\t\t\t\t]\n\t\t\t},\n\t\t\t\"type\": \"file\",\n\t\t\t\"id\": \"f10ae4230c32ce97563aecbc154da3e058f9857627e1906b634299c8cd8e3641\",\n\t\t\t\"links\": {\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/files/f10ae4230c32ce97563aecbc154da3e058f9857627e1906b634299c8cd8e3641\"\
+                    \n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/collections/malpedia_win_emotet/search?query=name%3Aemotet&attributes=names&limit=2\",\n\t\t\
+                    \"next\": \"https://www.virustotal.com/api/v3/collections/malpedia_win_emotet/search?cursor=eJwNyTEOgzAMBdAroZSVhYJQkOwo6ANK1nao7GTqAFgcvn3ru3cbHZtvGOkIw_j1z7kS-k9GvMh6IZslQx__t7RvkiqdjEUTuNCwtlm0ZbwcybsQ9ODqHVm8AoqEiTVMq7HE05emu381USYK&query=name%3Aemotet&limit=2&attributes=names\"\
+                    \n\t}\n}"
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        attributes:
+                          properties:
+                            names:
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        id:
+                          type: string
+                        links:
+                          properties:
+                            self:
+                              type: string
+                          type: object
+                        type:
+                          type: string
+                      type: object
+                    type: array
+                  links:
+                    properties:
+                      next:
+                        type: string
+                      self:
+                        type: string
+                    type: object
+                  meta:
+                    properties:
+                      allowed_orders:
+                        items:
+                          type: string
+                        type: array
+                      cursor:
+                        type: string
+                      total_hits:
+                        default: 0
+                        type: integer
+                    type: object
+                type: object
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: VirusTotal Search IoCs Inside a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/download/{format}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport IoCs from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\
+        \nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url,\
+        \ headers=headers)\n```\n\nExport IoCs from a malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nformat = \"csv\"\n\
+        url = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n\
+        ```\n\nExport IoCs from a campaign.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a IoC collection.\n\n```python\nimport requests\nimport\
+        \ urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\"\
+        : \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport IoCs from a vulnerability.\n\n```python\nimport requests\nimport urllib\n\nobject_id\
+        \ = \"vulnerability--cve-2022-30190\"\nformat = \"json\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/download/{format}\"\nheaders = {\"accept\": \"application/json\",\"x-apikey\"\
+        : <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: exportThreatIocs
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Export format (one of `json`, `csv`, or `stix`)
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"files\": [\n    \"009cc0f34f60467552ef79c3892c501043c972be55fe936efb30584975d45ec0\",\n    \"153117aa54492ca955b540ac0a8c21c1be98e9f7dd8636a36d73581ec1ddcf58\",\n    \"\
+                    18479a93fc2d5acd7d71d596f27a5834b2b236b44219bb08f6ca06cf760b74f6\"\n  ],\n  \"threat_actors\": [\n    \"muddywater\"\n  ],\n  \"references\": [\n    \"153590cf5677a6ab5b5103382d41d4d8868a878a04104e86e936db63e4d186b8\"\
+                    \n  ],\n  \"urls\": [\n    \"http://abrahamseed.co.za/db_template.php\",\n    \"http://absfinancialplanning.co.za/images/db_template.php\"\n  ]\n}"
+              schema:
+                properties:
+                  files:
+                    items:
+                      type: string
+                    type: array
+                  references:
+                    items:
+                      type: string
+                    type: array
+                  threat_actors:
+                    items:
+                      type: string
+                    type: array
+                  urls:
+                    items:
+                      type: string
+                    type: array
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Export IOCs from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/aggregations/download/{format}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> This endpoint is only available to users with Google Threat Intelligence (Google TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\
+        \nExport commonalities from a threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a malware or toolkit.\n\n```python\nimport\
+        \ requests\nimport urllib\n\nobject_id = \"malware--350aa703-7750-5e07-997b-476375955828\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a campaign.\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a IoC collection.\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders\
+        \ = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport commonalities from a vulnerability.\n\n```python\nimport requests\nimport\
+        \ urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nformat = \"csv\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/aggregations/download/{format}\"\nheaders = {\"accept\"\
+        : \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: exportThreatAggregations
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Export format (one of `json` or `csv`)
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"files\": {\n\t\t\"contacted_urls\": [\n\t\t\t{\n\t\t\t\t\"count\": 2,\n\t\t\t\t\"value\": \"http://ocsp.digicert.com/\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"count\": 2,\n\t\t\t\
+                    \t\"value\": \"http://crl3.digicert.com/Omniroot2025.crl\"\n\t\t\t}\n      ...\n\t\t],\n\t\t\"contacted_domains\": [\n\t\t\t{\n\t\t\t\t\"count\": 4,\n\t\t\t\t\"value\": \"nexusrules.officeapps.live.com\"\
+                    \n\t\t\t},\n\t\t\t{\n\t\t\t\t\"count\": 4,\n\t\t\t\t\"value\": \"officeclient.microsoft.com\"\n\t\t\t},\n      ...\n\t\t],\n    ...\n\t},\n  ...\n}"
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Export Aggregations / Commonalities from a Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /collections/{id}/{relationship}/download/{format}:
+    get:
+      tags:
+      - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+      deprecated: false
+      description: "> \U0001F6A7 Special privileges required\n> \n> Threat Actors, Campaigns, Reports & Analyses and Vulnerabilities are only available to users with the Google Threat Intelligence (Google\
+        \ TI) Enterprise or Enterprise Plus licenses.\n\n## Examples\n\nExport files related to a given threat actor.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"threat-actor--bcaaad6f-0597-4b89-b69b-84a6be2b7bc3\"\
+        \nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\nheaders = {\"accept\": \"application/json\"\
+        ,\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given malware or toolkit.\n\n```python\nimport requests\nimport urllib\n\nobject_id = \"\
+        malware--350aa703-7750-5e07-997b-476375955828\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given campaign.\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"campaign--24f96f40-b2fa-512c-b1da-2f22a949d12d\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given IoC collection.\n\n```python\nimport\
+        \ requests\nimport urllib\n\nobject_id = \"alienvault_64edfc5ab93abb1407070292\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```\n\nExport files related to a given vulnerability\n\n```python\nimport requests\n\
+        import urllib\n\nobject_id = \"vulnerability--cve-2022-30190\"\nrelationship = \"files\"\nformat = \"stix\"\nurl = f\"https://www.virustotal.com/api/v3/collections/{object_id}/{relationship}/download/{format}\"\
+        \nheaders = {\"accept\": \"application/json\",\"x-apikey\": <api-key>}\nresponse = requests.get(url, headers=headers)\n```"
+      operationId: exportIocsThreatRelationship
+      parameters:
+      - description: Threat object's ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [threat actors](ref:threat-actor-object#relationships), [campaign](ref:campaign-object#relationships), [malware family](ref:malware-family-object#relationships),
+          [software toolkit](ref:software-toolkit-object#relationships), [ioc collections](ref:ioc-collection-object#relationships), [reports](ref:report-object#relationships), [vulnerabilities](ref:vulnerability-object#relationships))
+          relationships section
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Export format (one of `json`, `csv`, or `stix`)
+        in: path
+        name: format
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"files\": [\n    \"009cc0f34f60467552ef79c3892c501043c972be55fe936efb30584975d45ec0\",\n    \"153117aa54492ca955b540ac0a8c21c1be98e9f7dd8636a36d73581ec1ddcf58\",\n    \"\
+                    18479a93fc2d5acd7d71d596f27a5834b2b236b44219bb08f6ca06cf760b74f6\"\n  ]\n}"
+              schema:
+                properties:
+                  files:
+                    items:
+                      type: string
+                    type: array
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Export IOCs from a Given Threat Object (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability, Report)'s Relationship
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Object:
+      type: object
+      description: Base shape of a VirusTotal object (file, url, domain, ip_address, comment, vote, graph, collection, analysis, etc.).
+      properties:
+        id:
+          type: string
+          description: Object identifier. For files this is the SHA-256; for URLs the base64url of the URL; for domains the domain; for IPs the address.
+          example: 44d88612fea8a8f36de82e1278abb02f
+        type:
+          type: string
+          description: Object type discriminator.
+          example: file
+        links:
+          type: object
+          description: Hypermedia links for this object.
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Canonical URL for this object.
+          additionalProperties: true
+        attributes:
+          type: object
+          description: Type-specific attributes payload.
+          additionalProperties: true
+        context_attributes:
+          type: object
+          description: Optional context-specific attributes when the object is returned as part of a relationship.
+          additionalProperties: true
+        relationships:
+          type: object
+          description: Pre-expanded relationships to other VirusTotal objects, keyed by relationship name.
+          additionalProperties: true
+      required:
+      - id
+      - type

@@ -1,0 +1,1811 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC Stream)
+  version: '3.0'
+  description: Livehunt, Retrohunt, the IoC Stream, and crowdsourced YARA rules — VirusTotal's hunting and notification surface.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: YARA Hunting - IoC Stream
+  description: YARA Hunting - IoC Stream
+- name: YARA Hunting - Livehunt
+  description: YARA Hunting - Livehunt
+- name: YARA Hunting - Retrohunt
+  description: YARA Hunting - Retrohunt
+- name: YARA Hunting - Rules
+  description: YARA Hunting - Rules
+paths:
+  /ioc_stream:
+    delete:
+      tags:
+      - YARA Hunting - IoC Stream
+      deprecated: false
+      description: 'Uses the same filters than the IoC Stream ([GET /ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream)) to delete all the matching notifications.
+
+        '
+      operationId: deleteNotificationsFromTheIocStream
+      parameters:
+      - description: Filter string
+        in: query
+        name: filter
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '429':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"TooManyRequests\",\n    \"message\": \"Notifications already being deleted. Depending on volume this may take a while.\"\n}"
+          description: '429'
+      summary: VirusTotal Delete Notifications from the IoC Stream
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - IoC Stream
+      deprecated: false
+      description: "The IoC stream endpoint returns different types of objects (files, URLs, domains, IP addresses) coming from multiple origins (you can restrict the returned types by using the filters\
+        \ explained below). In addition, depending on the origin of the notification there will be different context attributes added to these objects.\n\nThe possible context attributes in IoC Stream objects\
+        \ are:\n\n- `notification_id`: \\<_string_> Always present. This string identifies the notification, and can be used to retrieve the notification individually (by using [GET /ioc_stream_notifications/{id}](https://gtidocs.virustotal.com/reference/get-an-ioc-stream-notification))\
+        \ or to delete it ([DELETE /ioc_stream_notifications/{id}](https://gtidocs.virustotal.com/reference/delete-an-ioc-stream-notification)).\n- `notification_date`: \\<_int_> Always present. Date when\
+        \ the notification was created (UTC timestamp).\n- `origin`: \\<_string_> Always present. The notification's origin. In the case of Livehunt or Retrohunt the origin is `hunting`.\n- `sources`: \\\
+        <_list of dictionaries_> Always present. The different sources associated to the notification. In the case of Livehunt the only source is always the hunting ruleset that triggered the notification.\n\
+        - `tags`: \\<_list of strings_> List of notification's tags (if any). These tags can be used to filter the objects by using the `notification_tag:` filter.\n- `hunting_info`: \\<_dictionary_> Only\
+        \ present for notifications of `hunting` origin. It contains additional contextual information from Livehunt. Its structure is the following:\n  - `rule_name`: \\<_string_> matched rule name.\n\
+        \  - `rule_tags`: \\<_list of strings_> matched rule tags.\n  - `snippet`: \\<_string_> matched contents inside the file as hexdump. Contains `begin_highlight` and `end_highlight` substrings to\
+        \ indicate the part of the file that produced the match and give additional context about surrounding bytes in the match.\n  - `source_country`: \\<_string_> country where the matched file was uploaded\
+        \ from.\n  - `source_key`: \\<_string_> unique identifier for the source in ciphered form.\n\nAllowed filters with examples (they can be combined in the same filter string):\n\n- `date:2023-02-07T10:00:00+`:\
+        \ Returns objects from notifications generated after 2023-02-07T10:00:00 (UTC)\n- `date:2023-02-07-`: Returns objects from notifications generated before 2023-03-07T00:00:00 (UTC)\n- `origin:hunting`:\
+        \ Returns objects from notifications coming from Livehunt. Allowed values: `hunting, subscriptions`.\n- `entity_id:objectId`: Return objects whose ID is `objectId`\n- `entity_type:file`: Return\
+        \ only file objects. Allowed values: `file, domain, url, ip_address`\n- `source_type:hunting_ruleset`: The type of source object that triggered the notification. Allowed values: `hunting_ruleset,\
+        \ retrohunt_job, collection, threat_actor`.\n- `source_id:objectId`: The ID of the source object that triggered the notification. In the case of hunting the notification's source object ID corresponds\
+        \ to the hunting ruleset's ID.\n- `notification_tag:ruleName`: Notifications with `ruleName` in their tags. In the case of notifications coming from Livehunt there are several tags in each notification,\
+        \ like the rule name or the username of the ruleset's owner.\n\nAllowed orders:\n\n- `date-` (default): Sorts by most recent notifications first.\n- `date+`: Sorts by oldest notification first.\n"
+      operationId: getObjectsFromTheIocStream
+      parameters:
+      - description: Number of objects to retrieve (max 40)
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: The response returns only objects descriptors instead of whole VT objects
+        in: query
+        name: descriptors_only
+        schema:
+          default: false
+          type: boolean
+      - description: Filter string
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Sort order
+        in: query
+        name: order
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck0KEQoEZGF0ZRIJCLnz1ObJg_0CEjRqEXN-dmlydXN0b3RhbGNsb3Vkch8LEhVJT0NTdHJlYW1Ob3RpZmljYXRpb24YsK2w2iEMGAAgAQ==\"\n\t},\n\t\"data\": [\n\t\t{\n\
+                    \t\t\t\"type\": \"file\",\n\t\t\t\"id\": \"c9c4ee34d9c9f769f884f720e1d37ce1e864aae1be81a4a274bb1a88704cb11c\",\n\t\t\t\"context_attributes\": {\n\t\t\t\t\"notification_id\": \"9047905968\"\
+                    ,\n\t\t\t\t\"origin\": \"hunting\",\n\t\t\t\t\"hunting_info\": {\n\t\t\t\t\t\"rule_name\": \"vulnerability_weaponization\"\n\t\t\t\t},\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"c9c4ee34d9c9f769f884f720e1d37ce1e864aae1be81a4a274bb1a88704cb11c\"\
+                    ,\n\t\t\t\t\t\"vulnerability_weaponization\",\n\t\t\t\t\t\"ransomware\"\n\t\t\t\t],\n\t\t\t\t\"sources\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"type\": \"hunting_ruleset\",\n\t\t\t\t\t\t\"id\"\
+                    : \"7926136120\",\n\t\t\t\t\t\t\"label\": \"Ransomware\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"notification_date\": 1675778611\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/ioc_stream?limit=1&filter=date%3A2023-02-07T10%3A00%3A00%2B%20entity_type%3Afile%20origin%3Ahunting&descriptors_only=true\"\
+                    ,\n\t\t\"next\": \"https://www.virustotal.com/api/v3/ioc_stream?filter=date%3A2023-02-07T10%3A00%3A00-+entity_type%3Afile+origin%3Ahunting&cursor=Ck0KEQoEZGF0ZRIJCLnz1ObJg_0CEjRqEXN-dmlydXN0b3RhbGNsb3Vkch8LEhVJT0NTdHJlYW1Ob3RpZmljYXRpb24YsK2w2iEMGAAgAQ%3D%3D&limit=1&descriptors_only=true\"\
+                    \n\t}\n}"
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        context_attributes:
+                          properties:
+                            hunting_info:
+                              properties:
+                                rule_name:
+                                  type: string
+                              type: object
+                            notification_date:
+                              default: 0
+                              type: integer
+                            notification_id:
+                              type: string
+                            origin:
+                              type: string
+                            sources:
+                              items:
+                                properties:
+                                  id:
+                                    type: string
+                                  label:
+                                    type: string
+                                  type:
+                                    type: string
+                                type: object
+                              type: array
+                            tags:
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        id:
+                          type: string
+                        type:
+                          type: string
+                      type: object
+                    type: array
+                  links:
+                    properties:
+                      next:
+                        type: string
+                      self:
+                        type: string
+                    type: object
+                  meta:
+                    properties:
+                      cursor:
+                        type: string
+                    type: object
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"error\": {\n\t\t\"message\": \"origin \\\"notHunting\\\" is not valid. Valid origins are: hunting,subscriptions\",\n\t\t\"code\": \"BadRequestError\"\n\t}\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      summary: VirusTotal Get Objects from the IoC Stream
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ioc_stream_notifications/{id}:
+    delete:
+      tags:
+      - YARA Hunting - IoC Stream
+      deprecated: false
+      description: 'Deletes an IoC Stream notification.
+
+        '
+      operationId: deleteAnIocStreamNotification
+      parameters:
+      - description: The ID of the IoC Stream notification
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: VirusTotal Delete an IoC Stream Notification
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - IoC Stream
+      deprecated: false
+      description: 'Returns an IoC Stream notification.
+
+        '
+      operationId: getAnIocStreamNotification
+      parameters:
+      - description: The ID of the IoC Stream notification
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      summary: VirusTotal Get an IoC Stream Notification
+      security:
+      - VTApiKey: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_notification_files:
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "> ❗️ Important\n> \n> Hunting notifications files are no longer showed in the web interface. Use the [/api/v3/ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream)\
+        \ endpoint instead to retrieve objects from IoC-Stream notifications.\n\nEach file object returned, _in addition to all the file details_, has a `context_attributes` property that contains information\
+        \ about the Google Threat Intelligence Hunting Livehunt notification tied to the file, this is an example:\n\n```json Example context attributes for a matching file\n\"context_attributes\": {\n\
+        \  \"match_in_subfile\": false,\n  \"notification_date\": 1543301214,\n  \"notification_id\": \"961092289288866-4582222113734656-3c7f77cc43338e14824c111671beef30\",\n  \"notification_snippet\":\
+        \ \"00 61 64 64 41 75 64 69 6F [...]\",\n  \"notification_source_key\": \"b3190c38\",\n  \"notification_tags\": [\n    \"bozok\",\n    \"rats\",\n    \"a2d2906f7ad5265165c25baed76d342b48b8bc5f4d9db6004e9e6dd72eaea4e1\"\
+        \n  ],\n  \"ruleset_id\": \"5706526672224256\",\n  \"ruleset_name\": \"rats\",\n  \"rule_name\": \"Bozok\",\n  \"rule_tags\": [],\n}\n```\n\nOther than that, the `filter` parameter allows to filter\
+        \ the matching files according to the Google TI Hunting Livehunt notification properties. You can filter by the name of the matching rule, match date, rule namespace, ruleset or file hash. Notice\
+        \ however that this only works with the exact keyword, not substrings of it.\n\nFor more information check the [user's hunting_notification_files relationship](https://gtidocs.virustotal.com/reference/user-hunting_notification_files).\n"
+      operationId: huntingNotificationFiles
+      parameters:
+      - description: Maximum number of notifications to retrieve
+        in: query
+        name: limit
+        schema:
+          default: '10'
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: String to search with in the hunting notification tags
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Maximum number of notifications counted (meta.count in the response) 10,000 max
+        in: query
+        name: count_limit
+        schema:
+          default: 200
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Retrieve File Objects for Livehunt Notifications
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_notifications:
+    delete:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: 'This endpoint deletes Google Threat Intelligence Hunting Livehunt notifications in bulk. If the `tag` parameter is specified all your notifications with the given tag will be deleted.
+        If the `tag` parameter is not specified all your notifications will be deleted.
+
+        '
+      operationId: deleteHuntingNotifications
+      parameters:
+      - description: Delete notifications with the given tag
+        in: query
+        name: tag
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete Livehunt Notifications
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "> ❗️ Important\n> \n> Hunting notifications are no longer showed in the web interface. Use the [/api/v3/ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream)\
+        \ endpoint (with `descriptors_only=true`) instead to retrieve IoC-Stream notifications.\n\n> \U0001F6A7 Retrieving matching files rather than just notifications\n> \n> This API endpoint retrieves\
+        \ lists of hunting notification objects, but you may be more interested in retrieving the actual file objects tied to those notifications, you have two different options to do this:\n> \n> - Ask\
+        \ for the file relation when retrieving the hunting notifications, this will embed the descriptor for the file in the response, which includes the file identifier. This file identifier can then\
+        \ be used to perform a file object lookup via the file endpoint.\n> \n> - Make use of the [hunting notification files](https://gtidocs.virustotal.com/reference/hunting_notification_files) endpoint,\
+        \ which returns a lists of file objects tied to your notifications, along with metadata about the hunting notification match.\n\nThis endpoint returns the notifications triggered by your own Livehunt\
+        \ rulesets, or by any other rule owned by somebody else and shared with you.\n\nThe `filter` parameter allows to filter the notification according to the values of certain attributes. For example\
+        \ you can get the notifications that are tagged as `my_rule` with `tag:my_rule`. Tags are automatically generated and include the matching file's SHA-256, the ruleset's name, and the identifier\
+        \ for the YARA rule matching the file.\n\nYou can also filter the notifications based on the ruleset's owner. With `owner:some_user`, you will get notifications generated by those rules that some_user\
+        \ shared with you. If you are interested only on those notifications triggered by your own rules, use the `owner` filter with you own user name. You can also combine multiple filters by separating\
+        \ them with spaces, for example: `filter=tag:my_rule owner:foo`.\n\nIn addition, it is possible to filter by the notifications date. The date parameter accepts both UTC timestamps or `%Y-%m-%d`\
+        \ date formats with ranges (-, +). For example, `filter=date:1626960086+` returns the notifications that were generated since `Thu 22 Jul 2021 15:21:26 CEST`, `filter=date:2021-07-22-` returns the\
+        \ notifications generated before July 22th, 2021 and `filter=date:2021-07-21+ date:2021-07-23-` returns notifications generated since the July 21th, 2021 and before the July 23th, 2021.\n\nThe `order`\
+        \ parameters control the order in which notifications are returned, you can get them by ascending date with `date+`, and by descending date with `date-`.  If no order is specified they will be order\
+        \ by descending date.\n\nFor more information check the [Hunting Notification](https://gtidocs.virustotal.com/reference/hunting-notification-object) API object documentation.\n"
+      operationId: listHuntingNotifications
+      parameters:
+      - description: Maximum number of notifications to retrieve
+        in: query
+        name: limit
+        schema:
+          default: '10'
+          type: string
+      - description: Return the notifications matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Maximum number of notifications counted (meta.count in the response) 10,000 max
+        in: query
+        name: count_limit
+        schema:
+          default: 200
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Livehunt Notifications
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_notifications/{id}:
+    delete:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: VirusTotal Delete a Livehunt Notification
+      operationId: deleteHuntingNotification
+      parameters:
+      - description: Notification identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a Livehunt Notification
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: VirusTotal Get a Livehunt Notification Object
+      operationId: getHuntingNotification
+      parameters:
+      - description: Notification identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Livehunt Notification Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets:
+    delete:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: 'This API call deletes all rulesets owned by the user and removes the user from the list of editors in rules shared with them. This operation is asynchronous: the handler launches a background
+        job and returns immediately. This API endpoint returns a [Operation](https://gtidocs.virustotal.com/reference/operation-object) object.
+
+        '
+      operationId: deleteAllHuntingRulesets
+      parameters:
+      - description: Since this is a very destructive operation, this additional header must be set to your username.
+        in: header
+        name: x-confirm-delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"BadRequestError\",\n    \"message\": \"Send a x-confirm-delete header with your username as a confirmation\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Remove All Livehunt Rulesets
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "This endpoint returns the Google Threat Intelligence Hunting Livehunt rulesets viewable by the user making the request. A ruleset is viewable by a user either if it was created by the\
+        \ user or if it was shared with him by someone else. This endpoint is equivalent to `GET /users/{user}/hunting_rulesets`, where `{user}` is the username of the user owning the API key. In fact,\
+        \ if you look carefully at the example response below you'll notice that the `self` and `next` links do not point to `/intelligence/hunting_rulesets` but to `/users/{user}/hunting_rulesets`\n\n\
+        ```json Example response\n{\n  \"data\": [\n    {\n      \"type\": \"hunting_ruleset\",\n      \"id\": \"{id}\",\n      \"links\": {\n      \t\"self\": \"https://www.virustotal.com/api/v3/intelligence/hunting_rulesets/{id}\"\
+        \n      },\n      \"attributes\": {\n        \"creation_date\": 1523635880,\n        \"enabled\": true,\n        \"limit\": 1000,\n        \"modification_date\": 1525263069,\n        \"name\": \"\
+        foo\",\n        \"notification_emails\": [],\n        \"rules\": \"rule foo {condition: false}\"\n      }\n    },\n    { .. ruleset 2 .. },\n    { .. ruleset 3 .. },\n    { .. ruleset 4 .. },\n\
+        \  ],\n  \"meta\": {\n    \"cursor\": \"Cu0FCsACCpIC9xuRl9v...\"\n  },\n  \"links\": {\n    \"self\": \"https://www.virustotal.com/api/v3/users/{user}/hunting_rulesets\",\n    \"next\": \"https://www.virustotal.com/api/v3/users/{user}/hunting_rulesets?cursor=Cu0FCsACCpIC9xuRl9v...\"\
+        \n  }\n}\n```\n\nThe `filter` parameter allows to filter the rulesets according to the values of certain attributes. For example you can get only the enabled rulesets with `enabled:true`. With `name:foo`\
+        \ and `rules:foo` you can search for rulesets having the word \"foo\" in their names or in the YARA rules respectively. Notice however that this only works with full words (words delimited by non-alphanumeric\
+        \ characters), if the ruleset's name is \"foobar\" it won't appear if you filter with `name:foo`. You can also filter the rulesets with the same tag, by using for example `filter=tag:auto`.\n\n\
+        You can combine multiple filters separating them with spaces, for example: `filter=enabled:true name:foo`.\n\nThe `order` parameters control the order in which rulesets are returned, accepted orders\
+        \ are: `name`, `creation_date` and `modification_date`. You can prepend `+` and `-` suffixes to specify ascending and descending orders (examples: `name-`, `creation_date+`, ). If not suffix is\
+        \ specified the order is ascending by default.\n"
+      operationId: listHuntingRulesets
+      parameters:
+      - description: Maximum number of rulesets to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Return the rulesets matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Sort order
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Livehunt Rulesets
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "This endpoint creates a new Google Threat Intelligence Hunting Livehunt ruleset. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n\
+        \    \"type\": \"hunting_ruleset\",\n    \"attributes\": {\n      \"name\": \"foobar\",\n      \"enabled\": true,\n      \"limit\": 100,\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\
+        \" condition: all of them }\",\n      \"notification_emails\": [\"wcoyte@acme.com\", \"rrunner@acme.com\"],\n      \"match_object_type\": \"file\"\n    }\n  }\n}\n```\n\nUse the `match_object_type`\
+        \ to specify the expected entity kind to match with this ruleset. Allowed values are `file`, `url`, `domain` and `ip`.\n\nThe `name` and `rules` attributes are required, the remaining ones are optional.\n\
+        \n```json Example response\n{\n  \"type\": \"hunting_ruleset\",\n  \"id\": \"{id}\",\n  \"links\": {\n    \"self\": \"https://www.virustotal.com/api/v3/intelligence/hunting_ruleset/{id}\"\n  },\n\
+        \  \"data\": {\n    \"attributes\": {\n      \"name\": \"foobar\",\n      \"enabled\": true,\n      \"limit\": 100,\n      \"creation_date\": 1521016318,\n      \"modification_date\": 1521016318,\n\
+        \      \"number_of_rules\": 1,\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_emails\": [\"notifications@acme.com\"],\n      \"match_object_type\"\
+        : \"file\"\n    }\n  }\n}\n```\n"
+      operationId: createHuntingRuleset
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{     "type": "hunting_ruleset",     "attributes": {       "name": "Test ruleset",       "enabled": true,       "limit": 100,       "rules": "rule foobar { strings: $ = \"foobar\"
+                    condition: all of them }",       "notification_emails": [],       "match_object_type": "file"     }   }'
+                  description: A Malware Hunting ruleset
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a New Livehunt Ruleset
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}:
+    delete:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: VirusTotal Delete a Livehunt Ruleset
+      operationId: deleteHuntingRuleset
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a Livehunt Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: 'Returns a [Hunting Ruleset](https://gtidocs.virustotal.com/reference/hunting-ruleset-object) object.
+
+        '
+      operationId: getHuntingRuleset
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Livehunt Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "```json Example request\n{\n  \"data\": {\n    \"type\": \"hunting_ruleset\",\n    \"id\": \"{id}\",\n    \"attributes\": {\n      \"enabled\": true,\n      \"limit\": 10,\n      \"\
+        name\": \"bar\",\n      \"notification_emails\": [\"notifications@acme.com\"],\n      \"rules\": \"rule foo {condition: false}\"\n    }\n  }\n}\n```\n\nReturns the updated [Hunting Ruleset](https://gtidocs.virustotal.com/reference/hunting-ruleset-object)\
+        \ object.\n"
+      operationId: modifyHuntingRuleset
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A Hunting Ruleset object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update a Livehunt Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}/relationships/editors:
+    post:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: VirusTotal Grant Livehunt Ruleset Edit Permissions for a User or Group
+      operationId: editHuntingRulesetRelationship
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A list of user/groups to be added as editors or set as owners of the ruleset
+                  format: json
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Grant Livehunt Ruleset Edit Permissions for a User or Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}/relationships/editors/{user_or_group_id}:
+    delete:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: VirusTotal Revoke Livehunt Ruleset Edit Permission from a User or Group
+      operationId: deleteHuntingRulesetEditor
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Revoke Livehunt Ruleset Edit Permission from a User or Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "This endpoint returns true if the user has editing access to the Hunting ruleset.\n\n```json Response example\n{\n    \"data\": true\n}\n```\n"
+      operationId: checkUserHuntingRulesetEditor
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User or Group is a Livehunt Ruleset Editor
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}/relationships/owner:
+    post:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: 'Note: The new owner must be a member of the same group the ruleset was created with.
+
+        '
+      operationId: transferLivehuntRulesetToAnotherUser
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A user object descriptor
+                  format: json
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Transfer Livehunt Ruleset to Another User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: 'Same as [/hunting_rulesets/{id}/{relationships}](https://gtidocs.virustotal.com/reference/get-hunting-ruleset-full-relationships) except it returns just the related object''s descriptor
+        (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: getHuntingRulesetRelationship
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:hunting-ruleset-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Livehunt Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/hunting_rulesets/{id}/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Livehunt
+      deprecated: false
+      description: "Hunting Rulesets objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects\
+        \ can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by Hunting Rulesets objects are documented in the [Hunting Rulesets](https://gtidocs.virustotal.com/reference/hunting-ruleset-object#relationships)\
+        \ API object page.\n"
+      operationId: getHuntingRulesetFullRelationships
+      parameters:
+      - description: Ruleset identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:hunting-ruleset-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Livehunt Ruleset
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/retrohunt_jobs:
+    get:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: 'Returns a list of [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.
+
+        '
+      operationId: getRetrohuntJobs
+      parameters:
+      - description: Maximum number jobs to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Return the jobs matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a List of Retrohunt Jobs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"retrohunt_job\",\n    \"\
+        attributes\": {\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_email\": \"notifications@acme.com\",\n      \"corpus\": \"main\",\n\
+        \      \"time_range\": {\n        \"start\": 1545145761,\n        \"end\": 1547737720\n      }\n    }\n  }\n}\n```\n\nThe `rules` attribute is required, but `notification_email`, `corpus` and `time_range`\
+        \ are optional. You should provide  `notification_email` if you want to receive an email notification when the job is finished, while `corpus` allows you to select which dataset you want to scan\
+        \ with your job. There are two different corpuses: \"main\" and \"goodware\". The \"main\" corpus is the default one, composed of files sent to Google Threat Intelligence during the last few months.\
+        \ The \"goodware\" corpus is a random selection of ~1.000.000 files from the [NSRL](https://www.nist.gov/software-quality-group/national-software-reference-library-nsrl) that are not detected by\
+        \ any antivirus engine. This corpus contains multiple file types, and is useful for testing your YARA rules for false positives. If the `corpus` attribute is not specified the \"main\" corpus will\
+        \ be used.\n\n> \U0001F6A7 Retrohunt limits\n> \n> Each user can run up to 10 Retrohunt jobs at the same time, when you reach that limit you must wait for one of the running jobs to finish before\
+        \ launching a new one. Additionally, each job can contain up to 300 YARA rules.\n\nIf you want your job to scan files sent to Google TI within a certain time range you can use the  `time_range`\
+        \ attribute to specify the desired range. Both the `start` and `end` fields in `time_range` should be the UNIX timestamp for the minimum and upper bound of the time range in UTC, and they should\
+        \ be within the maximum range allowed by your Retrohunt privileges. All users can scan up to 90 days back, and this can go up to 180 or 365 days for more privileged users. If `start` is not specified\
+        \ your Retrohunt job will scan back to the limit allowed by your privileges, and if `end` is not specified it will scan up to the most recent files.\n\nReturns the newly created [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object)\
+        \ object.\n"
+      operationId: createRetrohuntJob
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{     "type": "retrohunt_job",     "attributes": {       "rules": "rule foobar { strings: $ = \"foobar\" condition: all of them }",       "corpus": "main"    }   }'
+                  description: A Retrohunt job
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a New Retrohunt Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/retrohunt_jobs/{id}:
+    delete:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: VirusTotal Delete a Retrohunt Job
+      operationId: deleteRetrohuntJob
+      parameters:
+      - description: Job identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a Retrohunt Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: 'Returns a [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.
+
+        '
+      operationId: getRetrohuntJob
+      parameters:
+      - description: Job identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Retrohunt Job Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/retrohunt_jobs/{id}/abort:
+    post:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: VirusTotal Abort a Retrohunt Job
+      operationId: abortRetrohuntJob
+      parameters:
+      - description: Job identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Abort a Retrohunt Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /intelligence/retrohunt_jobs/{id}/matching_files:
+    get:
+      tags:
+      - YARA Hunting - Retrohunt
+      deprecated: false
+      description: 'Retrohunt jobs are related to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved
+        by sending `GET` requests to the relationships URL.
+
+
+        The supported relationships for Retrohunt jobs are described in the [Retrohunt Jobs](https://gtidocs.virustotal.com/reference/retrohunt-job-object) API object page.
+
+        '
+      operationId: getRetrohuntJobRelationships
+      parameters:
+      - description: Job identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Maximum number of matching files to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Retrieve Matches for a Retrohunt Job
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\
+        \n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"name\": \"PK_AXA_fun\",\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"AXA\"\n\t\t\t\t],\n\t\t\t\t\"matches\": 0,\n\t\t\t\t\"author\": \"Thomas\
+        \ Damonneville\",\n\t\t\t\t\"enabled\": true,\n\t\t\t\t\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n    meta:\\n        description = \\\"Phishing Kit impersonating AXA banque\\\"\\n        licence =\
+        \ \\\"GPL-3.0\\\"\\n        author = \\\"Thomas Damonneville\\\"\\n        reference = \\\"\\\"\\n        date = \\\"2023-05-02\\\"\\n        comment = \\\"Phishing Kit - AXA - using a fun.php page\\\
+        \"\\n\\n    strings:\\n        // the zipfile working on\\n        $zip_file = { 50 4b 03 04 }\\n        $spec_dir = \\\"css\\\"\\n        $spec_dir2 = \\\"images\\\"\\n        // specific file\
+        \ found in PhishingKit\\n        $spec_file = \\\"detail.html\\\"\\n        $spec_file2 = \\\"fun.php\\\"\\n        $spec_file3 = \\\"fin.html\\\"\\n        $spec_file4 = \\\"axa_pp_blanc.min.css\\\
+        \"\\n\\n    condition:\\n        // look for the ZIP header\\n        uint32(0) == 0x04034b50 and\\n        // make sure we have a local file header\\n        $zip_file and\\n        // check for\
+        \ file\\n        all of ($spec_file*) and\\n        all of ($spec_dir*)\\n}\",\n\t\t\t\t\"creation_date\": 1682985600,\n\t\t\t\t\"meta\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"description\",\n\t\
+        \t\t\t\t\t\"value\": \"Phishing Kit impersonating AXA banque\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"licence\",\n\t\t\t\t\t\t\"value\": \"GPL-3.0\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\
+        \t\t\t\"key\": \"author\",\n\t\t\t\t\t\t\"value\": \"Thomas Damonneville\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"reference\",\n\t\t\t\t\t\t\"value\": \"\"\n\t\t\t\t\t},\n\t\t\t\t\t\
+        {\n\t\t\t\t\t\t\"key\": \"date\",\n\t\t\t\t\t\t\"value\": \"2023-05-02\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"comment\",\n\t\t\t\t\t\t\"value\": \"Phishing Kit - AXA - using a fun.php\
+        \ page\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"last_modification_date\": 1683185194\n\t\t\t},\n\t\t\t\"type\": \"yara_rule\",\n\t\t\t\"id\": \"003e1c51ef|PK_AXA_fun\",\n\t\t\t\"links\": {\n\t\t\t\t\
+        \"self\": \"https://www.virustotal.com/api/v3/yara_rules/003e1c51ef|PK_AXA_fun\"\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/yara_rules?limit=1\",\n\t\
+        \t\"next\": \"https://www.virustotal.com/api/v3/yara_rules?cursor=Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB&limit=1\"\n\t}\n}\n\
+        ```\n\nThe `filter` parameter allows to filter the rules according to the values of certain attributes. For example you can get only the enabled rules with `enabled:true`. With `name:foo` and `foo`\
+        \ you can search for rules having the word \"foo\" in their names or in their meta values. Notice however that this only works with full words (words delimited by non-alphanumeric characters), if\
+        \ the rule's name is \"foobar\" it won't appear if you filter with `name:foo`. You can combine multiple filters separating them with spaces, for example: `filter=enabled:true name:foo`.\n\nAll the\
+        \ accepted filters are: `author`, `creation_date`, `enabled`, `included_date`, `last_modification_date`, `name`, `tag`, `threat_category`.\n\nThe `order` parameters control the order in which rulesets\
+        \ are returned, accepted orders are: `matches`, `creation_date`, `included_date` and `modification_date`. You can prepend `+` and `-` suffixes to specify ascending and descending orders (examples:\
+        \ `name-`, `creation_date+`, ). If not suffix is specified the order is ascending by default.\n"
+      operationId: listCrowdsourcedYaraRules
+      parameters:
+      - description: Maximum number of rules to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Return the rules matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Sort order
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal List Crowdsourced YARA Rules
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: 'Returns a [YARA rule](https://gtidocs.virustotal.com/reference/yara-rule-object) object.
+
+        '
+      operationId: getACrowdsourcedYaraRule
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: 'Same as [/yara_rules/{id}/{relationships}](https://gtidocs.virustotal.com/reference/crowdsourced-yara-rule-relationship-endpoint) except it returns just the related object''s descriptor
+        (and context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: crowdsourcedYaraRuleRelationshipDescriptorsEndpoint
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:yara-rule-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /yara_rules/{id}/{relationship}:
+    get:
+      tags:
+      - YARA Hunting - Rules
+      deprecated: false
+      description: "YARA rule objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can\
+        \ be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by YARA rule objects are documented in the [YARA Rules](https://gtidocs.virustotal.com/reference/yara-rule-object#relationships)\
+        \ API object page.\n"
+      operationId: crowdsourcedYaraRuleRelationshipEndpoint
+      parameters:
+      - description: Rule identifier
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:yara-rule-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Crowdsourced YARA Rule
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Object:
+      type: object
+      description: Base shape of a VirusTotal object (file, url, domain, ip_address, comment, vote, graph, collection, analysis, etc.).
+      properties:
+        id:
+          type: string
+          description: Object identifier. For files this is the SHA-256; for URLs the base64url of the URL; for domains the domain; for IPs the address.
+          example: 44d88612fea8a8f36de82e1278abb02f
+        type:
+          type: string
+          description: Object type discriminator.
+          example: file
+        links:
+          type: object
+          description: Hypermedia links for this object.
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Canonical URL for this object.
+          additionalProperties: true
+        attributes:
+          type: object
+          description: Type-specific attributes payload.
+          additionalProperties: true
+        context_attributes:
+          type: object
+          description: Optional context-specific attributes when the object is returned as part of a relationship.
+          additionalProperties: true
+        relationships:
+          type: object
+          description: Pre-expanded relationships to other VirusTotal objects, keyed by relationship name.
+          additionalProperties: true
+      required:
+      - id
+      - type

@@ -1,0 +1,1395 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Access Control
+  version: '3.0'
+  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Access Control - Group Management
+  description: Access Control - Group Management
+- name: Access Control - Quota Management
+  description: Access Control - Quota Management
+- name: Access Control - Service Account Management
+  description: Access Control - Service Account Management
+- name: Access Control - User Management
+  description: Access Control - User Management
+paths:
+  /groups/{id}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Get a Group Object
+      operationId: groups
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Group Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'This request accepts a JSON body containing the group attributes to update. Attributes not present in the request body remain the same. It returns the updated [Group](https://gtidocs.virustotal.com/reference/group-object)
+        object.
+
+        '
+      operationId: patchGroup
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: A partial group object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update a Group Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/administrators:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Returns a list of [User](https://gtidocs.virustotal.com/reference/user-object) objects.
+
+        '
+      operationId: getGroupAdministrators
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Administrators for a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Update group administrator list. User emails must be used. If a username is used, a 400 error is returned.
+
+
+        No admins are removed by using this endpoint. To revoke admin privileges from a certain user, use [DELETE/groups/{id}/relationships/administrators/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-group-administrator).
+
+        '
+      operationId: postGroupAdministrators
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: List of user objects.
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"InvalidArgumentError\",\n    \"message\": \"Invalid email address: \\\"spellman\\\"\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Grant Group Admin Permissions to a List of Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/administrators/{user_id}:
+    delete:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Revoke Group Admin Permissions from a User
+      operationId: deleteUserGroupAdministrator
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User ID to remove.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Revoke Group Admin Permissions from a User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Check if a User is a Group Admin
+      operationId: checkUserGroupAdministrator
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User ID to check.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User is a Group Admin
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/users:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Get Group Users
+      operationId: getGroupUsers
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Group Users
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'Update the group''s user list. User emails must be used, if a username is used a 400 error is returned.
+
+
+        No users are removed by using this endpoint. To remove group membership from a certain user, use [DELETE/groups/{id}/relationships/users/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-from-group).
+
+        '
+      operationId: updateGroupUsers
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: List of user objects
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"InvalidArgumentError\",\n    \"message\": \"Invalid email address: \\\"spellman\\\"\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add Users to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/users/{user_id}:
+    delete:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Remove a User from a Group
+      operationId: deleteUserFromGroup
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User to remove.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Remove a User from a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: VirusTotal Check if a User is a Group Member
+      operationId: checkUserInGroup
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User to check.
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User is a Group Member
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: 'This endpoint is the same as [/groups/{id}/{relationship}](https://gtidocs.virustotal.com/reference/groups-relationships) except it returns just the related object''s descriptor (and
+        context attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: groupsRelationshipsIds
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:group-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/{relationship}:
+    get:
+      tags:
+      - Access Control - Group Management
+      deprecated: false
+      description: "Group objects have relationships to other objects. As mentioned in the  [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be\
+        \ retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by group objects are described in the [Group object section](https://gtidocs.virustotal.com/reference/group-object).\n"
+      operationId: groupsRelationships
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:group-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}/api_usage:
+    get:
+      tags:
+      - Access Control - Quota Management
+      deprecated: false
+      description: "This endpoint retrieves information about a the API usage, broken down by endpoint, of an user in a specific range of days (last 30 days by default).  \nThe period of time can be delimited\
+        \ by the two query parameters **start_date** and **end_date**, being the first and last day when API usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural\
+        \ days.\n\n> \U0001F6A7 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error\
+        \ message as response.\n\nThe user can be retrieved either by user ID or by API key, but the latter only works if the requester is the user himself or an administrator of a group the user belongs\
+        \ to.\n\n```json Example response\n{\n  \"data\": {\n    \"daily\": {\n      \"2020-08-10\": {\n        \"urls\": 2\n      },\n      \"2020-08-11\": {\n        \"domains\": 1,\n        \"file_relationships\"\
+        : 1,\n        \"files\": 1\n      },\n      \"2020-08-12\": {\n        \"analyses\": 25,\n        \"file_analyse\": 3,\n        \"files\": 6\n      },\n      \"2020-08-17\": {\n        \"urls\"\
+        : 3\n      },\n      \"2020-08-18\": {\n        \"urls\": 1\n      },\n      \"2020-08-20\": {\n        \"file_download\": 36,\n        \"file_relationships\": 5,\n        \"files\": 1\n      },\n\
+        \      \"2020-08-21\": {\n        \"file_analyse\": 1,\n        \"file_download\": 92,\n        \"files\": 1\n      },\n      \"2020-08-23\": {\n        \"analyses\": 5,\n        \"file_analyse\"\
+        : 1\n      },\n      \"2020-08-25\": {\n        \"file_download\": 51\n      },\n      \"2020-08-26\": {\n        \"file_download\": 51\n      },\n      \"2020-08-28\": {\n        \"file_download\"\
+        : 14\n      },\n      \"2020-08-31\": {\n        \"file_download\": 6\n      },\n      \"2020-09-01\": {\n        \"file_download\": 81\n      },\n      \"2020-09-02\": {\n        \"file_relationships\"\
+        : 5,\n        \"graphs\": 1\n      },\n      \"2020-09-03\": {\n        \"file_relationships\": 6,\n        \"graph_comments\": 1,\n        \"graph_items\": 3,\n        \"graphs\": 2,\n        \"\
+        retrohunt_jobs\": 2\n      },\n      \"2020-09-05\": {\n        \"comment_relationships\": 1,\n        \"comments\": 4,\n        \"domain_comments\": 1,\n        \"domain_graphs\": 2,\n        \"\
+        domain_relationships\": 1,\n        \"file_analyse\": 1,\n        \"statistics\": 1\n      },\n      \"2020-09-06\": {\n        \"file_behaviours\": 6,\n        \"file_relationships\": 2,\n    \
+        \    \"graph_comments\": 1,\n        \"graphs\": 5\n      },\n      \"2020-09-07\": {\n        \"domain_relationships\": 1,\n        \"intelligence_search\": 5,\n        \"resolutions\": 1,\n  \
+        \      \"search\": 6,\n        \"submissions\": 1,\n        \"url_relationships\": 1,\n        \"urls\": 2\n      }\n    },\n    \"total\": {\n      \"analyses\": 30,\n      \"comment_relationships\"\
+        : 1,\n      \"comments\": 4,\n      \"domain_comments\": 1,\n      \"domain_graphs\": 2,\n      \"domain_relationships\": 2,\n      \"domains\": 1,\n      \"file_analyse\": 6,\n      \"file_behaviours\"\
+        : 6,\n      \"file_download\": 331,\n      \"file_relationships\": 19,\n      \"files\": 9,\n      \"graph_comments\": 2,\n      \"graph_items\": 3,\n      \"graphs\": 8,\n      \"intelligence_search\"\
+        : 5,\n      \"resolutions\": 1,\n      \"retrohunt_jobs\": 2,\n      \"search\": 6,\n      \"statistics\": 1,\n      \"submissions\": 1,\n      \"url_relationships\": 1,\n      \"urls\": 8\n   \
+        \ }\n  }\n}\n```\n"
+      operationId: userApiUsage
+      parameters:
+      - description: User ID or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: A string in format YYYYMMDD
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: A string in format YYYYMMDD
+        in: query
+        name: end_date
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a User’s API Usage
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}/overall_quotas:
+    get:
+      tags:
+      - Access Control - Quota Management
+      deprecated: false
+      description: "This endpoint returns a summary of a user's overall quotas including:\n\n- `allowed`: \\<_integer_> quota limit.\n- `inherited_from`: \\<_string_> group from which the quota is inherited.\n\
+        - `used`: \\<_integer_> how many quota has been used.\n\nConsumption data based on natural month and UTC.\n\n```json Example\n{\n  \"data\": {\n    \"api_requests_daily\": {\n      \"group\": {\n\
+        \        \"allowed\": 99000000,\n        \"inherited_from\": \"company\",\n        \"used\": 45073\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 17\n      }\n\
+        \    },\n    \"api_requests_hourly\": {\n      \"group\": {\n        \"allowed\": 3300000,\n        \"inherited_from\": \"company\",\n        \"used\": 653\n      },\n      \"user\": {\n       \
+        \ \"allowed\": 60000000000,\n        \"used\": 0\n      }\n    },\n    \"api_requests_monthly\": {\n      \"group\": {\n        \"allowed\": 2000000000,\n        \"inherited_from\": \"company\"\
+        ,\n        \"used\": 142176\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 137\n      }\n    }\n  }\n}\n```\n"
+      operationId: getUserOverallQuotas
+      parameters:
+      - description: User ID or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a User’s Quota Summary
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/api_usage:
+    get:
+      tags:
+      - Access Control - Quota Management
+      deprecated: false
+      description: "This endpoint retrieves information about a the API usage, broken down by endpoint, of a group in a specific range of days (last 30 days by default).  \nThe period of time can be delimited\
+        \ by the two query parameters **start_date** and **end_date**, being the first and last day when API V3 usage data will be retrieved, respectively.  \nThe data available includes only the last 60\
+        \ natural days.\n\n> \U0001F6A7 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an\
+        \ error message as response.\n\nTo use this endpoint and get the API consumption of a certain group, you must be an administrator of that group.\n\n```json Example response\n\"daily\": {\n     \
+        \       \"2019-10-22\": {\n                \"search\": 1\n            },\n            \"2019-10-23\": {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n        \
+        \        \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\": 3,\n                \"intelligence_search\": 3,\n                \"item_vote\": 1\n        \
+        \    },\n            \"2019-10-24\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-25\": {\n                \"files\": 10,\n                \"intelligence_search\"\
+        : 3\n            },\n            \"2019-10-28\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-29\": {\n                \"url_submission\": 1\n           \
+        \ },\n            \"2019-10-30\": {\n                \"url_submission\": 1\n            },\n            \"2019-10-31\": {\n                \"domain_comments\": 9,\n                \"domain_graphs\"\
+        : 9,\n                \"domain_relationships\": 90,\n                \"file_upload_url\": 1,\n                \"intelligence_search\": 30,\n                \"ip_addresses\": 2,\n               \
+        \ \"ip_addresses_comments\": 4,\n                \"ip_addresses_graphs\": 4,\n                \"ip_addresses_relationships\": 28,\n                \"item_vote\": 13,\n                \"url_submission\"\
+        : 1\n            },\n            \"2019-11-04\": {\n                \"file_behaviours\": 2,\n                \"file_comments\": 2,\n                \"file_graphs\": 2,\n                \"file_relationships\"\
+        : 40,\n                \"files\": 8,\n                \"intelligence_search\": 4,\n                \"item_vote\": 2\n            },\n            \"2019-11-05\": {\n                \"graphs\": 1,\n\
+        \                \"intelligence_search\": 1\n            },\n            \"2019-11-06\": {\n                \"domains\": 14,\n                \"file_comments\": 1,\n                \"file_relationships\"\
+        : 11,\n                \"files\": 34,\n                \"ip_addresses\": 10,\n                \"urls\": 10\n            },\n            \"2019-11-08\": {\n                \"analyses\": 1,\n    \
+        \            \"intelligence_search\": 4,\n                \"item_vote\": 3,\n                \"url_comments\": 3,\n                \"url_graphs\": 3,\n                \"url_relationships\": 12,\n\
+        \                \"url_submission\": 2,\n                \"urls\": 9\n            },\n            \"2019-11-09\": {\n                \"files\": 123,\n                \"intelligence_search\": 13\n\
+        \            },\n            \"2019-11-12\": {\n                \"file_behaviours\": 16,\n                \"file_comments\": 15,\n                \"file_graphs\": 15,\n                \"file_relationships\"\
+        : 314,\n                \"files\": 44,\n                \"intelligence_search\": 3,\n                \"item_vote\": 15,\n                \"retrohunt_jobs\": 1\n            },\n            \"2019-11-13\"\
+        : {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n                \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\":\
+        \ 2,\n                \"intelligence_search\": 1,\n                \"item_vote\": 1\n            },\n            \"2019-11-18\": {\n                \"analyses\": 12,\n                \"file_behaviours\"\
+        : 10,\n                \"file_comments\": 10,\n                \"file_graphs\": 10,\n                \"file_relationships\": 215,\n                \"file_upload_url\": 1,\n                \"files\"\
+        : 51,\n                \"intelligence_search\": 7,\n                \"item_vote\": 10\n            },\n            \"2019-11-19\": {\n                \"domain_comments\": 1,\n                \"\
+        domain_graphs\": 1,\n                \"domain_relationships\": 10,\n                \"file_behaviours\": 9,\n                \"file_comments\": 9,\n                \"file_graphs\": 9,\n        \
+        \        \"file_relationships\": 180,\n                \"files\": 9,\n                \"intelligence_search\": 11,\n                \"item_vote\": 10\n            },\n            \"2019-11-20\"\
+        : {\n                \"file_behaviours\": 5,\n                \"file_comments\": 5,\n                \"file_graphs\": 5,\n                \"file_relationships\": 100,\n                \"files\"\
+        : 21,\n                \"intelligence_search\": 16,\n                \"item_vote\": 5\n            },\n            \"2019-11-21\": {\n                \"intelligence_search\": 8,\n              \
+        \  \"item_vote\": 9,\n                \"url_comments\": 9,\n                \"url_graphs\": 9,\n                \"url_relationships\": 36,\n                \"urls\": 24\n            }\n        },\n\
+        \        \"total\": {\n            \"analyses\": 13,\n            \"domain_comments\": 10,\n            \"domain_graphs\": 10,\n            \"domain_relationships\": 100,\n            \"domains\"\
+        : 54,\n            \"file_behaviours\": 44,\n            \"file_comments\": 44,\n            \"file_download\": 309,\n            \"file_graphs\": 43,\n            \"file_relationships\": 900,\n\
+        \            \"file_upload_url\": 2,\n            \"files\": 551,\n            \"graphs\": 1,\n            \"intelligence_search\": 189,\n            \"ip_addresses\": 14,\n            \"ip_addresses_comments\"\
+        : 6,\n            \"ip_addresses_graphs\": 4,\n            \"ip_addresses_relationships\": 39,\n            \"item_vote\": 69,\n            \"retrohunt_jobs\": 1,\n            \"search\": 3,\n \
+        \           \"url_comments\": 12,\n            \"url_graphs\": 12,\n            \"url_relationships\": 48,\n            \"url_submission\": 5,\n            \"urls\": 53\n        }\n    }\n```\n"
+      operationId: groupApiUsage
+      parameters:
+      - description: Group ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: A string in format YYYYMMDD
+        in: query
+        name: start_date
+        schema:
+          type: string
+      - description: A string in format YYYYMMDD
+        in: query
+        name: end_date
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Group’s API Usage
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{id}/relationships/service_accounts:
+    get:
+      tags:
+      - Access Control - Service Account Management
+      deprecated: false
+      description: 'Get all the Service Accounts belonging to your Google Threat Intelligence group.
+
+        '
+      operationId: getServiceAccountsOfAGroup
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Service Accounts of a Group
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Access Control - Service Account Management
+      deprecated: false
+      description: 'Create a new Service Account inside your Google Threat Intelligence group by only providing a descriptive identifier which must be unique inside your group.
+
+        '
+      operationId: createANewServiceAccount
+      parameters:
+      - description: Group ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: List of Unique Service Account objects (only 'id' param is needed) within your group.
+                  format: json
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a New Service Account
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /service_accounts/{id}:
+    get:
+      tags:
+      - Access Control - Service Account Management
+      deprecated: false
+      description: 'Get the information about a [Service Account](https://gtidocs.virustotal.com/reference/service-accounts-object) object.
+
+        '
+      operationId: getAServiceAccountObject
+      parameters:
+      - description: Service Account ID (with the form <group ID>_<service account ID>
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Service Account Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}:
+    delete:
+      tags:
+      - Access Control - User Management
+      deprecated: false
+      description: 'This request deletes a given user. A user account can only be deleted by its owner, a 403 error is returned otherwise.
+
+
+        An additional `x-user-password` header is required, which is used as confirmation.
+
+        '
+      operationId: deleteUserId
+      parameters:
+      - description: User ID or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User password, needed as confirmation.
+        in: header
+        name: x-user-password
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '403':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"error\": {\n    \"code\": \"ForbiddenError\",\n    \"message\": \"You are not authorized to perform the requested operation\"\n  }\n}"
+              schema:
+                properties:
+                  error:
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+          description: '403'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Access Control - User Management
+      deprecated: false
+      description: 'This endpoint retrieves information about a user, including the privileges and quotas associated to the user. The user can be retrieved either by user ID or by API key, but the former
+        only works if the requester is the user himself or an administrator of a group the user belongs to.
+
+
+        Returns an [User](https://gtidocs.virustotal.com/reference/user-object) object.
+
+        '
+      operationId: user
+      parameters:
+      - description: User ID or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a User Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Access Control - User Management
+      deprecated: false
+      description: 'This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated [User](https://gtidocs.virustotal.com/reference/user-object)
+        object.
+
+        '
+      operationId: patchUserId
+      parameters:
+      - description: User ID or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  description: User object
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update a User Object
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Access Control - User Management
+      deprecated: false
+      description: 'This endpoint is the same as [/users/{id}/{relationship}](https://gtidocs.virustotal.com/reference/users-relationships) except it returns just the related object''s IDs (and context
+        attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: getUsersRelationshipsIds
+      parameters:
+      - description: Username or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:user-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{id}/{relationship}:
+    get:
+      tags:
+      - Access Control - User Management
+      deprecated: false
+      description: 'Users are related to other objects in our dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved
+        by sending `GET` requests to this API endpoint.
+
+
+        Some relationships are only accessible to their account''s owners and their group''s admins.
+
+
+        The supported relationships are documented in the [User](https://gtidocs.virustotal.com/reference/user-object#relationships) API object page.
+
+        '
+      operationId: usersRelationships
+      parameters:
+      - description: Username or API key
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:user-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          default: 10
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                properties: {}
+                type: object
+          description: '400'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a User
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Object:
+      type: object
+      description: Base shape of a VirusTotal object (file, url, domain, ip_address, comment, vote, graph, collection, analysis, etc.).
+      properties:
+        id:
+          type: string
+          description: Object identifier. For files this is the SHA-256; for URLs the base64url of the URL; for domains the domain; for IPs the address.
+          example: 44d88612fea8a8f36de82e1278abb02f
+        type:
+          type: string
+          description: Object type discriminator.
+          example: file
+        links:
+          type: object
+          description: Hypermedia links for this object.
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Canonical URL for this object.
+          additionalProperties: true
+        attributes:
+          type: object
+          description: Type-specific attributes payload.
+          additionalProperties: true
+        context_attributes:
+          type: object
+          description: Optional context-specific attributes when the object is returned as part of a relationship.
+          additionalProperties: true
+        relationships:
+          type: object
+          description: Pre-expanded relationships to other VirusTotal objects, keyed by relationship name.
+          additionalProperties: true
+      required:
+      - id
+      - type

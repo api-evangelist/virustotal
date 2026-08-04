@@ -1,0 +1,1286 @@
+openapi: 3.0.3
+info:
+  title: VirusTotal API v3 - Threat Graphs
+  version: '3.0'
+  description: Create, share, edit, and search Threat Graphs — visualisations of how IoCs and threats relate. Includes the editor/viewer ACL surface.
+  contact:
+    name: VirusTotal / Google Threat Intelligence
+    url: https://docs.virustotal.com/reference/overview
+  license:
+    name: VirusTotal Terms of Service
+    url: https://www.virustotal.com/gui/terms-of-service
+  x-generated-from: https://storage.googleapis.com/gtidocresources/guides/GTI_API_v3_openapi_spec_10022025.json
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://www.virustotal.com/api/v3
+  description: VirusTotal / GTI API v3 production.
+security:
+- VTApiKey: []
+tags:
+- name: Threat Graphs
+  description: Threat Graphs
+- name: Threat Graphs Permissions & ACL
+  description: Threat Graphs Permissions & ACL
+paths:
+  /graphs:
+    get:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: "Endpoint used to search graphs.\n\nThere are a set of multiple modifiers that you can use to refine your search results. You can combine all of them together and use them in conjunction\
+        \ with AND, OR and NOT operators.\n\nDate and numeric fields support the suffix plus or minus to match values greater or less than the passed value. If not sign has been added to the modifier, you\
+        \ will get exact matches. You can use more than once the same modifier in the same query to define ranges: `creation_date:2018-11-1+` `creation_date:2018-11-12-` will match graphs created between\
+        \ 2018-11-1 and 2018-11-22.\n\n**Graph-related modifiers**\n\n| Modifier            | Description                                        | Example                                               \
+        \               |\n| :------------------ | :------------------------------------------------- | :------------------------------------------------------------------- |\n| id:                 | Filters\
+        \ by graph identifier.                       | id:g675a2fd4c8834e288afd71bbbe88f78884e7d21a8c9348b5ab45cc9281cffc3c |\n| name:               | Filters by graph name.                            \
+        \ | name:Wannacry                                                        |\n| owner:              | Filters by graphs owned by user.                   | owner:richard_hendricks                 \
+        \                             |\n| group:              | Filters by graphs owned by group.                  | group:piedpiper                                                      |\n| visible_to_user:\
+        \    | Filters by graphs visible to user.                 | visible_to_user:richard_hendricks                                    |\n| visible_to_group:   | Filters by graphs visible to group.  \
+        \              | visible_to_group:piedpiper                                           |\n| private:            | Filters by private graphs.                         | private:true, private:false\
+        \                                          |\n| creation_date:      | Filters by the graph creation date.                | creation_date:2018-11-1                                              |\n\
+        | last_modified_date: | Filters by the last date the graph was modified.   | last_modified_date:2018-11-12                                        |\n| total_nodes:        | Filters by graphs containing\
+        \ some amount of nodes. | total_nodes:100                                                      |\n| comments_count:     | Filter by the number of comments of the graph.     | comments_count:10+\
+        \                                                   |\n| views_count:        | Filter by the number of graph views.               | views_count:1000+                                            \
+        \        |\n\n**Node-related modifiers**\n\n| Modifier    | Description                                              | Example                                                               |\n|\
+        \ :---------- | :------------------------------------------------------- | :-------------------------------------------------------------------- |\n| label:      | Filters by graphs containing nodes\
+        \ with a specific label | label:Kill switch                                                     |\n| file:       | Filters by graphs containing the file.                   | file:131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267\
+        \ |\n| domain:     | Filters by graphs containing the domain.                 | domain:piedpiper.com                                                  |\n| ip_address: | Filters by graphs containing\
+        \ the ip address.             | ip_address:1.1.1.1                                                    |\n| url:        | Filters by graphs containing the url.                    | url:<https://piedpiper.com/the-box/>\
+        \                                  |\n| actor:      | Filters by graphs containing the actor.                  | actor:funny bear                                                      |\n| victim:\
+        \     | Filters by graphs containing the victim.                 | victim:richard_hendricks                                              |\n| email:      | Filters by graphs containing the email.\
+        \                  | email:[richard@piedpiper.com](mailto:richard@piedpiper.com)           |\n| department: | Filters by graphs containing the department.             | department:engineers    \
+        \                                              |\n\nIn addition to these modifiers, you can do a free search query. The search engine will return graphs that match the query with the content of\
+        \ any field in the graph.\n\n```curl All graphs\ncurl --request POST \\\n  --url https://www.virustotal.com/api/v3/graphs \\\n  --header 'x-apikey: <your API key>'\n```\n```curl FIlter by user\n\
+        curl --request POST \\\n  --url https://www.virustotal.com/api/v3/graphs?filter=owner:bbunny \\\n  --header 'x-apikey: <your API key>'\n```\n```curl Attributes selection\ncurl --request POST \\\n\
+        \  --url https://www.virustotal.com/api/v3/graphs?filter=owner:bbunny&attributes=private,graph_data \\\n  --header 'x-apikey: <your API key>'\n```\n```curl Filter by domain\ncurl --request POST\
+        \ \\\n  --url https://www.virustotal.com/api/v3/graphs?filter=domain:hooli.com \\\n  --header 'x-apikey: <your API key>'\n```\n\nSupported `order` fields are: `name`, `owner`, `creation_date`, `last_modified_date`,\
+        \ `views_count` and `comments_count`.\n"
+      operationId: graphs
+      parameters:
+      - description: Return the graphs matching the given criteria only
+        in: query
+        name: filter
+        schema:
+          type: string
+      - description: Maximum number graphs to retrieve
+        in: query
+        name: limit
+        schema:
+          format: int32
+          type: integer
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Sort order
+        in: query
+        name: order
+        schema:
+          type: string
+      - description: Specific fields to retrieve
+        in: query
+        name: attributes
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Search Graphs
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: "This endpoint can be used to create new graphs. Note that private graphs will increment the usage of the private graphs quota in your Google Threat Intelligence plan. \n\n```json Request\
+        \ example\n{\n  \"data\": {\n    \"attributes\": {\n      \"comments_count\": 0,\n      \"creation_date\": 1599060646,\n      \"graph_data\": {\n        \"description\": \"test\",\n        \"version\"\
+        : \"5.0.0\"\n      },\n      \"last_modified_date\": 1599117623,\n      \"links\": [\n        {\n          \"connection_type\": \"last_serving_ip_address\",\n          \"source\": \"ecd87dff4decb36ebf35cf2d327cce62fe1e5666d694c4b0f11ff67d540ff4dc\"\
+        ,\n          \"target\": \"relationships_last_serving_ip_address_ecd87dff4decb36ebf35cf2d327cce62fe1e5666d694c4b0f11ff67d540ff4dc\"\n        },\n        {\n          \"connection_type\": \"last_serving_ip_address\"\
+        ,\n          \"source\": \"relationships_last_serving_ip_address_e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\",\n          \"target\": \"138.133.35.39\"\n        },\n      \
+        \  {\n          \"connection_type\": \"contacted_ips\",\n          \"source\": \"e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\",\n          \"target\": \"relationships_contacted_ips_e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\"\
+        \n        },\n        {\n          \"connection_type\": \"contacted_ips\",\n          \"source\": \"relationships_contacted_ips_e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\"\
+        ,\n          \"target\": \"138.133.35.39\"\n        },\n        {\n          \"connection_type\": \"commonality\",\n          \"source\": \"relationships_commonality_106438826\",\n          \"target\"\
+        : \"f053cb783411211b54e2837ec01e0998e3d9bc042f599d95f7f2cb4ba348305d\"\n        },\n        {\n          \"connection_type\": \"hunting\",\n          \"source\": \"relationships_hunting_6534979578789888\"\
+        ,\n          \"target\": \"5a041d8d72fc12d21e09fd781831ff8279199025c3b3da4b13ec24d20200340f\"\n        }\n      ],\n      \"nodes\": [\n        {\n          \"entity_attributes\": {\n          \
+        \  \"has_detections\": true\n          },\n          \"entity_id\": \"e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\",\n          \"index\": 0,\n          \"text\": \"\",\n  \
+        \        \"type\": \"url\",\n          \"x\": 0,\n          \"y\": 0\n        },\n        {\n          \"entity_attributes\": {},\n          \"entity_id\": \"relationships_last_serving_ip_address_e743cffce9efddfb4f1d7e7dc3c10c6d562e61b5f65e6dd3fd4f28b604fcc2f6\"\
+        ,\n          \"index\": 1,\n          \"text\": \"\",\n          \"type\": \"relationship\",\n          \"x\": -27.425258029385414,\n          \"y\": -19.198748008541706\n        },\n        {\n\
+        \          \"entity_attributes\": {\n            \"country\": \"OM\",\n            \"has_detections\": true\n          },\n          \"entity_id\": \"138.133.35.39\",\n          \"fx\": -60.42155469411466,\n\
+        \          \"fy\": -1.7339803589372877,\n          \"index\": 2,\n          \"text\": \"\",\n          \"type\": \"ip_address\",\n          \"x\": -60.42155469411466,\n          \"y\": -1.7339803589372877\n\
+        \        },\n        {\n          \"entity_attributes\": {\n            \"has_detections\": false,\n            \"type_tag\": \"text\"\n          },\n          \"entity_id\": \"733314c4b079b42174c6b55fb89755faca798378ab999ea240b3f14b0d24a90f\"\
+        ,\n          \"index\": 6,\n          \"text\": \"\",\n          \"type\": \"file\",\n          \"x\": 27.265746471390678,\n          \"y\": -9.726931961146573\n        },\n        {\n         \
+        \ \"entity_attributes\": {\n            \"has_detections\": false\n          },\n          \"entity_id\": \"www.blablabla.com\",\n          \"index\": 88,\n          \"text\": \"\",\n          \"\
+        type\": \"domain\",\n          \"x\": -234.75082645175817,\n          \"y\": 8.15972244734705\n        },\n        {\n          \"entity_attributes\": {\n            \"intelligence_query\": \"entity:\
+        \ url path: blablabla\",\n            \"relationship_type\": \"intelligence\"\n          },\n          \"entity_id\": \"intelligence_-1173580683\",\n          \"index\": 154,\n          \"text\"\
+        : \"VTI: entity: url path: blablabla\",\n          \"type\": \"relationship\",\n          \"x\": -27.95565446983731,\n          \"y\": -64.23455937679253\n        },,\n        {\n          \"entity_attributes\"\
+        : {\n            \"commonalities\": [\n              {\n                \"commonality\": \"path\",\n                \"value\": \"/\"\n              }\n            ],\n            \"relationship_type\"\
+        : \"commonality\"\n          },\n          \"entity_id\": \"relationships_commonality_106438826\",\n          \"fx\": -107.49097518267031,\n          \"fy\": 198.2339878510857,\n          \"index\"\
+        : 160,\n          \"text\": \"path: /\",\n          \"type\": \"relationship\",\n          \"x\": -107.49097518267031,\n          \"y\": 198.2339878510857\n        },\n        {\n          \"entity_attributes\"\
+        : {\n            \"relationship_type\": \"hunting\",\n            \"ruleset_id\": \"6533973538739388\"\n          },\n          \"entity_id\": \"relationships_hunting_6533973538739388\",\n     \
+        \     \"index\": 161,\n          \"text\": \"\",\n          \"type\": \"relationship\",\n          \"x\": -130.72553403592232,\n          \"y\": 346.7297024640031\n        }\n      ],\n      \"\
+        private\": true\n    },\n    \"type\": \"graph\"\n  }\n}\n```\n\n```json Response example\n{\n    \"data\": {\n        \"id\": \"g0538d03053194c338643183e315b134ec3463a392330430938033934f3be3f37\"\
+        ,\n        \"type\": \"graph\"\n    }\n}\n```\n"
+      operationId: createGraphs
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                RAW_BODY:
+                  format: json
+                  type: string
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Create a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}:
+    delete:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: VirusTotal Delete a Graph
+      operationId: graphsDelete
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Delete a Graph
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: "Returns a [Graph](https://gtidocs.virustotal.com/reference/graph-object) object.\n\n```json Response example\n{\n  \"data\": {\n    \"attributes\": {\n      \"graph_data\": {\n     \
+        \   \"description\": \"Hooli.com investigation\"\n      },\n      \"links\": [\n        {\n          \"connection_type\": \"resolutions\",\n          \"source\": \"www.hooli.com\",\n          \"\
+        target\": \"relationships_resolutions_wwwhoolicom\"\n        },\n        {\n          \"connection_type\": \"resolutions\",\n          \"source\": \"relationships_resolutions_wwwhoolicom\",\n  \
+        \        \"target\": \"8.8.8.8\"\n        }\n      ],\n      \"private\": false,\n      \"creation_date\": 1530006951,\n      \"position\": {\n        \"y\": 388,\n        \"x\": 897,\n        \"\
+        scale\": \"1\"\n      },\n      \"nodes\": [\n        {\n          \"index\": 0,\n          \"entity_id\": \"www.hooli.com\",\n          \"text\": \"Root Node\",\n          \"y\": 65,\n        \
+        \  \"x\": -18,\n          \"type\": \"domain\"\n        },\n        {\n          \"y\": 42,\n          \"index\": 1,\n          \"entity_id\": \"relationships_resolutions_wwwhoolicom\",\n      \
+        \    \"type\": \"relationship\",\n          \"x\": -56\n        },\n        {\n          \"index\": 2,\n          \"entity_id\": \"8.8.8.8\",\n          \"fx\": 3.3,\n          \"fy\": 4.4,\n  \
+        \        \"y\": 0,\n          \"x\": -64,\n          \"type\": \"ip_address\"\n        },\n        {\n          \"index\": 2,\n          \"entity_id\": \"131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267\"\
+        ,\n          \"fx\": 3.3,\n          \"fy\": 4.4,\n          \"y\": 0,\n          \"x\": -64,\n          \"type\": \"file\"\n        },\n        {\n          \"index\": 2,\n          \"entity_id\"\
+        : \"1a0556926f7e76419d12e4c6ad52f10388af11f2689f6c0fb6111a2b85f131de\",\n          \"fx\": 3.3,\n          \"fy\": 4.4,\n          \"y\": 0,\n          \"x\": -64,\n          \"type\": \"url\"\n\
+        \        }\n      ]\n    },\n    \"type\": \"graph\",\n    \"id\": \"g3ad78ce6c21ae675e81ac376a6fc016c37befa6dc87484b95a2b069f8d04ef44\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/graphs/g3ad78ce6c21ae675e81ac376a6fc016c37befa6dc87484b95a2b069f8d04ef44\"\
+        \n    }\n  }\n}\n```\n"
+      operationId: graphsInfo
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get a Graph Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: "```json Update request example\n{\n  \"data\":{\n    \"attributes\": {\n      \"private\": true\n    },\n    \"type\":\"graph\"\n  }\n}\n```\n\n```json Response example\n{\n  \"data\"\
+        : {\n    \"attributes\": {\n      \"private\": false,\n      \"nodes\": [\n        {\n          \"type\":\"domain\",\n          \"entity_id\":\"www.hooli.com\",\n          \"x\":-18,\n         \
+        \ \"y\":65,\n          \"text\":\"Root Node\",\n          \"index\":0\n        },\n        {\n          \"type\":\"relationship\",\n          \"entity_id\":\"relationships_resolutions_wwwhoolicom\"\
+        ,\n          \"x\":-56,\n          \"y\":42,\n          \"index\":1\n        },\n        {\n          \"type\":\"ip_address\",\n          \"entity_id\":\"8.8.8.8\",\n          \"x\":-64,\n     \
+        \     \"y\":0,\n          \"index\":2,\n          \"fx\":3.3,\n          \"fy\":4.4\n        },\n        {\n          \"type\":\"file\",\n          \"entity_id\":\"131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267\"\
+        ,\n          \"x\":-64,\n          \"y\":0,\n          \"index\":2,\n          \"fx\":3.3,\n          \"fy\":4.4\n        },\n        {\n          \"type\":\"url\",\n          \"entity_id\":\"1a0556926f7e76419d12e4c6ad52f10388af11f2689f6c0fb6111a2b85f131de\"\
+        ,\n          \"x\":-64,\n          \"y\":0,\n          \"index\":2,\n          \"fx\":3.3,\n          \"fy\":4.4\n        }\n      ],\n        \"links\":[\n          {\n            \"source\":\"\
+        www.hooli.com\",\n            \"target\":\"relationships_resolutions_wwwhoolicom\",\n            \"connection_type\":\"resolutions\"\n          },\n          {\n            \"source\":\"relationships_resolutions_wwwhoolicom\"\
+        ,\n            \"target\":\"8.8.8.8\",\n            \"connection_type\":\"resolutions\"\n          }\n        ],\n          \"position\": {\n            \"x\":897,\n              \"y\":388,\n  \
+        \              \"scale\":\"1\"\n          },\n            \"graph_data\": {\n              \"description\": \"Hooli.com graph\"\n            }\n    },\n      \"type\": \"graph\"\n  }\n}\n```\n"
+      operationId: graphsUpdate
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                graph_data:
+                  description: Highlevel graph data.
+                  properties:
+                    version:
+                      description: Current version of the graph.
+                      type: string
+                  type: object
+                links:
+                  description: Array of links.
+                  items:
+                    properties:
+                      connection_type:
+                        description: Type of the connection between the source and the target.
+                        type: string
+                      source:
+                        description: Entity id of the link source.
+                        type: string
+                      target:
+                        description: Entity id of the link target.
+                        type: string
+                    type: object
+                  type: array
+                nodes:
+                  description: Array of nodes.
+                  items:
+                    properties:
+                      entity_attributes:
+                        description: (optional) Entity related attributes.
+                        type: object
+                      entity_id:
+                        description: Node entity id.
+                        type: string
+                      fx:
+                        description: (optional) Force x position.
+                        format: float
+                        type: number
+                      fy:
+                        description: (optional) Force y position.
+                        format: float
+                        type: number
+                      index:
+                        description: Index of the node list.
+                        format: int32
+                        type: integer
+                      text:
+                        description: (optional) Node label.
+                        type: string
+                      type:
+                        description: Node entity type.
+                        type: string
+                      x:
+                        description: X position of the node.
+                        format: float
+                        type: number
+                      y:
+                        description: Y position of the node.
+                        format: float
+                        type: number
+                    type: object
+                  type: array
+                private:
+                  description: Private status.
+                  type: boolean
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Update a Graph Object
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/comments:
+    get:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: 'This endpoint returns the comments posted in a given graph. Check [Graph comments relationship page](https://gtidocs.virustotal.com/reference/graph-comments) to know more about the returned
+        object.
+
+        '
+      operationId: getGraphComments
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Comments on a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: VirusTotal Add a Comment to a Graph
+      operationId: postGraphsComments
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  default: '{"type": "comment", "attributes": {"text": "test"}}'
+                  description: A comment object.
+                  format: json
+                  type: string
+              required:
+              - data
+              type: object
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Add a Comment to a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/relationships/{relationship}:
+    get:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: 'This endpoint is the same as [/graphs/{id}/{relationship}](https://gtidocs.virustotal.com/reference/graphs-relationships) except it returns just the related object''s IDs (and context
+        attributes, if any) instead of returning all attributes.
+
+        '
+      operationId: graphsRelationshipsIds
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:graph-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Object Descriptors Related to a Graph
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/{relationship}:
+    get:
+      tags:
+      - Threat Graphs
+      deprecated: false
+      description: "Graph objects have number of relationships to other objects. As mentioned in the  [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects\
+        \ can be retrieved by sending `GET` requests to the relationship URL. \n\nSome relationships are accesible only to users who have access to Google Threat Intelligence.\n\nThe relationships supported\
+        \ by graph objects are documented in the [Graph](https://gtidocs.virustotal.com/reference/graph-object) API object page.\n\n```json Response example for owner\n{\n    \"data\": {\n        \"attributes\"\
+        : {\n            \"first_name\": \"Richard\",\n            \"last_name\": \"Hendricks\",\n            \"profile_phrase\": \"CEO of Pied Piper\",\n            \"reputation\": 1,\n            \"status\"\
+        : \"active\",\n            \"user_since\": 1528111032\n        },\n        \"id\": \"hendricks\",\n        \"links\": {\n            \"self\": \"https://www.virustotal.com/api/v3/users/hendricks\"\
+        \n        },\n        \"type\": \"user\"\n    },\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g510b3e01190b9e6001f7ed7d14015558b11ca9d3e87367b6b809bbb402645bf2/owner\"\
+        \n    }\n}\n```\n"
+      operationId: graphsRelationships
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Relationship name (see [table](ref:graph-object#relationships))
+        in: path
+        name: relationship
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Objects Related to a Graph
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/relationships/editors:
+    get:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: "This endpoint returns the users and groups that can edit the graph. The graph needs to be shared with them as `Editor` to appear here.\n\n```json Response example\n{\n    \"data\": [\n\
+        \        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n               \
+        \ \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n         \
+        \       \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10\"\
+        \n    }\n}\n```\n"
+      operationId: graphsEditors
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Users and Groups That Can Edit a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: "This endpoint adds a user or groups as a graph editor. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"\
+        Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n               \
+        \ \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n      \
+        \      },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10\"\
+        \n    }\n}\n```\n"
+      operationId: graphsAddEditor
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Grant Users and Groups Permission to Edit a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/relationships/editors/{user_or_group_id}:
+    delete:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: VirusTotal Revoke Edit Graph Permissions from a User or Group
+      operationId: graphsDeleteEditor
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Revoke Edit Graph Permissions from a User or Group
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: "This endpoint returns true if the user or group has `Editor` access to the graph.\n\n```json Response example\n{\n    \"data\": false\n}\n```\n"
+      operationId: graphsCheckEditor
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User or Group Can Edit a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/relationships/viewers/{user_or_group_id}:
+    delete:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: VirusTotal Revoke View Permission from a User or Group
+      operationId: graphsDeleteViewer
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Revoke View Permission from a User or Group
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: 'This endpoint returns true if the user has `Viewer` access to the graph.
+
+        '
+      operationId: graphsCheckViewer
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: User or group ID
+        in: path
+        name: user_or_group_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"data\": true\n}"
+              schema:
+                properties:
+                  data:
+                    default: true
+                    type: boolean
+                type: object
+          description: '200'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Check if a User or Group Can View a Graph
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /graphs/{id}/relationships/viewers:
+    get:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: "This endpoint returns the users that can view the graph. The graph needs to be shared with them as `Viewer` to appear here.\n\n```json Response example\n{\n    \"data\": [\n        {\n\
+        \            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\"\
+        : 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\":\
+        \ \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10\"\
+        \n    }\n}\n```\n"
+      operationId: graphsViewers
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of related objects to retrieve
+        in: query
+        name: limit
+        schema:
+          type: string
+      - description: Continuation cursor
+        in: query
+        name: cursor
+        schema:
+          format: int32
+          type: integer
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Get Users and Groups That Can View a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      tags:
+      - Threat Graphs Permissions & ACL
+      deprecated: false
+      description: "This endpoint adds a user or group as a graph viewer. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\"\
+        ,\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\"\
+        : 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n      \
+        \      \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10\"\
+        \n    }\n}\n```\n"
+      operationId: graphsAddViewer
+      parameters:
+      - description: A 65 char length id which uniquely identify the graph.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      security:
+      - VTApiKey: []
+      summary: VirusTotal Grant Users and Groups Permission to See a Graph
+      responses:
+        '200':
+          description: Successful VirusTotal API response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataEnvelope'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Missing or invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Object not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit or quota exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    VTApiKey:
+      type: apiKey
+      in: header
+      name: x-apikey
+      description: Personal VirusTotal / GTI API key. Found in the user menu of your VirusTotal account.
+  schemas:
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    DataEnvelope:
+      type: object
+      description: Successful response envelope. The shape of `data` depends on the endpoint.
+      properties:
+        data:
+          description: Endpoint-specific payload — usually a VirusTotal object or list of objects.
+          example: {}
+        meta:
+          type: object
+          description: Optional metadata about the response (cursors, counts, etc.).
+          additionalProperties: true
+        links:
+          type: object
+          description: Optional pagination links.
+          properties:
+            next:
+              type: string
+              format: uri
+              description: URL to the next page of results.
+            self:
+              type: string
+              format: uri
+              description: URL of the current page.
+          additionalProperties: true
+      required:
+      - data
+    Object:
+      type: object
+      description: Base shape of a VirusTotal object (file, url, domain, ip_address, comment, vote, graph, collection, analysis, etc.).
+      properties:
+        id:
+          type: string
+          description: Object identifier. For files this is the SHA-256; for URLs the base64url of the URL; for domains the domain; for IPs the address.
+          example: 44d88612fea8a8f36de82e1278abb02f
+        type:
+          type: string
+          description: Object type discriminator.
+          example: file
+        links:
+          type: object
+          description: Hypermedia links for this object.
+          properties:
+            self:
+              type: string
+              format: uri
+              description: Canonical URL for this object.
+          additionalProperties: true
+        attributes:
+          type: object
+          description: Type-specific attributes payload.
+          additionalProperties: true
+        context_attributes:
+          type: object
+          description: Optional context-specific attributes when the object is returned as part of a relationship.
+          additionalProperties: true
+        relationships:
+          type: object
+          description: Pre-expanded relationships to other VirusTotal objects, keyed by relationship name.
+          additionalProperties: true
+      required:
+      - id
+      - type

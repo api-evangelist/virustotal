@@ -5,7 +5,7 @@
       "source": "https://blog.virustotal.com/feeds/posts/default?alt=rss",
       "feed_url": "https://blog.virustotal.com/feeds/posts/default?alt=rss",
       "title": "",
-      "saved": 0,
+      "saved": 1,
       "method": "feed"
     },
     {
@@ -13,9 +13,10 @@
       "feed_url": "https://github.com/VirusTotal",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
-  "post_count": 25,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 26,
+  "fetched": "2026-08-15T12:11:08Z"
 }

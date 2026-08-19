@@ -1,0 +1,312 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Files Behaviours API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IoC Investigation - Files Behaviours",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a File Behavior Report from a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID. See \"Sandbox Report identifiers\" section below for more info."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetches a [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object by ID.\n\n> 📘 This API call only fetches the behaviour report for a single behavioural analysis you can fetch all of them with [https://gtidocs.virustotal.com/reference/file-all-behaviours-summary](https://gtidocs.virustotal.com/reference/file-all-behaviours-summary)\n\n## Sandbox Report identifiers\n\nA Sandbox report ID has two main components: the **analysed file's SHA256** and the **sandbox n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the EVTX File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/evtx",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the EVTX file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Detailed HTML Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/html",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object as an HTML report.\n\n## Sandbox Report identifiers\n\nA Sandbox report ID has two main components: the **analysed file's SHA256** and the **sandbox name**. These two components are joined by a `_` character. For example, ID `5353e23f3653402339c93a8565307c6308ff378e03fcf23a4378f31c434030b0_VirusTotal Jujubox` fetches the sandbox report for a file having a SHA256 `5353e23f3653402339c93a8565307c63"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the Memdump File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/memdump",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the memdump file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get the PCAP File Generated During a File’s Behavior Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/pcap",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Special privileges required\n> \n> This endpoint is only available for users with special privileges.\n\nFetch the PCAP file associated with the sandbox execution.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Object Descriptors Related to a Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/relationships/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:file-behaviour-summary-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is the same as [/file_behaviours/{sandbox_id}/{relationship}](https://gtidocs.virustotal.com/reference/file_behaviourssandbox_idrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Behaviour Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/file_behaviours/:sandbox_id/:relationship",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox report ID"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:file-behaviour-summary-object#relationships))"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object documentation.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviour_mitre_trees",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a summary of MITRE ATT&CK tactics and techniques observed in each of the sandbox reports of a file.\n\nThe resulting structure is the following one:\n\n```json\n{\n  sandbox_name: {\n    \"tactics\": [\n      {\n        \"id\": tactic_id,\n        \"name\": tactic_name,\n        \"description\": tactic_description,\n        \"link\": tactic_mitre_url,\n        \"techniques\": [\n          {\n            \"id\": technique_id,\n            \"name\": technique_name,\n            \"description\": technique_descr"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviour_summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a summary with behavioural information about the file. The summary consists in merging together the reports produced by the multiple sandboxes we have integrated in VirusTotal. \n\nThis API call returns all fields contained in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object, except the ones that make sense only for individual sandboxes:\n\n- `analysis_date`\n- `behash`\n- `has_html_report`\n- `has_pcap`\n- `last_modification_date`"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get All Behavior Reports for a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/files/:id/behaviours",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "SHA-256, SHA-1 or MD5 identifying the file"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns behavioural information from each sandbox about the file. \n\nThis API call returns all fields contained in the [File behaviour](https://gtidocs.virustotal.com/reference/file-behaviour-summary-object) object.\n\nNote some of the entries have \n\n- `has_html_report` if true you may fech the HTML [File behaviour](https://gtidocs.virustotal.com/reference/get-file-behaviour-html).\n- `has_pcap` if true you may fech the PCAP [File behaviour](https://gtidocs.virustotal.com/reference/fil"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

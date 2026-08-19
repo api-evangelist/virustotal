@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Retrohunt API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "YARA Hunting - Retrohunt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get a List of Retrohunt Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number jobs to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the jobs matching the given criteria only"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Create a New Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"retrohunt_job\",\n    \"attributes\": {\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_email\": \"notifications@acme.com\",\n      \"corpus\": \"main\",\n      \"time_range\": {\n        \"start\": 1545145761,\n        \"end\": 1547737720\n      }\n    }\n  }\n}\n```\n\nThe `rules` attribute is required, but `notification_e"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Retrohunt Job Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Delete a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Delete a Retrohunt Job"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Abort a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id/abort",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Abort a Retrohunt Job"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Retrieve Matches for a Retrohunt Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/retrohunt_jobs/:id/matching_files",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job identifier"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of matching files to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrohunt jobs are related to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships URL.\n\nThe supported relationships for Retrohunt jobs are described in the [Retrohunt Jobs](https://gtidocs.virustotal.com/reference/retrohunt-job-object) API object page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

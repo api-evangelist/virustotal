@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Rules API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "YARA Hunting - Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal List Crowdsourced YARA Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rules to retrieve"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Return the rules matching the given criteria only"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"name\": \"PK_AXA_fun\",\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"AXA\"\n\t\t\t\t],\n\t\t\t\t\"matches\": 0,\n\t\t\t\t\"author\": \"Thomas Damonneville\",\n\t\t\t\t\"enabled\": true,\n\t\t\t\t\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n    meta:\\n        description = \\\"Phis"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a [YARA rule](https://gtidocs.virustotal.com/reference/yara-rule-object) object.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id/relationships/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:yara-rule-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Same as [/yara_rules/{id}/{relationships}](https://gtidocs.virustotal.com/reference/crowdsourced-yara-rule-relationship-endpoint) except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Objects Related to a Crowdsourced YARA Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/yara_rules/:id/:relationship",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Rule identifier"
+              },
+              {
+                "name": "relationship",
+                "value": "",
+                "type": "path",
+                "description": "Relationship name (see [table](ref:yara-rule-object#relationships))"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "YARA rule objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by YARA rule objects are documented in the [YARA Rules](https://gtidocs.virustotal.com/reference/yara-rule-object#relationships) API object page.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

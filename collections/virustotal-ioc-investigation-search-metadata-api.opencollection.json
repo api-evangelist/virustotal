@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Search & Metadata API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IoC Investigation - Search & Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Advanced Corpus Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query using URL Safe encoding"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (see table in the description above)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (Max. 300)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              },
+              {
+                "name": "descriptors_only",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return full object information or just object descriptors."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "> 🚧 Searches using a fuzzy hash (ssdeep, TLSH, ...) are throttled due to performance reasons. The typical throttler is 15 searches / minute.\n\nThis endpoint allows to search for files in the Google Threat Intelligence's dataset, using the same query syntax that you would use in the Google TI user interface. **URL Safe encoding must be used when using this endpoint programatically.**\n\nThe result from this endpoint is a collection of file objects that match the given query. If the `descriptors_onl"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get File Content Search Snippets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/intelligence/search/snippets/:snippet",
+            "params": [
+              {
+                "name": "snippet",
+                "value": "",
+                "type": "path",
+                "description": "Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This request returns file content snippets that matched a query in the [`/search`](https://gtidocs.virustotal.com/reference/intelligence-search) endpoint. The response is a list of strings containing both content hexdump and plain text. Matched content is found between `*` characters, more file content is returned to provide additional context about the match.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Google Threat Intel Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/metadata",
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns a dictionary with metadata related to Google Threat Intelligence, which includes a full list of engines in use, a list of existing privileges, etc.\n\n```json Example\n{\n  \"data\": {\n    \"engines\": {\n      \"ALYac\": {},\n      \"APEX\": {},\n      \"AVG\": {},\n      \"AVware\": {},\n      \"Acronis\": {},\n      \"Ad-Aware\": {},\n      \"AegisLab\": {},\n      \"AhnLab-V3\": {},\n      \"Alibaba\": {},\n      \"Antiy-AVL\": {},\n      \"Arcabit\": {},\n      \"Avast\": {},\n      \"Avast-Mobile\": {},\n      \"Avi"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Search for Files, URLs, Domains, IPs and Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint searches any of the following:\n\n- A file hash - Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.\n- A URL - Returns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n- A domain - Returns [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n- A IP address - Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n- Comments by tags - Returns a list of [Comment](https://gtidocs.virustotal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

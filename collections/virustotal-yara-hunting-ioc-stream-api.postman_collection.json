@@ -1,0 +1,897 @@
+{
+  "item": [
+    {
+      "id": "6ce56120-b6da-4f41-a9e6-d79f7db305c6",
+      "name": "YARA Hunting - IoC Stream",
+      "description": {
+        "content": "YARA Hunting - IoC Stream",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c243c6c2-5cee-4d6d-885f-e929a2738d20",
+          "name": "VirusTotal Delete Notifications from the IoC Stream",
+          "request": {
+            "name": "VirusTotal Delete Notifications from the IoC Stream",
+            "description": {
+              "content": "Uses the same filters than the IoC Stream ([GET /ioc_stream](https://gtidocs.virustotal.com/reference/get-objects-from-the-ioc-stream)) to delete all the matching notifications.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ioc_stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter string"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2d30d7e-5821-4472-9644-4665956a1041",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edb6c830-6223-42ce-a239-a80826088959",
+              "name": "429",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": \\\"TooManyRequests\\\",\\n    \\\"message\\\": \\\"Notifications already being deleted. Depending on volume this may take a while.\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cda4407c-57c2-4ae2-a469-ad994f22019d",
+          "name": "VirusTotal Get Objects from the IoC Stream",
+          "request": {
+            "name": "VirusTotal Get Objects from the IoC Stream",
+            "description": {
+              "content": "The IoC stream endpoint returns different types of objects (files, URLs, domains, IP addresses) coming from multiple origins (you can restrict the returned types by using the filters explained below). In addition, depending on the origin of the notification there will be different context attributes added to these objects.\n\nThe possible context attributes in IoC Stream objects are:\n\n- `notification_id`: \\<_string_> Always present. This string identifies the notification, and can be used to retrieve the notification individually (by using [GET /ioc_stream_notifications/{id}](https://gtidocs.virustotal.com/reference/get-an-ioc-stream-notification)) or to delete it ([DELETE /ioc_stream_notifications/{id}](https://gtidocs.virustotal.com/reference/delete-an-ioc-stream-notification)).\n- `notification_date`: \\<_int_> Always present. Date when the notification was created (UTC timestamp).\n- `origin`: \\<_string_> Always present. The notification's origin. In the case of Livehunt or Retrohunt the origin is `hunting`.\n- `sources`: \\<_list of dictionaries_> Always present. The different sources associated to the notification. In the case of Livehunt the only source is always the hunting ruleset that triggered the notification.\n- `tags`: \\<_list of strings_> List of notification's tags (if any). These tags can be used to filter the objects by using the `notification_tag:` filter.\n- `hunting_info`: \\<_dictionary_> Only present for notifications of `hunting` origin. It contains additional contextual information from Livehunt. Its structure is the following:\n  - `rule_name`: \\<_string_> matched rule name.\n  - `rule_tags`: \\<_list of strings_> matched rule tags.\n  - `snippet`: \\<_string_> matched contents inside the file as hexdump. Contains `begin_highlight` and `end_highlight` substrings to indicate the part of the file that produced the match and give additional context about surrounding bytes in the match.\n  - `source_country`: \\<_string_> country where the matched file was uploaded from.\n  - `source_key`: \\<_string_> unique identifier for the source in ciphered form.\n\nAllowed filters with examples (they can be combined in the same filter string):\n\n- `date:2023-02-07T10:00:00+`: Returns objects from notifications generated after 2023-02-07T10:00:00 (UTC)\n- `date:2023-02-07-`: Returns objects from notifications generated before 2023-03-07T00:00:00 (UTC)\n- `origin:hunting`: Returns objects from notifications coming from Livehunt. Allowed values: `hunting, subscriptions`.\n- `entity_id:objectId`: Return objects whose ID is `objectId`\n- `entity_type:file`: Return only file objects. Allowed values: `file, domain, url, ip_address`\n- `source_type:hunting_ruleset`: The type of source object that triggered the notification. Allowed values: `hunting_ruleset, retrohunt_job, collection, threat_actor`.\n- `source_id:objectId`: The ID of the source object that triggered the notification. In the case of hunting the notification's source object ID corresponds to the hunting ruleset's ID.\n- `notification_tag:ruleName`: Notifications with `ruleName` in their tags. In the case of notifications coming from Livehunt there are several tags in each notification, like the rule name or the username of the ruleset's owner.\n\nAllowed orders:\n\n- `date-` (default): Sorts by most recent notifications first.\n- `date+`: Sorts by oldest notification first.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ioc_stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of objects to retrieve (max 40)"
+                },
+                {
+                  "disabled": false,
+                  "key": "descriptors_only",
+                  "value": "false",
+                  "description": "The response returns only objects descriptors instead of whole VT objects"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter string"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8b70b334-ec06-4918-bf57-b9985f8df7ce",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "descriptors_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n\\t\\\"meta\\\": {\\n\\t\\t\\\"cursor\\\": \\\"Ck0KEQoEZGF0ZRIJCLnz1ObJg_0CEjRqEXN-dmlydXN0b3RhbGNsb3Vkch8LEhVJT0NTdHJlYW1Ob3RpZmljYXRpb24YsK2w2iEMGAAgAQ==\\\"\\n\\t},\\n\\t\\\"data\\\": [\\n\\t\\t{\\n\\t\\t\\t\\\"type\\\": \\\"file\\\",\\n\\t\\t\\t\\\"id\\\": \\\"c9c4ee34d9c9f769f884f720e1d37ce1e864aae1be81a4a274bb1a88704cb11c\\\",\\n\\t\\t\\t\\\"context_attributes\\\": {\\n\\t\\t\\t\\t\\\"notification_id\\\": \\\"9047905968\\\",\\n\\t\\t\\t\\t\\\"origin\\\": \\\"hunting\\\",\\n\\t\\t\\t\\t\\\"hunting_info\\\": {\\n\\t\\t\\t\\t\\t\\\"rule_name\\\": \\\"vulnerability_weaponization\\\"\\n\\t\\t\\t\\t},\\n\\t\\t\\t\\t\\\"tags\\\": [\\n\\t\\t\\t\\t\\t\\\"c9c4ee34d9c9f769f884f720e1d37ce1e864aae1be81a4a274bb1a88704cb11c\\\",\\n\\t\\t\\t\\t\\t\\\"vulnerability_weaponization\\\",\\n\\t\\t\\t\\t\\t\\\"ransomware\\\"\\n\\t\\t\\t\\t],\\n\\t\\t\\t\\t\\\"sources\\\": [\\n\\t\\t\\t\\t\\t{\\n\\t\\t\\t\\t\\t\\t\\\"type\\\": \\\"hunting_ruleset\\\",\\n\\t\\t\\t\\t\\t\\t\\\"id\\\": \\\"7926136120\\\",\\n\\t\\t\\t\\t\\t\\t\\\"label\\\": \\\"Ransomware\\\"\\n\\t\\t\\t\\t\\t}\\n\\t\\t\\t\\t],\\n\\t\\t\\t\\t\\\"notification_date\\\": 1675778611\\n\\t\\t\\t}\\n\\t\\t}\\n\\t],\\n\\t\\\"links\\\": {\\n\\t\\t\\\"self\\\": \\\"https://www.virustotal.com/api/v3/ioc_stream?limit=1&filter=date%3A2023-02-07T10%3A00%3A00%2B%20entity_type%3Afile%20origin%3Ahunting&descriptors_only=true\\\",\\n\\t\\t\\\"next\\\": \\\"https://www.virustotal.com/api/v3/ioc_stream?filter=date%3A2023-02-07T10%3A00%3A00-+entity_type%3Afile+origin%3Ahunting&cursor=Ck0KEQoEZGF0ZRIJCLnz1ObJg_0CEjRqEXN-dmlydXN0b3RhbGNsb3Vkch8LEhVJT0NTdHJlYW1Ob3RpZmljYXRpb24YsK2w2iEMGAAgAQ%3D%3D&limit=1&descriptors_only=true\\\"\\n\\t}\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5790289e-fac7-41aa-8382-225067377305",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "descriptors_only",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n\\t\\\"error\\\": {\\n\\t\\t\\\"message\\\": \\\"origin \\\\\\\"notHunting\\\\\\\" is not valid. Valid origins are: hunting,subscriptions\\\",\\n\\t\\t\\\"code\\\": \\\"BadRequestError\\\"\\n\\t}\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01d36219-51a7-44ac-a3b9-7f48cc38b69b",
+          "name": "VirusTotal Delete an IoC Stream Notification",
+          "request": {
+            "name": "VirusTotal Delete an IoC Stream Notification",
+            "description": {
+              "content": "Deletes an IoC Stream notification.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ioc_stream_notifications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the IoC Stream notification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1f70f194-f7cf-408d-8c39-d71a11e635a2",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b87d114-8880-4bc7-9c49-5a2860170951",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3421e6c2-9a5d-497e-8642-c4cc40adf383",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "664ba988-fdc0-46e4-9f54-7930223237bc",
+              "name": "Object not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bf3ba2f-ea30-4774-9214-c1b820ac28c5",
+              "name": "Rate limit or quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b53b2920-2440-4aba-8480-7c6448b82d79",
+          "name": "VirusTotal Get an IoC Stream Notification",
+          "request": {
+            "name": "VirusTotal Get an IoC Stream Notification",
+            "description": {
+              "content": "Returns an IoC Stream notification.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ioc_stream_notifications",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the IoC Stream notification"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4297891c-4657-4799-8ba8-8100f8d1cf2d",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b6ef837-4199-4917-a1fe-4be23caa1a12",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ioc_stream_notifications",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the IoC Stream notification"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.virustotal.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b4fe3b1d-ffd5-44dc-b513-24f0bcb07abb",
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - IoC Stream API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+      "type": "text/plain"
+    }
+  }
+}

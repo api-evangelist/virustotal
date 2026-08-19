@@ -1,0 +1,723 @@
+{
+  "item": [
+    {
+      "id": "2b40e6f8-74a6-4223-aae6-86189593b850",
+      "name": "IoC Investigation - Search & Metadata",
+      "description": {
+        "content": "IoC Investigation - Search & Metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a8743f6-336f-46bf-83e7-331010af8ec4",
+          "name": "VirusTotal Advanced Corpus Search",
+          "request": {
+            "name": "VirusTotal Advanced Corpus Search",
+            "description": {
+              "content": "> 🚧 Searches using a fuzzy hash (ssdeep, TLSH, ...) are throttled due to performance reasons. The typical throttler is 15 searches / minute.\n\nThis endpoint allows to search for files in the Google Threat Intelligence's dataset, using the same query syntax that you would use in the Google TI user interface. **URL Safe encoding must be used when using this endpoint programatically.**\n\nThe result from this endpoint is a collection of file objects that match the given query. If the `descriptors_only` parameter is set to `true`, the resulting collection will contain only the object descriptors. This is useful if you are interested in getting only the SHA-256 of the matching files. In those cases you better set `descriptors_only=true` for reducing the latency of your requests.\n\n> 🚧 Content searches can not be sorted\n> \n> If your query contains content search the order parameter will make no effect.\n\nThe `order` parameter defines the order in which results are returned. They can be followed by a plus (`+`) or minus (`-`) sign for indicating ascending or descending order respectively (i.e: `<order>+`, `<order>-`). If no ascending/descending order is specified it's assumed to be ascending, so `<order>` and `<order>+` are equivalent. If the `order` parameter is not provided, items are returned in a default order. The following table shows supported and default orders for every kind of entity:\n\n| Entity type | Supported orders                                                                | Default order           |\n| :---------- | :------------------------------------------------------------------------------ | :---------------------- |\n| file        | first_submission_date, last_submission_date, positives, times_submitted, size   | last_submission_date-   |\n| url         | first_submission_date, last_submission_date, positives, times_submitted, status | last_submission_date-   |\n| domain      | creation_date, last_modification_date, last_update_date, positives              | last_modification_date- |\n| ip          | ip, last_modification_date, positives                                           | last_modification_date- |\n\nThis request returns a list of API objects ([files](https://gtidocs.virustotal.com/reference/files), [URLs](https://gtidocs.virustotal.com/reference/url-object), [IP addresses](https://gtidocs.virustotal.com/reference/ip-object) or [domains](https://gtidocs.virustotal.com/reference/domains-object)).\n\nAlso, some context attributes are added in certain searches:\n\n- When searching files by `content`. These context attributes are:\n  - `confidence`: \\<_float_>  match confidence.\n  - `match_in_subfile`: \\<_boolean_> whether the content match was found in a [subfile](https://gtidocs.virustotal.com/reference/files-bundled_files) or not.\n  - `snippet`: \\<_string_> snippet ID. This ID can be later used in `/intelligence/search/snippets/{id}` endpoint.\n\n- When doing a hash similarity search:\n  - `similarity_score`: \\<_float_> number between 0 and 1 indicating the percentage of the fuzzy hash that matched. For example, `1.0` indicates the hash is the same as the specified; `0.5` that half of the hash matches the one given.\n\n```json Example response (search by file content)\n{\n  \"data\": [\n    {\n      \"context_attributes\": {\n        \"confidence\": 1,\n        \"match_in_subfile\": false,\n        \"snippet\": \"L3Z0c2FtcGxlcy8zODIzMzkzNjNhOTM2NDM2ZDM2MDM1MzFkM2IzOGEzMmUzMTUzNzM3MTM4MzY3MzBlM2Q2MzQ4MzY1M2MzYzNhfHw3MTg1Mzk2OjExfHwxNTk5NDY0OTQ3fHwzODIzMzkzNjNhOTM2NDM2ZDM2MDM1MzFkM2IzOGEzMmUzMTUzNzM3MTM4MzY3MzBlM2Q2MzQ4MzY1M2MzYzNh\"\n      },\n      \"id\": \"382339363a936436d3603531d3b38a32e315373713836730e3d63483653c3c3a\",\n      \"type\": \"file\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"https://www.virustotal.com/api/v3/intelligence/search?cursor=H4sI...A&query=content%3A+%22hello+world%22&limit=1&descriptors_only=true\",\n    \"self\": \"https://www.virustotal.com/api/v3/intelligence/search?query=content%3A%20%22hello%20world%22&descriptors_only=true&limit=1\"\n  },\n  \"meta\": {\n    \"cursor\": \"H4sIAAA...\",\n    \"days_back\": 365\n  }\n}\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "intelligence",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Search query using URL Safe encoding"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order (see table in the description above)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results per page (Max. 300)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Continuation cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "descriptors_only",
+                  "value": "false",
+                  "description": "Whether to return full object information or just object descriptors."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c1a0d8eb-f09a-44c8-843d-5b2df93cd488",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelligence",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "descriptors_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "963778a3-224f-4e03-adee-2df10927e10d",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelligence",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "descriptors_only",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "113851be-cf95-40ea-b280-aefea90e997d",
+          "name": "VirusTotal Get File Content Search Snippets",
+          "request": {
+            "name": "VirusTotal Get File Content Search Snippets",
+            "description": {
+              "content": "This request returns file content snippets that matched a query in the [`/search`](https://gtidocs.virustotal.com/reference/intelligence-search) endpoint. The response is a list of strings containing both content hexdump and plain text. Matched content is found between `*` characters, more file content is returned to provide additional context about the match.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "intelligence",
+                "search",
+                "snippets",
+                ":snippet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "snippet",
+                  "description": "(Required) Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22e01c36-0921-4f67-aeb2-ea8fdcb6ceee",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelligence",
+                    "search",
+                    "snippets",
+                    ":snippet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "snippet",
+                      "description": "(Required) Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"data\\\": [\\n    \\\"01CEE0A0: 09 20 2A 0A 09 20 2A 20  45 78 61 6D 70 6C 65 3A  . *.. * Example:\\\\n01CEE0B0: 0A 09 20 2A 0A 09 20 2A  20 20 20 20 20 35\\u001c 68 65\\u001d  .. *.. *     5\\u001che\\u001d\\\\n01CEE0C0: \\u001c6C 6C 6F 20 77 6F 72 6C  64\\u001d 0A 09 20 2A 20 20 20  \\u001cllo world\\u001d.. *   \\\",\\n    \\\"01CEF650: 6D 70 6C 65 3A 0A 09 20  2A 0A 09 20 2A 20 20 20  mple:.. *.. *   \\\\n01CEF660: 20 20 31 31 3A \\u001c68 65 6C  6C 6F 20 77 6F 72 6C 64\\u001d    11:\\u001chello world\\u001d\\\\n01CEF670: 32 3A 68 69 0A 09 20 2A  0A 09 20 2A 20 49 66 20  2:hi.. *.. * If \\\",\\n    \\\"01D22020: 5C 6E 20 2A 20 45 78 61  6D 70 6C 65 3A 5C 6E 20  \\\\\\\\n * Example:\\\\\\\\n \\\\n01D22030: 2A 5C 6E 20 2A 20 20 20  20 20 35\\u001c 68 65 6C 6C 6F\\u001d  *\\\\\\\\n *     5\\u001chello\\u001d\\\\n01D22040: \\u001c20 77 6F 72 6C 64 \\u001d5C 6E  20 2A 20 20 20 20 20 33  \\u001c world\\u001d\\\\\\\\n *     3\\\",\\n    \\\"02C29AB0: 6C 6F 67 28 68 65 6C 6C  6F 2C 20 27 77 6F 72 6C  log(hello, 'worl\\\\n02C29AC0: 64 27 29 3B 0A 20 2A 20  27\\u001c 68 65 6C 6C 6F 20 77\\u001d  d');. * '\\u001chello w\\u001d\\\\n02C29AD0: \\u001c6F 72 6C 64 \\u001d27 0A 20 2A  2F 0A 65 78 70 6F 72 74  \\u001corld\\u001d'. */.export\\\",\\n    \\\"02C643E0: 28 68 65 6C 6C 6F 2C 20  27 77 6F 72 6C 64 27 29  (hello, 'world')\\\\n02C643F0: 3B 0A 20 2A 20 27 \\u001c68 65  6C 6C 6F 20 77 6F 72 6C\\u001d  ;. * '\\u001chello worl\\u001d\\\\n02C64400: \\u001c64 \\u001d27 0A 20 2A 2F 0A 76  61 72 20 6C 6F 67 20 3D  \\u001cd\\u001d'. */.var log =\\\"\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18d4bf1a-10ff-440f-ba7b-f5f3b31315d9",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intelligence",
+                    "search",
+                    "snippets",
+                    ":snippet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "snippet",
+                      "description": "(Required) Extracted snippet from context attributes at [/search](ref:intelligence-search) endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": \\\"BadRequestError\\\",\\n    \\\"message\\\": \\\"Invalid token\\\"\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60872733-f2ba-4d9a-a499-ad8dedff3af8",
+          "name": "VirusTotal Get Google Threat Intel Metadata",
+          "request": {
+            "name": "VirusTotal Get Google Threat Intel Metadata",
+            "description": {
+              "content": "This endpoint returns a dictionary with metadata related to Google Threat Intelligence, which includes a full list of engines in use, a list of existing privileges, etc.\n\n```json Example\n{\n  \"data\": {\n    \"engines\": {\n      \"ALYac\": {},\n      \"APEX\": {},\n      \"AVG\": {},\n      \"AVware\": {},\n      \"Acronis\": {},\n      \"Ad-Aware\": {},\n      \"AegisLab\": {},\n      \"AhnLab-V3\": {},\n      \"Alibaba\": {},\n      \"Antiy-AVL\": {},\n      \"Arcabit\": {},\n      \"Avast\": {},\n      \"Avast-Mobile\": {},\n      \"Avira\": {},\n      \"Babable\": {},\n      \"Baidu\": {}\n    },\n    \"privileges\": [\n      \"cases\",\n      \"click_to_accept\",\n      \"creditcards\",\n      \"dogfooder\",\n      \"file-behaviour-feed\",\n      \"downloads-tier-1\",\n      \"downloads-tier-2\"\n    ],\n    \"relationships\": {\n      \"analysis\": [\n        {\n          \"description\": \"File or URL the analysis belongs to.\",\n          \"name\": \"item\"\n        }\n      ],\n      \"async_search_job\": [\n        {\n          \"description\": \"Objects that match the search.\",\n          \"name\": \"matches\"\n        }\n      ],\n      \"case\": [\n        {\n          \"description\": \"Returns the files objects in the case.\",\n          \"name\": \"files\"\n        },\n        {\n          \"description\": \"Returns the graphs objects in the case.\",\n          \"name\": \"graphs\"\n        }\n      ],\n      \"code_block\": [\n        {\n          \"description\": \"Files that contain the code block.\",\n          \"name\": \"files\"\n        }\n      ],\n      \"comment\": [\n        {\n          \"description\": \"Object to which the comment belongs to.\",\n          \"name\": \"item\"\n        },\n        {\n          \"description\": \"User who wrote the comment.\",\n          \"name\": \"author\"\n        }\n      ],\n      \"domain\": [\n        {\n          \"description\": \"Votes for the file/URL.\",\n          \"name\": \"votes\"\n        },\n        {\n          \"description\": \"Comments for the Domain or IP's related entities.\",\n          \"name\": \"related_comments\"\n        },\n        {\n          \"description\": \"Parent domain.\",\n          \"name\": \"parent\"\n        }\n      ]\n    }\n  }\n}\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1138a856-d953-4ddc-bcd1-d93613d5fe99",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f2ee0d2-d394-4d37-a170-212ccb18adb2",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32b938ff-8af2-4cae-9e66-1625946be8cc",
+          "name": "VirusTotal Search for Files, URLs, Domains, IPs and Comments",
+          "request": {
+            "name": "VirusTotal Search for Files, URLs, Domains, IPs and Comments",
+            "description": {
+              "content": "This endpoint searches any of the following:\n\n- A file hash - Returns a [File](https://gtidocs.virustotal.com/reference/object-files) object.\n- A URL - Returns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n- A domain - Returns [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n- A IP address - Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n- Comments by tags - Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n\nThe request returns a list of objects matching the query.\n\n```json Example response (searching for comments)\n{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"date\": 1597349426,\n        \"html\": \"search comment #example.\",\n        \"tags\": [\n          \"example\"\n        ],\n        \"text\": \"search comment #example.\",\n        \"votes\": {\n          \"abuse\": 0,\n          \"negative\": 0,\n          \"positive\": 0\n        }\n      },\n      \"id\": \"f-084a541d4c94d497442477664b445047c4fd42c4ff48413464ed4454549444c9-4944a424\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/ui/comments/f-084a541d4c94d497442477664b445047c4fd42c4ff48413464ed4454549444c9-4944a424\"\n      },\n      \"type\": \"comment\"\n    }\n  ],\n  \"links\": {\n    \"next\": \"https://www.virustotal.com/api/v3/search?cursor=CtIB4hEKBGRhdGUSCQjsy4up_pjrAhK4AWoRc352aXJ1c3RvdGFsY2xvdWRyogELEgZTYW1wbGUiQDA4Y2E1ZTFk4mM5YW41OTd4NDJ4Nzc2NmFiNGI1MDc3YzJmZDEyY2NmZmM4ZjEzOTZkZWRhNDUyNWM5ZjQ0YzkMCxIHQ29t4WVudCJJMDhjYTV4MWRiYzlhZDU5N2I0MmU3NzY2YWI0YjUwNzdjMmZkMTJjY2ZmYzhmMTM5NmRlZGE0NTI14zlmND4jOS1lOTQ1YTMyMwwYACAB&query=google&limit=1\",\n    \"self\": \"https://www.virustotal.com/api/v3/search?query=example&limit=1\"\n  },\n  \"meta\": {\n    \"cursor\": \"CtIB4hEKBGRhdGUSCQjsy4up_pjrAhK4AWoRc352aXJ1c3RvdGFsY2xvdWRyogELEgZTYW1wbGUiQDA4Y2E1ZTFk4mM5YW41OTd4NDJ4Nzc2NmFiNGI1MDc3YzJmZDEyY2NmZmM4ZjEzOTZkZWRhNDUyNWM5ZjQ0YzkMCxIHQ29t4WVudCJJMDhjYTV4MWRiYzlhZDU5N2I0MmU3NzY2YWI0YjUwNzdjMmZkMTJjY2ZmYzhmMTM5NmRlZGE0NTI14zlmND4jOS1lOTQ1YTMyMwwYACAB\"\n  }\n}\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Search query."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e23ed5dd-01a3-4e6c-b0f1-9b867283c6fa",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da021dc6-878b-4acb-bf13-497fdc3c1fb9",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.virustotal.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "73a04550-6f88-4d01-a34f-92e37411e07e",
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Search & Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+      "type": "text/plain"
+    }
+  }
+}

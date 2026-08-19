@@ -1,0 +1,274 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Threat Graphs Permissions & ACL API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-apikey",
+      "value": "{{x-apikey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threat Graphs Permissions & ACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VirusTotal Get Users and Groups That Can Edit a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/editors",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns the users and groups that can edit the graph. The graph needs to be shared with them as `Editor` to appear here.\n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n          "
+        },
+        {
+          "info": {
+            "name": "VirusTotal Grant Users and Groups Permission to Edit a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/editors",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint adds a user or groups as a graph editor. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/g"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check if a User or Group Can Edit a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/editors/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns true if the user or group has `Editor` access to the graph.\n\n```json Response example\n{\n    \"data\": false\n}\n```\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Revoke Edit Graph Permissions from a User or Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/editors/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Revoke Edit Graph Permissions from a User or Group"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Check if a User or Group Can View a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/viewers/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns true if the user has `Viewer` access to the graph.\n"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Revoke View Permission from a User or Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/viewers/:user_or_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "user_or_group_id",
+                "value": "",
+                "type": "path",
+                "description": "User or group ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "VirusTotal Revoke View Permission from a User or Group"
+        },
+        {
+          "info": {
+            "name": "VirusTotal Get Users and Groups That Can View a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/viewers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of related objects to retrieve"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Continuation cursor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint returns the users that can view the graph. The graph needs to be shared with them as `Viewer` to appear here.\n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": "
+        },
+        {
+          "info": {
+            "name": "VirusTotal Grant Users and Groups Permission to See a Graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.virustotal.com/api/v3/graphs/:id/relationships/viewers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A 65 char length id which uniquely identify the graph."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-apikey",
+              "value": "{{x-apikey}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint adds a user or group as a graph viewer. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,612 @@
+{
+  "item": [
+    {
+      "id": "72d4ce3e-1005-4c70-8413-fa9bd32e593c",
+      "name": "Access Control - Quota Management",
+      "description": {
+        "content": "Access Control - Quota Management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "032210dc-517f-491b-ac16-fd3cf1f66e1e",
+          "name": "VirusTotal Get a User’s API Usage",
+          "request": {
+            "name": "VirusTotal Get a User’s API Usage",
+            "description": {
+              "content": "This endpoint retrieves information about a the API usage, broken down by endpoint, of an user in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> 🚧 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.\n\nThe user can be retrieved either by user ID or by API key, but the latter only works if the requester is the user himself or an administrator of a group the user belongs to.\n\n```json Example response\n{\n  \"data\": {\n    \"daily\": {\n      \"2020-08-10\": {\n        \"urls\": 2\n      },\n      \"2020-08-11\": {\n        \"domains\": 1,\n        \"file_relationships\": 1,\n        \"files\": 1\n      },\n      \"2020-08-12\": {\n        \"analyses\": 25,\n        \"file_analyse\": 3,\n        \"files\": 6\n      },\n      \"2020-08-17\": {\n        \"urls\": 3\n      },\n      \"2020-08-18\": {\n        \"urls\": 1\n      },\n      \"2020-08-20\": {\n        \"file_download\": 36,\n        \"file_relationships\": 5,\n        \"files\": 1\n      },\n      \"2020-08-21\": {\n        \"file_analyse\": 1,\n        \"file_download\": 92,\n        \"files\": 1\n      },\n      \"2020-08-23\": {\n        \"analyses\": 5,\n        \"file_analyse\": 1\n      },\n      \"2020-08-25\": {\n        \"file_download\": 51\n      },\n      \"2020-08-26\": {\n        \"file_download\": 51\n      },\n      \"2020-08-28\": {\n        \"file_download\": 14\n      },\n      \"2020-08-31\": {\n        \"file_download\": 6\n      },\n      \"2020-09-01\": {\n        \"file_download\": 81\n      },\n      \"2020-09-02\": {\n        \"file_relationships\": 5,\n        \"graphs\": 1\n      },\n      \"2020-09-03\": {\n        \"file_relationships\": 6,\n        \"graph_comments\": 1,\n        \"graph_items\": 3,\n        \"graphs\": 2,\n        \"retrohunt_jobs\": 2\n      },\n      \"2020-09-05\": {\n        \"comment_relationships\": 1,\n        \"comments\": 4,\n        \"domain_comments\": 1,\n        \"domain_graphs\": 2,\n        \"domain_relationships\": 1,\n        \"file_analyse\": 1,\n        \"statistics\": 1\n      },\n      \"2020-09-06\": {\n        \"file_behaviours\": 6,\n        \"file_relationships\": 2,\n        \"graph_comments\": 1,\n        \"graphs\": 5\n      },\n      \"2020-09-07\": {\n        \"domain_relationships\": 1,\n        \"intelligence_search\": 5,\n        \"resolutions\": 1,\n        \"search\": 6,\n        \"submissions\": 1,\n        \"url_relationships\": 1,\n        \"urls\": 2\n      }\n    },\n    \"total\": {\n      \"analyses\": 30,\n      \"comment_relationships\": 1,\n      \"comments\": 4,\n      \"domain_comments\": 1,\n      \"domain_graphs\": 2,\n      \"domain_relationships\": 2,\n      \"domains\": 1,\n      \"file_analyse\": 6,\n      \"file_behaviours\": 6,\n      \"file_download\": 331,\n      \"file_relationships\": 19,\n      \"files\": 9,\n      \"graph_comments\": 2,\n      \"graph_items\": 3,\n      \"graphs\": 8,\n      \"intelligence_search\": 5,\n      \"resolutions\": 1,\n      \"retrohunt_jobs\": 2,\n      \"search\": 6,\n      \"statistics\": 1,\n      \"submissions\": 1,\n      \"url_relationships\": 1,\n      \"urls\": 8\n    }\n  }\n}\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id",
+                "api_usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "A string in format YYYYMMDD"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "A string in format YYYYMMDD"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) User ID or API key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f1b999e-4531-4877-959c-76a25aa5e0a5",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id",
+                    "api_usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) User ID or API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78453c00-5648-4e75-b5cd-b6717ffd9c50",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id",
+                    "api_usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) User ID or API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f346b51c-a276-4b0a-ac3b-23319f9a2d24",
+          "name": "VirusTotal Get a User’s Quota Summary",
+          "request": {
+            "name": "VirusTotal Get a User’s Quota Summary",
+            "description": {
+              "content": "This endpoint returns a summary of a user's overall quotas including:\n\n- `allowed`: \\<_integer_> quota limit.\n- `inherited_from`: \\<_string_> group from which the quota is inherited.\n- `used`: \\<_integer_> how many quota has been used.\n\nConsumption data based on natural month and UTC.\n\n```json Example\n{\n  \"data\": {\n    \"api_requests_daily\": {\n      \"group\": {\n        \"allowed\": 99000000,\n        \"inherited_from\": \"company\",\n        \"used\": 45073\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 17\n      }\n    },\n    \"api_requests_hourly\": {\n      \"group\": {\n        \"allowed\": 3300000,\n        \"inherited_from\": \"company\",\n        \"used\": 653\n      },\n      \"user\": {\n        \"allowed\": 60000000000,\n        \"used\": 0\n      }\n    },\n    \"api_requests_monthly\": {\n      \"group\": {\n        \"allowed\": 2000000000,\n        \"inherited_from\": \"company\",\n        \"used\": 142176\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 137\n      }\n    }\n  }\n}\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id",
+                "overall_quotas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) User ID or API key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bfca3efb-2290-4805-b13f-61996e1438b4",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id",
+                    "overall_quotas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) User ID or API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f49caf09-e315-4a38-9ab7-2f5c4d215c14",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id",
+                    "overall_quotas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) User ID or API key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48379c48-08a7-49b0-99f5-74c9cc97044e",
+          "name": "VirusTotal Get a Group’s API Usage",
+          "request": {
+            "name": "VirusTotal Get a Group’s API Usage",
+            "description": {
+              "content": "This endpoint retrieves information about a the API usage, broken down by endpoint, of a group in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API V3 usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> 🚧 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.\n\nTo use this endpoint and get the API consumption of a certain group, you must be an administrator of that group.\n\n```json Example response\n\"daily\": {\n            \"2019-10-22\": {\n                \"search\": 1\n            },\n            \"2019-10-23\": {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n                \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\": 3,\n                \"intelligence_search\": 3,\n                \"item_vote\": 1\n            },\n            \"2019-10-24\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-25\": {\n                \"files\": 10,\n                \"intelligence_search\": 3\n            },\n            \"2019-10-28\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-29\": {\n                \"url_submission\": 1\n            },\n            \"2019-10-30\": {\n                \"url_submission\": 1\n            },\n            \"2019-10-31\": {\n                \"domain_comments\": 9,\n                \"domain_graphs\": 9,\n                \"domain_relationships\": 90,\n                \"file_upload_url\": 1,\n                \"intelligence_search\": 30,\n                \"ip_addresses\": 2,\n                \"ip_addresses_comments\": 4,\n                \"ip_addresses_graphs\": 4,\n                \"ip_addresses_relationships\": 28,\n                \"item_vote\": 13,\n                \"url_submission\": 1\n            },\n            \"2019-11-04\": {\n                \"file_behaviours\": 2,\n                \"file_comments\": 2,\n                \"file_graphs\": 2,\n                \"file_relationships\": 40,\n                \"files\": 8,\n                \"intelligence_search\": 4,\n                \"item_vote\": 2\n            },\n            \"2019-11-05\": {\n                \"graphs\": 1,\n                \"intelligence_search\": 1\n            },\n            \"2019-11-06\": {\n                \"domains\": 14,\n                \"file_comments\": 1,\n                \"file_relationships\": 11,\n                \"files\": 34,\n                \"ip_addresses\": 10,\n                \"urls\": 10\n            },\n            \"2019-11-08\": {\n                \"analyses\": 1,\n                \"intelligence_search\": 4,\n                \"item_vote\": 3,\n                \"url_comments\": 3,\n                \"url_graphs\": 3,\n                \"url_relationships\": 12,\n                \"url_submission\": 2,\n                \"urls\": 9\n            },\n            \"2019-11-09\": {\n                \"files\": 123,\n                \"intelligence_search\": 13\n            },\n            \"2019-11-12\": {\n                \"file_behaviours\": 16,\n                \"file_comments\": 15,\n                \"file_graphs\": 15,\n                \"file_relationships\": 314,\n                \"files\": 44,\n                \"intelligence_search\": 3,\n                \"item_vote\": 15,\n                \"retrohunt_jobs\": 1\n            },\n            \"2019-11-13\": {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n                \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\": 2,\n                \"intelligence_search\": 1,\n                \"item_vote\": 1\n            },\n            \"2019-11-18\": {\n                \"analyses\": 12,\n                \"file_behaviours\": 10,\n                \"file_comments\": 10,\n                \"file_graphs\": 10,\n                \"file_relationships\": 215,\n                \"file_upload_url\": 1,\n                \"files\": 51,\n                \"intelligence_search\": 7,\n                \"item_vote\": 10\n            },\n            \"2019-11-19\": {\n                \"domain_comments\": 1,\n                \"domain_graphs\": 1,\n                \"domain_relationships\": 10,\n                \"file_behaviours\": 9,\n                \"file_comments\": 9,\n                \"file_graphs\": 9,\n                \"file_relationships\": 180,\n                \"files\": 9,\n                \"intelligence_search\": 11,\n                \"item_vote\": 10\n            },\n            \"2019-11-20\": {\n                \"file_behaviours\": 5,\n                \"file_comments\": 5,\n                \"file_graphs\": 5,\n                \"file_relationships\": 100,\n                \"files\": 21,\n                \"intelligence_search\": 16,\n                \"item_vote\": 5\n            },\n            \"2019-11-21\": {\n                \"intelligence_search\": 8,\n                \"item_vote\": 9,\n                \"url_comments\": 9,\n                \"url_graphs\": 9,\n                \"url_relationships\": 36,\n                \"urls\": 24\n            }\n        },\n        \"total\": {\n            \"analyses\": 13,\n            \"domain_comments\": 10,\n            \"domain_graphs\": 10,\n            \"domain_relationships\": 100,\n            \"domains\": 54,\n            \"file_behaviours\": 44,\n            \"file_comments\": 44,\n            \"file_download\": 309,\n            \"file_graphs\": 43,\n            \"file_relationships\": 900,\n            \"file_upload_url\": 2,\n            \"files\": 551,\n            \"graphs\": 1,\n            \"intelligence_search\": 189,\n            \"ip_addresses\": 14,\n            \"ip_addresses_comments\": 6,\n            \"ip_addresses_graphs\": 4,\n            \"ip_addresses_relationships\": 39,\n            \"item_vote\": 69,\n            \"retrohunt_jobs\": 1,\n            \"search\": 3,\n            \"url_comments\": 12,\n            \"url_graphs\": 12,\n            \"url_relationships\": 48,\n            \"url_submission\": 5,\n            \"urls\": 53\n        }\n    }\n```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":id",
+                "api_usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "A string in format YYYYMMDD"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "A string in format YYYYMMDD"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Group ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "286bd3ae-3dac-4a79-b36d-7f54e2d92d16",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id",
+                    "api_usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Group ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06b2ad72-3e9a-4343-8c9b-ae3a23c027dd",
+              "name": "400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":id",
+                    "api_usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Group ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.virustotal.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "58b45944-7371-4515-ab34-a9eeab3aacd7",
+    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Access Control - Quota Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+      "type": "text/plain"
+    }
+  }
+}

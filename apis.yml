@@ -29,6 +29,17 @@ x-category: Anti-Malware
 x-type: company
 x-tier: 1
 tags:
+  - Anti Malware
+  - Threat Intelligence
+  - Security
+  - File Analysis
+  - URL Analysis
+  - YARA
+  - IOC
+  - Sandbox
+  - MITRE ATT&CK
+  - Google Cloud
+tags_raw:
   - Anti-Malware
   - Threat Intelligence
   - Security
@@ -311,7 +322,8 @@ apis:
   description: IoC Investigation - Analyses, Submissions & Operations
   humanURL: https://docs.virustotal.com/reference/overview
   baseURL: https://www.virustotal.com/api/v3
-  tags:
+  tags: []
+  tags_raw:
   - IoC Investigation - Analyses, Submissions & Operations
   properties:
   - type: OpenAPI
@@ -805,7 +817,8 @@ apis:
   description: Threat Landscape & Vulnerability Intelligence & Reports & Analysis
   humanURL: https://docs.virustotal.com/reference/overview
   baseURL: https://www.virustotal.com/api/v3
-  tags:
+  tags: []
+  tags_raw:
   - Threat Landscape & Vulnerability Intelligence & Reports & Analysis
   properties:
   - type: OpenAPI

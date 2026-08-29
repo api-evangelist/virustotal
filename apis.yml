@@ -7,6 +7,18 @@ description: >-
   Hunting (Livehunt, Retrohunt, IoC Stream). Now also branded "Google Threat Intelligence" (GTI) for Enterprise
   customers, integrating Mandiant intelligence, Digital Threat Monitoring (DTM), and Attack Surface Management (ASM).
 url: https://docs.virustotal.com/reference/overview
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -945,6 +957,9 @@ apis:
   - type: Documentation
     url: https://docs.virustotal.com/reference/livehunt
 common:
+  - type: CapabilityMap
+    url: capabilities/virustotal-capability-edges.yml
+    name: VirusTotal Business Capability Map
   - type: AgenticAccess
     url: agentic-access/virustotal-agentic-access.yml
   - type: DomainSecurity

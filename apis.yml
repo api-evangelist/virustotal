@@ -41,13 +41,13 @@ x-category: Anti-Malware
 x-type: company
 x-tier: 1
 tags:
-  - Anti-Malware
+  - Anti Malware
   - Threat Intelligence
   - Security
   - File Analysis
   - URL Analysis
   - YARA
-  - IoC
+  - IOC
   - Sandbox
   - MITRE ATT&CK
   - Google Cloud

@@ -1,0 +1,273 @@
+slug: virustotal
+provider: VirusTotal
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 26
+edges:
+- tag: IoC Investigation - Files Behaviours
+  spec_file: virustotal-ioc-investigation-files-behaviours-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.88
+  evidence: GET /file_behaviours/{sandbox_id} — "Get a File Behavior Report from a Sandbox"; "Get a Summary
+    of All MITRE ATT&CK Techniques Observed in a File"
+  reason: Sandbox dynamic-analysis reports (PCAP, memdump, EVTX) and ATT&CK technique summaries are malware
+    behavioural analysis for threat detection and incident response.
+- tag: IoC Investigation - Domains & Resolutions
+  spec_file: virustotal-ioc-investigation-domains-resolutions-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GET /domains/{domain} — "Get a Domain Report"; GET /resolutions/{id} — "Get a DNS Resolution
+    Object"
+  reason: Domain reputation reports and passive-DNS resolution lookups are core indicator-of-compromise
+    investigation used by SOC/IR teams, mapping to Threat Detection & Response Management.
+- tag: IoC Investigation - Files
+  spec_file: virustotal-ioc-investigation-files-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: POST /files — "Upload a File"; POST /files/{id}/analyse — "Request a File Rescan (re-analyze)";
+    GET /files/{id} — "Get a File Report"
+  reason: Submitting files for multi-engine malware scanning and retrieving detection reports is malware
+    analysis in support of threat detection and response, not generic file storage.
+- tag: IoC Investigation - IP addresses
+  spec_file: virustotal-ioc-investigation-ip-addresses-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GET /ip_addresses/{ip} — "Get an IP Address Report"
+  reason: IP reputation/enrichment reports are indicator-of-compromise investigation performed by security
+    operations, mapping to Threat Detection & Response Management.
+- tag: IoC Investigation - URLs
+  spec_file: virustotal-ioc-investigation-urls-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: POST /urls — "Scan URL"; GET /urls/{id} — "Get a URL Report"
+  reason: URL scanning and reputation reporting is malicious-URL detection used in security operations,
+    mapping to Threat Detection & Response Management.
+- tag: Private Scanning - Files
+  spec_file: virustotal-private-scanning-files-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: POST /private/files 'Upload a File'; 'Get a Private File Report'; 'Rescan a Private File'
+  reason: Uploading files for private malware scanning and retrieving/rescanning threat reports is malware
+    detection and analysis, squarely threat detection & response.
+- tag: Private Scanning - Files Behaviours
+  spec_file: virustotal-private-scanning-files-behaviours-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '''Get the Behaviour Reports from a Private File''; ''Get a Summary of All MITRE ATT&CK Techniques
+    Observed in a File'''
+  reason: Sandbox behaviour reports, PCAP/memdump artefacts and MITRE ATT&CK mapping are malware analysis
+    outputs used for detection and incident investigation.
+- tag: Private Scanning - URLs
+  spec_file: virustotal-private-scanning-urls-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: POST /private/urls 'Private Scan URL'; 'Get a URL Analysis Report'
+  reason: Scanning URLs and retrieving malicious-verdict analysis reports is threat detection/analysis
+    on a security platform.
+- tag: YARA Hunting - Livehunt
+  spec_file: virustotal-yara-hunting-livehunt-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: '''Create a New Livehunt Ruleset''; ''Get Livehunt Notifications'''
+  reason: Managing YARA detection rulesets that fire notifications on newly seen malicious files is detection
+    engineering and alerting — threat detection & response.
+- tag: Private Scanning - Analyses
+  spec_file: virustotal-private-scanning-analyses-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.82
+  evidence: GET /private/analyses  'List Private Analyses' / 'Get a Private Analysis' on a threat intelligence
+    platform that analyses files, URLs, IP addresses, and domains
+  reason: Operations retrieve malware/URL analysis results from private scanning — security threat analysis
+    and investigation, i.e. threat detection & response tooling, not generic IT ops.
+- tag: Threat Landscape & Vulnerability Intelligence & Reports & Analysis
+  spec_file: virustotal-threat-landscape-vulnerability-intelligence-reports-analysis-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.82
+  evidence: GET /collections 'List Threat Objects (Actor, Malware & Tool, Campaign, IoC Collection, Vulnerability,
+    Report)'; 'Get MITRE Tactics and Techniques Associated with a Threat Object'
+  reason: Curation and retrieval of threat actor, malware, campaign and IoC collections is cyber threat
+    intelligence feeding detection and response; sub-capability could arguably include vulnerability management
+    but threat intel dominates.
+- tag: YARA Hunting - Retrohunt
+  spec_file: virustotal-yara-hunting-retrohunt-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.82
+  evidence: '''Create a New Retrohunt Job''; ''Retrieve Matches for a Retrohunt Job'''
+  reason: Retrospective YARA scanning jobs over the historical file corpus to find malware matches — threat
+    hunting, a detection & response activity, despite the job-management shape of the API.
+- tag: YARA Hunting - IoC Stream
+  spec_file: virustotal-yara-hunting-ioc-stream-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: GET /ioc_stream 'Get Objects from the IoC Stream'; 'Get an IoC Stream Notification'
+  reason: Stream of indicator-of-compromise match notifications delivered to security analysts — detection
+    alerting on a threat intelligence platform, not generic notification plumbing.
+- tag: YARA Hunting - Rules
+  spec_file: virustotal-yara-hunting-rules-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: GET /yara_rules 'List Crowdsourced YARA Rules'; 'Get a Crowdsourced YARA Rule'
+  reason: YARA rules are malware detection signatures; reading the crowdsourced rule catalogue supports
+    detection engineering within threat detection & response.
+- tag: Access Control - Group Management
+  spec_file: virustotal-access-control-group-management-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: '"postGroupAdministrators  Grant Group Admin Permissions to a List of Users", "deleteUserFromGroup  Remove
+    a User from a Group", "checkUserInGroup  Check if a User is a Group Member"'
+  reason: Operations grant/revoke admin permissions and manage group membership for platform users — access
+    administration, i.e. Identity & Access Management. It is administrative access control of the vendor's
+    own tenant rather than any threat-intelligence function.
+- tag: IoC Investigation - Analyses, Submissions & Operations
+  spec_file: virustotal-ioc-investigation-analyses-submissions-operations-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.78
+  evidence: GET /analyses/{id} — "Get a URL / File Analysis"; GET /submission/{id} — "Get a Submission
+    Object"
+  reason: 'Retrieval of malware/URL analysis verdicts and submission status on a threat-intelligence platform
+    is security threat detection/investigation work, mapping to Threat Detection & Response Management.
+    Not a generic job-status surface: the objects are IoC analyses.'
+- tag: Threat Graphs
+  spec_file: virustotal-threat-graphs-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.78
+  evidence: GET /graphs 'Search Graphs'; POST /graphs 'Create a Graph'; 'Add a Comment to a Graph'
+  reason: Threat graphs are analyst artefacts linking IoCs for security investigation and collaboration;
+    closest fit is threat detection & response investigation. Some ambiguity as the surface is generic
+    CRUD over graph objects.
+- tag: Access Control - User Management
+  spec_file: virustotal-access-control-user-management-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: '"deleteUserId  Delete a User", "patchUserId  Update a User Object"; description "Manage users,
+    groups, service accounts, API quotas"'
+  reason: Create/read/update/delete of user accounts on the platform is user identity administration (joiners-movers-leavers),
+    mapping to Identity & Access Management rather than any HR capability, since these are platform accounts
+    not employees.
+- tag: IoC Feeds - Domain intelligence feed
+  spec_file: virustotal-ioc-feeds-domain-intelligence-feed-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.75
+  evidence: '"feedsdomainshourly2time  Get an Hourly Domain Feed Batch", "feedsdomains2time  Get a Minutely
+    Domain Feed Batch"'
+  reason: Streaming batches of indicator-of-compromise domain intelligence for consumption by security
+    teams — threat intelligence feeding detection and response. No other candidate covers threat intel
+    ingestion.
+- tag: IoC Feeds - File intelligence feed
+  spec_file: virustotal-ioc-feeds-file-intelligence-feed-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.75
+  evidence: '"feedsFileHourly  Get a Hourly File Feed Batch", "fileFeedDownload  Download a File Published
+    in the File Feed"'
+  reason: Delivers batches of malicious-file intelligence and the sample files themselves, i.e. threat
+    intelligence supporting detection and response operations. Not generic file upload plumbing — the
+    payload is IoC data.
+- tag: IoC Feeds - IP intelligence feed
+  spec_file: virustotal-ioc-feeds-ip-intelligence-feed-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.75
+  evidence: '"feedsipAddresseshourly2time  Get an Hourly IP Address Feed Batch"'
+  reason: Hourly/minutely batches of IP-address indicators of compromise — threat intelligence consumed
+    for detection and response. Thin surface (two GETs) but the meaning is clear from the vendor context.
+- tag: IoC Feeds - Sandbox analyses feed
+  spec_file: virustotal-ioc-feeds-sandbox-analyses-feed-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.74
+  evidence: '"feedsFileBehaviourHourly  Get an Hourly File Behaviour Feed Batch", "fileBehaviourFeedPcap  Get
+    the PCAP File Generated During a File''s Behavior Analysis"'
+  reason: Sandbox behavioural analysis artefacts (EVTX, memdump, PCAP, HTML reports) for malware samples
+    are malware-analysis outputs used in threat detection and incident response, mapping to BC-620.30.
+- tag: IoC Feeds - URL intelligence feed
+  spec_file: virustotal-ioc-feeds-url-intelligence-feed-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.74
+  evidence: '"feedsUrlHourly  Get an Hourly URL Feed Batch", "feedsUrl  Get a Minutely URL Feed Batch"'
+  reason: Batch delivery of malicious-URL indicators from a threat intelligence platform, consumed for
+    detection and response. Small surface, so confidence is moderate rather than high.
+- tag: Access Control - Quota Management
+  spec_file: virustotal-access-control-quota-management-api-openapi.yml
+  capability_id: BC-4270.50
+  capability_id_l1: BC-4270
+  capability_name: API Consumption Governance
+  confidence: 0.72
+  evidence: '"userApiUsage  Get a User''s API Usage", "getUserOverallQuotas  Get a User''s Quota Summary",
+    "groupApiUsage  Get a Group''s API Usage"'
+  reason: Reads API consumption and quota allowances for users and groups, which is precisely quotas/rate
+    limits/usage analytics for a public API programme. Only three read operations, so context is thin
+    but unambiguous in meaning.
+- tag: IoC Investigation - Attack Tactics
+  spec_file: virustotal-ioc-investigation-attack-tactics-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.72
+  evidence: GET /attack_tactics/{id} — "Get an Attack Tactic Object" and "Get Objects Related to an Attack
+    Tactic"
+  reason: Attack tactic objects are MITRE ATT&CK adversary-tactic intelligence used to enrich threat investigation,
+    which sits under Threat Detection & Response Management. Confidence moderated because the surface
+    is purely reference-data lookup.
+- tag: IoC Investigation - Attack Techniques
+  spec_file: virustotal-ioc-investigation-attack-techniques-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.72
+  evidence: GET /attack_techniques/{id} — "Get an Attack Technique Object"
+  reason: Adversary technique (ATT&CK) reference objects support threat analysis and detection engineering,
+    so Threat Detection & Response is the honest mapping; it is reference lookup only, hence moderate
+    confidence.

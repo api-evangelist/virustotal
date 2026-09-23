@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Retrohunt API
+  title: VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Livehunt, Retrohunt, the IoC Stream, and crowdsourced YARA rules — VirusTotal's hunting and notification surface.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,9 +25,7 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: 'Returns a list of [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.
-
-        '
+      description: Returns a list of Retrohunt Job objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.
       operationId: getRetrohuntJobs
       parameters:
       - description: Maximum number jobs to retrieve
@@ -78,7 +76,56 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"retrohunt_job\",\n    \"attributes\": {\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_email\": \"notifications@acme.com\",\n      \"corpus\": \"main\",\n      \"time_range\": {\n        \"start\": 1545145761,\n        \"end\": 1547737720\n      }\n    }\n  }\n}\n```\n\nThe `rules` attribute is required, but `notification_email`, `corpus` and `time_range` are optional. You should provide  `notification_email` if you want to receive an email notification when the job is finished, while `corpus` allows you to select which dataset you want to scan with your job. There are two different corpuses: \"main\" and \"goodware\". The \"main\" corpus is the default one, composed of files sent to Google Threat Intelligence during the last few months. The \"goodware\" corpus is a random selection of ~1.000.000 files from the [NSRL](https://www.nist.gov/software-quality-group/national-software-reference-library-nsrl) that are not detected by any antivirus engine. This corpus contains multiple file types, and is useful for testing your YARA rules for false positives. If the `corpus` attribute is not specified the \"main\" corpus will be used.\n\n> \U0001F6A7 Retrohunt limits\n> \n> Each user can run up to 10 Retrohunt jobs at the same time, when you reach that limit you must wait for one of the running jobs to finish before launching a new one. Additionally, each job can contain up to 300 YARA rules.\n\nIf you want your job to scan files sent to Google TI within a certain time range you can use the  `time_range` attribute to specify the desired range. Both the `start` and `end` fields in `time_range` should be the UNIX timestamp for the minimum and upper bound of the time range in UTC, and they should be within the maximum range allowed by your Retrohunt privileges. All users can scan up to 90 days back, and this can go up to 180 or 365 days for more privileged users. If `start` is not specified your Retrohunt job will scan back to the limit allowed by your privileges, and if `end` is not specified it will scan up to the most recent files.\n\nReturns the newly created [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.\n"
+      description: 'This endpoint creates a new Retrohunt job. The request''s body must have the following structure:
+
+
+        ```json Example request
+
+        {
+
+        "data": {
+
+        "type": "retrohunt_job",
+
+        "attributes": {
+
+        "rules": "rule foobar { strings: $ = \"foobar\" condition: all of them }",
+
+        "notification_email": "notifications@acme.com",
+
+        "corpus": "main",
+
+        "time_range": {
+
+        "start": 1545145761,
+
+        "end": 1547737720
+
+        }
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The `rules` attribute is required, but `notification_email`, `corpus` and `time_range` are optional. You should provide `notification_email` if you want to receive an email notification when the job is finished, while `corpus` allows you to select which dataset you want to scan with your job. There are two different corpuses: "main" and "goodware". The "main" corpus is the default one, composed of files sent to Google Threat Intelligence during the last few months. The "goodware" corpus is a random selection of ~1.000.000 files from the NSRL that are not detected by any antivirus engine. This corpus contains multiple file types, and is useful for testing your YARA rules for false positives. If the `corpus` attribute is not specified the "main" corpus will be used.
+
+
+        > 🚧 Retrohunt limits
+
+        >
+
+        > Each user can run up to 10 Retrohunt jobs at the same time, when you reach that limit you must wait for one of the running jobs to finish before launching a new one. Additionally, each job can contain up to 300 YARA rules.
+
+
+        If you want your job to scan files sent to Google TI within a certain time range you can use the `time_range` attribute to specify the desired range. Both the `start` and `end` fields in `time_range` should be the UNIX timestamp for the minimum and upper bound of the time range in UTC, and they should be within the maximum range allowed by your Retrohunt privileges. All users can scan up to 90 days back, and this can go up to 180 or 365 days for more privileged users. If `start` is not specified your Retrohunt job will scan back to the limit allowed by your privileges, and if `end` is not specified it will scan up to the most recent files.
+
+
+        Returns the newly created Retrohunt Job object.'
       operationId: createRetrohuntJob
       parameters: []
       requestBody:
@@ -126,7 +173,6 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: VirusTotal Delete a Retrohunt Job
       operationId: deleteRetrohuntJob
       parameters:
       - description: Job identifier
@@ -166,9 +212,7 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: 'Returns a [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.
-
-        '
+      description: Returns a Retrohunt Job object.
       operationId: getRetrohuntJob
       parameters:
       - description: Job identifier
@@ -209,7 +253,6 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: VirusTotal Abort a Retrohunt Job
       operationId: abortRetrohuntJob
       parameters:
       - description: Job identifier
@@ -250,12 +293,10 @@ paths:
       tags:
       - YARA Hunting - Retrohunt
       deprecated: false
-      description: 'Retrohunt jobs are related to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships URL.
+      description: 'Retrohunt jobs are related to other objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationships URL.
 
 
-        The supported relationships for Retrohunt jobs are described in the [Retrohunt Jobs](https://gtidocs.virustotal.com/reference/retrohunt-job-object) API object page.
-
-        '
+        The supported relationships for Retrohunt jobs are described in the Retrohunt Jobs API object page.'
       operationId: getRetrohuntJobRelationships
       parameters:
       - description: Job identifier

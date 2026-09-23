@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management API
+  title: VirusTotal API v3 - Access Control Access Control - Group…
   version: '3.0'
   description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
   contact:
@@ -25,7 +25,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Get a Group Object
       operationId: groups
       parameters:
       - description: Group ID
@@ -75,9 +74,7 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: 'This request accepts a JSON body containing the group attributes to update. Attributes not present in the request body remain the same. It returns the updated [Group](https://gtidocs.virustotal.com/reference/group-object) object.
-
-        '
+      description: This request accepts a JSON body containing the group attributes to update. Attributes not present in the request body remain the same. It returns the updated Group object.
       operationId: patchGroup
       parameters:
       - description: Group ID
@@ -140,9 +137,7 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: 'Returns a list of [User](https://gtidocs.virustotal.com/reference/user-object) objects.
-
-        '
+      description: Returns a list of User objects.
       operationId: getGroupAdministrators
       parameters:
       - description: Group id
@@ -182,9 +177,7 @@ paths:
       description: 'Update group administrator list. User emails must be used. If a username is used, a 400 error is returned.
 
 
-        No admins are removed by using this endpoint. To revoke admin privileges from a certain user, use [DELETE/groups/{id}/relationships/administrators/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-group-administrator).
-
-        '
+        No admins are removed by using this endpoint. To revoke admin privileges from a certain user, use DELETE/groups/{id}/relationships/administrators/{user_id}.'
       operationId: postGroupAdministrators
       parameters:
       - description: Group id
@@ -241,7 +234,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Revoke Group Admin Permissions from a User
       operationId: deleteUserGroupAdministrator
       parameters:
       - description: Group id
@@ -284,7 +276,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Check if a User is a Group Admin
       operationId: checkUserGroupAdministrator
       parameters:
       - description: Group id
@@ -334,7 +325,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Get Group Users
       operationId: getGroupUsers
       parameters:
       - description: Group ID.
@@ -374,9 +364,7 @@ paths:
       description: 'Update the group''s user list. User emails must be used, if a username is used a 400 error is returned.
 
 
-        No users are removed by using this endpoint. To remove group membership from a certain user, use [DELETE/groups/{id}/relationships/users/{user_id}](https://gtidocs.virustotal.com/reference/delete-user-from-group).
-
-        '
+        No users are removed by using this endpoint. To remove group membership from a certain user, use DELETE/groups/{id}/relationships/users/{user_id}.'
       operationId: updateGroupUsers
       parameters:
       - description: Group ID.
@@ -433,7 +421,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Remove a User from a Group
       operationId: deleteUserFromGroup
       parameters:
       - description: Group ID.
@@ -476,7 +463,6 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: VirusTotal Check if a User is a Group Member
       operationId: checkUserInGroup
       parameters:
       - description: Group ID.
@@ -526,9 +512,7 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: 'This endpoint is the same as [/groups/{id}/{relationship}](https://gtidocs.virustotal.com/reference/groups-relationships) except it returns just the related object''s descriptor (and context attributes, if any) instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /groups/{id}/{relationship} except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.
       operationId: groupsRelationshipsIds
       parameters:
       - description: Group ID.
@@ -597,7 +581,10 @@ paths:
       tags:
       - Access Control - Group Management
       deprecated: false
-      description: "Group objects have relationships to other objects. As mentioned in the  [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by group objects are described in the [Group object section](https://gtidocs.virustotal.com/reference/group-object).\n"
+      description: 'Group objects have relationships to other objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.
+
+
+        The relationships supported by group objects are described in the Group object section.'
       operationId: groupsRelationships
       parameters:
       - description: Group ID.
@@ -649,6 +636,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
     DataEnvelope:
       type: object
       description: Successful response envelope. The shape of `data` depends on the endpoint.
@@ -675,29 +685,6 @@ components:
           additionalProperties: true
       required:
       - data
-    Error:
-      type: object
-      description: Standard VirusTotal API error envelope.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          example: NotFoundError
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Resource not found
-      required:
-      - code
-      - message
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

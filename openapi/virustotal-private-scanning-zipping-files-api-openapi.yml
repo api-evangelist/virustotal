@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Zipping files API
+  title: VirusTotal API v3 - Private Scanning Private Scanning…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,63 @@ paths:
       tags:
       - Private Scanning - Zipping files
       deprecated: false
-      description: "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure: \n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n  \\\"hashes\\\":[\n   \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n   \\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n   \\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n  }\n}\n```\nThe response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that's why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n  \\\"data\\\": {\n   \\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"starting\\\",\n\\\"progress\\\": 0,\n    \\\"files_ok\\\": 0,\n\\\"files_error\\\": 0\n} \n}\n}\n```\n\n\nThe GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it's finished.\n"
+      description: 'Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request''s body must have the following structure:
+
+        ```json Example request
+
+        {
+
+        \"data\": {
+
+        \"password\": \"mysecretpassword\",
+
+        \"hashes\":[
+
+        \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",
+
+        \"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\",
+
+        \"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\"]
+
+        }
+
+        }
+
+        ```
+
+        The response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won''t be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that''s why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.
+
+
+        ```json Example response
+
+        {
+
+        \"data\": {
+
+        \"type\": \"zip_file\",
+
+        \"id\": \"4939392292\",
+
+        \"attributes\": {
+
+        \"status\": \"starting\",
+
+        \"progress\": 0,
+
+        \"files_ok\": 0,
+
+        \"files_error\": 0
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it''s finished.'
       operationId: privateScanningZipFiles
       parameters: []
       requestBody:
@@ -83,7 +139,55 @@ paths:
       tags:
       - Private Scanning - Zipping files
       deprecated: false
-      description: "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \\\"data\\\": {\n    \\\"type\\\": \\\"zip_file\\\",\n    \\\"id\\\": \\\"4939392292\\\",\n    \\\"attributes\\\": {\n      \\\"status\\\": \\\"creating\\\",\n      \\\"progress\\\": 45,\n      \\\"files_ok\\\": 3,\n      \\\"files_error\\\": 0\n    }\n  }\n}\n``` \n\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to download the file.\n"
+      description: 'This endpoint returns information about a ZIP file.
+
+
+        ```json Example response
+
+        {
+
+        \"data\": {
+
+        \"type\": \"zip_file\",
+
+        \"id\": \"4939392292\",
+
+        \"attributes\": {
+
+        \"status\": \"creating\",
+
+        \"progress\": 45,
+
+        \"files_ok\": 3,
+
+        \"files_error\": 0
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The `status` attribute contains one of the following statuses:
+
+
+        - `starting`
+
+        - `creating`
+
+        - `finished`
+
+        - `timeout`
+
+        - `error-starting`
+
+        - `error-creating`
+
+
+        When the status is finished you may proceed to download the file.'
       operationId: privateScanningGetZipFile
       parameters:
       - description: ZIP file identifier
@@ -124,7 +228,6 @@ paths:
       tags:
       - Private Scanning - Zipping files
       deprecated: false
-      description: VirusTotal Download a ZIP File
       operationId: privateScanningDownloadZipFile
       parameters:
       - description: ZIP file identifier
@@ -161,7 +264,6 @@ paths:
       tags:
       - Private Scanning - Zipping files
       deprecated: false
-      description: VirusTotal Get a ZIP File’s Download URL
       operationId: privateScanningGetZipDownloadUrl
       parameters:
       - description: ZIP file identifier
@@ -199,6 +301,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
     DataEnvelope:
       type: object
       description: Successful response envelope. The shape of `data` depends on the endpoint.
@@ -225,29 +350,6 @@ components:
           additionalProperties: true
       required:
       - data
-    Error:
-      type: object
-      description: Standard VirusTotal API error envelope.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          example: NotFoundError
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Resource not found
-      required:
-      - code
-      - message
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

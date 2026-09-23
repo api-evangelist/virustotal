@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Files API
+  title: VirusTotal API v3 - Private Scanning Private Scanning…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,13 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "Upload and analyse a file with Private Scanning\n> \U0001F4D8 File size\n> \n> If the file to be uploaded is bigger than 32MB, please use the [/private/files/upload_url](https://gtidocs.virustotal.com/reference/private-files-upload-url) endpoint instead which admits files up to 650MB.\n"
+      description: 'Upload and analyse a file with Private Scanning
+
+        > 📘 File size
+
+        >
+
+        > If the file to be uploaded is bigger than 32MB, please use the /private/files/upload_url endpoint instead which admits files up to 650MB.'
       operationId: uploadFilePrivateScanning
       parameters: []
       requestBody:
@@ -126,7 +132,101 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a list of previously analysed [private files](https://gtidocs.virustotal.com/reference/private-files-object). The files are always ordered by SHA256.\n\n```json /api/v3/private/files\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_FILE_OBJECT>,\n    <PRIVATE_FILE_OBJECT>,\n    ...\n  },\n  \"links\": {\n    \"self\": <string>,\n    \"next\": <string>\n  }\n}\n```\n```json\n{\n\t\"meta\": {\n\t\t\"cursor\": \"079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\",\n\t\t\"count\": 19\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"type_description\": \"Windows Installer\",\n        ...\n      },\n      \"type\": \"private_file\",\n      \"id\": \"079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/private/files/079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678\"\n      }\n    },\n    ...\n  ],\n  \"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/files?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/private/files?cursor=079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678&limit=1\"\n\t}\n}\n```\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        Returns a list of previously analysed private files. The files are always ordered by SHA256.
+
+
+        ```json /api/v3/private/files
+
+        {
+
+        "meta": {
+
+        "cursor": ,
+
+        "count":
+
+        },
+
+        "data": {
+
+        ,
+
+        ,
+
+        ...
+
+        },
+
+        "links": {
+
+        "self": ,
+
+        "next":
+
+        }
+
+        }
+
+        ```
+
+        ```json
+
+        {
+
+        "meta": {
+
+        "cursor": "079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678",
+
+        "count": 19
+
+        },
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "type_description": "Windows Installer",
+
+        ...
+
+        },
+
+        "type": "private_file",
+
+        "id": "079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/private/files/079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678"
+
+        }
+
+        },
+
+        ...
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/private/files?limit=1",
+
+        "next": "https://www.virustotal.com/api/v3/private/files?cursor=079b1db08ac52c94be8fdb5b638134a6109a510bc10a87c15413d6c793985678&limit=1"
+
+        }
+
+        }
+
+        ```'
       operationId: listPrivateFiles
       parameters:
       - description: Maximum number of files to retrieve (40 max)
@@ -174,7 +274,14 @@ paths:
       - Private Scanning - Files
       parameters: []
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFor uploading files smaller than 32MB you can simply use the [POST /files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, but for larger files you need to obtain a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/private/files`. The `POST` request should have the same format expected by the  [POST /files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint. Each upload URL can be used only once.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        For uploading files smaller than 32MB you can simply use the POST /files endpoint, but for larger files you need to obtain a special upload URL first, and then send the `POST` request to the upload URL instead of sending it to `/private/files`. The `POST` request should have the same format expected by the POST /files endpoint. Each upload URL can be used only once.'
       operationId: privateFilesUploadUrl
       responses:
         '200':
@@ -208,7 +315,14 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint deletes a private file from storage, as well as all the PrivateFile and PrivateAnalysis associated with it (unless `only_from_storage=true` is used.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        This endpoint deletes a private file from storage, as well as all the PrivateFile and PrivateAnalysis associated with it (unless `only_from_storage=true` is used.'
       operationId: deleteFilePrivateScanning
       parameters:
       - description: File's SHA-256
@@ -254,7 +368,91 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint return information about a file scanned privately. Notice that it only accepts SHA-256 as the file's ID, MD5 and SHA-1 are not supported like in its [GET /files/{id}](https://gtidocs.virustotal.com/reference/file-info) public counterpart. The SHA-256 for the analysed file can be computed by yourself or obtained from the response to the call to [GET /analyses/{id}](https://gtidocs.virustotal.com/reference/private-analysis).\n\n```json Example response\n{\n  \"data\": {\n    \"attributes\": {\n      \"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n      \"magic\": \"ASCII text\",\n      \"tags\": [\n        \"text\"\n      ],\n      \"exiftool\": {\n        \"MIMEType\": \"text/plain\",\n        \"LineCount\": \"1\",\n        \"MIMEEncoding\": \"us-ascii\",\n        \"FileTypeExtension\": \"txt\",\n        \"FileType\": \"TXT\",\n        \"WordCount\": \"1\",\n        \"Newlines\": \"Unix LF\"\n      },\n      \"trid\": [\n        {\n          \"file_type\": \"file seems to be plain text/ASCII\",\n          \"probability\": 0.0\n        }\n      ],\n      \"vhash\": \"9eecb7db59d16c80417c72d1e1f4fbf1\",\n      \"sha256\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n      \"ssdeep\": \"3:tdn:T\",\n      \"md5\": \"e5828c564f71fea3a12dde8bd5d27063\",\n      \"size\": 5\n    },\n    \"type\": \"private_file\",\n    \"id\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n    \"links\": {\n      \"self\": \"https://www.virustotal.com/api/v3/private/files/11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\"\n    }\n  }\n}\n```\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        This endpoint return information about a file scanned privately. Notice that it only accepts SHA-256 as the file''s ID, MD5 and SHA-1 are not supported like in its GET /files/{id} public counterpart. The SHA-256 for the analysed file can be computed by yourself or obtained from the response to the call to GET /analyses/{id}.
+
+
+        ```json Example response
+
+        {
+
+        "data": {
+
+        "attributes": {
+
+        "sha1": "7bae8076a5771865123be7112468b79e9d78a640",
+
+        "magic": "ASCII text",
+
+        "tags": [
+
+        "text"
+
+        ],
+
+        "exiftool": {
+
+        "MIMEType": "text/plain",
+
+        "LineCount": "1",
+
+        "MIMEEncoding": "us-ascii",
+
+        "FileTypeExtension": "txt",
+
+        "FileType": "TXT",
+
+        "WordCount": "1",
+
+        "Newlines": "Unix LF"
+
+        },
+
+        "trid": [
+
+        {
+
+        "file_type": "file seems to be plain text/ASCII",
+
+        "probability": 0.0
+
+        }
+
+        ],
+
+        "vhash": "9eecb7db59d16c80417c72d1e1f4fbf1",
+
+        "sha256": "11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772",
+
+        "ssdeep": "3:tdn:T",
+
+        "md5": "e5828c564f71fea3a12dde8bd5d27063",
+
+        "size": 5
+
+        },
+
+        "type": "private_file",
+
+        "id": "11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/private/files/11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772"
+
+        }
+
+        }
+
+        }
+
+        ```'
       operationId: privateFilesInfo
       parameters:
       - description: File's SHA-256
@@ -295,7 +493,14 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/files/{id}/{relationship}](https://gtidocs.virustotal.com/reference/private-files-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        This endpoint is the same as /files/{id}/{relationship} except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.'
       operationId: privatefilesidrelationshipsrelationship
       parameters:
       - description: File's SHA-256
@@ -354,7 +559,17 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private file](https://gtidocs.virustotal.com/reference/private-files-object) object documentation.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.
+
+
+        Available relationships are described in the private file object documentation.'
       operationId: privateFilesRelationships
       parameters:
       - description: File's SHA-256
@@ -413,7 +628,31 @@ paths:
       tags:
       - Private Scanning - Files
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReanalyses a private file. The same params from [/files](https://gtidocs.virustotal.com/reference/post_files) (other than the file) are accepted. Returns a [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object).\n\n```json Example\n{\n\t\"data\": {\n\t\t\"type\": \"private_analysis\",\n\t\t\"id\": \"ZmI5Y2VmNGJmZDIwZTkzNmQ5MzY0NTcwMGI2Nzc2M2Q6Tm9uZToxNjYwODI1NDE1\"\n\t}\n}\n```\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        Reanalyses a private file. The same params from /files (other than the file) are accepted. Returns a private analysis.
+
+
+        ```json Example
+
+        {
+
+        "data": {
+
+        "type": "private_analysis",
+
+        "id": "ZmI5Y2VmNGJmZDIwZTkzNmQ5MzY0NTcwMGI2Nzc2M2Q6Tm9uZToxNjYwODI1NDE1"
+
+        }
+
+        }
+
+        ```'
       operationId: rescanAPrivateFile
       parameters:
       - description: File's SHA256 hash

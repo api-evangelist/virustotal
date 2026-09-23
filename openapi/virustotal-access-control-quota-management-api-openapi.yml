@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Access Control - Quota Management API
+  title: VirusTotal API v3 - Access Control Access Control - Quota…
   version: '3.0'
   description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
   contact:
@@ -25,7 +25,254 @@ paths:
       tags:
       - Access Control - Quota Management
       deprecated: false
-      description: "This endpoint retrieves information about a the API usage, broken down by endpoint, of an user in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> \U0001F6A7 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.\n\nThe user can be retrieved either by user ID or by API key, but the latter only works if the requester is the user himself or an administrator of a group the user belongs to.\n\n```json Example response\n{\n  \"data\": {\n    \"daily\": {\n      \"2020-08-10\": {\n        \"urls\": 2\n      },\n      \"2020-08-11\": {\n        \"domains\": 1,\n        \"file_relationships\": 1,\n        \"files\": 1\n      },\n      \"2020-08-12\": {\n        \"analyses\": 25,\n        \"file_analyse\": 3,\n        \"files\": 6\n      },\n      \"2020-08-17\": {\n        \"urls\": 3\n      },\n      \"2020-08-18\": {\n        \"urls\": 1\n      },\n      \"2020-08-20\": {\n        \"file_download\": 36,\n        \"file_relationships\": 5,\n        \"files\": 1\n      },\n      \"2020-08-21\": {\n        \"file_analyse\": 1,\n        \"file_download\": 92,\n        \"files\": 1\n      },\n      \"2020-08-23\": {\n        \"analyses\": 5,\n        \"file_analyse\": 1\n      },\n      \"2020-08-25\": {\n        \"file_download\": 51\n      },\n      \"2020-08-26\": {\n        \"file_download\": 51\n      },\n      \"2020-08-28\": {\n        \"file_download\": 14\n      },\n      \"2020-08-31\": {\n        \"file_download\": 6\n      },\n      \"2020-09-01\": {\n        \"file_download\": 81\n      },\n      \"2020-09-02\": {\n        \"file_relationships\": 5,\n        \"graphs\": 1\n      },\n      \"2020-09-03\": {\n        \"file_relationships\": 6,\n        \"graph_comments\": 1,\n        \"graph_items\": 3,\n        \"graphs\": 2,\n        \"retrohunt_jobs\": 2\n      },\n      \"2020-09-05\": {\n        \"comment_relationships\": 1,\n        \"comments\": 4,\n        \"domain_comments\": 1,\n        \"domain_graphs\": 2,\n        \"domain_relationships\": 1,\n        \"file_analyse\": 1,\n        \"statistics\": 1\n      },\n      \"2020-09-06\": {\n        \"file_behaviours\": 6,\n        \"file_relationships\": 2,\n        \"graph_comments\": 1,\n        \"graphs\": 5\n      },\n      \"2020-09-07\": {\n        \"domain_relationships\": 1,\n        \"intelligence_search\": 5,\n        \"resolutions\": 1,\n        \"search\": 6,\n        \"submissions\": 1,\n        \"url_relationships\": 1,\n        \"urls\": 2\n      }\n    },\n    \"total\": {\n      \"analyses\": 30,\n      \"comment_relationships\": 1,\n      \"comments\": 4,\n      \"domain_comments\": 1,\n      \"domain_graphs\": 2,\n      \"domain_relationships\": 2,\n      \"domains\": 1,\n      \"file_analyse\": 6,\n      \"file_behaviours\": 6,\n      \"file_download\": 331,\n      \"file_relationships\": 19,\n      \"files\": 9,\n      \"graph_comments\": 2,\n      \"graph_items\": 3,\n      \"graphs\": 8,\n      \"intelligence_search\": 5,\n      \"resolutions\": 1,\n      \"retrohunt_jobs\": 2,\n      \"search\": 6,\n      \"statistics\": 1,\n      \"submissions\": 1,\n      \"url_relationships\": 1,\n      \"urls\": 8\n    }\n  }\n}\n```\n"
+      description: 'This endpoint retrieves information about a the API usage, broken down by endpoint, of an user in a specific range of days (last 30 days by default).
+
+        The period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API usage data will be retrieved, respectively.
+
+        The data available includes only the last 60 natural days.
+
+
+        > 🚧 Time range restrictions
+
+        >
+
+        > The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.
+
+
+        The user can be retrieved either by user ID or by API key, but the latter only works if the requester is the user himself or an administrator of a group the user belongs to.
+
+
+        ```json Example response
+
+        {
+
+        "data": {
+
+        "daily": {
+
+        "2020-08-10": {
+
+        "urls": 2
+
+        },
+
+        "2020-08-11": {
+
+        "domains": 1,
+
+        "file_relationships": 1,
+
+        "files": 1
+
+        },
+
+        "2020-08-12": {
+
+        "analyses": 25,
+
+        "file_analyse": 3,
+
+        "files": 6
+
+        },
+
+        "2020-08-17": {
+
+        "urls": 3
+
+        },
+
+        "2020-08-18": {
+
+        "urls": 1
+
+        },
+
+        "2020-08-20": {
+
+        "file_download": 36,
+
+        "file_relationships": 5,
+
+        "files": 1
+
+        },
+
+        "2020-08-21": {
+
+        "file_analyse": 1,
+
+        "file_download": 92,
+
+        "files": 1
+
+        },
+
+        "2020-08-23": {
+
+        "analyses": 5,
+
+        "file_analyse": 1
+
+        },
+
+        "2020-08-25": {
+
+        "file_download": 51
+
+        },
+
+        "2020-08-26": {
+
+        "file_download": 51
+
+        },
+
+        "2020-08-28": {
+
+        "file_download": 14
+
+        },
+
+        "2020-08-31": {
+
+        "file_download": 6
+
+        },
+
+        "2020-09-01": {
+
+        "file_download": 81
+
+        },
+
+        "2020-09-02": {
+
+        "file_relationships": 5,
+
+        "graphs": 1
+
+        },
+
+        "2020-09-03": {
+
+        "file_relationships": 6,
+
+        "graph_comments": 1,
+
+        "graph_items": 3,
+
+        "graphs": 2,
+
+        "retrohunt_jobs": 2
+
+        },
+
+        "2020-09-05": {
+
+        "comment_relationships": 1,
+
+        "comments": 4,
+
+        "domain_comments": 1,
+
+        "domain_graphs": 2,
+
+        "domain_relationships": 1,
+
+        "file_analyse": 1,
+
+        "statistics": 1
+
+        },
+
+        "2020-09-06": {
+
+        "file_behaviours": 6,
+
+        "file_relationships": 2,
+
+        "graph_comments": 1,
+
+        "graphs": 5
+
+        },
+
+        "2020-09-07": {
+
+        "domain_relationships": 1,
+
+        "intelligence_search": 5,
+
+        "resolutions": 1,
+
+        "search": 6,
+
+        "submissions": 1,
+
+        "url_relationships": 1,
+
+        "urls": 2
+
+        }
+
+        },
+
+        "total": {
+
+        "analyses": 30,
+
+        "comment_relationships": 1,
+
+        "comments": 4,
+
+        "domain_comments": 1,
+
+        "domain_graphs": 2,
+
+        "domain_relationships": 2,
+
+        "domains": 1,
+
+        "file_analyse": 6,
+
+        "file_behaviours": 6,
+
+        "file_download": 331,
+
+        "file_relationships": 19,
+
+        "files": 9,
+
+        "graph_comments": 2,
+
+        "graph_items": 3,
+
+        "graphs": 8,
+
+        "intelligence_search": 5,
+
+        "resolutions": 1,
+
+        "retrohunt_jobs": 2,
+
+        "search": 6,
+
+        "statistics": 1,
+
+        "submissions": 1,
+
+        "url_relationships": 1,
+
+        "urls": 8
+
+        }
+
+        }
+
+        }
+
+        ```'
       operationId: userApiUsage
       parameters:
       - description: User ID or API key
@@ -76,7 +323,96 @@ paths:
       tags:
       - Access Control - Quota Management
       deprecated: false
-      description: "This endpoint returns a summary of a user's overall quotas including:\n\n- `allowed`: \\<_integer_> quota limit.\n- `inherited_from`: \\<_string_> group from which the quota is inherited.\n- `used`: \\<_integer_> how many quota has been used.\n\nConsumption data based on natural month and UTC.\n\n```json Example\n{\n  \"data\": {\n    \"api_requests_daily\": {\n      \"group\": {\n        \"allowed\": 99000000,\n        \"inherited_from\": \"company\",\n        \"used\": 45073\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 17\n      }\n    },\n    \"api_requests_hourly\": {\n      \"group\": {\n        \"allowed\": 3300000,\n        \"inherited_from\": \"company\",\n        \"used\": 653\n      },\n      \"user\": {\n        \"allowed\": 60000000000,\n        \"used\": 0\n      }\n    },\n    \"api_requests_monthly\": {\n      \"group\": {\n        \"allowed\": 2000000000,\n        \"inherited_from\": \"company\",\n        \"used\": 142176\n      },\n      \"user\": {\n        \"allowed\": 1000000000,\n        \"used\": 137\n      }\n    }\n  }\n}\n```\n"
+      description: 'This endpoint returns a summary of a user''s overall quotas including:
+
+
+        - `allowed`: \ quota limit.
+
+        - `inherited_from`: \ group from which the quota is inherited.
+
+        - `used`: \ how many quota has been used.
+
+
+        Consumption data based on natural month and UTC.
+
+
+        ```json Example
+
+        {
+
+        "data": {
+
+        "api_requests_daily": {
+
+        "group": {
+
+        "allowed": 99000000,
+
+        "inherited_from": "company",
+
+        "used": 45073
+
+        },
+
+        "user": {
+
+        "allowed": 1000000000,
+
+        "used": 17
+
+        }
+
+        },
+
+        "api_requests_hourly": {
+
+        "group": {
+
+        "allowed": 3300000,
+
+        "inherited_from": "company",
+
+        "used": 653
+
+        },
+
+        "user": {
+
+        "allowed": 60000000000,
+
+        "used": 0
+
+        }
+
+        },
+
+        "api_requests_monthly": {
+
+        "group": {
+
+        "allowed": 2000000000,
+
+        "inherited_from": "company",
+
+        "used": 142176
+
+        },
+
+        "user": {
+
+        "allowed": 1000000000,
+
+        "used": 137
+
+        }
+
+        }
+
+        }
+
+        }
+
+        ```'
       operationId: getUserOverallQuotas
       parameters:
       - description: User ID or API key
@@ -117,7 +453,358 @@ paths:
       tags:
       - Access Control - Quota Management
       deprecated: false
-      description: "This endpoint retrieves information about a the API usage, broken down by endpoint, of a group in a specific range of days (last 30 days by default).  \nThe period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API V3 usage data will be retrieved, respectively.  \nThe data available includes only the last 60 natural days.\n\n> \U0001F6A7 Time range restrictions\n> \n> The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.\n\nTo use this endpoint and get the API consumption of a certain group, you must be an administrator of that group.\n\n```json Example response\n\"daily\": {\n            \"2019-10-22\": {\n                \"search\": 1\n            },\n            \"2019-10-23\": {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n                \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\": 3,\n                \"intelligence_search\": 3,\n                \"item_vote\": 1\n            },\n            \"2019-10-24\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-25\": {\n                \"files\": 10,\n                \"intelligence_search\": 3\n            },\n            \"2019-10-28\": {\n                \"intelligence_search\": 2\n            },\n            \"2019-10-29\": {\n                \"url_submission\": 1\n            },\n            \"2019-10-30\": {\n                \"url_submission\": 1\n            },\n            \"2019-10-31\": {\n                \"domain_comments\": 9,\n                \"domain_graphs\": 9,\n                \"domain_relationships\": 90,\n                \"file_upload_url\": 1,\n                \"intelligence_search\": 30,\n                \"ip_addresses\": 2,\n                \"ip_addresses_comments\": 4,\n                \"ip_addresses_graphs\": 4,\n                \"ip_addresses_relationships\": 28,\n                \"item_vote\": 13,\n                \"url_submission\": 1\n            },\n            \"2019-11-04\": {\n                \"file_behaviours\": 2,\n                \"file_comments\": 2,\n                \"file_graphs\": 2,\n                \"file_relationships\": 40,\n                \"files\": 8,\n                \"intelligence_search\": 4,\n                \"item_vote\": 2\n            },\n            \"2019-11-05\": {\n                \"graphs\": 1,\n                \"intelligence_search\": 1\n            },\n            \"2019-11-06\": {\n                \"domains\": 14,\n                \"file_comments\": 1,\n                \"file_relationships\": 11,\n                \"files\": 34,\n                \"ip_addresses\": 10,\n                \"urls\": 10\n            },\n            \"2019-11-08\": {\n                \"analyses\": 1,\n                \"intelligence_search\": 4,\n                \"item_vote\": 3,\n                \"url_comments\": 3,\n                \"url_graphs\": 3,\n                \"url_relationships\": 12,\n                \"url_submission\": 2,\n                \"urls\": 9\n            },\n            \"2019-11-09\": {\n                \"files\": 123,\n                \"intelligence_search\": 13\n            },\n            \"2019-11-12\": {\n                \"file_behaviours\": 16,\n                \"file_comments\": 15,\n                \"file_graphs\": 15,\n                \"file_relationships\": 314,\n                \"files\": 44,\n                \"intelligence_search\": 3,\n                \"item_vote\": 15,\n                \"retrohunt_jobs\": 1\n            },\n            \"2019-11-13\": {\n                \"file_behaviours\": 1,\n                \"file_comments\": 1,\n                \"file_graphs\": 1,\n                \"file_relationships\": 20,\n                \"files\": 2,\n                \"intelligence_search\": 1,\n                \"item_vote\": 1\n            },\n            \"2019-11-18\": {\n                \"analyses\": 12,\n                \"file_behaviours\": 10,\n                \"file_comments\": 10,\n                \"file_graphs\": 10,\n                \"file_relationships\": 215,\n                \"file_upload_url\": 1,\n                \"files\": 51,\n                \"intelligence_search\": 7,\n                \"item_vote\": 10\n            },\n            \"2019-11-19\": {\n                \"domain_comments\": 1,\n                \"domain_graphs\": 1,\n                \"domain_relationships\": 10,\n                \"file_behaviours\": 9,\n                \"file_comments\": 9,\n                \"file_graphs\": 9,\n                \"file_relationships\": 180,\n                \"files\": 9,\n                \"intelligence_search\": 11,\n                \"item_vote\": 10\n            },\n            \"2019-11-20\": {\n                \"file_behaviours\": 5,\n                \"file_comments\": 5,\n                \"file_graphs\": 5,\n                \"file_relationships\": 100,\n                \"files\": 21,\n                \"intelligence_search\": 16,\n                \"item_vote\": 5\n            },\n            \"2019-11-21\": {\n                \"intelligence_search\": 8,\n                \"item_vote\": 9,\n                \"url_comments\": 9,\n                \"url_graphs\": 9,\n                \"url_relationships\": 36,\n                \"urls\": 24\n            }\n        },\n        \"total\": {\n            \"analyses\": 13,\n            \"domain_comments\": 10,\n            \"domain_graphs\": 10,\n            \"domain_relationships\": 100,\n            \"domains\": 54,\n            \"file_behaviours\": 44,\n            \"file_comments\": 44,\n            \"file_download\": 309,\n            \"file_graphs\": 43,\n            \"file_relationships\": 900,\n            \"file_upload_url\": 2,\n            \"files\": 551,\n            \"graphs\": 1,\n            \"intelligence_search\": 189,\n            \"ip_addresses\": 14,\n            \"ip_addresses_comments\": 6,\n            \"ip_addresses_graphs\": 4,\n            \"ip_addresses_relationships\": 39,\n            \"item_vote\": 69,\n            \"retrohunt_jobs\": 1,\n            \"search\": 3,\n            \"url_comments\": 12,\n            \"url_graphs\": 12,\n            \"url_relationships\": 48,\n            \"url_submission\": 5,\n            \"urls\": 53\n        }\n    }\n```\n"
+      description: 'This endpoint retrieves information about a the API usage, broken down by endpoint, of a group in a specific range of days (last 30 days by default).
+
+        The period of time can be delimited by the two query parameters **start_date** and **end_date**, being the first and last day when API V3 usage data will be retrieved, respectively.
+
+        The data available includes only the last 60 natural days.
+
+
+        > 🚧 Time range restrictions
+
+        >
+
+        > The maximum range of time allowed by this endpoint is 30 days. If a greater range of time is specified, this endpoint will return an error message as response.
+
+
+        To use this endpoint and get the API consumption of a certain group, you must be an administrator of that group.
+
+
+        ```json Example response
+
+        "daily": {
+
+        "2019-10-22": {
+
+        "search": 1
+
+        },
+
+        "2019-10-23": {
+
+        "file_behaviours": 1,
+
+        "file_comments": 1,
+
+        "file_graphs": 1,
+
+        "file_relationships": 20,
+
+        "files": 3,
+
+        "intelligence_search": 3,
+
+        "item_vote": 1
+
+        },
+
+        "2019-10-24": {
+
+        "intelligence_search": 2
+
+        },
+
+        "2019-10-25": {
+
+        "files": 10,
+
+        "intelligence_search": 3
+
+        },
+
+        "2019-10-28": {
+
+        "intelligence_search": 2
+
+        },
+
+        "2019-10-29": {
+
+        "url_submission": 1
+
+        },
+
+        "2019-10-30": {
+
+        "url_submission": 1
+
+        },
+
+        "2019-10-31": {
+
+        "domain_comments": 9,
+
+        "domain_graphs": 9,
+
+        "domain_relationships": 90,
+
+        "file_upload_url": 1,
+
+        "intelligence_search": 30,
+
+        "ip_addresses": 2,
+
+        "ip_addresses_comments": 4,
+
+        "ip_addresses_graphs": 4,
+
+        "ip_addresses_relationships": 28,
+
+        "item_vote": 13,
+
+        "url_submission": 1
+
+        },
+
+        "2019-11-04": {
+
+        "file_behaviours": 2,
+
+        "file_comments": 2,
+
+        "file_graphs": 2,
+
+        "file_relationships": 40,
+
+        "files": 8,
+
+        "intelligence_search": 4,
+
+        "item_vote": 2
+
+        },
+
+        "2019-11-05": {
+
+        "graphs": 1,
+
+        "intelligence_search": 1
+
+        },
+
+        "2019-11-06": {
+
+        "domains": 14,
+
+        "file_comments": 1,
+
+        "file_relationships": 11,
+
+        "files": 34,
+
+        "ip_addresses": 10,
+
+        "urls": 10
+
+        },
+
+        "2019-11-08": {
+
+        "analyses": 1,
+
+        "intelligence_search": 4,
+
+        "item_vote": 3,
+
+        "url_comments": 3,
+
+        "url_graphs": 3,
+
+        "url_relationships": 12,
+
+        "url_submission": 2,
+
+        "urls": 9
+
+        },
+
+        "2019-11-09": {
+
+        "files": 123,
+
+        "intelligence_search": 13
+
+        },
+
+        "2019-11-12": {
+
+        "file_behaviours": 16,
+
+        "file_comments": 15,
+
+        "file_graphs": 15,
+
+        "file_relationships": 314,
+
+        "files": 44,
+
+        "intelligence_search": 3,
+
+        "item_vote": 15,
+
+        "retrohunt_jobs": 1
+
+        },
+
+        "2019-11-13": {
+
+        "file_behaviours": 1,
+
+        "file_comments": 1,
+
+        "file_graphs": 1,
+
+        "file_relationships": 20,
+
+        "files": 2,
+
+        "intelligence_search": 1,
+
+        "item_vote": 1
+
+        },
+
+        "2019-11-18": {
+
+        "analyses": 12,
+
+        "file_behaviours": 10,
+
+        "file_comments": 10,
+
+        "file_graphs": 10,
+
+        "file_relationships": 215,
+
+        "file_upload_url": 1,
+
+        "files": 51,
+
+        "intelligence_search": 7,
+
+        "item_vote": 10
+
+        },
+
+        "2019-11-19": {
+
+        "domain_comments": 1,
+
+        "domain_graphs": 1,
+
+        "domain_relationships": 10,
+
+        "file_behaviours": 9,
+
+        "file_comments": 9,
+
+        "file_graphs": 9,
+
+        "file_relationships": 180,
+
+        "files": 9,
+
+        "intelligence_search": 11,
+
+        "item_vote": 10
+
+        },
+
+        "2019-11-20": {
+
+        "file_behaviours": 5,
+
+        "file_comments": 5,
+
+        "file_graphs": 5,
+
+        "file_relationships": 100,
+
+        "files": 21,
+
+        "intelligence_search": 16,
+
+        "item_vote": 5
+
+        },
+
+        "2019-11-21": {
+
+        "intelligence_search": 8,
+
+        "item_vote": 9,
+
+        "url_comments": 9,
+
+        "url_graphs": 9,
+
+        "url_relationships": 36,
+
+        "urls": 24
+
+        }
+
+        },
+
+        "total": {
+
+        "analyses": 13,
+
+        "domain_comments": 10,
+
+        "domain_graphs": 10,
+
+        "domain_relationships": 100,
+
+        "domains": 54,
+
+        "file_behaviours": 44,
+
+        "file_comments": 44,
+
+        "file_download": 309,
+
+        "file_graphs": 43,
+
+        "file_relationships": 900,
+
+        "file_upload_url": 2,
+
+        "files": 551,
+
+        "graphs": 1,
+
+        "intelligence_search": 189,
+
+        "ip_addresses": 14,
+
+        "ip_addresses_comments": 6,
+
+        "ip_addresses_graphs": 4,
+
+        "ip_addresses_relationships": 39,
+
+        "item_vote": 69,
+
+        "retrohunt_jobs": 1,
+
+        "search": 3,
+
+        "url_comments": 12,
+
+        "url_graphs": 12,
+
+        "url_relationships": 48,
+
+        "url_submission": 5,
+
+        "urls": 53
+
+        }
+
+        }
+
+        ```'
       operationId: groupApiUsage
       parameters:
       - description: Group ID

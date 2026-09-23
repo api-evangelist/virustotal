@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Comments API
+  title: VirusTotal API v3 - IoC Investigation IoC Investigation…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,84 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: "This endpoint retrieves information about the latest comments added to Google Threat Intelligence.  \nYou can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).\n\n```json Response example\n{\n  \"meta\": {\n    \"cursor\": \"Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB\"\n  },\n  \"data\": [\n    {\n      \"attributes\": {\n        \"votes\": {\n          \"positive\": 0,\n          \"abuse\": 0,\n          \"negative\": 0\n        },\n        \"tags\": [\n          \"_:api\",\n          \"_:public\",\n          \"aicc\",\n          \"monitorapp\",\n          \"malware\"\n        ],\n        \"text\": \"#aicc #monitorapp #malware\",\n        \"html\": \"#aicc #monitorapp #malware\",\n        \"date\": 1619424604\n      },\n      \"type\": \"comment\",\n      \"id\": \"u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/comments/u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&limit=1\",\n    \"next\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&cursor=Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB&limit=1\"\n  }\n}\n```\n"
+      description: 'This endpoint retrieves information about the latest comments added to Google Threat Intelligence.
+
+        You can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).
+
+
+        ```json Response example
+
+        {
+
+        "meta": {
+
+        "cursor": "Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB"
+
+        },
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "votes": {
+
+        "positive": 0,
+
+        "abuse": 0,
+
+        "negative": 0
+
+        },
+
+        "tags": [
+
+        "_:api",
+
+        "_:public",
+
+        "aicc",
+
+        "monitorapp",
+
+        "malware"
+
+        ],
+
+        "text": "#aicc #monitorapp #malware",
+
+        "html": "#aicc #monitorapp #malware",
+
+        "date": 1619424604
+
+        },
+
+        "type": "comment",
+
+        "id": "u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/comments/u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a"
+
+        }
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&limit=1",
+
+        "next": "https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&cursor=Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB&limit=1"
+
+        }
+
+        }
+
+        ```'
       operationId: getComments
       parameters:
       - description: Number of items to retrieve
@@ -77,7 +154,6 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: VirusTotal Delete a Comment
       operationId: commentIdDelete
       parameters:
       - description: Comment ID
@@ -117,7 +193,6 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: VirusTotal Get a Comment Object
       operationId: getComment
       parameters:
       - description: Relationship name (see [table](ref:comment-object#relationships))
@@ -163,9 +238,7 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: 'This endpoint is the same as [/comments/{id}/{relationship}](https://gtidocs.virustotal.com/reference/comments-relationships) except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /comments/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.
       operationId: commentsRelationshipsIds
       parameters:
       - description: Comment identifier
@@ -223,7 +296,23 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: "```json Example response\n{\n    \"data\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\": 1\n    }\n}\n```\n"
+      description: '```json Example response
+
+        {
+
+        "data": {
+
+        "abuse": 0,
+
+        "negative": 0,
+
+        "positive": 1
+
+        }
+
+        }
+
+        ```'
       operationId: voteComment
       parameters:
       - description: Comment ID
@@ -275,12 +364,10 @@ paths:
       tags:
       - IoC Investigation - Comments
       deprecated: false
-      description: 'Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.
+      description: 'Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.
 
 
-        All available relationships are documented in the [Comment](https://gtidocs.virustotal.com/reference/comment-object) API object page.
-
-        '
+        All available relationships are documented in the Comment API object page.'
       operationId: commentsRelationships
       parameters:
       - description: Comment identifier

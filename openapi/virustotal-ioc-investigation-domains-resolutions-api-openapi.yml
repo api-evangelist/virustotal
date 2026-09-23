@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Domains & Resolutions API
+  title: VirusTotal API v3 - IoC Investigation IoC Investigation…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,9 +25,7 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: 'Returns a [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.
-
-        '
+      description: Returns a Domain object.
       operationId: domainInfo
       parameters:
       - description: Domain name
@@ -71,9 +69,7 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: 'Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.
-
-        '
+      description: Returns a list of Comment objects.
       operationId: domainsCommentsGet
       parameters:
       - description: Domain name
@@ -125,7 +121,34 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: "With this endpoint you can post a comment for a given domain. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comment-object) object.\n"
+      description: 'With this endpoint you can post a comment for a given domain. The body for the POST request must be the JSON representation of a comment object. Notice however that you don''t need to provide an ID for the object, as they are automatically generated for new comments.
+
+
+        Any word starting with # in your comment''s text will be considered a tag, and added to the comment''s tag attribute.
+
+
+        ```json Example request
+
+        {
+
+        "data": {
+
+        "type": "comment",
+
+        "attributes": {
+
+        "text": "Lorem #ipsum dolor sit ..."
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        Returns a Comment object.'
       operationId: domainsCommentsPost
       parameters:
       - description: Domain name
@@ -177,9 +200,7 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: 'This endpoint is the same as [/domains/{domain}/{relationship}](https://gtidocs.virustotal.com/reference/domains-relationships) except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /domains/{domain}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.
       operationId: domainsRelationshipsIds
       parameters:
       - description: Domain name
@@ -237,9 +258,7 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: 'Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.
-
-        '
+      description: Returns a list of Vote objects.
       operationId: domainsVotesGet
       parameters:
       - in: path
@@ -279,7 +298,34 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: "With this endpoint you can post a vote for a given domain. The body for the POST request must be the JSON representation of a [vote object](https://gtidocs.virustotal.com/reference/vote-object). Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n\nReturns a [votes](https://gtidocs.virustotal.com/reference/vote-object) object.\n"
+      description: 'With this endpoint you can post a vote for a given domain. The body for the POST request must be the JSON representation of a vote object. Note however that you don''t need to provide an ID for the object, as they are automatically generated for new votes.
+
+
+        The verdict attribute must have be either harmless or malicious.
+
+
+        ```json Example request
+
+        {
+
+        "data": {
+
+        "type": "vote",
+
+        "attributes": {
+
+        "verdict": "harmless"
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        Returns a votes object.'
       operationId: domainVotesPost
       parameters:
       - description: hostname or domain name
@@ -350,7 +396,10 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: "Domain objects have number of relationships to other Domains and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAll available relationships are documented in the [domain](https://gtidocs.virustotal.com/reference/domains-object) API object page.\n"
+      description: 'Domain objects have number of relationships to other Domains and objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.
+
+
+        All available relationships are documented in the domain API object page.'
       operationId: domainsRelationships
       parameters:
       - description: Domain name
@@ -409,9 +458,7 @@ paths:
       tags:
       - IoC Investigation - Domains & Resolutions
       deprecated: false
-      description: 'This endpoint retrieves a [Resolution](https://gtidocs.virustotal.com/reference/resolution-object) object by its ID. A resolution object ID is made by appending the IP and the domain it resolves to together.
-
-        '
+      description: This endpoint retrieves a Resolution object by its ID. A resolution object ID is made by appending the IP and the domain it resolves to together.
       operationId: getResolutionById
       parameters:
       - description: Resolution object ID.

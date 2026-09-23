@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Zipping files API
+  title: VirusTotal API v3 - IoC Investigation IoC Investigation…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,65 @@ paths:
       tags:
       - IoC Investigation - Zipping files
       deprecated: false
-      description: "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"password\": \"mysecretpassword\", \n    \"hashes\":[\n      \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \n      \"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\",\n      \"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\"]\n  }\n}\n```\n\nThe response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that's why the returned object has a `status` and `progress` attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"zip_file\",\n    \"id\": \"4939392292\",\n    \"attributes\": {\n      \"status\": \"starting\",\n      \"progress\": 0,\n      \"files_ok\": 0,\n      \"files_error\": 0\n    }  \n  }\n}\n```\n\nThe [GET /intelligence/zip_files/{id}](https://gtidocs.virustotal.com/reference/get-zip-file) endpoint should be used for retrieving the latest status of the ZIP file until it's `finished`.\n"
+      description: 'Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request''s body must have the following structure:
+
+
+        ```json Example request
+
+        {
+
+        "data": {
+
+        "password": "mysecretpassword",
+
+        "hashes":[
+
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+
+        "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+
+        "ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc"]
+
+        }
+
+        }
+
+        ```
+
+
+        The response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won''t be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that''s why the returned object has a `status` and `progress` attribute, which indicates the current status and current progress for the ZIP creation process.
+
+
+        ```json Example response
+
+        {
+
+        "data": {
+
+        "type": "zip_file",
+
+        "id": "4939392292",
+
+        "attributes": {
+
+        "status": "starting",
+
+        "progress": 0,
+
+        "files_ok": 0,
+
+        "files_error": 0
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The GET /intelligence/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it''s `finished`.'
       operationId: zipFiles
       parameters: []
       requestBody:
@@ -83,7 +141,55 @@ paths:
       tags:
       - IoC Investigation - Zipping files
       deprecated: false
-      description: "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \"data\": {\n    \"type\": \"zip_file\",\n    \"id\": \"4939392292\",\n    \"attributes\": {\n      \"status\": \"creating\",\n      \"progress\": 45,\n      \"files_ok\": 3,\n      \"files_error\": 0\n    }  \n  }\n}\n```\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is `finished` you may proceed to download the file.\n"
+      description: 'This endpoint returns information about a ZIP file.
+
+
+        ```json Example response
+
+        {
+
+        "data": {
+
+        "type": "zip_file",
+
+        "id": "4939392292",
+
+        "attributes": {
+
+        "status": "creating",
+
+        "progress": 45,
+
+        "files_ok": 3,
+
+        "files_error": 0
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The `status` attribute contains one of the following statuses:
+
+
+        - `starting`
+
+        - `creating`
+
+        - `finished`
+
+        - `timeout`
+
+        - `error-starting`
+
+        - `error-creating`
+
+
+        When the status is `finished` you may proceed to download the file.'
       operationId: getZipFile
       parameters:
       - description: ZIP file identifier
@@ -124,9 +230,7 @@ paths:
       tags:
       - IoC Investigation - Zipping files
       deprecated: false
-      description: 'This endpoint is similar to [GET /zip_files/{id}/download_url](https://gtidocs.virustotal.com/reference/zip-files-download-url), but it redirects you to the download URL. The download URL you are redirected to can be reused as many times as you want for a period of 1 hour. After that period the URL expires and can''t be used anymore.
-
-        '
+      description: This endpoint is similar to GET /zip_files/{id}/download_url, but it redirects you to the download URL. The download URL you are redirected to can be reused as many times as you want for a period of 1 hour. After that period the URL expires and can't be used anymore.
       operationId: zipFilesDownload
       parameters:
       - description: ZIP file identifier
@@ -163,9 +267,7 @@ paths:
       tags:
       - IoC Investigation - Zipping files
       deprecated: false
-      description: 'This endpoint returns a signed URL from where you can download the specified ZIP file. The URL expires after 1 hour.
-
-        '
+      description: This endpoint returns a signed URL from where you can download the specified ZIP file. The URL expires after 1 hour.
       operationId: zipFilesDownloadUrl
       parameters:
       - description: ZIP file identifier
@@ -203,6 +305,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
     DataEnvelope:
       type: object
       description: Successful response envelope. The shape of `data` depends on the endpoint.
@@ -229,29 +354,6 @@ components:
           additionalProperties: true
       required:
       - data
-    Error:
-      type: object
-      description: Standard VirusTotal API error envelope.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          example: NotFoundError
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Resource not found
-      required:
-      - code
-      - message
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

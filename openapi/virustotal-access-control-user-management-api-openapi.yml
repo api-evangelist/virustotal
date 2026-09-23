@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Access Control - User Management API
+  title: VirusTotal API v3 - Access Control Access Control - User…
   version: '3.0'
   description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
   contact:
@@ -28,9 +28,7 @@ paths:
       description: 'This request deletes a given user. A user account can only be deleted by its owner, a 403 error is returned otherwise.
 
 
-        An additional `x-user-password` header is required, which is used as confirmation.
-
-        '
+        An additional `x-user-password` header is required, which is used as confirmation.'
       operationId: deleteUserId
       parameters:
       - description: User ID or API key
@@ -83,9 +81,7 @@ paths:
       description: 'This endpoint retrieves information about a user, including the privileges and quotas associated to the user. The user can be retrieved either by user ID or by API key, but the former only works if the requester is the user himself or an administrator of a group the user belongs to.
 
 
-        Returns an [User](https://gtidocs.virustotal.com/reference/user-object) object.
-
-        '
+        Returns an User object.'
       operationId: user
       parameters:
       - description: User ID or API key
@@ -135,9 +131,7 @@ paths:
       tags:
       - Access Control - User Management
       deprecated: false
-      description: 'This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated [User](https://gtidocs.virustotal.com/reference/user-object) object.
-
-        '
+      description: This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated User object.
       operationId: patchUserId
       parameters:
       - description: User ID or API key
@@ -201,9 +195,7 @@ paths:
       tags:
       - Access Control - User Management
       deprecated: false
-      description: 'This endpoint is the same as [/users/{id}/{relationship}](https://gtidocs.virustotal.com/reference/users-relationships) except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /users/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.
       operationId: getUsersRelationshipsIds
       parameters:
       - description: Username or API key
@@ -262,15 +254,13 @@ paths:
       tags:
       - Access Control - User Management
       deprecated: false
-      description: 'Users are related to other objects in our dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to this API endpoint.
+      description: 'Users are related to other objects in our dataset. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to this API endpoint.
 
 
         Some relationships are only accessible to their account''s owners and their group''s admins.
 
 
-        The supported relationships are documented in the [User](https://gtidocs.virustotal.com/reference/user-object#relationships) API object page.
-
-        '
+        The supported relationships are documented in the User API object page.'
       operationId: usersRelationships
       parameters:
       - description: Username or API key
@@ -326,6 +316,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
     DataEnvelope:
       type: object
       description: Successful response envelope. The shape of `data` depends on the endpoint.
@@ -352,29 +365,6 @@ components:
           additionalProperties: true
       required:
       - data
-    Error:
-      type: object
-      description: Standard VirusTotal API error envelope.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          example: NotFoundError
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Resource not found
-      required:
-      - code
-      - message
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

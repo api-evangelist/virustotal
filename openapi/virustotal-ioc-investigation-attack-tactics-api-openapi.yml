@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Attack Tactics API
+  title: VirusTotal API v3 - IoC Investigation IoC Investigation…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,6 @@ paths:
       tags:
       - IoC Investigation - Attack Tactics
       deprecated: false
-      description: VirusTotal Get an Attack Tactic Object
       operationId: attackTacticsid
       parameters:
       - description: Attack tactic's ID
@@ -66,9 +65,7 @@ paths:
       tags:
       - IoC Investigation - Attack Tactics
       deprecated: false
-      description: 'This endpoint is the same as [/attack_tactics/{id}/{relationship}](https://gtidocs.virustotal.com/reference/attack_tacticsidrelationship) except it returns just the related object''s descriptor instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /attack_tactics/{id}/{relationship} except it returns just the related object's descriptor instead of returning all attributes.
       operationId: attackTacticsidrelationshipsrelationship
       parameters:
       - description: Attack tactic's ID
@@ -127,9 +124,7 @@ paths:
       tags:
       - IoC Investigation - Attack Tactics
       deprecated: false
-      description: 'Available relationships are described in the [Attack Tactic](https://gtidocs.virustotal.com/reference/attack-tactics) object documentation.
-
-        '
+      description: Available relationships are described in the Attack Tactic object documentation.
       operationId: attackTacticsidrelationship
       parameters:
       - description: Attack tactic's ID

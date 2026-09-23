@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Analyses API
+  title: VirusTotal API v3 - Private Scanning Private Scanning…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,121 @@ paths:
       tags:
       - Private Scanning - Analyses
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a list of the last [private analyses](https://gtidocs.virustotal.com/reference/private-analyses-object). The analyses are sorted by most recent first. You can use `?order=date-` to reverse the order.\n\n```json /api/v3/private/analyses\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_ANALYSIS_OBJECT>,\n    <PRIVATE_ANALYSIS_OBJECT>,\n    ...\n  },\n  \"links\": {\n    \"self\": <string>,\n    \"next\": <string>\n  }\n}\n```\n```json\n{\n\t\"meta\": {\n\t\t\"count\": 90,\n\t\t\"cursor\": \"1\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"status\": \"completed\",\n\t\t\t\t\"sandbox_status\": {\n\t\t\t\t\t\"Zenbox\": {\n\t\t\t\t\t\t\"status\": \"finished\",\n\t\t\t\t\t\t\"in_progress_percent\": 100\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"sandbox_configuration\": {\n\t\t\t\t\t\"enable_internet\": false,\n\t\t\t\t\t\"command_line\": \"\"\n\t\t\t\t},\n\t\t\t\t\"date\": 1666170912\n\t\t\t},\n\t\t\t\"type\": \"private_analysis\",\n\t\t\t\"id\": \"NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\",\n\t\t\t\"links\": {\n\t\t\t\t\"item\": \"https://www.virustotal.com/api/v3/private/files/16f6c6439c5b971218b9cd1d616ba40c7cad08c94984ecfde443dfa3c61c6152\",\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses/NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\"\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/private/analyses?cursor=1&limit=1\"\n\t}\n}\n```\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        Returns a list of the last private analyses. The analyses are sorted by most recent first. You can use `?order=date-` to reverse the order.
+
+
+        ```json /api/v3/private/analyses
+
+        {
+
+        "meta": {
+
+        "cursor": ,
+
+        "count":
+
+        },
+
+        "data": {
+
+        ,
+
+        ,
+
+        ...
+
+        },
+
+        "links": {
+
+        "self": ,
+
+        "next":
+
+        }
+
+        }
+
+        ```
+
+        ```json
+
+        {
+
+        "meta": {
+
+        "count": 90,
+
+        "cursor": "1"
+
+        },
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "status": "completed",
+
+        "sandbox_status": {
+
+        "Zenbox": {
+
+        "status": "finished",
+
+        "in_progress_percent": 100
+
+        }
+
+        },
+
+        "sandbox_configuration": {
+
+        "enable_internet": false,
+
+        "command_line": ""
+
+        },
+
+        "date": 1666170912
+
+        },
+
+        "type": "private_analysis",
+
+        "id": "NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==",
+
+        "links": {
+
+        "item": "https://www.virustotal.com/api/v3/private/files/16f6c6439c5b971218b9cd1d616ba40c7cad08c94984ecfde443dfa3c61c6152",
+
+        "self": "https://www.virustotal.com/api/v3/private/analyses/NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg=="
+
+        }
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/private/analyses?limit=1",
+
+        "next": "https://www.virustotal.com/api/v3/private/analyses?cursor=1&limit=1"
+
+        }
+
+        }
+
+        ```'
       operationId: listPrivateAnalyses
       parameters:
       - description: Maximum number of files to retrieve (40 max)
@@ -78,7 +192,64 @@ paths:
       tags:
       - Private Scanning - Analyses
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nWith this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the [POST /private/files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, and will return a private analysis object with information about the analysis.\n\n```json Example response\n{\n  \"meta\": {\n    \"file_info\": {\n      \"size\": 5,\n      \"sha256\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n      \"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n      \"md5\": \"e5828c564f71fea3a12dde8bd5d27063\"\n    }\n  },\n  \"data\": {\n    \"attributes\": {\n      \"date\": 1620127014,\n      \"status\": \"completed\"\n    },\n    \"type\": \"private_analysis\",\n    \"id\": \"ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\",\n    \"links\": {\n      \"self\": \"https://virustotal.com/api/v3/private/analyses/ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\"\n    }\n  }\n}\n```\n\nThe `status` attribute in the private analysis object can be either \"queued\" or \"completed\", once it gets completed, you can use the `sha256` in the `file_info` section with the [GET /private/files/{id}](https://gtidocs.virustotal.com/reference/private-files-info) for getting all the information that VirusTotal has generated for the analysed file. Alternatively you could use [GET /private/analyses/{id}/item](https://gtidocs.virustotal.com/reference/analysesidrelationship) for the same purpose.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        With this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the POST /private/files endpoint, and will return a private analysis object with information about the analysis.
+
+
+        ```json Example response
+
+        {
+
+        "meta": {
+
+        "file_info": {
+
+        "size": 5,
+
+        "sha256": "11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772",
+
+        "sha1": "7bae8076a5771865123be7112468b79e9d78a640",
+
+        "md5": "e5828c564f71fea3a12dde8bd5d27063"
+
+        }
+
+        },
+
+        "data": {
+
+        "attributes": {
+
+        "date": 1620127014,
+
+        "status": "completed"
+
+        },
+
+        "type": "private_analysis",
+
+        "id": "ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==",
+
+        "links": {
+
+        "self": "https://virustotal.com/api/v3/private/analyses/ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA=="
+
+        }
+
+        }
+
+        }
+
+        ```
+
+
+        The `status` attribute in the private analysis object can be either "queued" or "completed", once it gets completed, you can use the `sha256` in the `file_info` section with the GET /private/files/{id} for getting all the information that VirusTotal has generated for the analysed file. Alternatively you could use GET /private/analyses/{id}/item for the same purpose.'
       operationId: privateAnalysis
       parameters:
       - description: Analysis identifier
@@ -119,7 +290,14 @@ paths:
       tags:
       - Private Scanning - Analyses
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/private/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analysesidrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        This endpoint is the same as /private/analyses/{id}/{relationship} except it returns just the related object''s IDs (and context attributes, if any) instead of returning all attributes.'
       operationId: analysesidrelationshipsrelationship
       parameters:
       - description: Analysis identifier
@@ -166,7 +344,17 @@ paths:
       tags:
       - Private Scanning - Analyses
       deprecated: false
-      description: "> \U0001F6A7 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object) object documentation.\n"
+      description: '> 🚧 Special privileges required
+
+        >
+
+        > Private Scanning endpoints are only available to users with Private Scanning license.
+
+
+        As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.
+
+
+        Available relationships are described in the private analysis object documentation.'
       operationId: analysesidrelationship
       parameters:
       - description: Analysis identifier

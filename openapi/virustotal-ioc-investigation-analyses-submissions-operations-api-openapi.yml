@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Analyses, Submissions & Operations API
+  title: VirusTotal API v3 - IoC Investigation IoC Investigation…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,9 +25,7 @@ paths:
       tags:
       - IoC Investigation - Analyses, Submissions & Operations
       deprecated: false
-      description: 'Returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) object.
-
-        '
+      description: Returns an Analysis object.
       operationId: analysis
       parameters:
       - description: Analysis identifier
@@ -68,9 +66,7 @@ paths:
       tags:
       - IoC Investigation - Analyses, Submissions & Operations
       deprecated: false
-      description: 'This endpoint is the same as [/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analyses-get-objects) except it returns just the related object''s descriptors (ID and context attributes, if any) instead of returning all attributes.
-
-        '
+      description: This endpoint is the same as /analyses/{id}/{relationship} except it returns just the related object's descriptors (ID and context attributes, if any) instead of returning all attributes.
       operationId: analysesGetDescriptors
       parameters:
       - description: Analysis identifier
@@ -117,7 +113,10 @@ paths:
       tags:
       - IoC Investigation - Analyses, Submissions & Operations
       deprecated: false
-      description: "As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [analysis](https://gtidocs.virustotal.com/reference/analyses-object) object documentation.\n"
+      description: 'As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.
+
+
+        Available relationships are described in the analysis object documentation.'
       operationId: analysesGetObjects
       parameters:
       - description: Analysis identifier
@@ -164,9 +163,7 @@ paths:
       tags:
       - IoC Investigation - Analyses, Submissions & Operations
       deprecated: false
-      description: 'Returns a [Submission](https://gtidocs.virustotal.com/reference/submission-object) object.
-
-        '
+      description: Returns a Submission object.
       operationId: getSubmission
       parameters:
       - description: Submission object ID
@@ -207,9 +204,7 @@ paths:
       tags:
       - IoC Investigation - Analyses, Submissions & Operations
       deprecated: false
-      description: 'Returns an [Operation](https://gtidocs.virustotal.com/reference/operation-object) object.
-
-        '
+      description: Returns an Operation object.
       operationId: getOperationsId
       parameters:
       - description: Operation ID

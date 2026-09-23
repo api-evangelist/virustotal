@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: VirusTotal API v3 - Access Control Access Control - Group Management Threat Graphs Permissions & ACL API
+  title: VirusTotal API v3 - Threat Graphs Threat Graphs Permissions…
   version: '3.0'
-  description: Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.
+  description: Create, share, edit, and search Threat Graphs — visualisations of how IoCs and threats relate. Includes the editor/viewer ACL surface.
   contact:
     name: VirusTotal / Google Threat Intelligence
     url: https://docs.virustotal.com/reference/overview
@@ -25,7 +25,56 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: "This endpoint returns the users and groups that can edit the graph. The graph needs to be shared with them as `Editor` to appear here.\n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10\"\n    }\n}\n```\n"
+      description: 'This endpoint returns the users and groups that can edit the graph. The graph needs to be shared with them as `Editor` to appear here.
+
+
+        ```json Response example
+
+        {
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "first_name": "Bertram",
+
+        "last_name": "Gilfoyle",
+
+        "profile_phrase": "",
+
+        "reputation": 1,
+
+        "status": "active",
+
+        "user_since": 1530008602
+
+        },
+
+        "id": "gilfoyle",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/users/gilfoyle"
+
+        },
+
+        "type": "user"
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10"
+
+        }
+
+        }
+
+        ```'
       operationId: graphsEditors
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -86,7 +135,56 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: "This endpoint adds a user or groups as a graph editor. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10\"\n    }\n}\n```\n"
+      description: 'This endpoint adds a user or groups as a graph editor.
+
+
+        ```json Response example
+
+        {
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "first_name": "Bertram",
+
+        "last_name": "Gilfoyle",
+
+        "profile_phrase": "",
+
+        "reputation": 1,
+
+        "status": "active",
+
+        "user_since": 1530008602
+
+        },
+
+        "id": "gilfoyle",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/users/gilfoyle"
+
+        },
+
+        "type": "user"
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/editors?limit=10"
+
+        }
+
+        }
+
+        ```'
       operationId: graphsAddEditor
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -137,7 +235,6 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: VirusTotal Revoke Edit Graph Permissions from a User or Group
       operationId: graphsDeleteEditor
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -193,7 +290,18 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: "This endpoint returns true if the user or group has `Editor` access to the graph.\n\n```json Response example\n{\n    \"data\": false\n}\n```\n"
+      description: 'This endpoint returns true if the user or group has `Editor` access to the graph.
+
+
+        ```json Response example
+
+        {
+
+        "data": false
+
+        }
+
+        ```'
       operationId: graphsCheckEditor
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -250,7 +358,6 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: VirusTotal Revoke View Permission from a User or Group
       operationId: graphsDeleteViewer
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -306,9 +413,7 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: 'This endpoint returns true if the user has `Viewer` access to the graph.
-
-        '
+      description: This endpoint returns true if the user has `Viewer` access to the graph.
       operationId: graphsCheckViewer
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -372,7 +477,56 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: "This endpoint returns the users that can view the graph. The graph needs to be shared with them as `Viewer` to appear here.\n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10\"\n    }\n}\n```\n"
+      description: 'This endpoint returns the users that can view the graph. The graph needs to be shared with them as `Viewer` to appear here.
+
+
+        ```json Response example
+
+        {
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "first_name": "Bertram",
+
+        "last_name": "Gilfoyle",
+
+        "profile_phrase": "",
+
+        "reputation": 1,
+
+        "status": "active",
+
+        "user_since": 1530008602
+
+        },
+
+        "id": "gilfoyle",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/users/gilfoyle"
+
+        },
+
+        "type": "user"
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10"
+
+        }
+
+        }
+
+        ```'
       operationId: graphsViewers
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -433,7 +587,56 @@ paths:
       tags:
       - Threat Graphs Permissions & ACL
       deprecated: false
-      description: "This endpoint adds a user or group as a graph viewer. \n\n```json Response example\n{\n    \"data\": [\n        {\n            \"attributes\": {\n                \"first_name\": \"Bertram\",\n                \"last_name\": \"Gilfoyle\",\n                \"profile_phrase\": \"\",\n                \"reputation\": 1,\n                \"status\": \"active\",\n                \"user_since\": 1530008602\n            },\n            \"id\": \"gilfoyle\",\n            \"links\": {\n                \"self\": \"https://www.virustotal.com/api/v3/users/gilfoyle\"\n            },\n            \"type\": \"user\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10\"\n    }\n}\n```\n"
+      description: 'This endpoint adds a user or group as a graph viewer.
+
+
+        ```json Response example
+
+        {
+
+        "data": [
+
+        {
+
+        "attributes": {
+
+        "first_name": "Bertram",
+
+        "last_name": "Gilfoyle",
+
+        "profile_phrase": "",
+
+        "reputation": 1,
+
+        "status": "active",
+
+        "user_since": 1530008602
+
+        },
+
+        "id": "gilfoyle",
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/users/gilfoyle"
+
+        },
+
+        "type": "user"
+
+        }
+
+        ],
+
+        "links": {
+
+        "self": "https://www.virustotal.com/api/v3/graphs/g5598743d5f3c699f1c90e76c2c2d541d41f1b56bd8114c06d181ed3f60cfcada/viewers?limit=10"
+
+        }
+
+        }
+
+        ```'
       operationId: graphsAddViewer
       parameters:
       - description: A 65 char length id which uniquely identify the graph.
@@ -481,6 +684,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
+    Error:
+      type: object
+      description: Standard VirusTotal API error envelope.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code.
+          example: NotFoundError
+        message:
+          type: string
+          description: Human-readable error message.
+          example: Resource not found
+      required:
+      - code
+      - message
     DataEnvelope:
       type: object
       description: Successful response envelope. The shape of `data` depends on the endpoint.
@@ -507,29 +733,6 @@ components:
           additionalProperties: true
       required:
       - data
-    Error:
-      type: object
-      description: Standard VirusTotal API error envelope.
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code.
-          example: NotFoundError
-        message:
-          type: string
-          description: Human-readable error message.
-          example: Resource not found
-      required:
-      - code
-      - message
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

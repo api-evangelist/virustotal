@@ -342,14 +342,6 @@ components:
           additionalProperties: true
       required:
       - data
-    ErrorResponse:
-      type: object
-      description: Error response envelope returned by the VirusTotal API.
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-      required:
-      - error
     Error:
       type: object
       description: Standard VirusTotal API error envelope.
@@ -365,6 +357,14 @@ components:
       required:
       - code
       - message
+    ErrorResponse:
+      type: object
+      description: Error response envelope returned by the VirusTotal API.
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+      - error
   securitySchemes:
     VTApiKey:
       type: apiKey

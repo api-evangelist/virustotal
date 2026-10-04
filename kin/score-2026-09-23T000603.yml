@@ -1,21 +1,19 @@
-# Kin Score artifact — virustotal — 2026-08-27T123021
+# Kin Score artifact — virustotal — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: virustotal
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T123021
-  composite: 49.7
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 50.5
   band: developing
   facets:
-    discoverability: 57.4
-    contract_quality: 68.9
-    governance: 28.8
+    discoverability: 75.9
+    contract_quality: 67.6
+    contract_governance: 28.8
     operational_transparency: 34.2
     developer_ergonomics: 54.8
-    commercial_clarity: 39.5
-    contract_governance: 28.8
     access_clarity: 39.5
   agent_readiness:
     score: 30.6

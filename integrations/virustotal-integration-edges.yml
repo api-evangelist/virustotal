@@ -1,7 +1,10 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- crowdstrike/integrations/crowdstrike-integration-edges.yml
 - https://azuremarketplace.microsoft.com/
+- microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+- palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: Microsoft Azure Marketplace
@@ -20,3 +23,62 @@ edges:
   seller_name: VIRUSTOTAL SL.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: CrowdStrike (own)
+  partner: crowdstrike
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.crowdstrike.com/listings/virustotal/
+  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
+  apps:
+  - VirusTotal Threat Context Enrichment
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+- partner_name: Microsoft Sentinel (own)
+  partner: microsoft-sentinel
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/Google%20Threat%20Intelligence
+  mirror_of: microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+  apps:
+  - Google Threat Intelligence
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Security - Threat Intelligence
+  badges:
+  - support-tier:partner
+- partner_name: Palo Alto Networks (own)
+  partner: palo-alto-networks
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://cortex.marketplace.pan.dev/marketplace/details/GoogleThreatIntelligence/
+  mirror_of: palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml
+  apps:
+  - GoogleThreatIntelligence
+  - VirusTotal
+  listing_count: 2
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Data Enrichment & Threat Intelligence
+  badges:
+  - support:partner
+source:
+- crowdstrike/integrations/crowdstrike-integration-edges.yml
+- microsoft-sentinel/integrations/microsoft-sentinel-integration-edges.yml
+- palo-alto-networks/integrations/palo-alto-networks-integration-edges.yml

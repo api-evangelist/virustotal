@@ -15,6 +15,55 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: virustotal-mcp-registry
+  label: MCP Registry
+  partner: mcp
+  partner_name: MCP Registry
+  type: register
+  channel: standard-directory
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.VirusTotal
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: io.github.VirusTotal/virustotal-mcp
+    register_id: io.github.VirusTotal/virustotal-mcp
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: virustotal-winget-windows-package-manager
+  label: winget (Windows Package Manager)
+  partner_name: winget (Windows Package Manager)
+  category: official CLI (winget (Windows Package Manager))
+  type: register
+  channel: package-registry
+  evidence: https://github.com/microsoft/winget-pkgs/tree/master/manifests/v/VirusTotal/vt-cli
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: winget (Windows Package Manager) (public package index)
+    spec_file: null
+    packages:
+    - name: VirusTotal.vt-cli
+      kind: manifest
+      version: 1.3.1
+      released: '2026-05-19'
+      lapsed: false
+      page: https://github.com/microsoft/winget-pkgs/tree/master/manifests/v/VirusTotal/vt-cli
+      cli: 'winget: VirusTotal Command Line Interface'
+      repo_leg: github-org:virustotal
+      publisher_leg: artifact-github-org:virustotal
+      matched_by: github-org
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
 - slug: virustotal-crowdstrike-own
   label: CrowdStrike (own)
   partner: crowdstrike
@@ -53,22 +102,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: virustotal-mcp-registry
-  label: MCP Registry
-  partner: mcp
-  partner_name: MCP Registry
-  type: register
-  channel: standard-directory
-  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=io.github.VirusTotal
+- slug: virustotal-eclipse-foundation-open-vsx
+  label: Eclipse Foundation (open-vsx)
+  partner: eclipse
+  partner_name: Eclipse Foundation (open-vsx)
+  category: IDE / developer extension marketplace listing
+  type: marketplace
+  marketplace: open-vsx
+  channel: partner-built
+  evidence: https://open-vsx.org/namespace/virustotal
   source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: registry.modelcontextprotocol.io
-    spec_file: null
-    role: mcp-server-listing
-    registered_name: io.github.VirusTotal/virustotal-mcp
-    register_id: io.github.VirusTotal/virustotal-mcp
-    detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

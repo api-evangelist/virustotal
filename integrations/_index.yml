@@ -215,3 +215,37 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: virustotal-arch-user-repository-aur
+  label: Arch User Repository (AUR)
+  partner_name: Arch User Repository (AUR)
+  category: official CLI (Arch User Repository (AUR))
+  type: register
+  channel: package-registry
+  evidence: https://aur.archlinux.org/packages/vt-cli-bin
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Arch User Repository (AUR) (public package index)
+    spec_file: null
+    packages:
+    - name: vt-cli-bin
+      kind: aur
+      version: 1.3.1-1
+      released: '2026-05-20'
+      released_field: AUR LastModified
+      out_of_date: false
+      lapsed: false
+      page: https://aur.archlinux.org/packages/vt-cli-bin
+      upstream: https://github.com/VirusTotal/vt-cli
+      cli: 'AUR description: VirusTotal Command Line Interface'
+      repo_leg: github-org:virustotal
+      publisher_leg: artifact-github-org:virustotal
+      matched_by: github-org
+    current: true
+    signal_note: 'the provider''s own command-line tool packaged for Arch Linux (community-maintained PKGBUILD whose
+      upstream and source artifact are the provider''s): distribution, not an integration; lapsed = flagged out-of-date
+      or not updated in 24 months'
+    detected_by: sweep-aur-vendor-cli-packages.py
+    detected: '2026-10-23'
+  status: not-a-workflow
+  arazzo: null

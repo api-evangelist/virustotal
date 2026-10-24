@@ -1,160 +1,157 @@
 {
+  "info": {
+    "_postman_id": "4c26723d-0597-4e07-a44a-2e75a5862454",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:58:23.000Z",
+    "updatedAt": "2026-10-22T01:58:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c26723d-0597-4e07-a44a-2e75a5862454"
+  },
   "item": [
     {
-      "id": "18346483-b7a6-4d00-af0b-5ae0c4cc806a",
-      "name": "IoC Investigation - Popular Threat Categories",
-      "description": {
-        "content": "IoC Investigation - Popular Threat Categories",
-        "type": "text/plain"
-      },
+      "name": "popular_threat_categories",
       "item": [
         {
-          "id": "647c6a83-48ec-44f0-8499-5f0ed6e55ce8",
           "name": "VirusTotal Get a List of Popular Threat Categories",
+          "id": "0796415b-9e39-4643-bdce-0c15e41c0a41",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "VirusTotal Get a List of Popular Threat Categories",
-            "description": {
-              "content": "VirusTotal Get a List of Popular Threat Categories",
-              "type": "text/plain"
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
             },
-            "url": {
-              "path": [
-                "popular_threat_categories"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
+            "url": {
+              "raw": "{{baseUrl}}/popular_threat_categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "popular_threat_categories"
               ]
             }
           },
           "response": [
             {
-              "id": "5b719a29-4b92-4b09-b56c-0fabd2d68a6f",
+              "id": "091115d3-0730-4c6c-a5c6-cc8263cef613",
               "name": "200",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "popular_threat_categories"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/popular_threat_categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "popular_threat_categories"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{\\\"data\\\": [\\n  \\\"adware\\\", \\\"banker\\\", \\\"downloader\\\",\\n  \\\"dropper\\\", \\\"fakeav\\\", \\\"hacktool\\\",\\n  \\\"miner\\\", \\\"phising\\\", \\\"pua\\\",\\n  \\\"ransomware\\\", \\\"spyware\\\", \\\"trojan\\\",\\n  \\\"virus\\\", \\\"worm\\\"]}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-10-22T01:58:24.000Z",
+              "updatedAt": "2026-10-22T01:58:24.000Z",
+              "uid": "35240-091115d3-0730-4c6c-a5c6-cc8263cef613"
             },
             {
-              "id": "ca773fb1-06b4-4c43-a3f7-2067a36f36f8",
+              "id": "92285ad2-fed8-437a-b7d9-13c668a4d5f8",
               "name": "400",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "popular_threat_categories"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/popular_threat_categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "popular_threat_categories"
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:58:24.000Z",
+              "updatedAt": "2026-10-22T01:58:24.000Z",
+              "uid": "35240-92285ad2-fed8-437a-b7d9-13c668a4d5f8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:58:23.000Z",
+          "updatedAt": "2026-10-22T01:58:23.000Z",
+          "uid": "35240-0796415b-9e39-4643-bdce-0c15e41c0a41"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "96d50b5d-d20a-4d8f-a916-5dbf8597fe2f",
+      "createdAt": "2026-10-22T01:58:23.000Z",
+      "updatedAt": "2026-10-22T01:58:23.000Z",
+      "uid": "35240-96d50b5d-d20a-4d8f-a916-5dbf8597fe2f"
     }
   ],
   "auth": {
@@ -162,25 +159,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ffdcf674-42f9-48b5-862d-81f3c333547a",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Popular Threat Categories API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

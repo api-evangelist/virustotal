@@ -1,760 +1,767 @@
 {
+  "info": {
+    "_postman_id": "a99675dc-1344-4e67-87f9-a78417fb4d9c",
+    "name": "VirusTotal API v3 - Private Scanning Private Scanning\u2026",
+    "description": "Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:58:49.000Z",
+    "updatedAt": "2026-10-22T01:58:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a99675dc-1344-4e67-87f9-a78417fb4d9c"
+  },
   "item": [
     {
-      "id": "2c549edf-7cd7-4ef3-9933-b056417bc5a4",
-      "name": "Private Scanning - Analyses",
-      "description": {
-        "content": "Private Scanning - Analyses",
-        "type": "text/plain"
-      },
+      "name": "private",
       "item": [
         {
-          "id": "80b43c6e-c87e-49e8-9587-1a53066f662b",
-          "name": "VirusTotal List Private Analyses",
-          "request": {
-            "name": "VirusTotal List Private Analyses",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a list of the last [private analyses](https://gtidocs.virustotal.com/reference/private-analyses-object). The analyses are sorted by most recent first. You can use `?order=date-` to reverse the order.\n\n```json /api/v3/private/analyses\n{\n  \"meta\": {\n    \"cursor\": <string>,\n    \"count\": <int>\n  },\n  \"data\": {\n    <PRIVATE_ANALYSIS_OBJECT>,\n    <PRIVATE_ANALYSIS_OBJECT>,\n    ...\n  },\n  \"links\": {\n    \"self\": <string>,\n    \"next\": <string>\n  }\n}\n```\n```json\n{\n\t\"meta\": {\n\t\t\"count\": 90,\n\t\t\"cursor\": \"1\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"status\": \"completed\",\n\t\t\t\t\"sandbox_status\": {\n\t\t\t\t\t\"Zenbox\": {\n\t\t\t\t\t\t\"status\": \"finished\",\n\t\t\t\t\t\t\"in_progress_percent\": 100\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"sandbox_configuration\": {\n\t\t\t\t\t\"enable_internet\": false,\n\t\t\t\t\t\"command_line\": \"\"\n\t\t\t\t},\n\t\t\t\t\"date\": 1666170912\n\t\t\t},\n\t\t\t\"type\": \"private_analysis\",\n\t\t\t\"id\": \"NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\",\n\t\t\t\"links\": {\n\t\t\t\t\"item\": \"https://www.virustotal.com/api/v3/private/files/16f6c6439c5b971218b9cd1d616ba40c7cad08c94984ecfde443dfa3c61c6152\",\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses/NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\"\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/analyses?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/private/analyses?cursor=1&limit=1\"\n\t}\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "analyses"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of files to retrieve (40 max)"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                },
-                {
-                  "disabled": false,
-                  "key": "order",
-                  "value": "date-",
-                  "description": "Sorting order"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "analyses",
+          "item": [
             {
-              "id": "e90b5441-9477-488e-a85d-da4e7d07b30f",
-              "name": "200",
-              "originalRequest": {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "relationships",
+                  "item": [
+                    {
+                      "name": "{relationship}",
+                      "item": [
+                        {
+                          "name": "VirusTotal Get Object Descriptors Related to a Private Analysis",
+                          "id": "003b9bce-1b28-49b8-acf7-e78ba609c113",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "x-apikey",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/analyses/:id/relationships/:relationship",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "analyses",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3453138c-e441-4c98-9627-d7e681bae0a8",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) Analysis identifier"
+                                },
+                                {
+                                  "id": "1f9ce9f0-9c58-4592-a4c8-d7f2aa6883ba",
+                                  "key": "relationship",
+                                  "value": "<string>",
+                                  "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
+                                }
+                              ]
+                            },
+                            "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nThis endpoint is the same as /private/analyses/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                          },
+                          "response": [
+                            {
+                              "id": "cade54d1-5946-4845-a211-b60fe28bd432",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-apikey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/private/analyses/:id/relationships/:relationship",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "private",
+                                    "analyses",
+                                    ":id",
+                                    "relationships",
+                                    ":relationship"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    },
+                                    {
+                                      "key": "relationship"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-22T01:58:49.000Z",
+                              "updatedAt": "2026-10-22T01:58:49.000Z",
+                              "uid": "35240-cade54d1-5946-4845-a211-b60fe28bd432"
+                            },
+                            {
+                              "id": "9f3da5db-3b08-4fbc-8d44-0c88ecbc6058",
+                              "name": "400",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-apikey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/private/analyses/:id/relationships/:relationship",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "private",
+                                    "analyses",
+                                    ":id",
+                                    "relationships",
+                                    ":relationship"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    },
+                                    {
+                                      "key": "relationship"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-22T01:58:49.000Z",
+                              "updatedAt": "2026-10-22T01:58:49.000Z",
+                              "uid": "35240-9f3da5db-3b08-4fbc-8d44-0c88ecbc6058"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T01:58:49.000Z",
+                          "updatedAt": "2026-10-22T01:58:49.000Z",
+                          "uid": "35240-003b9bce-1b28-49b8-acf7-e78ba609c113"
+                        }
+                      ],
+                      "id": "8d317f7b-1533-437d-902a-1844eb6572c8",
+                      "createdAt": "2026-10-22T01:58:49.000Z",
+                      "updatedAt": "2026-10-22T01:58:49.000Z",
+                      "uid": "35240-8d317f7b-1533-437d-902a-1844eb6572c8"
+                    }
+                  ],
+                  "id": "102db8d5-412d-4908-9a4f-bf6417e8d0c1",
+                  "createdAt": "2026-10-22T01:58:49.000Z",
+                  "updatedAt": "2026-10-22T01:58:49.000Z",
+                  "uid": "35240-102db8d5-412d-4908-9a4f-bf6417e8d0c1"
+                },
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Objects Related to a Private Analysis",
+                      "id": "ee3107dc-54e9-4f84-8a56-fbf8d0c4c146",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/analyses/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "analyses",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b331c4c1-fdab-4962-bcf9-0b1ab37d5e4c",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Analysis identifier"
+                            },
+                            {
+                              "id": "1f06013a-7c40-4524-b842-11f3977d0a3b",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nAs mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nAvailable relationships are described in the private analysis object documentation."
+                      },
+                      "response": [
+                        {
+                          "id": "3a74f484-aaee-4ac3-94b6-cf9821a1d9a8",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/analyses/:id/:relationship",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "analyses",
+                                ":id",
+                                ":relationship"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:49.000Z",
+                          "updatedAt": "2026-10-22T01:58:49.000Z",
+                          "uid": "35240-3a74f484-aaee-4ac3-94b6-cf9821a1d9a8"
+                        },
+                        {
+                          "id": "07b1b372-82ba-4e7a-81d4-db9860227662",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/analyses/:id/:relationship",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "analyses",
+                                ":id",
+                                ":relationship"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:49.000Z",
+                          "updatedAt": "2026-10-22T01:58:49.000Z",
+                          "uid": "35240-07b1b372-82ba-4e7a-81d4-db9860227662"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:58:49.000Z",
+                      "updatedAt": "2026-10-22T01:58:49.000Z",
+                      "uid": "35240-ee3107dc-54e9-4f84-8a56-fbf8d0c4c146"
+                    }
+                  ],
+                  "id": "737d4baf-1556-49e6-84a8-8d8875ca0a61",
+                  "createdAt": "2026-10-22T01:58:49.000Z",
+                  "updatedAt": "2026-10-22T01:58:49.000Z",
+                  "uid": "35240-737d4baf-1556-49e6-84a8-8d8875ca0a61"
+                },
+                {
+                  "name": "VirusTotal Get a Private Analysis",
+                  "id": "d46da789-4e28-4101-9c7c-355137a38414",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/private/analyses/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "analyses",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "77c81e4f-5755-4d77-bd1e-1d65e8f6408d",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Analysis identifier"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nWith this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the POST /private/files endpoint, and will return a private analysis object with information about the analysis.\n\n```json Example response\n{\n\"meta\": {\n\"file_info\": {\n\"size\": 5,\n\"sha256\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n\"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n\"md5\": \"e5828c564f71fea3a12dde8bd5d27063\"\n}\n},\n\"data\": {\n\"attributes\": {\n\"date\": 1620127014,\n\"status\": \"completed\"\n},\n\"type\": \"private_analysis\",\n\"id\": \"ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\",\n\"links\": {\n\"self\": \"https://virustotal.com/api/v3/private/analyses/ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\"\n}\n}\n}\n```\n\nThe `status` attribute in the private analysis object can be either \"queued\" or \"completed\", once it gets completed, you can use the `sha256` in the `file_info` section with the GET /private/files/{id} for getting all the information that VirusTotal has generated for the analysed file. Alternatively you could use GET /private/analyses/{id}/item for the same purpose."
+                  },
+                  "response": [
+                    {
+                      "id": "8f8ab61e-91f0-4903-8cd1-699f325c27c1",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/analyses/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "analyses",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:49.000Z",
+                      "updatedAt": "2026-10-22T01:58:49.000Z",
+                      "uid": "35240-8f8ab61e-91f0-4903-8cd1-699f325c27c1"
+                    },
+                    {
+                      "id": "ea2a971d-fb25-4748-a222-dfc9f717c8cb",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/analyses/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "analyses",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:49.000Z",
+                      "updatedAt": "2026-10-22T01:58:49.000Z",
+                      "uid": "35240-ea2a971d-fb25-4748-a222-dfc9f717c8cb"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:49.000Z",
+                  "updatedAt": "2026-10-22T01:58:49.000Z",
+                  "uid": "35240-d46da789-4e28-4101-9c7c-355137a38414"
+                }
+              ],
+              "id": "ce1503d9-8d5e-4c47-9a38-4d7cdb8a1d3a",
+              "createdAt": "2026-10-22T01:58:49.000Z",
+              "updatedAt": "2026-10-22T01:58:49.000Z",
+              "uid": "35240-ce1503d9-8d5e-4c47-9a38-4d7cdb8a1d3a"
+            },
+            {
+              "name": "VirusTotal List Private Analyses",
+              "id": "7682db32-6494-4b5f-b65b-1a5fbc4b9da7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/private/analyses?limit=10&cursor=<string>&order=date-",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "private",
                     "analyses"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Maximum number of files to retrieve (40 max)",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     },
                     {
+                      "description": "Sorting order",
                       "key": "order",
                       "value": "date-"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nReturns a list of the last private analyses. The analyses are sorted by most recent first. You can use `?order=date-` to reverse the order.\n\n```json /api/v3/private/analyses\n{\n\"meta\": {\n\"cursor\": ,\n\"count\":\n},\n\"data\": {\n,\n,\n...\n},\n\"links\": {\n\"self\": ,\n\"next\":\n}\n}\n```\n```json\n{\n\"meta\": {\n\"count\": 90,\n\"cursor\": \"1\"\n},\n\"data\": [\n{\n\"attributes\": {\n\"status\": \"completed\",\n\"sandbox_status\": {\n\"Zenbox\": {\n\"status\": \"finished\",\n\"in_progress_percent\": 100\n}\n},\n\"sandbox_configuration\": {\n\"enable_internet\": false,\n\"command_line\": \"\"\n},\n\"date\": 1666170912\n},\n\"type\": \"private_analysis\",\n\"id\": \"NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\",\n\"links\": {\n\"item\": \"https://www.virustotal.com/api/v3/private/files/16f6c6439c5b971218b9cd1d616ba40c7cad08c94984ecfde443dfa3c61c6152\",\n\"self\": \"https://www.virustotal.com/api/v3/private/analyses/NTJjNTM1MThmMzhiNWRiNGE1ZWQ5ZDhiZjQyNWY2NzM6NTJjMjllYmQ3MThjODM2OWRjNmFiNmIzOTc2MmM3OTY6MTY2NjE3MDkxMg==\"\n}\n}\n],\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/private/analyses?limit=1\",\n\"next\": \"https://www.virustotal.com/api/v3/private/analyses?cursor=1&limit=1\"\n}\n}\n```"
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b1651bf1-bf4f-4d0a-9abd-ff922782f4cd",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "a0f14b26-c013-4efd-92f4-b3fded3477f4",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/private/analyses?limit=10&cursor=<string>&order=date-",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "analyses"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of files to retrieve (40 max)",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sorting order",
+                          "key": "order",
+                          "value": "date-"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "order",
-                      "value": "date-"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:49.000Z",
+                  "updatedAt": "2026-10-22T01:58:49.000Z",
+                  "uid": "35240-a0f14b26-c013-4efd-92f4-b3fded3477f4"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "3eb272fa-e25a-4597-a87f-03cec70964e2",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/private/analyses?limit=10&cursor=<string>&order=date-",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "analyses"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of files to retrieve (40 max)",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sorting order",
+                          "key": "order",
+                          "value": "date-"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:49.000Z",
+                  "updatedAt": "2026-10-22T01:58:49.000Z",
+                  "uid": "35240-3eb272fa-e25a-4597-a87f-03cec70964e2"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:58:49.000Z",
+              "updatedAt": "2026-10-22T01:58:49.000Z",
+              "uid": "35240-7682db32-6494-4b5f-b65b-1a5fbc4b9da7"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6aca36fb-98aa-4d7a-845e-c02842827472",
-          "name": "VirusTotal Get a Private Analysis",
-          "request": {
-            "name": "VirusTotal Get a Private Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nWith this endpoint you can check the status of a private file analysis. It expects the analysis ID returned by the [POST /private/files](https://gtidocs.virustotal.com/reference/upload-file-private-scanning) endpoint, and will return a private analysis object with information about the analysis.\n\n```json Example response\n{\n  \"meta\": {\n    \"file_info\": {\n      \"size\": 5,\n      \"sha256\": \"11a77c3d96c06974b53d7f40a577e6813739eb5c811b2a86f59038ea90add772\",\n      \"sha1\": \"7bae8076a5771865123be7112468b79e9d78a640\",\n      \"md5\": \"e5828c564f71fea3a12dde8bd5d27063\"\n    }\n  },\n  \"data\": {\n    \"attributes\": {\n      \"date\": 1620127014,\n      \"status\": \"completed\"\n    },\n    \"type\": \"private_analysis\",\n    \"id\": \"ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\",\n    \"links\": {\n      \"self\": \"https://virustotal.com/api/v3/private/analyses/ZTU4MjhjNTY0ZjcxZmVhM2ExMmRkZThiZDVkMjcwNjM6MTYyMDEyNzAxNA==\"\n    }\n  }\n}\n```\n\nThe `status` attribute in the private analysis object can be either \"queued\" or \"completed\", once it gets completed, you can use the `sha256` in the `file_info` section with the [GET /private/files/{id}](https://gtidocs.virustotal.com/reference/private-files-info) for getting all the information that VirusTotal has generated for the analysed file. Alternatively you could use [GET /private/analyses/{id}/item](https://gtidocs.virustotal.com/reference/analysesidrelationship) for the same purpose.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "analyses",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Analysis identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "fb159d33-1e9e-47bf-a234-8de596c0666d",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "73e75830-235f-49cf-97e9-46956bfc26aa",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "80c234fd-f8e3-4003-be99-fc4ed4e289cb",
-          "name": "VirusTotal Get Object Descriptors Related to a Private Analysis",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a Private Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/private/analyses/{id}/{relationship}](https://gtidocs.virustotal.com/reference/analysesidrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "analyses",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Analysis identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "d1192935-0b6e-4c61-8b88-5f8ce31d585d",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "774dd6e5-5b03-4811-bce4-78f09a172619",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "379d78ef-6358-4012-81c2-7f1ee1dd0b63",
-          "name": "VirusTotal Get Objects Related to a Private Analysis",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a Private Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private analysis](https://gtidocs.virustotal.com/reference/private-analyses-object) object documentation.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "analyses",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Analysis identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "6091dffd-1cc1-43da-b255-93284e82171f",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "161d471e-e275-4610-8e0c-ac9febf6e7e5",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "analyses",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Analysis identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-analyses-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ab9871ea-9672-4fed-b631-0b26d5dbfe8f",
+          "createdAt": "2026-10-22T01:58:49.000Z",
+          "updatedAt": "2026-10-22T01:58:49.000Z",
+          "uid": "35240-ab9871ea-9672-4fed-b631-0b26d5dbfe8f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "9680481b-386c-465a-aa4f-f1cb016faf19",
+      "createdAt": "2026-10-22T01:58:49.000Z",
+      "updatedAt": "2026-10-22T01:58:49.000Z",
+      "uid": "35240-9680481b-386c-465a-aa4f-f1cb016faf19"
     }
   ],
   "auth": {
@@ -762,25 +769,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "b78b2f8b-1000-448d-8ac6-1e601cd98455",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Analyses API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

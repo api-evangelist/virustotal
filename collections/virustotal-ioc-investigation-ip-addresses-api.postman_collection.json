@@ -1,107 +1,1332 @@
 {
+  "info": {
+    "_postman_id": "b2b06f7f-171a-4708-95eb-373baaa1041a",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:58:17.000Z",
+    "updatedAt": "2026-10-22T01:58:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2b06f7f-171a-4708-95eb-373baaa1041a"
+  },
   "item": [
     {
-      "id": "71e5b86c-88a4-48b5-b150-78f051430b4a",
-      "name": "IoC Investigation - IP addresses",
-      "description": {
-        "content": "IoC Investigation - IP addresses",
-        "type": "text/plain"
-      },
+      "name": "ip_addresses",
       "item": [
         {
-          "id": "d0520944-6d0a-4bdf-be86-46a65b57eaeb",
-          "name": "VirusTotal Get an IP Address Report",
-          "request": {
-            "name": "VirusTotal Get an IP Address Report",
-            "description": {
-              "content": "Returns an [IP address](https://gtidocs.virustotal.com/reference/ip-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP address"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                "key": "x-tool",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{ip}",
+          "item": [
             {
-              "id": "2a344103-7c1d-4b95-baea-aa88c37db414",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "comments",
+              "item": [
+                {
+                  "name": "VirusTotal Get Comments on an IP Address",
+                  "id": "979f25cb-5eb4-4a3d-a879-34867459e514",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip/comments?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip",
+                        "comments"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of comments to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "41a381a6-c50c-4c44-8676-ccf6cb291f6d",
+                          "key": "ip",
+                          "value": "<string>",
+                          "description": "(Required) IP address"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Comment objects."
+                  },
+                  "response": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
+                      "id": "f67ddb85-f81b-484c-bc7f-4ed6028545fd",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-f67ddb85-f81b-484c-bc7f-4ed6028545fd"
+                    },
+                    {
+                      "id": "345de99e-07ba-4732-a8b8-73260e25c6d6",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-345de99e-07ba-4732-a8b8-73260e25c6d6"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-979f25cb-5eb4-4a3d-a879-34867459e514"
+                },
+                {
+                  "name": "VirusTotal Add a Comment to an IP Address",
+                  "id": "06c703b1-dc07-45dd-abb1-48f84333e7fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip/comments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip",
+                        "comments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9eef4ffb-a0e7-4462-a43a-88ef4191c58f",
+                          "key": "ip",
+                          "value": "<string>",
+                          "description": "(Required) IP address"
+                        }
+                      ]
+                    },
+                    "description": "With this endpoint you can post a comment for a given IP address. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"comment\",\n\"attributes\": {\n\"text\": \"Lorem #ipsum dolor sit ...\"\n}\n}\n}\n```\n\nReturns a Comment object."
+                  },
+                  "response": [
+                    {
+                      "id": "a499eed2-ad32-4cfa-94b9-8b087396a0ac",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-a499eed2-ad32-4cfa-94b9-8b087396a0ac"
+                    },
+                    {
+                      "id": "6ec8b8cb-6972-42a7-980e-8c0d5c01ce52",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-6ec8b8cb-6972-42a7-980e-8c0d5c01ce52"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-06c703b1-dc07-45dd-abb1-48f84333e7fe"
+                }
+              ],
+              "id": "1dcf02bb-afb4-4e95-912c-17178861ebd3",
+              "createdAt": "2026-10-22T01:58:17.000Z",
+              "updatedAt": "2026-10-22T01:58:17.000Z",
+              "uid": "35240-1dcf02bb-afb4-4e95-912c-17178861ebd3"
+            },
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Object Descriptors Related to an IP Address",
+                      "id": "0691be22-b124-46a8-9674-87976b4e33b9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b9be991d-c360-475e-8017-a8767a69be62",
+                              "key": "ip",
+                              "value": "<string>",
+                              "description": "(Required) IP address"
+                            },
+                            {
+                              "id": "1b1faa84-9dde-4421-a306-e02a07806d3c",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /ip_addresses/{ip}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "065922f6-3e69-4645-92f2-751302c97413",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ip_addresses/:ip/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ip_addresses",
+                                ":ip",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ip"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:17.000Z",
+                          "updatedAt": "2026-10-22T01:58:17.000Z",
+                          "uid": "35240-065922f6-3e69-4645-92f2-751302c97413"
+                        },
+                        {
+                          "id": "b72049b1-f6f6-47a6-be8e-8afb952bca39",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/ip_addresses/:ip/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "ip_addresses",
+                                ":ip",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "ip"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:17.000Z",
+                          "updatedAt": "2026-10-22T01:58:17.000Z",
+                          "uid": "35240-b72049b1-f6f6-47a6-be8e-8afb952bca39"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-0691be22-b124-46a8-9674-87976b4e33b9"
+                    }
+                  ],
+                  "id": "afd9b70c-b7e1-413a-87eb-7a79cfbdd837",
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-afd9b70c-b7e1-413a-87eb-7a79cfbdd837"
+                }
+              ],
+              "id": "24846fc9-6dd4-4c94-8861-5c57311d2663",
+              "createdAt": "2026-10-22T01:58:17.000Z",
+              "updatedAt": "2026-10-22T01:58:17.000Z",
+              "uid": "35240-24846fc9-6dd4-4c94-8861-5c57311d2663"
+            },
+            {
+              "name": "votes",
+              "item": [
+                {
+                  "name": "VirusTotal Get Votes on an IP Address",
+                  "id": "d4906aa7-0987-4b3d-809e-9ccd205e9082",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip",
+                        "votes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2089a605-cf40-4da5-84e8-87e4221020da",
+                          "key": "ip",
+                          "value": "<string>",
+                          "description": "(Required) IP Address"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Vote objects."
+                  },
+                  "response": [
+                    {
+                      "id": "1c67e133-7ea0-4bcc-a1c6-e7de2f34210d",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"attributes\": {\n        \"date\": 0,\n        \"value\": 0,\n        \"verdict\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\"\n    },\n    {\n      \"attributes\": {\n        \"date\": 0,\n        \"value\": 0,\n        \"verdict\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-1c67e133-7ea0-4bcc-a1c6-e7de2f34210d"
+                    },
+                    {
+                      "id": "29ccfc8d-a78f-4b2d-b01f-92cfff9bf356",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-29ccfc8d-a78f-4b2d-b01f-92cfff9bf356"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-d4906aa7-0987-4b3d-809e-9ccd205e9082"
+                },
+                {
+                  "name": "VirusTotal Add a Vote to an IP Address",
+                  "id": "add186a6-0b27-4160-8bba-5b797ad28986",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip",
+                        "votes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7f85488c-4d48-467c-a588-b50e9b7c1f4d",
+                          "key": "ip",
+                          "value": "<string>",
+                          "description": "(Required) IP Address"
+                        }
+                      ]
+                    },
+                    "description": "With this endpoint you can post a vote for a given file. The body for the POST request must be the JSON representation of a vote object. Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"vote\",\n\"attributes\": {\n\"verdict\": \"harmless\"\n}\n}\n}\n```\n\nReturns a Vote object."
+                  },
+                  "response": [
+                    {
+                      "id": "f228b90d-e06c-4fb0-abed-4af2271b771b",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"attributes\": {\n      \"date\": 0,\n      \"value\": 0,\n      \"verdict\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"links\": {\n      \"self\": {}\n    },\n    \"type\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-f228b90d-e06c-4fb0-abed-4af2271b771b"
+                    },
+                    {
+                      "id": "e6548946-28ff-441e-8b53-084c87b5496f",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-e6548946-28ff-441e-8b53-084c87b5496f"
+                    },
+                    {
+                      "id": "56cc67e5-be26-4e8a-8ea8-4287d2696a82",
+                      "name": "409",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-56cc67e5-be26-4e8a-8ea8-4287d2696a82"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-add186a6-0b27-4160-8bba-5b797ad28986"
+                }
+              ],
+              "id": "c8727b08-f342-4fc0-be37-9b035ed669ea",
+              "createdAt": "2026-10-22T01:58:17.000Z",
+              "updatedAt": "2026-10-22T01:58:17.000Z",
+              "uid": "35240-c8727b08-f342-4fc0-be37-9b035ed669ea"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to an IP Address",
+                  "id": "48ed468b-63b6-4217-8696-b7aa042c75a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip/:relationship?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip",
+                        ":relationship"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of related objects to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "36f3977d-6c77-4edf-bb54-8889a09f7d78",
+                          "key": "ip",
+                          "value": "<string>",
+                          "description": "(Required) IP address"
+                        },
+                        {
+                          "id": "9aa86950-7c47-430c-ab82-80d271a41756",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "IP addresses have number of relationships to other objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nAll available relationships are documented in the IP address API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "a0376439-6640-48b6-b698-1af835208287",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-a0376439-6640-48b6-b698-1af835208287"
+                    },
+                    {
+                      "id": "ee4539dd-d5d2-4ef6-9cd2-c7129721be4b",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ip_addresses/:ip/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ip_addresses",
+                            ":ip",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "ip"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:17.000Z",
+                      "updatedAt": "2026-10-22T01:58:17.000Z",
+                      "uid": "35240-ee4539dd-d5d2-4ef6-9cd2-c7129721be4b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-48ed468b-63b6-4217-8696-b7aa042c75a3"
+                }
+              ],
+              "id": "477b2f0a-a826-4c07-aae7-5b88e0ca9e2d",
+              "createdAt": "2026-10-22T01:58:17.000Z",
+              "updatedAt": "2026-10-22T01:58:17.000Z",
+              "uid": "35240-477b2f0a-a826-4c07-aae7-5b88e0ca9e2d"
+            },
+            {
+              "name": "VirusTotal Get an IP Address Report",
+              "id": "0455e3b4-4564-4e98-9a4c-28d4ee1c9141",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
                     "key": "x-tool",
                     "value": "<string>"
@@ -111,1354 +1336,149 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cb5cd44a-f718-46c6-8636-b0b0d379fe1c",
-              "name": "400",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/ip_addresses/:ip",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "ip_addresses",
                     ":ip"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "38304f0e-2040-4dfe-a976-650a610650ec",
                       "key": "ip",
+                      "value": "<string>",
                       "description": "(Required) IP address"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                    "key": "x-tool",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns an IP address object."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "8d415d7a-314c-4494-a2a9-b30f5b83883d",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ip"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-8d415d7a-314c-4494-a2a9-b30f5b83883d"
+                },
+                {
+                  "id": "5972f924-2d34-4c26-87b2-3d36e47338f5",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ip_addresses/:ip",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ip_addresses",
+                        ":ip"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ip"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:17.000Z",
+                  "updatedAt": "2026-10-22T01:58:17.000Z",
+                  "uid": "35240-5972f924-2d34-4c26-87b2-3d36e47338f5"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:58:17.000Z",
+              "updatedAt": "2026-10-22T01:58:17.000Z",
+              "uid": "35240-0455e3b4-4564-4e98-9a4c-28d4ee1c9141"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "aa735057-0470-479c-aeb5-f92fa26943c7",
-          "name": "VirusTotal Get Comments on an IP Address",
-          "request": {
-            "name": "VirusTotal Get Comments on an IP Address",
-            "description": {
-              "content": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of comments to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP address"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "8dc69064-bd43-404a-b568-74a54cf4d5c1",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3a1330c8-e328-425e-a480-04eba27d3d1f",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b7a7b1fb-0ed3-455d-a481-445e2cbd9b75",
-          "name": "VirusTotal Add a Comment to an IP Address",
-          "request": {
-            "name": "VirusTotal Add a Comment to an IP Address",
-            "description": {
-              "content": "With this endpoint you can post a comment for a given IP address. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comment-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP address"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "83c14f5e-9ebe-4cbb-8154-84758caff6e5",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9930fcba-cd36-42eb-9ccf-7548920c7318",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "77cf7519-096b-4965-a082-1dc22ff2674f",
-          "name": "VirusTotal Get Object Descriptors Related to an IP Address",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to an IP Address",
-            "description": {
-              "content": "This endpoint is the same as [/ip_addresses/{ip}/{relationship}](https://gtidocs.virustotal.com/reference/ip-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP address"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "30ba3213-d281-4282-b0bf-43628fa1b52f",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "32499d12-fad3-4a17-859a-ee2bc73d56df",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d24386dc-fc62-45aa-aa70-fe938e19ef1d",
-          "name": "VirusTotal Get Votes on an IP Address",
-          "request": {
-            "name": "VirusTotal Get Votes on an IP Address",
-            "description": {
-              "content": "Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP Address"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "8da10aac-355d-4b92-bee4-700b92a32823",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP Address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n    \\\"data\\\": [\\n        {\\n            \\\"attributes\\\": {\\n                \\\"date\\\": 1574246328,\\n                \\\"value\\\": 47,\\n                \\\"verdict\\\": \\\"harmless\\\"\\n            },\\n            \\\"id\\\": \\\"i-1.1.1.1-a68784ad\\\",\\n            \\\"links\\\": {\\n                \\\"self\\\": \\\"https://www.virustotal.com/api/v3/votes/i-1.1.1.1-a68784ad\\\"\\n            },\\n            \\\"type\\\": \\\"vote\\\"\\n        },\\n        {\\n            \\\"attributes\\\": {\\n                \\\"date\\\": 1569486791,\\n                \\\"value\\\": -1,\\n                \\\"verdict\\\": \\\"malicious\\\"\\n            },\\n            \\\"id\\\": \\\"i-1.1.1.1-e15e57e9\\\",\\n            \\\"links\\\": {\\n                \\\"self\\\": \\\"https://www.virustotal.com/api/v3/votes/i-1.1.1.1-e15e57e9\\\"\\n            },\\n            \\\"type\\\": \\\"vote\\\"\\n        }\\n    ],\\n    \\\"links\\\": {\\n        \\\"self\\\": \\\"https://www.virustotal.com/api/v3/ip_addresses/1.1.1.1/votes?limit=10\\\"\\n    }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2ea631d8-ccfd-4477-86e5-297aa9ad6da7",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP Address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c59bfda9-5530-4be3-9df4-0d51e6cb48af",
-          "name": "VirusTotal Add a Vote to an IP Address",
-          "request": {
-            "name": "VirusTotal Add a Vote to an IP Address",
-            "description": {
-              "content": "With this endpoint you can post a vote for a given file. The body for the POST request must be the JSON representation of a [vote object](https://gtidocs.virustotal.com/reference/vote-object). Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n\nReturns a [Vote](https://gtidocs.virustotal.com/reference/vote-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP Address"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "9e4951cf-5bf7-4e56-9fc5-a506f61f865b",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP Address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n    \\\"data\\\": {\\n        \\\"attributes\\\": {\\n            \\\"date\\\": 1574246672,\\n            \\\"value\\\": 1,\\n            \\\"verdict\\\": \\\"harmless\\\"\\n        },\\n        \\\"id\\\": \\\"i-IP-a68784ad\\\",\\n        \\\"links\\\": {\\n            \\\"self\\\": null\\n        },\\n        \\\"type\\\": \\\"vote\\\"\\n    }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cd138893-781e-4e4c-920f-31177e4899a2",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP Address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d8f5b729-93e8-4602-ba83-b2d77e2a970a",
-              "name": "409",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP Address"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n    \\\"error\\\": {\\n        \\\"code\\\": \\\"AlreadyExistsError\\\",\\n        \\\"message\\\": \\\"User \\\\\\\"UserName\\\\\\\" already voted \\\\\\\"harmless\\\\\\\" for this ip_address\\\"\\n    }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a231766b-d1bd-4f2e-a8fb-9ff4f3256883",
-          "name": "VirusTotal Get Objects Related to an IP Address",
-          "request": {
-            "name": "VirusTotal Get Objects Related to an IP Address",
-            "description": {
-              "content": "IP addresses have number of relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAll available relationships are documented in the [IP address](https://gtidocs.virustotal.com/reference/ip-object) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ip_addresses",
-                ":ip",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ip",
-                  "description": "(Required) IP address"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "e374d9df-b6fc-45c5-bc30-1fe9687c3aa9",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7c98ccd3-0392-43f5-ab6e-e67c0f900ab0",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ip_addresses",
-                    ":ip",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ip",
-                      "description": "(Required) IP address"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:ip-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "06a703d5-f1fe-4cd1-a940-4fea0d0bdf03",
+          "createdAt": "2026-10-22T01:58:17.000Z",
+          "updatedAt": "2026-10-22T01:58:17.000Z",
+          "uid": "35240-06a703d5-f1fe-4cd1-a940-4fea0d0bdf03"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "f16906e7-ccc5-4c4d-a523-dafa74d597ba",
+      "createdAt": "2026-10-22T01:58:17.000Z",
+      "updatedAt": "2026-10-22T01:58:17.000Z",
+      "uid": "35240-f16906e7-ccc5-4c4d-a523-dafa74d597ba"
     }
   ],
   "auth": {
@@ -1466,25 +1486,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "31a7a735-afcf-4e4d-9621-1ad71cb1ad5d",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - IP addresses API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

@@ -1,628 +1,631 @@
 {
+  "info": {
+    "_postman_id": "e0542db5-e039-4faa-9bde-8a039fca5fca",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:57:48.000Z",
+    "updatedAt": "2026-10-22T01:57:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e0542db5-e039-4faa-9bde-8a039fca5fca"
+  },
   "item": [
     {
-      "id": "485b14cb-c851-4882-9c78-4b8f024bf439",
-      "name": "IoC Investigation - Attack Techniques",
-      "description": {
-        "content": "IoC Investigation - Attack Techniques",
-        "type": "text/plain"
-      },
+      "name": "attack_techniques",
       "item": [
         {
-          "id": "bd138a27-e084-44b9-b35c-5b0e8f800b9a",
-          "name": "VirusTotal Get an Attack Technique Object",
-          "request": {
-            "name": "VirusTotal Get an Attack Technique Object",
-            "description": {
-              "content": "VirusTotal Get an Attack Technique Object",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "attack_techniques",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Attack technique's ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{id}",
+          "item": [
             {
-              "id": "b71997c8-b213-4d80-8b08-42b33de73292",
-              "name": "200",
-              "originalRequest": {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Object Descriptors Related to an Attack Technique",
+                      "id": "a57bc195-3ce7-4187-9a75-c8876937638a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attack_techniques/:id/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attack_techniques",
+                            ":id",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "cc8d2b5b-d93a-4e65-a503-21a79aafbfe5",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Attack technique's ID"
+                            },
+                            {
+                              "id": "1c644451-5dd7-4b8e-b6a0-c42fa0c52d1a",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /attack_techniques/{id}/{relationship} except it returns just the related object's descriptor instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "5a84b5a9-b0d8-4082-8204-26ea678c719d",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/attack_techniques/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "attack_techniques",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:49.000Z",
+                          "updatedAt": "2026-10-22T01:57:49.000Z",
+                          "uid": "35240-5a84b5a9-b0d8-4082-8204-26ea678c719d"
+                        },
+                        {
+                          "id": "421dabc2-c53e-4cf7-a116-80818481ddfd",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/attack_techniques/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "attack_techniques",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:49.000Z",
+                          "updatedAt": "2026-10-22T01:57:49.000Z",
+                          "uid": "35240-421dabc2-c53e-4cf7-a116-80818481ddfd"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:49.000Z",
+                      "updatedAt": "2026-10-22T01:57:49.000Z",
+                      "uid": "35240-a57bc195-3ce7-4187-9a75-c8876937638a"
+                    }
+                  ],
+                  "id": "04ad92fa-8ea1-465c-b284-f7de3552046e",
+                  "createdAt": "2026-10-22T01:57:49.000Z",
+                  "updatedAt": "2026-10-22T01:57:49.000Z",
+                  "uid": "35240-04ad92fa-8ea1-465c-b284-f7de3552046e"
+                }
+              ],
+              "id": "2bc707a7-a41e-4cb7-8d29-b3bbead4d2ae",
+              "createdAt": "2026-10-22T01:57:49.000Z",
+              "updatedAt": "2026-10-22T01:57:49.000Z",
+              "uid": "35240-2bc707a7-a41e-4cb7-8d29-b3bbead4d2ae"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to an Attack Technique",
+                  "id": "afd1957c-aad0-4f34-aa1b-7080221000a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attack_techniques/:id/:relationship?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attack_techniques",
+                        ":id",
+                        ":relationship"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of related objects to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "dc39dea9-881e-4837-8ca3-6392a24e402c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Attack technique's ID"
+                        },
+                        {
+                          "id": "e5cb1e4c-79cf-433e-b874-9f7fa2315c0f",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "Available relationships are described in the Attack Technique object documentation."
+                  },
+                  "response": [
+                    {
+                      "id": "5aea2386-2ba5-4a1c-9593-e6b066a60a73",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attack_techniques/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attack_techniques",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:49.000Z",
+                      "updatedAt": "2026-10-22T01:57:49.000Z",
+                      "uid": "35240-5aea2386-2ba5-4a1c-9593-e6b066a60a73"
+                    },
+                    {
+                      "id": "2bded516-4779-4b1a-b955-da89e3ad3663",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/attack_techniques/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "attack_techniques",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:49.000Z",
+                      "updatedAt": "2026-10-22T01:57:49.000Z",
+                      "uid": "35240-2bded516-4779-4b1a-b955-da89e3ad3663"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:49.000Z",
+                  "updatedAt": "2026-10-22T01:57:49.000Z",
+                  "uid": "35240-afd1957c-aad0-4f34-aa1b-7080221000a6"
+                }
+              ],
+              "id": "2d328731-b213-4b61-9bf0-350c284648c9",
+              "createdAt": "2026-10-22T01:57:49.000Z",
+              "updatedAt": "2026-10-22T01:57:49.000Z",
+              "uid": "35240-2d328731-b213-4b61-9bf0-350c284648c9"
+            },
+            {
+              "name": "VirusTotal Get an Attack Technique Object",
+              "id": "daeee0dc-bcff-4b81-a12b-1440f8554855",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/attack_techniques/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "attack_techniques",
                     ":id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "4067e914-dcae-464b-8f45-bd77fec45956",
                       "key": "id",
+                      "value": "<string>",
                       "description": "(Required) Attack technique's ID"
                     }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
                 }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0052fe72-8eb7-4222-904f-f8fbf2fdbf39",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "attack_techniques",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Attack technique's ID"
+              },
+              "response": [
+                {
+                  "id": "29e1d9cb-4e37-4618-ada3-8abb655f8feb",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attack_techniques/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attack_techniques",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:49.000Z",
+                  "updatedAt": "2026-10-22T01:57:49.000Z",
+                  "uid": "35240-29e1d9cb-4e37-4618-ada3-8abb655f8feb"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "9c4793ca-71cf-4d5f-bef0-16994f04e624",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/attack_techniques/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "attack_techniques",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:49.000Z",
+                  "updatedAt": "2026-10-22T01:57:49.000Z",
+                  "uid": "35240-9c4793ca-71cf-4d5f-bef0-16994f04e624"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:57:49.000Z",
+              "updatedAt": "2026-10-22T01:57:49.000Z",
+              "uid": "35240-daeee0dc-bcff-4b81-a12b-1440f8554855"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "89d2a05c-a736-4b4d-862f-968cc1664f0d",
-          "name": "VirusTotal Get Object Descriptors Related to an Attack Technique",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to an Attack Technique",
-            "description": {
-              "content": "This endpoint is the same as [/attack_techniques/{id}/{relationship}](https://gtidocs.virustotal.com/reference/attack_techniqueidrelationship) except it returns just the related object's descriptor instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "attack_techniques",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Attack technique's ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c7656d35-a803-481a-aed0-cebe60d1e5ec",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "attack_techniques",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Attack technique's ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6b64fe6a-3d78-40ea-b416-2d062bf3b252",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "attack_techniques",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Attack technique's ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2afd1b0b-8c07-4cc1-8e00-6a8475b436a0",
-          "name": "VirusTotal Get Objects Related to an Attack Technique",
-          "request": {
-            "name": "VirusTotal Get Objects Related to an Attack Technique",
-            "description": {
-              "content": "Available relationships are described in the [Attack Technique](https://gtidocs.virustotal.com/reference/attack-techniques) object documentation.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "attack_techniques",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Attack technique's ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "04d3cf4a-ad4b-48b5-9f07-783967db4aef",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "attack_techniques",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Attack technique's ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "80e4b461-117b-4879-be99-29d8b673bcff",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "attack_techniques",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Attack technique's ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:object-attack-techniques#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "5693aec8-08b5-44d9-bccc-1abf8ea48c9b",
+          "createdAt": "2026-10-22T01:57:49.000Z",
+          "updatedAt": "2026-10-22T01:57:49.000Z",
+          "uid": "35240-5693aec8-08b5-44d9-bccc-1abf8ea48c9b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "ad45e7de-9c0f-42ba-b6ee-74ecc4751a6b",
+      "createdAt": "2026-10-22T01:57:49.000Z",
+      "updatedAt": "2026-10-22T01:57:49.000Z",
+      "uid": "35240-ad45e7de-9c0f-42ba-b6ee-74ecc4751a6b"
     }
   ],
   "auth": {
@@ -630,25 +633,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "49608a06-f47c-4c7a-9844-f3c567c8177e",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Attack Techniques API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

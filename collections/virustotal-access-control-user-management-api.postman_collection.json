@@ -1,107 +1,495 @@
 {
+  "info": {
+    "_postman_id": "3f1ca3bf-764b-4380-a344-44b21c47ff73",
+    "name": "VirusTotal API v3 - Access Control Access Control - User\u2026",
+    "description": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:57:03.000Z",
+    "updatedAt": "2026-10-22T01:57:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3f1ca3bf-764b-4380-a344-44b21c47ff73"
+  },
   "item": [
     {
-      "id": "b41df966-1e96-4b66-aa29-396bd5d3672f",
-      "name": "Access Control - User Management",
-      "description": {
-        "content": "Access Control - User Management",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "a1c2a327-de09-41ba-9ccb-7d746ee9e8b4",
-          "name": "VirusTotal Delete a User",
-          "request": {
-            "name": "VirusTotal Delete a User",
-            "description": {
-              "content": "This request deletes a given user. A user account can only be deleted by its owner, a 403 error is returned otherwise.\n\nAn additional `x-user-password` header is required, which is used as confirmation.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) User ID or API key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) User password, needed as confirmation.",
-                "key": "x-user-password",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{id}",
+          "item": [
             {
-              "id": "ce3f6cf2-5d1a-4ec5-9064-69a05c45375d",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "name": "VirusTotal Get Object Descriptors Related to a User",
+                      "id": "2cdc1185-e873-4712-a9b3-b028b39b68f9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:id/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":id",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d2c2c965-a109-4ada-8bbd-a440ea3d32ec",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Username or API key"
+                            },
+                            {
+                              "id": "b392cead-c4a2-4414-b241-6324709acae4",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /users/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "6ad636c4-57f1-4ec1-8ef8-4cfbfaa7dcff",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:03.000Z",
+                          "updatedAt": "2026-10-22T01:57:03.000Z",
+                          "uid": "35240-6ad636c4-57f1-4ec1-8ef8-4cfbfaa7dcff"
+                        },
+                        {
+                          "id": "6748d6dd-79d0-42de-abd4-37bf92f11731",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:03.000Z",
+                          "updatedAt": "2026-10-22T01:57:03.000Z",
+                          "uid": "35240-6748d6dd-79d0-42de-abd4-37bf92f11731"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:03.000Z",
+                      "updatedAt": "2026-10-22T01:57:03.000Z",
+                      "uid": "35240-2cdc1185-e873-4712-a9b3-b028b39b68f9"
+                    }
+                  ],
+                  "id": "54b6582f-3682-45e6-bc4a-94a0bdc62c68",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-54b6582f-3682-45e6-bc4a-94a0bdc62c68"
+                }
+              ],
+              "id": "fe9a70ab-6806-4598-8701-f583666725c0",
+              "createdAt": "2026-10-22T01:57:03.000Z",
+              "updatedAt": "2026-10-22T01:57:03.000Z",
+              "uid": "35240-fe9a70ab-6806-4598-8701-f583666725c0"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to a User",
+                  "id": "2cc8fdb6-cee5-46e4-8111-a6389c3df7ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id/:relationship?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id",
+                        ":relationship"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of related objects to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "83c9f1f4-6689-4cf5-8958-2bb52c4c552c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Username or API key"
+                        },
+                        {
+                          "id": "29683e57-7c96-40d4-b875-d6592c70eba6",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "Users are related to other objects in our dataset. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to this API endpoint.\n\nSome relationships are only accessible to their account's owners and their group's admins.\n\nThe supported relationships are documented in the User API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "271b8400-cf94-434b-8af4-2b30db76115a",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:03.000Z",
+                      "updatedAt": "2026-10-22T01:57:03.000Z",
+                      "uid": "35240-271b8400-cf94-434b-8af4-2b30db76115a"
+                    },
+                    {
+                      "id": "ef29dcd6-c446-4635-a3c3-8c954f4e4250",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:03.000Z",
+                      "updatedAt": "2026-10-22T01:57:03.000Z",
+                      "uid": "35240-ef29dcd6-c446-4635-a3c3-8c954f4e4250"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-2cc8fdb6-cee5-46e4-8111-a6389c3df7ee"
+                }
+              ],
+              "id": "3f5c2200-5086-437c-8423-5ee0a607c869",
+              "createdAt": "2026-10-22T01:57:03.000Z",
+              "updatedAt": "2026-10-22T01:57:03.000Z",
+              "uid": "35240-3f5c2200-5086-437c-8423-5ee0a607c869"
+            },
+            {
+              "name": "VirusTotal Delete a User",
+              "id": "130b5419-f3ea-4f23-899e-b1ce6171fa77",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "DELETE",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) User password, needed as confirmation.",
                     "key": "x-user-password",
                     "value": "<string>"
@@ -111,1229 +499,833 @@
                     "value": "text/plain"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9a143dbe-61a6-409e-a3fd-bb825a4d689c",
-              "name": "403",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "users",
                     ":id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "5c10c193-3e06-4f7e-a3f9-55d3f7b22f1f",
                       "key": "id",
+                      "value": "<string>",
                       "description": "(Required) User ID or API key"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) User password, needed as confirmation.",
-                    "key": "x-user-password",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
+                "description": "This request deletes a given user. A user account can only be deleted by its owner, a 403 error is returned otherwise.\n\nAn additional `x-user-password` header is required, which is used as confirmation."
               },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": \\\"ForbiddenError\\\",\\n    \\\"message\\\": \\\"You are not authorized to perform the requested operation\\\"\\n  }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3867b547-2fc4-4d93-93c5-3a6122b758aa",
-          "name": "VirusTotal Get a User Object",
-          "request": {
-            "name": "VirusTotal Get a User Object",
-            "description": {
-              "content": "This endpoint retrieves information about a user, including the privileges and quotas associated to the user. The user can be retrieved either by user ID or by API key, but the former only works if the requester is the user himself or an administrator of a group the user belongs to.\n\nReturns an [User](https://gtidocs.virustotal.com/reference/user-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) User ID or API key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "167e2a6d-8def-4fe5-9ed5-0e0ab451860b",
-              "name": "Successful VirusTotal API response.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "ee52bd72-37ac-41fb-af2e-1bf2df622867",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) User password, needed as confirmation.",
+                        "key": "x-user-password",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": \"\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-ee52bd72-37ac-41fb-af2e-1bf2df622867"
+                },
+                {
+                  "id": "9ae59710-9a1e-4582-b875-5b5804311871",
+                  "name": "403",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) User password, needed as confirmation.",
+                        "key": "x-user-password",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-9ae59710-9a1e-4582-b875-5b5804311871"
+                }
+              ],
+              "createdAt": "2026-10-22T01:57:03.000Z",
+              "updatedAt": "2026-10-22T01:57:03.000Z",
+              "uid": "35240-130b5419-f3ea-4f23-899e-b1ce6171fa77"
+            },
+            {
+              "name": "VirusTotal Get a User Object",
+              "id": "3cb183c7-a960-4fb9-8eec-78612505bb9c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"meta\": {\n    \"key_0\": \"string\"\n  },\n  \"links\": {\n    \"next\": \"http://iOjMphBPjhDazaJsDXBhOGTuAbkcz.njmQNPgX4wVx4w3IDe+2pv,jvqnoJoqpHUGTh.uwk,KfN9cabnenDUfJjlT8Ww\",\n    \"self\": \"https://yyVirMroPzaUqmDGDonAyIHagQK.ycxbFRNz30c3\",\n    \"key_0\": 4685.624203040371,\n    \"key_1\": 4255\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5004f05f-148f-49ab-9db5-71d0fe9b2f92",
-              "name": "Bad request.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
-                    }
-                  ]
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0835fe9a-8537-4ed2-96e4-62880d4a3793",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "users",
                     ":id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "fcdc3aeb-b7f5-46a2-ad52-e84a85e4b2e1",
                       "key": "id",
+                      "value": "<string>",
                       "description": "(Required) User ID or API key"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                "description": "This endpoint retrieves information about a user, including the privileges and quotas associated to the user. The user can be retrieved either by user ID or by API key, but the former only works if the requester is the user himself or an administrator of a group the user belongs to.\n\nReturns an User object."
+              },
+              "response": [
+                {
+                  "id": "8002a8bc-179f-41ee-be58-4eed07de537e",
+                  "name": "Successful VirusTotal API response.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "da5d2c88-8f24-461b-b7c5-5f6a60f02b1c",
-              "name": "Object not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"description\": \"Endpoint-specific payload \u2014 usually a VirusTotal object or list of objects.\",\n    \"example\": {}\n  },\n  \"meta\": {\n    \"dolore50\": true,\n    \"enim_876\": false\n  },\n  \"links\": {\n    \"next\": \"<uri>\",\n    \"self\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-8002a8bc-179f-41ee-be58-4eed07de537e"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                {
+                  "id": "01580f3e-a772-49eb-b855-75b190c936d2",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "03a41f91-47da-413e-847a-62fa51e4448c",
-              "name": "Rate limit or quota exceeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-01580f3e-a772-49eb-b855-75b190c936d2"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                {
+                  "id": "6f2a2720-782e-48bd-904c-ab4a5245a111",
+                  "name": "Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c8a20733-3085-44f1-a5a3-0bac92e0269c",
-          "name": "VirusTotal Update a User Object",
-          "request": {
-            "name": "VirusTotal Update a User Object",
-            "description": {
-              "content": "This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated [User](https://gtidocs.virustotal.com/reference/user-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) User ID or API key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "PATCH",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"<json>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c3798b1d-6d12-4cc8-b416-9a00256cd624",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-6f2a2720-782e-48bd-904c-ab4a5245a111"
+                },
+                {
+                  "id": "1742dc09-dfaa-46fc-87b3-916b1e4e7631",
+                  "name": "Object not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-1742dc09-dfaa-46fc-87b3-916b1e4e7631"
+                },
+                {
+                  "id": "c77a2662-7ffd-4ed6-a4a0-60dfda580d7c",
+                  "name": "Rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-c77a2662-7ffd-4ed6-a4a0-60dfda580d7c"
+                }
+              ],
+              "createdAt": "2026-10-22T01:57:03.000Z",
+              "updatedAt": "2026-10-22T01:57:03.000Z",
+              "uid": "35240-3cb183c7-a960-4fb9-8eec-78612505bb9c"
+            },
+            {
+              "name": "VirusTotal Update a User Object",
+              "id": "23c541e9-319a-4d36-b6eb-e114744d51c9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "PATCH",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "text/plain"
                   }
                 ],
-                "method": "PATCH",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"data\": \"<json>\"\n}",
+                  "raw": "{\n  \"data\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b387a84b-fd17-4bf9-8904-0193279ed8d0",
-              "name": "Bad request.",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "users",
                     ":id"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "6e24583a-6f39-4437-abf6-d2d2d674cc3e",
                       "key": "id",
+                      "value": "<string>",
                       "description": "(Required) User ID or API key"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<json>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "This request accepts a JSON body containing the user attributes to update. Attributes not present in the request body remain the same. It returns the updated User object."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e6c003a8-ca44-45e7-b6c3-a071e4d85772",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "14413910-2f31-4b04-ba15-688ea1fe6eb5",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "text/plain"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": \"\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-14413910-2f31-4b04-ba15-688ea1fe6eb5"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<json>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d06747d2-813d-4a41-a8e9-7031b3443e5a",
-              "name": "Object not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "3c3b8c00-5615-4abb-b424-99f5c981914f",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-3c3b8c00-5615-4abb-b424-99f5c981914f"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<json>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2fb48c9e-2bcd-41b8-b962-fdda09455e30",
-              "name": "Rate limit or quota exceeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "e746f3a8-31af-432b-8031-dbcf8e4cc124",
+                  "name": "Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User ID or API key"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-e746f3a8-31af-432b-8031-dbcf8e4cc124"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<json>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "32160792-7048-48df-993b-7a8cf1da6c8a",
+                  "name": "Object not found.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-32160792-7048-48df-993b-7a8cf1da6c8a"
+                },
+                {
+                  "id": "29970d73-c5d1-4b76-a26f-c56713b8e8be",
+                  "name": "Rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:57:03.000Z",
+                  "updatedAt": "2026-10-22T01:57:03.000Z",
+                  "uid": "35240-29970d73-c5d1-4b76-a26f-c56713b8e8be"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:57:03.000Z",
+              "updatedAt": "2026-10-22T01:57:03.000Z",
+              "uid": "35240-23c541e9-319a-4d36-b6eb-e114744d51c9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9f2381d6-73e1-431a-b181-f7cbe3afa0d9",
-          "name": "VirusTotal Get Object Descriptors Related to a User",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a User",
-            "description": {
-              "content": "This endpoint is the same as [/users/{id}/{relationship}](https://gtidocs.virustotal.com/reference/users-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Username or API key"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "d771ca2c-86cc-4c6b-a5f1-0088e7c107c4",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Username or API key"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c1f9ee7c-a93e-40c0-b184-35db65bf1425",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Username or API key"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f891166d-bd97-4bd4-9ffe-ae1db0591fab",
-          "name": "VirusTotal Get Objects Related to a User",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a User",
-            "description": {
-              "content": "Users are related to other objects in our dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to this API endpoint.\n\nSome relationships are only accessible to their account's owners and their group's admins.\n\nThe supported relationships are documented in the [User](https://gtidocs.virustotal.com/reference/user-object#relationships) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Username or API key"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "02d81962-fddd-4b35-83ac-7d8622ccee76",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Username or API key"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "13f128d7-100a-4838-8e0d-4931582a80f4",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Username or API key"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:user-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "f791f71c-aea4-4cca-bae8-aae85be37403",
+          "createdAt": "2026-10-22T01:57:03.000Z",
+          "updatedAt": "2026-10-22T01:57:03.000Z",
+          "uid": "35240-f791f71c-aea4-4cca-bae8-aae85be37403"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "2956ed56-5bf0-4a34-9b3c-afab8eed9415",
+      "createdAt": "2026-10-22T01:57:03.000Z",
+      "updatedAt": "2026-10-22T01:57:03.000Z",
+      "uid": "35240-2956ed56-5bf0-4a34-9b3c-afab8eed9415"
     }
   ],
   "auth": {
@@ -1341,25 +1333,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "227e4168-76cd-4a5c-a8ec-e153163363dd",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Access Control - User Management API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

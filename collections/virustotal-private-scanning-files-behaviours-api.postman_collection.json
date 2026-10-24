@@ -1,1827 +1,1883 @@
 {
+  "info": {
+    "_postman_id": "07119cec-9fa6-498d-b399-a6375611e063",
+    "name": "VirusTotal API v3 - Private Scanning Private Scanning\u2026",
+    "description": "Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:59:03.000Z",
+    "updatedAt": "2026-10-22T01:59:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07119cec-9fa6-498d-b399-a6375611e063"
+  },
   "item": [
     {
-      "id": "74dceffb-407a-471c-bdd7-60406d813493",
-      "name": "Private Scanning - Files Behaviours",
-      "description": {
-        "content": "Private Scanning - Files Behaviours",
-        "type": "text/plain"
-      },
+      "name": "private",
       "item": [
         {
-          "id": "a9daf34a-70bf-4b6b-a99d-b9cd8b4aa053",
-          "name": "VirusTotal Get the Behaviour Reports from a Private File",
-          "request": {
-            "name": "VirusTotal Get the Behaviour Reports from a Private File",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetches all the [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) reports available for a private file.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file",
-                ":id",
-                "behaviours"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) id parameter"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "file",
+          "item": [
             {
-              "id": "52c96e64-714a-458e-91d6-550ab262c08c",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file",
-                    ":id",
-                    "behaviours"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) id parameter"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{id}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "behaviours",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get the Behaviour Reports from a Private File",
+                      "id": "66852be4-c1e7-468b-9bf0-982a460f0d45",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file/:id/behaviours",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file",
+                            ":id",
+                            "behaviours"
+                          ],
+                          "variable": [
+                            {
+                              "id": "92699b84-df73-444d-8307-a6ac39ac6147",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) id parameter"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nFetches all the Private File Behaviour reports available for a private file."
+                      },
+                      "response": [
+                        {
+                          "id": "308ed0ff-09b3-4552-86ae-ba3beb80f074",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file/:id/behaviours",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file",
+                                ":id",
+                                "behaviours"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-308ed0ff-09b3-4552-86ae-ba3beb80f074"
+                        },
+                        {
+                          "id": "ed0df809-10b0-4100-b0ae-314a5260a5cb",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file/:id/behaviours",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file",
+                                ":id",
+                                "behaviours"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-ed0df809-10b0-4100-b0ae-314a5260a5cb"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-66852be4-c1e7-468b-9bf0-982a460f0d45"
+                    }
+                  ],
+                  "id": "6a0f9ef3-87e4-4ca3-8eb8-a184da7d3c53",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-6a0f9ef3-87e4-4ca3-8eb8-a184da7d3c53"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9793dc8e-2a75-4655-9cfd-9167b7fbc63a",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file",
-                    ":id",
-                    "behaviours"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) id parameter"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e51a242a-18ca-4fa5-90e3-2a40e40cf7be",
+              "createdAt": "2026-10-22T01:59:04.000Z",
+              "updatedAt": "2026-10-22T01:59:04.000Z",
+              "uid": "35240-e51a242a-18ca-4fa5-90e3-2a40e40cf7be"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "5a1e8cfb-1379-47dc-a6c7-ff18321419c0",
+          "createdAt": "2026-10-22T01:59:04.000Z",
+          "updatedAt": "2026-10-22T01:59:04.000Z",
+          "uid": "35240-5a1e8cfb-1379-47dc-a6c7-ff18321419c0"
         },
         {
-          "id": "db578928-a586-487b-a0fa-9d5ae925089e",
-          "name": "VirusTotal Get a Behaviour Report from a Private File",
-          "request": {
-            "name": "VirusTotal Get a Behaviour Report from a Private File",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetches a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object by ID. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file) endpoint.\n\n```json Example response\n{\n    \"data\": {\n        \"attributes\": {\n            \"behash\": \"3f4a02b305dde56c7c606849289bb194\",\n            \"calls_highlighted\": [\n                \"GetTickCount\"\n            ],\n            \"files_opened\": [\n                \"C:\\\\Windows\\\\system32\\\\ws2_32.dll\",\n                \"C:\\\\Windows\\\\system32\\\\UxTheme.dll\",\n                \"C:\\\\Windows\\\\system32\\\\ole32.dll\",\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.hlp\",\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.cnt\",\n                \"C:\\\\Users\\\\<USER>\\\\Downloads\\\\putty.chm\",\n                \"C:\\\\Windows\\\\system32\\\\user32.dll\",\n                \"C:\\\\Windows\\\\system32\\\\advapi32.dll\",\n                \"C:\\\\Windows\\\\system32\\\\ntmarta.dll\",\n                \"C:\\\\Windows\\\\WinSxS\\\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_41e855142bd5705d\",\n                \"C:\\\\Windows\\\\Fonts\\\\staticcache.dat\"\n            ],\n            \"has_html_report\": true,\n            \"has_pcap\": true,\n            \"modules_loaded\": [\n                \"UxTheme.dll\",\n                \"IMM32.dll\",\n                \"SspiCli.dll\",\n                \"ADVAPI32.dll\"\n            ],\n            \"processes_tree\": [\n                {\n                    \"name\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91.exe\",\n                    \"process_id\": \"2340\"\n                }\n            ],\n            \"registry_keys_opened\": [\n                \"HKCU\\\\Software\\\\SimonTatham\\\\PuTTY\\\\Sessions\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\FontLink\\\\SystemLink\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\\Disable\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\\DataFilePath\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\",\n                \"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\\\\MS Shell Dlg\"\n            ],\n            \"sandbox_name\": \"VirusTotal Jujubox\",\n            \"tags\": [\n                \"DIRECT_CPU_CLOCK_ACCESS\",\n                \"RUNTIME_MODULES\"\n            ],\n            \"text_highlighted\": [\n                \"PuTTY Configuration\",\n                \"&Open\",\n                \"Cate&gory:\",\n                \"C:\\\\Windows\\\\system32\\\\cmd.exe\"\n            ]\n        },\n        \"id\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal Jujubox-1658933614\",\n        \"links\": {\n            \"self\": \"https://www.virustotal.com/api/v3/private/file_behaviours/9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal Jujubox-1658933614\"\n        },\n        \"type\": \"private_file_behaviour\"\n    }\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "file_behaviours",
+          "item": [
             {
-              "id": "4ad9f40f-a07a-45b7-9cc1-dd3df264a3bf",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{sandbox_id}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "evtx",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get the EVTX File Generated During a Private File\u2019s Behavior Analysis",
+                      "id": "be64c028-7e9c-46f9-83aa-6ea6373004f6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/evtx",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id",
+                            "evtx"
+                          ],
+                          "variable": [
+                            {
+                              "id": "92b60250-ff52-4d07-884d-38530c57f8e0",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) Sandbox report ID"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nFetch the EVTX file associated with the sandbox execution."
+                      },
+                      "response": [
+                        {
+                          "id": "6ff518aa-c359-4311-8c2a-04ffe86dd932",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/evtx",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "evtx"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-6ff518aa-c359-4311-8c2a-04ffe86dd932"
+                        },
+                        {
+                          "id": "9272d3d5-e357-4ef5-9f8c-f0d41ab9039f",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/evtx",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "evtx"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-9272d3d5-e357-4ef5-9f8c-f0d41ab9039f"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-be64c028-7e9c-46f9-83aa-6ea6373004f6"
+                    }
+                  ],
+                  "id": "483a09e3-1a05-4278-9fbc-d2c7fdc71ad0",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-483a09e3-1a05-4278-9fbc-d2c7fdc71ad0"
+                },
+                {
+                  "name": "html",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get a Detailed HTML Behaviour Report",
+                      "id": "5826d007-58b3-420e-aa3e-a1482127d6c1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/html",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id",
+                            "html"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f8abccf6-af5e-4a3a-81ec-992a968cfaa1",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) Sandbox report ID"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nReturns a Private File Behaviour object as an HTML report. It expects the sandbox ID returned by the GET /private/files/{id}/behaviours endpoint."
+                      },
+                      "response": [
+                        {
+                          "id": "097c0927-59bb-4163-bf90-f77429f578f9",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/html",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "html"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n  ...\"\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-097c0927-59bb-4163-bf90-f77429f578f9"
+                        },
+                        {
+                          "id": "e5e7f2bb-7efe-4ad5-9ae6-6b0c38cc5c90",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/html",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "html"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-e5e7f2bb-7efe-4ad5-9ae6-6b0c38cc5c90"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-5826d007-58b3-420e-aa3e-a1482127d6c1"
+                    }
+                  ],
+                  "id": "2143a1be-bd1e-49b0-92e9-df55d9cf3f9a",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-2143a1be-bd1e-49b0-92e9-df55d9cf3f9a"
+                },
+                {
+                  "name": "memdump",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get the Memdump File Generated During a Private File\u2019s Behavior\u2026",
+                      "id": "696bf58f-0747-44db-9014-437e02d7e8d5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/memdump",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id",
+                            "memdump"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9be88793-c9b2-4155-8ae4-c43ffe181015",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) Sandbox report ID"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nFetch the PCAP file associated with the sandbox execution."
+                      },
+                      "response": [
+                        {
+                          "id": "3e4ad64e-9bac-49f6-a18e-42e727eb6505",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/memdump",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "memdump"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-3e4ad64e-9bac-49f6-a18e-42e727eb6505"
+                        },
+                        {
+                          "id": "7f8b7415-b63f-43d6-94bf-758de103bae4",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/memdump",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "memdump"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-7f8b7415-b63f-43d6-94bf-758de103bae4"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-696bf58f-0747-44db-9014-437e02d7e8d5"
+                    }
+                  ],
+                  "id": "8be4fc66-c942-45ef-81d0-22dbde9e3e87",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-8be4fc66-c942-45ef-81d0-22dbde9e3e87"
+                },
+                {
+                  "name": "pcap",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get the PCAP File Generated During a Private File\u2019s Behavior Analysis",
+                      "id": "3411e993-ab29-4426-bcea-3deffd04f9e1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/pcap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id",
+                            "pcap"
+                          ],
+                          "variable": [
+                            {
+                              "id": "95f77407-04a6-4ff5-9656-27b79b547215",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) Sandbox report ID"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nFetch the memdump file associated with the sandbox execution."
+                      },
+                      "response": [
+                        {
+                          "id": "95d8d778-d0cd-4f13-ad37-24b016398c1e",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/pcap",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "pcap"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-95d8d778-d0cd-4f13-ad37-24b016398c1e"
+                        },
+                        {
+                          "id": "54b203e4-581b-41b6-9832-8d80af921e42",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/pcap",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "pcap"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-54b203e4-581b-41b6-9832-8d80af921e42"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-3411e993-ab29-4426-bcea-3deffd04f9e1"
+                    }
+                  ],
+                  "id": "b6fcd683-3808-40da-bc8c-7312fe341908",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-b6fcd683-3808-40da-bc8c-7312fe341908"
+                },
+                {
+                  "name": "relationships",
+                  "item": [
+                    {
+                      "name": "{relationship}",
+                      "item": [
+                        {
+                          "name": "VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report",
+                          "id": "e31ea23e-24e1-42e4-b1a4-4620fdbed60c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "x-apikey",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "80d1c72a-2976-4f96-a176-2aa08c6207a5",
+                                  "key": "sandbox_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
+                                },
+                                {
+                                  "id": "81e20619-1fea-403e-bfb3-43d7c3298e9b",
+                                  "key": "relationship",
+                                  "value": "<string>",
+                                  "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
+                                }
+                              ]
+                            },
+                            "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nThis endpoint is the same as /private/file_behaviours/{sandbox_id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                          },
+                          "response": [
+                            {
+                              "id": "4294b848-f427-47b0-9039-fa0573834c94",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-apikey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/relationships/:relationship?limit=10&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "private",
+                                    "file_behaviours",
+                                    ":sandbox_id",
+                                    "relationships",
+                                    ":relationship"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of related objects to retrieve",
+                                      "key": "limit",
+                                      "value": "10"
+                                    },
+                                    {
+                                      "description": "Continuation cursor",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    },
+                                    {
+                                      "key": "relationship"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-22T01:59:04.000Z",
+                              "updatedAt": "2026-10-22T01:59:04.000Z",
+                              "uid": "35240-4294b848-f427-47b0-9039-fa0573834c94"
+                            },
+                            {
+                              "id": "16582b5c-c473-4fec-9207-2c1dafc318b4",
+                              "name": "400",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-apikey",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/relationships/:relationship?limit=10&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "private",
+                                    "file_behaviours",
+                                    ":sandbox_id",
+                                    "relationships",
+                                    ":relationship"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Maximum number of related objects to retrieve",
+                                      "key": "limit",
+                                      "value": "10"
+                                    },
+                                    {
+                                      "description": "Continuation cursor",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "sandbox_id"
+                                    },
+                                    {
+                                      "key": "relationship"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-10-22T01:59:04.000Z",
+                              "updatedAt": "2026-10-22T01:59:04.000Z",
+                              "uid": "35240-16582b5c-c473-4fec-9207-2c1dafc318b4"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-e31ea23e-24e1-42e4-b1a4-4620fdbed60c"
+                        }
+                      ],
+                      "id": "62875029-d2b8-4e20-939e-22af0c8000a8",
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-62875029-d2b8-4e20-939e-22af0c8000a8"
+                    }
+                  ],
+                  "id": "6e9615a9-3e17-4960-bdb2-c5d59692de2f",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-6e9615a9-3e17-4960-bdb2-c5d59692de2f"
+                },
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Objects Related to a Private File's Behaviour Report",
+                      "id": "8bb5d925-3995-439b-8c42-aba981b6ba48",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "cf50d9a4-744b-41d5-a088-df5c2d577039",
+                              "key": "sandbox_id",
+                              "value": "<string>",
+                              "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
+                            },
+                            {
+                              "id": "1d6fa0f2-7d6a-456d-b4a7-c5950deaf0b9",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nAs mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nAvailable relationships are described in the private file behaviour object documentation."
+                      },
+                      "response": [
+                        {
+                          "id": "a293db70-bde5-4140-92b4-1827f422d695",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-a293db70-bde5-4140-92b4-1827f422d695"
+                        },
+                        {
+                          "id": "20928cf0-f409-4174-9338-2ae56a4e795d",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "file_behaviours",
+                                ":sandbox_id",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "sandbox_id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-20928cf0-f409-4174-9338-2ae56a4e795d"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-8bb5d925-3995-439b-8c42-aba981b6ba48"
+                    }
+                  ],
+                  "id": "40c929f7-1a47-45dc-a2f4-e9ef19398ea2",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-40c929f7-1a47-45dc-a2f4-e9ef19398ea2"
+                },
+                {
+                  "name": "VirusTotal Get a Behaviour Report from a Private File",
+                  "id": "558ccfcd-2c1e-444f-a8b4-66b5db65d268",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "file_behaviours",
+                        ":sandbox_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e2312a16-ebb4-4d0b-97a4-664d57e61382",
+                          "key": "sandbox_id",
+                          "value": "<string>",
+                          "description": "(Required) Sandbox report ID."
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license.\n\nFetches a Private File Behaviour object by ID. It expects the sandbox ID returned by the GET /private/files/{id}/behaviours endpoint.\n\n```json Example response\n{\n\"data\": {\n\"attributes\": {\n\"behash\": \"3f4a02b305dde56c7c606849289bb194\",\n\"calls_highlighted\": [\n\"GetTickCount\"\n],\n\"files_opened\": [\n\"C:\\\\Windows\\\\system32\\\\ws2_32.dll\",\n\"C:\\\\Windows\\\\system32\\\\UxTheme.dll\",\n\"C:\\\\Windows\\\\system32\\\\ole32.dll\",\n\"C:\\\\Users\\\\\\\\Downloads\\\\putty.hlp\",\n\"C:\\\\Users\\\\\\\\Downloads\\\\putty.cnt\",\n\"C:\\\\Users\\\\\\\\Downloads\\\\putty.chm\",\n\"C:\\\\Windows\\\\system32\\\\user32.dll\",\n\"C:\\\\Windows\\\\system32\\\\advapi32.dll\",\n\"C:\\\\Windows\\\\system32\\\\ntmarta.dll\",\n\"C:\\\\Windows\\\\WinSxS\\\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_41e855142bd5705d\",\n\"C:\\\\Windows\\\\Fonts\\\\staticcache.dat\"\n],\n\"has_html_report\": true,\n\"has_pcap\": true,\n\"modules_loaded\": [\n\"UxTheme.dll\",\n\"IMM32.dll\",\n\"SspiCli.dll\",\n\"ADVAPI32.dll\"\n],\n\"processes_tree\": [\n{\n\"name\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91.exe\",\n\"process_id\": \"2340\"\n}\n],\n\"registry_keys_opened\": [\n\"HKCU\\\\Software\\\\SimonTatham\\\\PuTTY\\\\Sessions\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\FontLink\\\\SystemLink\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\\Disable\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\DataStore_V1.0\\\\DataFilePath\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\",\n\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\LanguagePack\\\\SurrogateFallback\\\\MS Shell Dlg\"\n],\n\"sandbox_name\": \"VirusTotal Jujubox\",\n\"tags\": [\n\"DIRECT_CPU_CLOCK_ACCESS\",\n\"RUNTIME_MODULES\"\n],\n\"text_highlighted\": [\n\"PuTTY Configuration\",\n\"&Open\",\n\"Cate&gory:\",\n\"C:\\\\Windows\\\\system32\\\\cmd.exe\"\n]\n},\n\"id\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal Jujubox-1658933614\",\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/private/file_behaviours/9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91_VirusTotal Jujubox-1658933614\"\n},\n\"type\": \"private_file_behaviour\"\n}\n}\n```"
+                  },
+                  "response": [
+                    {
+                      "id": "feacf35c-e85e-4f46-9058-dcc95649a20b",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sandbox_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-feacf35c-e85e-4f46-9058-dcc95649a20b"
+                    },
+                    {
+                      "id": "914a9d4a-2466-4a3f-a353-c4b41ae99d61",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/file_behaviours/:sandbox_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "file_behaviours",
+                            ":sandbox_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "sandbox_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-914a9d4a-2466-4a3f-a353-c4b41ae99d61"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-558ccfcd-2c1e-444f-a8b4-66b5db65d268"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "37d4b964-e1c3-4278-a48c-eadf2fb97f90",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "c9fee105-9db2-48f1-801f-ecae29631add",
+              "createdAt": "2026-10-22T01:59:04.000Z",
+              "updatedAt": "2026-10-22T01:59:04.000Z",
+              "uid": "35240-c9fee105-9db2-48f1-801f-ecae29631add"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "271aa342-a2b9-4c18-8c66-edf4c9cc3b38",
+          "createdAt": "2026-10-22T01:59:04.000Z",
+          "updatedAt": "2026-10-22T01:59:04.000Z",
+          "uid": "35240-271aa342-a2b9-4c18-8c66-edf4c9cc3b38"
         },
         {
-          "id": "1796fd8c-e4ba-4b46-a7c8-0ec7ff288274",
-          "name": "VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis",
-          "request": {
-            "name": "VirusTotal Get the EVTX File Generated During a Private File’s Behavior Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the EVTX file associated with the sandbox execution.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                "evtx"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "files",
+          "item": [
             {
-              "id": "2e099990-5cdf-40ea-bb41-194b46cbf9ea",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "evtx"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "behaviour_mitre_trees",
+                  "item": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
+                      "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
+                      "id": "433e1964-3b48-4d91-a8f1-6e65fb5569d9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/files/:id/behaviour_mitre_trees",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "files",
+                            ":id",
+                            "behaviour_mitre_trees"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a0fbd5dd-a068-442f-a347-80132db9b933",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) File's SHA-256"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license."
+                      },
+                      "response": [
+                        {
+                          "id": "0d58fd2e-fddf-40ed-9d4c-6d405fde21e4",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/files/:id/behaviour_mitre_trees",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "files",
+                                ":id",
+                                "behaviour_mitre_trees"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-0d58fd2e-fddf-40ed-9d4c-6d405fde21e4"
+                        },
+                        {
+                          "id": "65dade9b-430a-41f4-a46f-6c6064bc0a64",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/files/:id/behaviour_mitre_trees",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "files",
+                                ":id",
+                                "behaviour_mitre_trees"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-65dade9b-430a-41f4-a46f-6c6064bc0a64"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-433e1964-3b48-4d91-a8f1-6e65fb5569d9"
                     }
-                  ]
+                  ],
+                  "id": "80ce8c90-84cc-45ce-9032-4722fe130d4a",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-80ce8c90-84cc-45ce-9032-4722fe130d4a"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eea4815d-ff16-4d54-a1f0-da3522f68efc",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "evtx"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "name": "behaviour_summary",
+                  "item": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
+                      "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
+                      "id": "2f2a13e3-8cf6-47ec-af98-40f9028f5bcb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/files/:id/behaviour_summary",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "files",
+                            ":id",
+                            "behaviour_summary"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c2f072e0-9c0e-4086-9383-cdcc88dbf328",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) File's SHA-256"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Private Scanning endpoints are only available to users with Private Scanning license."
+                      },
+                      "response": [
+                        {
+                          "id": "533b87d1-642a-4926-aa22-22767145aa24",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/files/:id/behaviour_summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "files",
+                                ":id",
+                                "behaviour_summary"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-533b87d1-642a-4926-aa22-22767145aa24"
+                        },
+                        {
+                          "id": "2ad9fa12-d82c-4dc5-ae98-b0186d600efc",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/files/:id/behaviour_summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "files",
+                                ":id",
+                                "behaviour_summary"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:04.000Z",
+                          "updatedAt": "2026-10-22T01:59:04.000Z",
+                          "uid": "35240-2ad9fa12-d82c-4dc5-ae98-b0186d600efc"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:04.000Z",
+                      "updatedAt": "2026-10-22T01:59:04.000Z",
+                      "uid": "35240-2f2a13e3-8cf6-47ec-af98-40f9028f5bcb"
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3777ecf2-dcc7-4ce1-807f-a49a1d1b9eee",
-          "name": "VirusTotal Get a Detailed HTML Behaviour Report",
-          "request": {
-            "name": "VirusTotal Get a Detailed HTML Behaviour Report",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nReturns a [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object as an HTML report. It expects the sandbox ID returned by the [GET /private/files/{id}/behaviours](https://gtidocs.virustotal.com/reference/get-all-behaviour-reports-from-a-private-file) endpoint.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                "html"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "f59432c6-f936-47ef-b649-468aecf7cbb4",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "html"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "0f0a6a97-2788-4675-be2b-29b650723f0d",
+                  "createdAt": "2026-10-22T01:59:04.000Z",
+                  "updatedAt": "2026-10-22T01:59:04.000Z",
+                  "uid": "35240-0f0a6a97-2788-4675-be2b-29b650723f0d"
                 }
               ],
-              "body": "<!DOCTYPE html>\n<html lang=\"en\">\n  ...",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "15aa03e9-a94d-42b8-b601-73d04d4ccb60",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "html"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d23b28b8-e9d9-4e8a-acb0-a63cdab69d71",
-          "name": "VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis",
-          "request": {
-            "name": "VirusTotal Get the Memdump File Generated During a Private File’s Behavior Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the PCAP file associated with the sandbox execution.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                "memdump"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "15de2cad-1055-4f79-bece-3d34f3c27fcc",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "memdump"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a80afb92-ebde-4411-82ed-185fcae39e19",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "memdump"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "76b757f2-403f-44af-8a44-8f72f60e8429",
+              "createdAt": "2026-10-22T01:59:04.000Z",
+              "updatedAt": "2026-10-22T01:59:04.000Z",
+              "uid": "35240-76b757f2-403f-44af-8a44-8f72f60e8429"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0914b7bc-eb5a-4478-b9aa-07a41293b7c9",
-          "name": "VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis",
-          "request": {
-            "name": "VirusTotal Get the PCAP File Generated During a Private File’s Behavior Analysis",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nFetch the memdump file associated with the sandbox execution.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                "pcap"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "e69365dc-50cb-4188-8e39-f7236c1842a1",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "pcap"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "810d1bad-608e-49db-9249-a48f1f54686e",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "pcap"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7e785e01-0429-4853-8e07-113ce8cde20f",
-          "name": "VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a Private File's Behaviour Report",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint is the same as [/private/file_behaviours/{sandbox_id}/{relationship}](https://gtidocs.virustotal.com/reference/privatefile-behaviourssandbox-idrelationship) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "85e991d0-3d2a-4dc7-b898-397f90e63677",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f8648460-9b7a-4d10-b585-155ceadab5a6",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2ddb2488-6de7-4bca-8f3e-4027e4ff81d9",
-          "name": "VirusTotal Get Objects Related to a Private File's Behaviour Report",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a Private File's Behaviour Report",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nAs mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAvailable relationships are described in the [private file behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object documentation.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "file_behaviours",
-                ":sandbox_id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "sandbox_id",
-                  "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "043720f5-47d9-4d99-8acc-54dbac203e1d",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e8b8e331-306d-4e2d-854d-57c136272871",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "file_behaviours",
-                    ":sandbox_id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "sandbox_id",
-                      "description": "(Required) Sandbox report ID. See \"Sandbox Report identifiers\" section above for more info."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:private-file-behaviours-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "35450730-be26-4850-825c-5d6ab98313b1",
-          "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
-          "request": {
-            "name": "VirusTotal Get a Summary of All MITRE ATT&CK Techniques Observed in a File",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint returns a summary of MITRE ATT&CK tactics and techniques observed in each of the behaviour reports of a file.\n\nThe resulting structure is the following one:\n\n```json\n{\n  sandbox_name: {\n    \"tactics\": [\n      {\n        \"id\": tactic_id,\n        \"name\": tactic_name,\n        \"description\": tactic_description,\n        \"link\": tactic_mitre_url,\n        \"techniques\": [\n          {\n            \"id\": technique_id,\n            \"name\": technique_name,\n            \"description\": technique_description,\n            \"link\": technique_mitre_url,\n            \"signatures\": [\n              {\n                \"severity\": severity (\"HIGH\" / \"MEDIUM\" / \"LOW\" / \"INFO\" / \"UNKNOWN\"),\n                \"description\": signature_description\n              }, ...\n            ]\n          }, ...\n        ]\n      }, ...\n    ]\n  }, ...  \n}\n```\n\n```json Example response\n{\n\t\"data\": {\n\t\t\"VirusTotal Observer\": {\n\t\t\t\"tactics\": []\n\t\t},\n\t\t\"Zenbox\": {\n\t\t\t\"tactics\": [\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to figure out your environment.\\n\\nDiscovery consists of techniques an adversary may use to gain knowledge about the system and internal network. These techniques help adversaries observe the environment and orient themselves before deciding how to act. They also allow adversaries to explore what they can control and what’s around their entry point in order to discover how it could benefit their current objective. Native operating system tools are often used toward this post-compromise information-gathering objective. \",\n\t\t\t\t\t\"techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\\nTools such as Systeminfo can be used to gather detailed system information. If running with privileged access, a breakdown of system data can be gathered through the systemsetup configuration tool on macOS. As an example, adversaries with user-level access can execute the df -aH command to obtain currently mounted disks and associated freely available space. Adversaries may also leverage a Network Device CLI on network devices to gather detailed system information. System Information Discovery combined with information gathered from other forms of discovery and reconnaissance can drive payload development and concealment.\\nInfrastructure as a Service (IaaS) cloud providers such as AWS, GCP, and Azure allow access to instance and virtual machine information via APIs. Successful authenticated API calls can return data such as the operating system platform and status of a particular instance or the model view of a virtual machine.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Reads software policies\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1082/\",\n\t\t\t\t\t\t\t\"id\": \"T1082\",\n\t\t\t\t\t\t\t\"name\": \"System Information Discovery\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may enumerate files and directories or may search in specific locations of a host or network share for certain information within a file system. Adversaries may use the information from File and Directory Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\\nMany command shell utilities can be used to obtain this information. Examples include dir, tree, ls, find, and locate. Custom tools may also be used to gather file and directory information and interact with the Native API. Adversaries may also leverage a Network Device CLI on network devices to gather file and directory information.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Reads ini files\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1083/\",\n\t\t\t\t\t\t\t\"id\": \"T1083\",\n\t\t\t\t\t\t\t\"name\": \"File and Directory Discovery\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0007/\",\n\t\t\t\t\t\"id\": \"TA0007\",\n\t\t\t\t\t\"name\": \"Discovery\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to avoid being detected.\\n\\nDefense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses. \",\n\t\t\t\t\t\"techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges. Process injection is a method of executing arbitrary code in the address space of a separate live process. Running code in the context of another process may allow access to the process's memory, system/network resources, and possibly elevated privileges. Execution via process injection may also evade detection from security products since the execution is masked under a legitimate process. \\nThere are many different ways to inject code into a process, many of which abuse legitimate functionalities. These implementations exist for every major OS but are typically platform specific. \\nMore sophisticated samples may perform multiple process injections to segment modules and further evade detection, utilizing named pipes or other inter-process communication (IPC) mechanisms as a communication channel. \",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Spawns processes\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1055/\",\n\t\t\t\t\t\t\t\"id\": \"T1055\",\n\t\t\t\t\t\t\t\"name\": \"Process Injection\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may attempt to manipulate features of their artifacts to make them appear legitimate or benign to users and/or security tools. Masquerading occurs when the name or location of an object, legitimate or malicious, is manipulated or abused for the sake of evading defenses and observation. This may include manipulating file metadata, tricking users into misidentifying the file type, and giving legitimate task or service names.\\nRenaming abusable system utilities to evade security monitoring is also a form of Masquerading.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Creates files inside the user directory\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1036/\",\n\t\t\t\t\t\t\t\"id\": \"T1036\",\n\t\t\t\t\t\t\t\"name\": \"Masquerading\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may delete files left behind by the actions of their intrusion activity. Malware, tools, or other non-native files dropped or created on a system by an adversary (ex: Ingress Tool Transfer) may leave traces to indicate to what was done within a network and how. Removal of these files can occur during an intrusion, or as part of a post-intrusion process to minimize the adversary's footprint.\\nThere are tools available from the host operating system to perform cleanup, but adversaries may use other tools as well. Examples of built-in Command and Scripting Interpreter functions include del on Windows and rm or unlink on Linux and macOS.\",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Deletes files inside the Windows folder\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1070/004/\",\n\t\t\t\t\t\t\t\"id\": \"T1070.004\",\n\t\t\t\t\t\t\t\"name\": \"File Deletion\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0005/\",\n\t\t\t\t\t\"id\": \"TA0005\",\n\t\t\t\t\t\"name\": \"Defense Evasion\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"description\": \"The adversary is trying to gain higher-level permissions.\\n\\nPrivilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities. Examples of elevated access include: \\n\\n* SYSTEM/root level\\n* local administrator\\n* user account with admin-like access \\n* user accounts with access to specific system or perform specific function\\n\\nThese techniques often overlap with Persistence techniques, as OS features that let an adversary persist can execute in an elevated context.  \",\n\t\t\t\t\t\"techniques\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"description\": \"Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges. Process injection is a method of executing arbitrary code in the address space of a separate live process. Running code in the context of another process may allow access to the process's memory, system/network resources, and possibly elevated privileges. Execution via process injection may also evade detection from security products since the execution is masked under a legitimate process. \\nThere are many different ways to inject code into a process, many of which abuse legitimate functionalities. These implementations exist for every major OS but are typically platform specific. \\nMore sophisticated samples may perform multiple process injections to segment modules and further evade detection, utilizing named pipes or other inter-process communication (IPC) mechanisms as a communication channel. \",\n\t\t\t\t\t\t\t\"signatures\": [\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"severity\": \"INFO\",\n\t\t\t\t\t\t\t\t\t\"description\": \"Spawns processes\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"link\": \"https://attack.mitre.org/techniques/T1055/\",\n\t\t\t\t\t\t\t\"id\": \"T1055\",\n\t\t\t\t\t\t\t\"name\": \"Process Injection\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"link\": \"https://attack.mitre.org/tactics/TA0004/\",\n\t\t\t\t\t\"id\": \"TA0004\",\n\t\t\t\t\t\"name\": \"Privilege Escalation\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t\"VirusTotal Jujubox\": {\n\t\t\t\"tactics\": []\n\t\t}\n\t},\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/private/files/bb04b55bc87b4bb4d2543bf50ff46ec840d653ca9311e9b40d9933e484719a91/behaviour_mitre_trees\"\n\t}\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "files",
-                ":id",
-                "behaviour_mitre_trees"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) File's SHA-256"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "0624a64f-3de8-49f8-9094-e05134b9b98e",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "files",
-                    ":id",
-                    "behaviour_mitre_trees"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) File's SHA-256"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "50b6fbf8-d6a0-40d2-8235-28e7fc0044f7",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "files",
-                    ":id",
-                    "behaviour_mitre_trees"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) File's SHA-256"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f6265bd3-526d-46a6-8487-822e3464a275",
-          "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
-          "request": {
-            "name": "VirusTotal Get a Summary of All Behavior Reports for a File",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Private Scanning endpoints are only available to users with [Private Scanning license](https://www.virustotal.com/gui/private-scanning-overview).\n\nThis endpoint returns a summary with behavioural information about the private file. The summary consists in merging together the reports produced by the multiple sandboxes we have integrated in VirusTotal. \n\nThis API call returns all fields contained in the [Private File Behaviour](https://gtidocs.virustotal.com/reference/private-file-behaviours-object) object, except the ones that make sense only for individual sandboxes:\n\n- `behash`\n- `has_html_report`\n- `has_pcap`\n- `last_modification_date`\n- `sandbox_name`\n\n```json Example response\n{\n    \"data\": {\n        \"calls_highlighted\": [\n            \"GetTickCount\"\n        ],\n        \"files_opened\": [\n            \"C:\\\\WINDOWS\\\\system32\\\\winime32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\ws2_32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\ws2help.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\psapi.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\imm32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\lpk.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\usp10.dll\",\n            \"C:\\\\WINDOWS\\\\WinSxS\\\\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.5512_x-ww_35d4ce83\\\\comctl32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\winmm.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\winspool.drv\",\n            \"C:\\\\WINDOWS\\\\WindowsShell.Manifest\",\n            \"C:\\\\WINDOWS\\\\system32\\\\shell32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\MSCTF.dll\"\n        ],\n        \"modules_loaded\": [\n            \"comctl32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\ws2_32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\MSCTF.dll\",\n            \"version.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\msctfime.ime\",\n            \"C:\\\\WINDOWS\\\\system32\\\\ole32.dll\",\n            \"USER32.dll\",\n            \"IMM32.dll\",\n            \"C:\\\\WINDOWS\\\\system32\\\\user32.dll\"\n        ],\n        \"mutexes_created\": [\n            \"CTF.LBES.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.Compart.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.Asm.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.Layouts.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.TMD.MutexDefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"CTF.TimListCache.FMPDefaultS-1-5-21-1482476501-1645522239-1417001333-500MUTEX.DefaultS-1-5-21-1482476501-1645522239-1417001333-500\",\n            \"MSCTF.Shared.MUTEX.EBH\"\n        ],\n        \"mutexes_opened\": [\n            \"ShimCacheMutex\"\n        ],\n        \"processes_terminated\": [\n            \"C:\\\\Documents and Settings\\\\Administrator\\\\Local Settings\\\\Temp\\\\EB93A6\\\\996E.exe\"\n        ],\n        \"processes_tree\": [\n            {\n                \"name\": \"****.exe\",\n                \"process_id\": \"1036\"\n            },\n            {\n                \"name\": \"9f9e74241d59eccfe7040bfdcbbceacb374eda397cc53a4197b59e4f6f380a91.exe\",\n                \"process_id\": \"2340\"\n            }\n        ],\n        \"registry_keys_opened\": [\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\996E.exe\",\n            \"\\\\Registry\\\\MACHINE\\\\System\\\\CurrentControlSet\\\\Control\\\\SafeBoot\\\\Option\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\\\\TransparentEnabled\",\n            \"\\\\REGISTRY\\\\USER\\\\S-1-5-21-1482476501-1645522239-1417001333-500\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Safer\\\\CodeIdentifiers\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\COMCTL32.dll\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\SHELL32.dll\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\comdlg32.dll\",\n            \"\\\\Registry\\\\Machine\\\\Software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Image File Execution Options\\\\WINMM.dll\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave1\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave2\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave3\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave4\",\n            \"\\\\REGISTRY\\\\MACHINE\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Drivers32\\\\wave5\"\n        ],\n        \"tags\": [\n            \"DIRECT_CPU_CLOCK_ACCESS\",\n            \"RUNTIME_MODULES\"\n        ],\n        \"text_highlighted\": [\n            \"&Open\",\n            \"&Cancel\",\n            \"&About\",\n            \"Cate&gory:\",\n            \"Host &Name (or IP address)\",\n            \"&Port\",\n            \"22\",\n            \"Connection type:\",\n            \"Ra&w\",\n            \"&Telnet\",\n            \"Rlog&in\"\n        ]\n    }\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "files",
-                ":id",
-                "behaviour_summary"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) File's SHA-256"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "ac5bd3cf-9cd6-4564-9d82-d0852386c9c4",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "files",
-                    ":id",
-                    "behaviour_summary"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) File's SHA-256"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ccb2e30c-9fef-42d9-9053-3c868b956795",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "files",
-                    ":id",
-                    "behaviour_summary"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) File's SHA-256"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a98087e8-107d-4a7f-a9b8-7a4b8fdb3a12",
+          "createdAt": "2026-10-22T01:59:04.000Z",
+          "updatedAt": "2026-10-22T01:59:04.000Z",
+          "uid": "35240-a98087e8-107d-4a7f-a9b8-7a4b8fdb3a12"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "28df88d6-690a-4246-8f7b-b7147cb3d105",
+      "createdAt": "2026-10-22T01:59:04.000Z",
+      "updatedAt": "2026-10-22T01:59:04.000Z",
+      "uid": "35240-28df88d6-690a-4246-8f7b-b7147cb3d105"
     }
   ],
   "auth": {
@@ -1829,25 +1885,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "1fa0a8fa-ec62-4da4-a276-cd47eedf4f3e",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Files Behaviours API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

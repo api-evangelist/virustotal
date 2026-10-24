@@ -1,855 +1,891 @@
 {
+  "info": {
+    "_postman_id": "61590d50-21bb-45bf-ae24-740f7dc10e1b",
+    "name": "VirusTotal API v3 - Private Scanning Private Scanning\u2026",
+    "description": "Submit files and URLs for analysis without sharing the artefact with the VirusTotal community. Mirrors the public scanning surface (Files / URLs / Analyses / Behaviours / Zip Files).\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:59:14.000Z",
+    "updatedAt": "2026-10-22T01:59:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-61590d50-21bb-45bf-ae24-740f7dc10e1b"
+  },
   "item": [
     {
-      "id": "46cfa5e1-cb1c-4c9a-9be5-67877045c24c",
-      "name": "Private Scanning - Zipping files",
-      "description": {
-        "content": "Private Scanning - Zipping files",
-        "type": "text/plain"
-      },
+      "name": "private",
       "item": [
         {
-          "id": "92a5ab12-38b7-4dcb-8bde-d58790e18a4a",
-          "name": "VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files",
-          "request": {
-            "name": "VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files",
-            "description": {
-              "content": "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure: \n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n  \\\"hashes\\\":[\n   \\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n   \\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n   \\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n  }\n}\n```\nThe response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that's why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n  \\\"data\\\": {\n   \\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"starting\\\",\n\\\"progress\\\": 0,\n    \\\"files_ok\\\": 0,\n\\\"files_error\\\": 0\n} \n}\n}\n```\n\n\nThe GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it's finished.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "zip_files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "zip_files",
+          "item": [
             {
-              "id": "e8adbd82-24e7-43d4-99aa-c0322f844afe",
-              "name": "Successful VirusTotal API response.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files"
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "download",
+                  "item": [
+                    {
+                      "name": "VirusTotal Download a ZIP File",
+                      "id": "d5ff0949-4d6e-40e7-8bca-c70f5415069d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/zip_files/:id/download",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "zip_files",
+                            ":id",
+                            "download"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7bf860c7-c666-4039-97f3-8f0484d820bd",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) ZIP file identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "28b8ef3d-c49d-465d-b72b-b30aa701aac8",
+                          "name": "Successful VirusTotal API response.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/zip_files/:id/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "zip_files",
+                                ":id",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"description\": \"Endpoint-specific payload \u2014 usually a VirusTotal object or list of objects.\",\n    \"example\": {}\n  },\n  \"meta\": {\n    \"deserunt_4\": -4991561.835812822,\n    \"non_7\": \"eiusmod non velit\"\n  },\n  \"links\": {\n    \"next\": \"<uri>\",\n    \"self\": \"<uri>\",\n    \"nullab76\": -66793563.36480047,\n    \"in_71\": \"dolor Lorem laboris aliqua\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:59:14.000Z",
+                          "updatedAt": "2026-10-22T01:59:14.000Z",
+                          "uid": "35240-28b8ef3d-c49d-465d-b72b-b30aa701aac8"
+                        },
+                        {
+                          "id": "5edea62f-08c9-43d9-b238-9ff7618034f0",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/zip_files/:id/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "zip_files",
+                                ":id",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:14.000Z",
+                          "updatedAt": "2026-10-22T01:59:14.000Z",
+                          "uid": "35240-5edea62f-08c9-43d9-b238-9ff7618034f0"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:14.000Z",
+                      "updatedAt": "2026-10-22T01:59:14.000Z",
+                      "uid": "35240-d5ff0949-4d6e-40e7-8bca-c70f5415069d"
+                    }
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  "id": "153f6af9-caf6-4e1b-8b19-0dd2658becad",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-153f6af9-caf6-4e1b-8b19-0dd2658becad"
                 },
+                {
+                  "name": "download_url",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get a ZIP File\u2019s Download URL",
+                      "id": "87b20495-5fe2-49d2-b156-73b9b4ae38ac",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/zip_files/:id/download_url",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "zip_files",
+                            ":id",
+                            "download_url"
+                          ],
+                          "variable": [
+                            {
+                              "id": "408b3a35-a18d-4726-9547-edf3dbdf4500",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) ZIP file identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d25c8353-a56d-4e60-94ca-747a7e26c8bc",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/zip_files/:id/download_url",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "zip_files",
+                                ":id",
+                                "download_url"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:14.000Z",
+                          "updatedAt": "2026-10-22T01:59:14.000Z",
+                          "uid": "35240-d25c8353-a56d-4e60-94ca-747a7e26c8bc"
+                        },
+                        {
+                          "id": "70d810a4-6c61-4e2f-8ff5-383f6293ddcc",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/private/zip_files/:id/download_url",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "private",
+                                "zip_files",
+                                ":id",
+                                "download_url"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:14.000Z",
+                          "updatedAt": "2026-10-22T01:59:14.000Z",
+                          "uid": "35240-70d810a4-6c61-4e2f-8ff5-383f6293ddcc"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:14.000Z",
+                      "updatedAt": "2026-10-22T01:59:14.000Z",
+                      "uid": "35240-87b20495-5fe2-49d2-b156-73b9b4ae38ac"
+                    }
+                  ],
+                  "id": "b178ca22-9047-4ddc-aa28-ab82b23757a1",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-b178ca22-9047-4ddc-aa28-ab82b23757a1"
+                },
+                {
+                  "name": "VirusTotal Check a ZIP File\u2019s Status",
+                  "id": "15890c55-aa88-4dbb-8a00-3f419364b6c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "99c04da6-2a45-4019-ae13-ae680c1d639f",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) ZIP file identifier"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n\\\"data\\\": {\n\\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"creating\\\",\n\\\"progress\\\": 45,\n\\\"files_ok\\\": 3,\n\\\"files_error\\\": 0\n}\n}\n}\n```\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to download the file."
+                  },
+                  "response": [
+                    {
+                      "id": "14e047e2-1f56-485c-8ffb-b4bef73341cd",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/zip_files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "zip_files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:14.000Z",
+                      "updatedAt": "2026-10-22T01:59:14.000Z",
+                      "uid": "35240-14e047e2-1f56-485c-8ffb-b4bef73341cd"
+                    },
+                    {
+                      "id": "27576aef-f72b-48b0-bb59-a85692089552",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/private/zip_files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "zip_files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:14.000Z",
+                      "updatedAt": "2026-10-22T01:59:14.000Z",
+                      "uid": "35240-27576aef-f72b-48b0-bb59-a85692089552"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-15890c55-aa88-4dbb-8a00-3f419364b6c1"
+                }
+              ],
+              "id": "90ad65a8-3e55-4683-a88e-acaeb261d12d",
+              "createdAt": "2026-10-22T01:59:14.000Z",
+              "updatedAt": "2026-10-22T01:59:14.000Z",
+              "uid": "35240-90ad65a8-3e55-4683-a88e-acaeb261d12d"
+            },
+            {
+              "name": "VirusTotal Create a Password-protected ZIP with Google Threat Intelligence Files",
+              "id": "2c59ba27-c7a3-4e50-9025-77ffca45f7b4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"meta\": {\n    \"key_0\": 1265.5355035107186\n  },\n  \"links\": {\n    \"next\": \"http://hmoGxIFVrQlztKmmdvCuObzIuzeMUmLP.wgdwf-VnrBrrsB+OSnXaoM1GnXdWAwfYar-\",\n    \"self\": \"http://fJrTHbxMojizTYXcBriY.gclyQPOyGF\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d6fc7f63-50ce-48a8-99d3-539baba683c8",
-              "name": "Bad request.",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "private",
-                    "zip_files"
-                  ],
+                  "raw": "{{baseUrl}}/private/zip_files",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2705df5c-a979-44a0-ba52-41130ff5bf8c",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "private",
                     "zip_files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Creates a ZIP file containing the files specified in the request. Optionally you can provide a password for protecting the ZIP file. The request's body must have the following structure:\n```json Example request\n{\n\\\"data\\\": {\n\\\"password\\\": \\\"mysecretpassword\\\",\n\\\"hashes\\\":[\n\\\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\\",\n\\\"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\\\",\n\\\"ed1707bf39a62b0efd40e76f55409ee99db0289dc5027d0a5e5337b4e7a61ccc\\\"]\n}\n}\n```\nThe response from this endpoint is the object corresponding to the newly created ZIP file. Notice however that your ZIP file won't be ready to be downloaded right away, you must wait for the backend to create the ZIP file for you, that's why the returned object has a status and progress attribute, which indicates the current status and current progress for the ZIP creation process.\n\n```json Example response\n{\n\\\"data\\\": {\n\\\"type\\\": \\\"zip_file\\\",\n\\\"id\\\": \\\"4939392292\\\",\n\\\"attributes\\\": {\n\\\"status\\\": \\\"starting\\\",\n\\\"progress\\\": 0,\n\\\"files_ok\\\": 0,\n\\\"files_error\\\": 0\n}\n}\n}\n```\n\nThe GET /private/zip_files/{id} endpoint should be used for retrieving the latest status of the ZIP file until it's finished."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "e37e6175-f361-4821-b1b6-39599e9733bc",
+                  "name": "Successful VirusTotal API response.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"description\": \"Endpoint-specific payload \u2014 usually a VirusTotal object or list of objects.\",\n    \"example\": {}\n  },\n  \"meta\": {\n    \"deserunt_4\": -4991561.835812822,\n    \"non_7\": \"eiusmod non velit\"\n  },\n  \"links\": {\n    \"next\": \"<uri>\",\n    \"self\": \"<uri>\",\n    \"nullab76\": -66793563.36480047,\n    \"in_71\": \"dolor Lorem laboris aliqua\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-e37e6175-f361-4821-b1b6-39599e9733bc"
+                },
+                {
+                  "id": "416cdccb-7902-465d-b591-a58fbc648bb2",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-416cdccb-7902-465d-b591-a58fbc648bb2"
+                },
+                {
+                  "id": "6868711f-852b-42ef-9b44-a762b889759c",
+                  "name": "Missing or invalid API key.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-6868711f-852b-42ef-9b44-a762b889759c"
+                },
+                {
+                  "id": "0d59b697-270b-4b09-b474-369d08c78069",
+                  "name": "Object not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-0d59b697-270b-4b09-b474-369d08c78069"
+                },
+                {
+                  "id": "71fcc2e4-4d14-4c1a-9630-330c53e22ae2",
+                  "name": "Rate limit or quota exceeded.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/zip_files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "zip_files"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T01:59:14.000Z",
+                  "updatedAt": "2026-10-22T01:59:14.000Z",
+                  "uid": "35240-71fcc2e4-4d14-4c1a-9630-330c53e22ae2"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ac2fd14d-0a50-4180-802c-98cdb34ff2a0",
-              "name": "Object not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ab566719-d4c7-4727-ba77-57bfcc570537",
-              "name": "Rate limit or quota exceeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"password\\\": \\\"<password>\\\", \\\"hashes\\\":[\\\"<hash1>\\\", \\\"<hash2>\\\"]}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:59:14.000Z",
+              "updatedAt": "2026-10-22T01:59:14.000Z",
+              "uid": "35240-2c59ba27-c7a3-4e50-9025-77ffca45f7b4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "863ce052-26e8-4636-a60b-9e813090102d",
-          "name": "VirusTotal Check a ZIP File’s Status",
-          "request": {
-            "name": "VirusTotal Check a ZIP File’s Status",
-            "description": {
-              "content": "This endpoint returns information about a ZIP file.\n\n```json Example response\n{\n  \\\"data\\\": {\n    \\\"type\\\": \\\"zip_file\\\",\n    \\\"id\\\": \\\"4939392292\\\",\n    \\\"attributes\\\": {\n      \\\"status\\\": \\\"creating\\\",\n      \\\"progress\\\": 45,\n      \\\"files_ok\\\": 3,\n      \\\"files_error\\\": 0\n    }\n  }\n}\n``` \n\n\nThe `status` attribute contains one of the following statuses:\n\n- `starting`\n- `creating`\n- `finished`\n- `timeout`\n- `error-starting`\n- `error-creating`\n\nWhen the status is finished you may proceed to download the file.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "zip_files",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) ZIP file identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b8e30667-99d3-4abd-bf47-9e3d23bde60c",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ea2b649f-c1c3-476d-9e60-72dace09a354",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8f238c26-4cfc-40b1-a957-1b3678e4c0ff",
-          "name": "VirusTotal Download a ZIP File",
-          "request": {
-            "name": "VirusTotal Download a ZIP File",
-            "description": {
-              "content": "VirusTotal Download a ZIP File",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "zip_files",
-                ":id",
-                "download"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) ZIP file identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "85914968-054e-4d27-bf0d-8fb49968bdb9",
-              "name": "Successful VirusTotal API response.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"meta\": {\n    \"key_0\": 1265.5355035107186\n  },\n  \"links\": {\n    \"next\": \"http://hmoGxIFVrQlztKmmdvCuObzIuzeMUmLP.wgdwf-VnrBrrsB+OSnXaoM1GnXdWAwfYar-\",\n    \"self\": \"http://fJrTHbxMojizTYXcBriY.gclyQPOyGF\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "34f87cde-e985-4f04-8d90-f29bb295cbb7",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "95a7056b-38cc-4cb0-84c9-7e6d3941a4cb",
-          "name": "VirusTotal Get a ZIP File’s Download URL",
-          "request": {
-            "name": "VirusTotal Get a ZIP File’s Download URL",
-            "description": {
-              "content": "VirusTotal Get a ZIP File’s Download URL",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "private",
-                "zip_files",
-                ":id",
-                "download_url"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) ZIP file identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b70410ca-6abc-4a42-a9fa-b93be0e3db6d",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id",
-                    "download_url"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d2477904-6828-4c62-abed-4f28d6aa22cd",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "private",
-                    "zip_files",
-                    ":id",
-                    "download_url"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) ZIP file identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4c9a0d0e-346f-4ffd-9d08-ed03b66b3aae",
+          "createdAt": "2026-10-22T01:59:14.000Z",
+          "updatedAt": "2026-10-22T01:59:14.000Z",
+          "uid": "35240-4c9a0d0e-346f-4ffd-9d08-ed03b66b3aae"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "896c725d-8ed6-498e-a6ba-a5dd573a24e2",
+      "createdAt": "2026-10-22T01:59:14.000Z",
+      "updatedAt": "2026-10-22T01:59:14.000Z",
+      "uid": "35240-896c725d-8ed6-498e-a6ba-a5dd573a24e2"
     }
   ],
   "auth": {
@@ -857,25 +893,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "655d2bd9-1c35-4b04-a41d-9fd8a8544d89",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management Private Scanning - Zipping files API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

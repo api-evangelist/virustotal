@@ -1,1082 +1,1104 @@
 {
+  "info": {
+    "_postman_id": "c7cbb6a0-dbee-4264-a42f-e409b269e963",
+    "name": "VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC\u2026",
+    "description": "Livehunt, Retrohunt, the IoC Stream, and crowdsourced YARA rules \u2014 VirusTotal's hunting and notification surface.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:59:56.000Z",
+    "updatedAt": "2026-10-22T01:59:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7cbb6a0-dbee-4264-a42f-e409b269e963"
+  },
   "item": [
     {
-      "id": "196660b2-70db-48f6-9b04-cab2b4bb632a",
-      "name": "YARA Hunting - Retrohunt",
-      "description": {
-        "content": "YARA Hunting - Retrohunt",
-        "type": "text/plain"
-      },
+      "name": "intelligence",
       "item": [
         {
-          "id": "4b27d69c-ccf3-4314-a31f-8e14d047d654",
-          "name": "VirusTotal Get a List of Retrohunt Jobs",
-          "request": {
-            "name": "VirusTotal Get a List of Retrohunt Jobs",
-            "description": {
-              "content": "Returns a list of [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number jobs to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Return the jobs matching the given criteria only"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "retrohunt_jobs",
+          "item": [
             {
-              "id": "94258213-75b7-4bb3-8b2e-f34d666c2294",
-              "name": "200",
-              "originalRequest": {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "abort",
+                  "item": [
+                    {
+                      "name": "VirusTotal Abort a Retrohunt Job",
+                      "id": "da7ec03c-a8bc-424b-8686-2c5f9ac2089a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/abort",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id",
+                            "abort"
+                          ],
+                          "variable": [
+                            {
+                              "id": "25f91967-1e26-4de8-8872-3859761ae64f",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Job identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2a6508f8-d991-4ba0-a5e7-b5aa3607959d",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/abort",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "intelligence",
+                                "retrohunt_jobs",
+                                ":id",
+                                "abort"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:56.000Z",
+                          "updatedAt": "2026-10-22T01:59:56.000Z",
+                          "uid": "35240-2a6508f8-d991-4ba0-a5e7-b5aa3607959d"
+                        },
+                        {
+                          "id": "cf67b12d-caf5-4eef-bac5-05ccff350efb",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/abort",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "intelligence",
+                                "retrohunt_jobs",
+                                ":id",
+                                "abort"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:56.000Z",
+                          "updatedAt": "2026-10-22T01:59:56.000Z",
+                          "uid": "35240-cf67b12d-caf5-4eef-bac5-05ccff350efb"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-da7ec03c-a8bc-424b-8686-2c5f9ac2089a"
+                    }
+                  ],
+                  "id": "b6c7d7c3-72f5-4e26-8e61-95a6eb027491",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-b6c7d7c3-72f5-4e26-8e61-95a6eb027491"
+                },
+                {
+                  "name": "matching_files",
+                  "item": [
+                    {
+                      "name": "VirusTotal Retrieve Matches for a Retrohunt Job",
+                      "id": "05b7ba2a-2737-43c0-845e-def71f25c5e1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/matching_files?cursor=<string>&limit=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id",
+                            "matching_files"
+                          ],
+                          "query": [
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of matching files to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "87605651-e9b4-4105-af34-88f33bb14ccf",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Job identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrohunt jobs are related to other objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationships URL.\n\nThe supported relationships for Retrohunt jobs are described in the Retrohunt Jobs API object page."
+                      },
+                      "response": [
+                        {
+                          "id": "ebb3dc49-5937-4104-8365-07d0da357909",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/matching_files?cursor=<string>&limit=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "intelligence",
+                                "retrohunt_jobs",
+                                ":id",
+                                "matching_files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of matching files to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:56.000Z",
+                          "updatedAt": "2026-10-22T01:59:56.000Z",
+                          "uid": "35240-ebb3dc49-5937-4104-8365-07d0da357909"
+                        },
+                        {
+                          "id": "6dd94461-4314-4893-98e0-b3bcfc374e0d",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id/matching_files?cursor=<string>&limit=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "intelligence",
+                                "retrohunt_jobs",
+                                ":id",
+                                "matching_files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of matching files to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:59:56.000Z",
+                          "updatedAt": "2026-10-22T01:59:56.000Z",
+                          "uid": "35240-6dd94461-4314-4893-98e0-b3bcfc374e0d"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-05b7ba2a-2737-43c0-845e-def71f25c5e1"
+                    }
+                  ],
+                  "id": "ef5539df-29bb-4b32-8b5e-fd55184422e3",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-ef5539df-29bb-4b32-8b5e-fd55184422e3"
+                },
+                {
+                  "name": "VirusTotal Delete a Retrohunt Job",
+                  "id": "2250afc1-a349-4893-a60c-762b67287585",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d46ea99c-b15c-48de-8e08-b2766dfb475c",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Job identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e8e05684-8c66-4c5c-a26d-3d28be187803",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-e8e05684-8c66-4c5c-a26d-3d28be187803"
+                    },
+                    {
+                      "id": "a35680d5-c31f-4585-bca5-b7bbd9494b06",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-a35680d5-c31f-4585-bca5-b7bbd9494b06"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-2250afc1-a349-4893-a60c-762b67287585"
+                },
+                {
+                  "name": "VirusTotal Get a Retrohunt Job Object",
+                  "id": "4d64d583-ab88-4adf-8963-5323e7e49438",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6edff55c-2513-45bc-9159-146203e9327d",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Job identifier"
+                        }
+                      ]
+                    },
+                    "description": "Returns a Retrohunt Job object."
+                  },
+                  "response": [
+                    {
+                      "id": "9a928117-43cf-41a9-995e-027d92030753",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-9a928117-43cf-41a9-995e-027d92030753"
+                    },
+                    {
+                      "id": "a5daf2ed-b6cd-444d-91ba-29ac73cc240a",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/intelligence/retrohunt_jobs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "intelligence",
+                            "retrohunt_jobs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:59:56.000Z",
+                      "updatedAt": "2026-10-22T01:59:56.000Z",
+                      "uid": "35240-a5daf2ed-b6cd-444d-91ba-29ac73cc240a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-4d64d583-ab88-4adf-8963-5323e7e49438"
+                }
+              ],
+              "id": "3ffa64c7-774f-40b3-b4e5-5ba1929a5d30",
+              "createdAt": "2026-10-22T01:59:56.000Z",
+              "updatedAt": "2026-10-22T01:59:56.000Z",
+              "uid": "35240-3ffa64c7-774f-40b3-b4e5-5ba1929a5d30"
+            },
+            {
+              "name": "VirusTotal Get a List of Retrohunt Jobs",
+              "id": "2af3bc61-8276-4fe3-9eea-4c6c01e15978",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/intelligence/retrohunt_jobs?limit=10&filter=<string>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "intelligence",
                     "retrohunt_jobs"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Maximum number jobs to retrieve",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Return the jobs matching the given criteria only",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns a list of Retrohunt Job objects. Accepted filters are `status:(starting|running|aborting|aborted|finished)`."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "87ea68e2-c1e2-44c3-ad38-416af0cf7246",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "71519bb7-187b-4a4f-b238-181ec016eff2",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs?limit=10&filter=<string>&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number jobs to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Return the jobs matching the given criteria only",
+                          "key": "filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-71519bb7-187b-4a4f-b238-181ec016eff2"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                {
+                  "id": "0dd514a5-20ed-4ead-b9f9-7d5b03b654eb",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs?limit=10&filter=<string>&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number jobs to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Return the jobs matching the given criteria only",
+                          "key": "filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-0dd514a5-20ed-4ead-b9f9-7d5b03b654eb"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0e065c97-8b0f-420b-8ac2-99daa2744618",
-          "name": "VirusTotal Create a New Retrohunt Job",
-          "request": {
-            "name": "VirusTotal Create a New Retrohunt Job",
-            "description": {
-              "content": "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"retrohunt_job\",\n    \"attributes\": {\n      \"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n      \"notification_email\": \"notifications@acme.com\",\n      \"corpus\": \"main\",\n      \"time_range\": {\n        \"start\": 1545145761,\n        \"end\": 1547737720\n      }\n    }\n  }\n}\n```\n\nThe `rules` attribute is required, but `notification_email`, `corpus` and `time_range` are optional. You should provide  `notification_email` if you want to receive an email notification when the job is finished, while `corpus` allows you to select which dataset you want to scan with your job. There are two different corpuses: \"main\" and \"goodware\". The \"main\" corpus is the default one, composed of files sent to Google Threat Intelligence during the last few months. The \"goodware\" corpus is a random selection of ~1.000.000 files from the [NSRL](https://www.nist.gov/software-quality-group/national-software-reference-library-nsrl) that are not detected by any antivirus engine. This corpus contains multiple file types, and is useful for testing your YARA rules for false positives. If the `corpus` attribute is not specified the \"main\" corpus will be used.\n\n> 🚧 Retrohunt limits\n> \n> Each user can run up to 10 Retrohunt jobs at the same time, when you reach that limit you must wait for one of the running jobs to finish before launching a new one. Additionally, each job can contain up to 300 YARA rules.\n\nIf you want your job to scan files sent to Google TI within a certain time range you can use the  `time_range` attribute to specify the desired range. Both the `start` and `end` fields in `time_range` should be the UNIX timestamp for the minimum and upper bound of the time range in UTC, and they should be within the maximum range allowed by your Retrohunt privileges. All users can scan up to 90 days back, and this can go up to 180 or 365 days for more privileged users. If `start` is not specified your Retrohunt job will scan back to the limit allowed by your privileges, and if `end` is not specified it will scan up to the most recent files.\n\nReturns the newly created [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.\n",
-              "type": "text/plain"
+              "createdAt": "2026-10-22T01:59:56.000Z",
+              "updatedAt": "2026-10-22T01:59:56.000Z",
+              "uid": "35240-2af3bc61-8276-4fe3-9eea-4c6c01e15978"
             },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{     \\\"type\\\": \\\"retrohunt_job\\\",     \\\"attributes\\\": {       \\\"rules\\\": \\\"rule foobar { strings: $ = \\\\\\\"foobar\\\\\\\" condition: all of them }\\\",       \\\"corpus\\\": \\\"main\\\"    }   }\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
             {
-              "id": "a80b116c-cbf9-4cdb-86db-93c4fbb76af1",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+              "name": "VirusTotal Create a New Retrohunt Job",
+              "id": "869d0484-2167-4f20-adda-93c5b7c82d3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
                     },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"data\": \"{     \\\"type\\\": \\\"retrohunt_job\\\",     \\\"attributes\\\": {       \\\"rules\\\": \\\"rule foobar { strings: $ = \\\\\\\"foobar\\\\\\\" condition: all of them }\\\",       \\\"corpus\\\": \\\"main\\\"    }   }\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a69b6695-c811-4d88-b004-8b2fd5920337",
-              "name": "400",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/intelligence/retrohunt_jobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "intelligence",
                     "retrohunt_jobs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{     \\\"type\\\": \\\"retrohunt_job\\\",     \\\"attributes\\\": {       \\\"rules\\\": \\\"rule foobar { strings: $ = \\\\\\\"foobar\\\\\\\" condition: all of them }\\\",       \\\"corpus\\\": \\\"main\\\"    }   }\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "This endpoint creates a new Retrohunt job. The request's body must have the following structure:\n\n```json Example request\n{\n\"data\": {\n\"type\": \"retrohunt_job\",\n\"attributes\": {\n\"rules\": \"rule foobar { strings: $ = \\\"foobar\\\" condition: all of them }\",\n\"notification_email\": \"notifications@acme.com\",\n\"corpus\": \"main\",\n\"time_range\": {\n\"start\": 1545145761,\n\"end\": 1547737720\n}\n}\n}\n}\n```\n\nThe `rules` attribute is required, but `notification_email`, `corpus` and `time_range` are optional. You should provide `notification_email` if you want to receive an email notification when the job is finished, while `corpus` allows you to select which dataset you want to scan with your job. There are two different corpuses: \"main\" and \"goodware\". The \"main\" corpus is the default one, composed of files sent to Google Threat Intelligence during the last few months. The \"goodware\" corpus is a random selection of ~1.000.000 files from the NSRL that are not detected by any antivirus engine. This corpus contains multiple file types, and is useful for testing your YARA rules for false positives. If the `corpus` attribute is not specified the \"main\" corpus will be used.\n\n> \ud83d\udea7 Retrohunt limits\n>\n> Each user can run up to 10 Retrohunt jobs at the same time, when you reach that limit you must wait for one of the running jobs to finish before launching a new one. Additionally, each job can contain up to 300 YARA rules.\n\nIf you want your job to scan files sent to Google TI within a certain time range you can use the `time_range` attribute to specify the desired range. Both the `start` and `end` fields in `time_range` should be the UNIX timestamp for the minimum and upper bound of the time range in UTC, and they should be within the maximum range allowed by your Retrohunt privileges. All users can scan up to 90 days back, and this can go up to 180 or 365 days for more privileged users. If `start` is not specified your Retrohunt job will scan back to the limit allowed by your privileges, and if `end` is not specified it will scan up to the most recent files.\n\nReturns the newly created Retrohunt Job object."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "733fedaf-4589-48dc-b5f8-fbabc45b07da",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{     \\\"type\\\": \\\"retrohunt_job\\\",     \\\"attributes\\\": {       \\\"rules\\\": \\\"rule foobar { strings: $ = \\\\\\\"foobar\\\\\\\" condition: all of them }\\\",       \\\"corpus\\\": \\\"main\\\"    }   }\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-733fedaf-4589-48dc-b5f8-fbabc45b07da"
+                },
+                {
+                  "id": "b3e113d7-934e-47e5-a675-a02645f84259",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{     \\\"type\\\": \\\"retrohunt_job\\\",     \\\"attributes\\\": {       \\\"rules\\\": \\\"rule foobar { strings: $ = \\\\\\\"foobar\\\\\\\" condition: all of them }\\\",       \\\"corpus\\\": \\\"main\\\"    }   }\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/intelligence/retrohunt_jobs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "intelligence",
+                        "retrohunt_jobs"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:59:56.000Z",
+                  "updatedAt": "2026-10-22T01:59:56.000Z",
+                  "uid": "35240-b3e113d7-934e-47e5-a675-a02645f84259"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:59:56.000Z",
+              "updatedAt": "2026-10-22T01:59:56.000Z",
+              "uid": "35240-869d0484-2167-4f20-adda-93c5b7c82d3e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4cdceec0-08d2-45b1-9dbb-f3c4a716c80e",
-          "name": "VirusTotal Delete a Retrohunt Job",
-          "request": {
-            "name": "VirusTotal Delete a Retrohunt Job",
-            "description": {
-              "content": "VirusTotal Delete a Retrohunt Job",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Job identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b729e112-860e-402c-ace3-0cb6f3a65eb7",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e2541251-73a2-4860-bec7-6a138cd03b32",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0290a039-ef75-4230-b7cf-4556e3749cf1",
-          "name": "VirusTotal Get a Retrohunt Job Object",
-          "request": {
-            "name": "VirusTotal Get a Retrohunt Job Object",
-            "description": {
-              "content": "Returns a [Retrohunt Job](https://gtidocs.virustotal.com/reference/retrohunt-job-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Job identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c7bb1718-cede-4e88-9880-6cee78c4ec66",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3f5d9599-174b-485c-a110-19ec54ea12dc",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e904f414-8e6a-45fc-b7e5-b50525e22964",
-          "name": "VirusTotal Abort a Retrohunt Job",
-          "request": {
-            "name": "VirusTotal Abort a Retrohunt Job",
-            "description": {
-              "content": "VirusTotal Abort a Retrohunt Job",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs",
-                ":id",
-                "abort"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Job identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "8b5e5b2c-659b-45d0-8c7e-6eb140490857",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id",
-                    "abort"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0bef3f69-79e9-4e80-9e02-55cb3c2458e9",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id",
-                    "abort"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6c1e9ed4-62a3-4538-a127-1e6ac60d1519",
-          "name": "VirusTotal Retrieve Matches for a Retrohunt Job",
-          "request": {
-            "name": "VirusTotal Retrieve Matches for a Retrohunt Job",
-            "description": {
-              "content": "Retrohunt jobs are related to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships URL.\n\nThe supported relationships for Retrohunt jobs are described in the [Retrohunt Jobs](https://gtidocs.virustotal.com/reference/retrohunt-job-object) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "intelligence",
-                "retrohunt_jobs",
-                ":id",
-                "matching_files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of matching files to retrieve"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Job identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "abdd83a1-e698-4928-8936-ea96fb1a00e3",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id",
-                    "matching_files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2ad52422-5072-4494-a1e3-177ff15ec79c",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "intelligence",
-                    "retrohunt_jobs",
-                    ":id",
-                    "matching_files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Job identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a73b15dd-8ede-430e-9701-a40a9a390a04",
+          "createdAt": "2026-10-22T01:59:56.000Z",
+          "updatedAt": "2026-10-22T01:59:56.000Z",
+          "uid": "35240-a73b15dd-8ede-430e-9701-a40a9a390a04"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "c5917b72-8d64-4310-9832-706bc3670589",
+      "createdAt": "2026-10-22T01:59:56.000Z",
+      "updatedAt": "2026-10-22T01:59:56.000Z",
+      "uid": "35240-c5917b72-8d64-4310-9832-706bc3670589"
     }
   ],
   "auth": {
@@ -1084,25 +1106,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "5ab2e432-7487-41eb-92b2-27c9079c3ab6",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Retrohunt API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

@@ -1,32 +1,1711 @@
 {
+  "info": {
+    "_postman_id": "4ebecfd2-b9d0-438e-8cb3-dbee7a817621",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:58:40.000Z",
+    "updatedAt": "2026-10-22T01:58:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4ebecfd2-b9d0-438e-8cb3-dbee7a817621"
+  },
   "item": [
     {
-      "id": "093262b8-17ca-460c-bc46-c580482cd367",
-      "name": "IoC Investigation - URLs",
-      "description": {
-        "content": "IoC Investigation - URLs",
-        "type": "text/plain"
-      },
+      "name": "urls",
       "item": [
         {
-          "id": "2eb75cb9-6045-4c13-bd94-9d1935081dda",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "analyse",
+              "item": [
+                {
+                  "name": "VirusTotal Request a URL Rescan (re-analyze)",
+                  "id": "a9c1f4dd-d00a-408b-b7c5-d6e5fd492052",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/analyse",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        "analyse"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7c0842bb-f5f9-4c4c-a719-20026a8f83b7",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nReturns a Analysis object descriptor which can be used in the GET/analyses/{id} API endpoint to get further information about the analysis status.\n\n```json Example response\n{\n\"data\": {\n\"id\": \"u-a354494a73382ea0b4bc47f4c9e8d6c578027cd4598196dc88f05a22b5817293-1604933101\",\n\"type\": \"analysis\"\n}\n}\n```"
+                  },
+                  "response": [
+                    {
+                      "id": "f812c338-402b-4d01-ae88-5a9e855a5ceb",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/analyse",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "analyse"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-f812c338-402b-4d01-ae88-5a9e855a5ceb"
+                    },
+                    {
+                      "id": "cc219219-2fe0-4ab3-8160-b18f1d702272",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/analyse",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "analyse"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-cc219219-2fe0-4ab3-8160-b18f1d702272"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-a9c1f4dd-d00a-408b-b7c5-d6e5fd492052"
+                }
+              ],
+              "id": "92f1195d-8f5f-4884-aae4-ca05255cfe6a",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-92f1195d-8f5f-4884-aae4-ca05255cfe6a"
+            },
+            {
+              "name": "comments",
+              "item": [
+                {
+                  "name": "VirusTotal Get Comments on a URL",
+                  "id": "ebe6f050-bbde-47b6-9eb2-58279b50827c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/comments?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        "comments"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of comments to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "b70f9795-e71b-40e7-8623-129beecbd29d",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Comment objects.\nCheck comments done in VT Community regarding a specific URL.\n\n> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\n- `data`: list of (\"comment\" objects)[ref:comment-object].\n- `links`: contains \"self\" with a reference to this group of comments and \"next\", with a reference to the next group.\n- `cursor`: contains the cursor token used to access the next group of comments."
+                  },
+                  "response": [
+                    {
+                      "id": "d91dbe40-2775-4741-b6a1-6c1d5439c976",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-d91dbe40-2775-4741-b6a1-6c1d5439c976"
+                    },
+                    {
+                      "id": "52da2b0a-8775-4aeb-9325-3e5dee977845",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-52da2b0a-8775-4aeb-9325-3e5dee977845"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-ebe6f050-bbde-47b6-9eb2-58279b50827c"
+                },
+                {
+                  "name": "VirusTotal Add a Comment on a URL",
+                  "id": "f2f91c88-63f9-491d-b4c4-f5ff1fe86c96",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/comments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        "comments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cbaad353-e19a-4587-8562-d22da3314e78",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a comment for a given URL. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"comment\",\n\"attributes\": {\n\"text\": \"Lorem #ipsum dolor sit ...\"\n}\n}\n}\n```\n\nReturns a Comment object."
+                  },
+                  "response": [
+                    {
+                      "id": "bef74c87-ceee-47b2-aea0-421546eec0ae",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-bef74c87-ceee-47b2-aea0-421546eec0ae"
+                    },
+                    {
+                      "id": "6bea464f-717c-4f3e-8c00-8ac36e398502",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-6bea464f-717c-4f3e-8c00-8ac36e398502"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-f2f91c88-63f9-491d-b4c4-f5ff1fe86c96"
+                }
+              ],
+              "id": "271cfd30-841b-4696-9d5c-31a1cf9bf9ea",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-271cfd30-841b-4696-9d5c-31a1cf9bf9ea"
+            },
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Object Descriptors Related to a URL",
+                      "id": "e01a4c25-8b4d-46b0-b7f5-aa36e6549a02",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e8e415f6-3c85-4baa-9535-3673417ae272",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) URL ID"
+                            },
+                            {
+                              "id": "34aefdb8-8878-495c-8fdf-78c3126aec7f",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /urls/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "971073a6-6d9a-414a-a54e-d1ccf4efe420",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/urls/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "urls",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:40.000Z",
+                          "updatedAt": "2026-10-22T01:58:40.000Z",
+                          "uid": "35240-971073a6-6d9a-414a-a54e-d1ccf4efe420"
+                        },
+                        {
+                          "id": "d670cee8-d786-40aa-9305-77f4e943590d",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/urls/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "urls",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:40.000Z",
+                          "updatedAt": "2026-10-22T01:58:40.000Z",
+                          "uid": "35240-d670cee8-d786-40aa-9305-77f4e943590d"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-e01a4c25-8b4d-46b0-b7f5-aa36e6549a02"
+                    }
+                  ],
+                  "id": "28da0510-a5db-4627-a901-d05756783fcc",
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-28da0510-a5db-4627-a901-d05756783fcc"
+                }
+              ],
+              "id": "13391d81-af4c-4eac-beab-9ea3c3fdbcd8",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-13391d81-af4c-4eac-beab-9ea3c3fdbcd8"
+            },
+            {
+              "name": "votes",
+              "item": [
+                {
+                  "name": "VirusTotal Get Votes on a URL",
+                  "id": "55e392ed-308f-462d-aa1b-2c8d9fe812e9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/votes?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        "votes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of votes to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c5132f7b-330e-4c8f-8de3-c76ebb92bafc",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nReturns a list of Vote objects."
+                  },
+                  "response": [
+                    {
+                      "id": "cbdfb554-bc26-4414-84ee-b95a93624bd2",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/votes?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "votes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of votes to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-cbdfb554-bc26-4414-84ee-b95a93624bd2"
+                    },
+                    {
+                      "id": "23bd5f9a-008e-40a2-9c90-b8e70c81931d",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/votes?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "votes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of votes to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-23bd5f9a-008e-40a2-9c90-b8e70c81931d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-55e392ed-308f-462d-aa1b-2c8d9fe812e9"
+                },
+                {
+                  "name": "VirusTotal Add a Vote on a URL",
+                  "id": "058a6232-96e9-4afe-a494-be85efb041cf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/votes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        "votes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b7bfec13-e9ff-4ae0-a899-bf37ee0e792d",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a vote for a given URL. The body for the `POST` request must be the JSON representation of a vote object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either `harmless` or `malicious`.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"vote\",\n\"attributes\": {\n\"verdict\": \"harmless\"\n}\n}\n}\n```\n\nReturns a Vote object."
+                  },
+                  "response": [
+                    {
+                      "id": "889d7efa-f686-4320-926f-cf82f9c2eca8",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-889d7efa-f686-4320-926f-cf82f9c2eca8"
+                    },
+                    {
+                      "id": "5ec84bec-efd1-4356-8d79-9a2d22f56d52",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-5ec84bec-efd1-4356-8d79-9a2d22f56d52"
+                    },
+                    {
+                      "id": "10cec667-7fde-4412-b0f3-d47bbb3dd53c",
+                      "name": "409",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-10cec667-7fde-4412-b0f3-d47bbb3dd53c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-058a6232-96e9-4afe-a494-be85efb041cf"
+                }
+              ],
+              "id": "13e36c22-125a-4815-8ad6-dffc5662304f",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-13e36c22-125a-4815-8ad6-dffc5662304f"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to a URL",
+                  "id": "dbacb891-df09-4631-a46a-b5a760fd9082",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id/:relationship?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id",
+                        ":relationship"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of related objects to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "04aa12b7-2a9f-4dc9-b6a9-185b79ec3ada",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) URL identifier"
+                        },
+                        {
+                          "id": "0a6e2403-9c07-425a-b735-fdc0e2e32c3b",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udcd8 See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nThe relationships supported by URL objects are documented in the URL API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "14c3caca-a04d-458e-a183-317c467d0270",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-14c3caca-a04d-458e-a183-317c467d0270"
+                    },
+                    {
+                      "id": "6e96c8bf-d14c-4c14-918b-7776f21746e3",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/urls/:id/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "urls",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:40.000Z",
+                      "updatedAt": "2026-10-22T01:58:40.000Z",
+                      "uid": "35240-6e96c8bf-d14c-4c14-918b-7776f21746e3"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-dbacb891-df09-4631-a46a-b5a760fd9082"
+                }
+              ],
+              "id": "8b562322-0477-4116-b669-6fbc4bdffba2",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-8b562322-0477-4116-b669-6fbc4bdffba2"
+            },
+            {
+              "name": "VirusTotal Get a URL Report",
+              "id": "54164458-04df-4684-a62f-0819603f5f0c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                    "key": "x-tool",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/urls/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "urls",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cc7610ea-fdd2-441d-9d79-3bbd7effdf25",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) URL identifier or base64 representation of URL to scan (w/o padding)"
+                    }
+                  ]
+                },
+                "description": "> \ud83d\udcd8\n>\n> See URL identifiers from more information about how to generate a valid URL identifier for a URL.\n\nReturns a URL object."
+              },
+              "response": [
+                {
+                  "id": "9ffee042-0567-407d-a461-62161a5d0cdb",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-9ffee042-0567-407d-a461-62161a5d0cdb"
+                },
+                {
+                  "id": "0492427e-5b39-40a7-89c9-3290350954ba",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/urls/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "urls",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:40.000Z",
+                  "updatedAt": "2026-10-22T01:58:40.000Z",
+                  "uid": "35240-0492427e-5b39-40a7-89c9-3290350954ba"
+                }
+              ],
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-54164458-04df-4684-a62f-0819603f5f0c"
+            }
+          ],
+          "id": "90f893cf-b28d-4fe9-ab8b-30db9e67c0d7",
+          "createdAt": "2026-10-22T01:58:40.000Z",
+          "updatedAt": "2026-10-22T01:58:40.000Z",
+          "uid": "35240-90f893cf-b28d-4fe9-ab8b-30db9e67c0d7"
+        },
+        {
           "name": "VirusTotal Scan URL",
+          "id": "feebaed5-c020-447f-b4ea-deca8d685926",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "VirusTotal Scan URL",
-            "description": {
-              "content": "This returns an [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) ID. The analysis can be retrieved by using the [Analysis](https://gtidocs.virustotal.com/reference/analysis) endpoint.\n",
-              "type": "text/plain"
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
             },
-            "url": {
-              "path": [
-                "urls"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -37,1804 +1716,150 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
             "body": {
               "mode": "urlencoded",
               "urlencoded": [
                 {
-                  "disabled": false,
+                  "description": "(Required) URL to scan",
                   "key": "url",
-                  "value": "<string>",
-                  "description": "(Required) URL to scan"
+                  "value": "<string>"
                 }
               ]
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/urls",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "urls"
+              ]
+            },
+            "description": "This returns an Analysis ID. The analysis can be retrieved by using the Analysis endpoint."
           },
           "response": [
             {
-              "id": "b220374b-59db-49fd-8a1b-76e75c41b257",
+              "id": "db2fac6c-115f-443a-ad89-01fe1fa1ce8b",
               "name": "200",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) URL to scan",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) URL to scan",
                       "key": "url",
                       "value": "<string>"
                     }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/urls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "urls"
                   ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-db2fac6c-115f-443a-ad89-01fe1fa1ce8b"
             },
             {
-              "id": "1d5a0cb9-8dde-4c91-b0ad-57b2e8594e31",
+              "id": "0b0b37d2-ad16-47d8-8738-5ca176283de5",
               "name": "400",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) URL to scan",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) URL to scan",
                       "key": "url",
                       "value": "<string>"
                     }
                   ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/urls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "urls"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:58:40.000Z",
+              "updatedAt": "2026-10-22T01:58:40.000Z",
+              "uid": "35240-0b0b37d2-ad16-47d8-8738-5ca176283de5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b614a0a1-010d-45e4-bb6c-7b438e2ceacb",
-          "name": "VirusTotal Get a URL Report",
-          "request": {
-            "name": "VirusTotal Get a URL Report",
-            "description": {
-              "content": "> 📘\n>\n> See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a [URL](https://gtidocs.virustotal.com/reference/url-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier or base64 representation of URL to scan (w/o padding)"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                "key": "x-tool",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "06b2202a-197e-4377-8010-2f5dabf77d7e",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier or base64 representation of URL to scan (w/o padding)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                    "key": "x-tool",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "91c10ee2-f4fe-49b4-ab64-1bf5989896e1",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier or base64 representation of URL to scan (w/o padding)"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                    "key": "x-tool",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f459baf3-29ba-4b70-b942-505a713daf4a",
-          "name": "VirusTotal Request a URL Rescan (re-analyze)",
-          "request": {
-            "name": "VirusTotal Request a URL Rescan (re-analyze)",
-            "description": {
-              "content": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a [Analysis](https://gtidocs.virustotal.com/reference/analyses-object) object descriptor which can be used in the [GET/analyses/{id}](https://gtidocs.virustotal.com/reference/analysis) API endpoint to get further information about the analysis status.\n\n```json Example response\n{\n    \"data\": {\n        \"id\": \"u-a354494a73382ea0b4bc47f4c9e8d6c578027cd4598196dc88f05a22b5817293-1604933101\",\n        \"type\": \"analysis\"\n    }\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "analyse"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "e61c20e2-0814-45a4-a46a-af922baec18b",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "analyse"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "11c1c255-b869-44cc-94a7-225db6eae540",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "analyse"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "51b4b966-6728-45bf-8eca-e679693a0499",
-          "name": "VirusTotal Get Comments on a URL",
-          "request": {
-            "name": "VirusTotal Get Comments on a URL",
-            "description": {
-              "content": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comments) objects.  \nCheck comments done in VT Community regarding a specific URL.\n\n> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\n- `data`: list of (\"comment\" objects)[ref:comment-object].\n- `links`: contains \"self\" with a reference to this group of comments and \"next\", with a reference to the next group.\n- `cursor`: contains the cursor token used to access the next group of comments.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of comments to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "923dc770-42d5-43e0-b33b-aab1ef98bf57",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d17e32bb-b00f-4a09-b5b7-c161aa644853",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "de0812a4-ffd5-4a42-8d8d-143d2dbdd869",
-          "name": "VirusTotal Add a Comment on a URL",
-          "request": {
-            "name": "VirusTotal Add a Comment on a URL",
-            "description": {
-              "content": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a comment for a given URL. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comments) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "dce28492-5917-4252-bb37-039294f93b25",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0ab85eee-68db-4d35-a23e-8d2389474d61",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c89a1df0-af3c-414a-b12c-34d62d3ea03c",
-          "name": "VirusTotal Get Object Descriptors Related to a URL",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a URL",
-            "description": {
-              "content": "This endpoint is the same as [/urls/{id}/{relationship}](https://gtidocs.virustotal.com/reference/relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "696dcac3-ec2b-47cb-bdf9-771976986156",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ace1f0ff-64b6-40c7-a21e-d15c5adc2c51",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "629167b7-ffd0-4d6c-b92d-a463487fb414",
-          "name": "VirusTotal Get Votes on a URL",
-          "request": {
-            "name": "VirusTotal Get Votes on a URL",
-            "description": {
-              "content": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nReturns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of votes to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "81eb4370-bb1a-45f0-9d52-25a16b410170",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "89aacb73-5083-45ee-8560-b55b64771154",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "03d2f8e5-dccd-45cf-b153-03a95ea1f361",
-          "name": "VirusTotal Add a Vote on a URL",
-          "request": {
-            "name": "VirusTotal Add a Vote on a URL",
-            "description": {
-              "content": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nWith this endpoint you can post a vote for a given URL. The body for the `POST` request must be the JSON representation of a vote object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either `harmless` or `malicious`.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n\nReturns a [Vote](https://gtidocs.virustotal.com/reference/vote-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "ab5aacdd-75a1-4f91-9796-c24761e85436",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "97ac6861-d6d5-41ba-a127-6bd3a0b01b58",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c09ef94a-337e-4600-9ac9-215fdf6f57ec",
-              "name": "409",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"malicious\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": \\\"AlreadyExistsError\\\",\\n    \\\"message\\\": \\\"User \\\\\\\"username\\\\\\\" already voted \\\\\\\"malicious\\\\\\\" for this url\\\"\\n  }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6c5afdf4-1eb9-4929-ae1a-9a0d6f8cee2b",
-          "name": "VirusTotal Get Objects Related to a URL",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a URL",
-            "description": {
-              "content": "> 📘 See [URL identifiers](https://gtidocs.virustotal.com/reference/urls#url-identifiers) from more information about how to generate a valid URL identifier for a URL.\n\nURL objects have number of relationships to other URLs and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by URL objects are documented in the [URL](https://gtidocs.virustotal.com/reference/url-object) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "urls",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) URL identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b614872a-9284-4450-9222-0725a53f5064",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fcfa92d4-eb7d-4402-959b-5a936fcad29a",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "urls",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) URL identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:url-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:58:40.000Z",
+          "updatedAt": "2026-10-22T01:58:40.000Z",
+          "uid": "35240-feebaed5-c020-447f-b4ea-deca8d685926"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "9faae69a-0044-45a8-9fed-7c249c21c321",
+      "createdAt": "2026-10-22T01:58:40.000Z",
+      "updatedAt": "2026-10-22T01:58:40.000Z",
+      "uid": "35240-9faae69a-0044-45a8-9fed-7c249c21c321"
     }
   ],
   "auth": {
@@ -1842,25 +1867,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "1a66eed1-6227-432a-a194-86ccdac03831",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - URLs API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

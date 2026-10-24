@@ -1,360 +1,380 @@
 {
+  "info": {
+    "_postman_id": "f107cb9b-b214-41ed-a194-7f6964b62290",
+    "name": "VirusTotal API v3 - IoC Feeds IoC Feeds - Domain\u2026",
+    "description": "Per-minute and hourly intelligence feed batches for files, URLs, domains, IP addresses, and sandbox analyses. Premium tier required.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:57:09.000Z",
+    "updatedAt": "2026-10-22T01:57:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f107cb9b-b214-41ed-a194-7f6964b62290"
+  },
   "item": [
     {
-      "id": "ec01e388-f06f-4a66-98ba-e2e5c6dde1f3",
-      "name": "IoC Feeds - Domain intelligence feed",
-      "description": {
-        "content": "IoC Feeds - Domain intelligence feed",
-        "type": "text/plain"
-      },
+      "name": "feeds",
       "item": [
         {
-          "id": "f3331c76-45bb-4279-9fe9-fed7349038d9",
-          "name": "VirusTotal Get an Hourly Domain Feed Batch",
-          "request": {
-            "name": "VirusTotal Get an Hourly Domain Feed Batch",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Domain feeds endpoints are only available to users with a Domain feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [`/feeds/domains/{time}`](https://gtidocs.virustotal.com/reference/feedsdomains2time) endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided time argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "feeds",
-                "domains",
-                "hourly",
-                ":time"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "time",
-                  "description": "(Required) A string in format YYYYMMDDhh"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "domains",
+          "item": [
             {
-              "id": "05835a72-952c-4eae-b735-1285ea88daa3",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "domains",
-                    "hourly",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhh"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "hourly",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{time}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get an Hourly Domain Feed Batch",
+                      "id": "aa13bfe8-4368-4b63-823a-d5895ab6a123",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/domains/hourly/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "domains",
+                            "hourly",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "id": "54229f3b-f288-4c67-8149-209344b50e25",
+                              "key": "time",
+                              "value": "<string>",
+                              "description": "(Required) A string in format YYYYMMDDhh"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> Domain feeds endpoints are only available to users with a Domain feeds license. Contact us for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in `/feeds/domains/{time}` endpoint for a given hour. The returned file is a .tar.bz2 file which contains the 60 minutely feeds for that hour.\n\nThe provided time argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded."
+                      },
+                      "response": [
+                        {
+                          "id": "3f093b20-07cf-4eb2-8636-9e626cb5ee69",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/domains/hourly/:time",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "domains",
+                                "hourly",
+                                ":time"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "time"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:10.000Z",
+                          "updatedAt": "2026-10-22T01:57:10.000Z",
+                          "uid": "35240-3f093b20-07cf-4eb2-8636-9e626cb5ee69"
+                        },
+                        {
+                          "id": "10a26656-fc3a-4f89-976e-e7d9eb777b38",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/domains/hourly/:time",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "domains",
+                                "hourly",
+                                ":time"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "time"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:10.000Z",
+                          "updatedAt": "2026-10-22T01:57:10.000Z",
+                          "uid": "35240-10a26656-fc3a-4f89-976e-e7d9eb777b38"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:10.000Z",
+                      "updatedAt": "2026-10-22T01:57:10.000Z",
+                      "uid": "35240-aa13bfe8-4368-4b63-823a-d5895ab6a123"
+                    }
+                  ],
+                  "id": "9d12e773-697a-4dbc-8326-7690c1fd4113",
+                  "createdAt": "2026-10-22T01:57:10.000Z",
+                  "updatedAt": "2026-10-22T01:57:10.000Z",
+                  "uid": "35240-9d12e773-697a-4dbc-8326-7690c1fd4113"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "d04a1015-065d-43d9-aae5-71c2c46b6a00",
+              "createdAt": "2026-10-22T01:57:10.000Z",
+              "updatedAt": "2026-10-22T01:57:10.000Z",
+              "uid": "35240-d04a1015-065d-43d9-aae5-71c2c46b6a00"
             },
             {
-              "id": "074efa7b-46ec-4720-9fd6-919052c743b0",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "domains",
-                    "hourly",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhh"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "name": "{time}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "VirusTotal Get a Minutely Domain Feed Batch",
+                  "id": "e0d43c95-b1af-464c-a1ea-c754463a44c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feeds/domains/:time",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feeds",
+                        "domains",
+                        ":time"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1acf0996-0350-47fd-8d5f-7c60b2af2845",
+                          "key": "time",
+                          "value": "<string>",
+                          "description": "(Required) A string in format YYYYMMDDhhmm"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udea7 Special privileges required\n>\n> Domain feeds endpoints are only available to users with a Domain feeds license. Contact us for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag with respect with to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> \ud83d\udea7 Missing batches\n>\n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any Domains in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a URL object as returned by the GET /domains/{domain} endpoint."
+                  },
+                  "response": [
+                    {
+                      "id": "dd951e76-19bb-48d7-b472-495c4ac146ef",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/domains/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "domains",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:10.000Z",
+                      "updatedAt": "2026-10-22T01:57:10.000Z",
+                      "uid": "35240-dd951e76-19bb-48d7-b472-495c4ac146ef"
+                    },
+                    {
+                      "id": "9f98b043-d39f-469b-8c97-9df3da645565",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/domains/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "domains",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:10.000Z",
+                      "updatedAt": "2026-10-22T01:57:10.000Z",
+                      "uid": "35240-9f98b043-d39f-469b-8c97-9df3da645565"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:10.000Z",
+                  "updatedAt": "2026-10-22T01:57:10.000Z",
+                  "uid": "35240-e0d43c95-b1af-464c-a1ea-c754463a44c1"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "878170e9-6c7a-423b-af57-58d6a5134c0c",
+              "createdAt": "2026-10-22T01:57:10.000Z",
+              "updatedAt": "2026-10-22T01:57:10.000Z",
+              "uid": "35240-878170e9-6c7a-423b-af57-58d6a5134c0c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "42769931-b788-4638-b3d5-44c7fcab7ed7",
-          "name": "VirusTotal Get a Minutely Domain Feed Batch",
-          "request": {
-            "name": "VirusTotal Get a Minutely Domain Feed Batch",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> Domain feeds endpoints are only available to users with a Domain feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a time consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag with respect with to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> 🚧 Missing batches\n> \n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any Domains in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a URL object as returned by the [GET /domains/{domain}](https://gtidocs.virustotal.com/reference/domain-info) endpoint.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "feeds",
-                "domains",
-                ":time"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "time",
-                  "description": "(Required) A string in format YYYYMMDDhhmm"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c0b2a31f-ca6c-4e24-afb7-b5a84cbef098",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "domains",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9ed492fc-8bd2-4767-9c5d-9e3bc9fc6cc4",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "domains",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0f77547c-6747-4f63-bcbe-4b5943c3d275",
+          "createdAt": "2026-10-22T01:57:10.000Z",
+          "updatedAt": "2026-10-22T01:57:10.000Z",
+          "uid": "35240-0f77547c-6747-4f63-bcbe-4b5943c3d275"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "f99ff28b-25ef-4210-a7ed-297e496a5f99",
+      "createdAt": "2026-10-22T01:57:10.000Z",
+      "updatedAt": "2026-10-22T01:57:10.000Z",
+      "uid": "35240-f99ff28b-25ef-4210-a7ed-297e496a5f99"
     }
   ],
   "auth": {
@@ -362,25 +382,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "0ecdf27b-1484-4681-9b50-fb12484a0fc9",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Feeds - Domain intelligence feed API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

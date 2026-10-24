@@ -1,689 +1,707 @@
 {
+  "info": {
+    "_postman_id": "0f76b0fb-1d19-47eb-a294-135e00d8fe5a",
+    "name": "VirusTotal API v3 - IoC Feeds IoC Feeds - File intelligence\u2026",
+    "description": "Per-minute and hourly intelligence feed batches for files, URLs, domains, IP addresses, and sandbox analyses. Premium tier required.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:57:14.000Z",
+    "updatedAt": "2026-10-22T01:57:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0f76b0fb-1d19-47eb-a294-135e00d8fe5a"
+  },
   "item": [
     {
-      "id": "23cf809d-4a13-4817-a1ca-08bcb86226e6",
-      "name": "IoC Feeds - File intelligence feed",
-      "description": {
-        "content": "IoC Feeds - File intelligence feed",
-        "type": "text/plain"
-      },
+      "name": "feeds",
       "item": [
         {
-          "id": "c9157eed-a5dd-42aa-b661-f0d087a1c337",
-          "name": "VirusTotal Get a Hourly File Feed Batch",
-          "request": {
-            "name": "VirusTotal Get a Hourly File Feed Batch",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in [/feeds/files/{time}](https://gtidocs.virustotal.com/reference/feeds-file) endpoint for a given hour. The returned file is a `.tar.bz2` file which contains the 60 minutely feeds for that hour.\n\nThe provided `time` argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\nThe downloaded file is a bzip2 tar file which include 60 files, one for each minute, these are UTF-8 text file which contains one JSON structure per line, where the structure represents a file object as returned by the GET /files/{id} endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: download_url and submitter. The download_url attribute is a link that can be used to download the file itself, while submitter is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that submitter is not present in all files as some files are re-analyzed by Google TI without being submitted by some external user.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "feeds",
-                "files",
-                "hourly",
-                ":time"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "time",
-                  "description": "(Required) A string in format YYYYMMDDhh"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "files",
+          "item": [
             {
-              "id": "0c48c327-ebb8-4ab3-b614-620873e714e7",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    "hourly",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhh"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "hourly",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{time}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get a Hourly File Feed Batch",
+                      "id": "700d2f37-5c62-4c69-a714-a9605a8cc8e4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/hourly/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            "hourly",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fff5ba69-619d-400a-aa44-7cc971da0e2e",
+                              "key": "time",
+                              "value": "<string>",
+                              "description": "(Required) A string in format YYYYMMDDhh"
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> File feeds endpoints are only available to users with a File feeds license. Contact us for more information.\n\nThis endpoint returns a single package containing all minutely packages returned in /feeds/files/{time} endpoint for a given hour. The returned file is a `.tar.bz2` file which contains the 60 minutely feeds for that hour.\n\nThe provided `time` argument must be in `YYYYMMDDhh` format. For example, time `2021012211` returns the batches correspoding to January 21st 2021 11:00 - 11:59 UTC. You can download batches up to 7 days old, and the most recent batch has always a 2 hours lag with respect with to the current time. This means that if the current time in UTC is T you can download batch T-2h but any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\nThe downloaded file is a bzip2 tar file which include 60 files, one for each minute, these are UTF-8 text file which contains one JSON structure per line, where the structure represents a file object as returned by the GET /files/{id} endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: download_url and submitter. The download_url attribute is a link that can be used to download the file itself, while submitter is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that submitter is not present in all files as some files are re-analyzed by Google TI without being submitted by some external user."
+                      },
+                      "response": [
+                        {
+                          "id": "e3421ccb-9b17-4ccb-9429-8b208ae7669d",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/files/hourly/:time",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "files",
+                                "hourly",
+                                ":time"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "time"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:15.000Z",
+                          "updatedAt": "2026-10-22T01:57:15.000Z",
+                          "uid": "35240-e3421ccb-9b17-4ccb-9429-8b208ae7669d"
+                        },
+                        {
+                          "id": "e0184b1e-c16b-495a-b5fb-aa7baabcd377",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/files/hourly/:time",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "files",
+                                "hourly",
+                                ":time"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "time"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:15.000Z",
+                          "updatedAt": "2026-10-22T01:57:15.000Z",
+                          "uid": "35240-e0184b1e-c16b-495a-b5fb-aa7baabcd377"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-700d2f37-5c62-4c69-a714-a9605a8cc8e4"
+                    }
+                  ],
+                  "id": "7e66abc9-867e-4f7d-93ae-ecdfe1ecd4be",
+                  "createdAt": "2026-10-22T01:57:15.000Z",
+                  "updatedAt": "2026-10-22T01:57:15.000Z",
+                  "uid": "35240-7e66abc9-867e-4f7d-93ae-ecdfe1ecd4be"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "8f4f7d7e-fc05-43a4-af0c-d627ba61648d",
+              "createdAt": "2026-10-22T01:57:15.000Z",
+              "updatedAt": "2026-10-22T01:57:15.000Z",
+              "uid": "35240-8f4f7d7e-fc05-43a4-af0c-d627ba61648d"
             },
             {
-              "id": "b362d405-7653-41c7-aceb-2fd75292bdb0",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    "hourly",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhh"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "name": "{time}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "VirusTotal Get a Per-minute File Feed Batch",
+                  "id": "3307ef12-f214-4c75-8350-34ed9a0cd9f3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/feeds/files/:time",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "feeds",
+                        "files",
+                        ":time"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f7f96b11-5711-459c-ad82-af4abc3fa117",
+                          "key": "time",
+                          "value": "<string>",
+                          "description": "(Required) A string in format YYYYMMDDhhmm"
+                        }
+                      ]
+                    },
+                    "description": "> \ud83d\udea7 Special privileges required\n>\n> File feeds endpoints are only available to users with a File feeds license. Contact us for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a `time` consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag respecting to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> \ud83d\udea7 Missing batches\n>\n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any files in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a file object as returned by the GET /files/{id} endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: `download_url` and `submitter`. The `download_url` attribute is a link that can be used to download the file itself, while `submitter` is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that `submitter` is not present in all files, it will be absent when files are submitted via the web interface without triggering a new analysis due to recent submissions, or when files are re-analyzed by Google TI without being submitted by some external user."
+                  },
+                  "response": [
+                    {
+                      "id": "92ef5071-666e-4dae-a67f-1619bea05e47",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": \"\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-92ef5071-666e-4dae-a67f-1619bea05e47"
+                    },
+                    {
+                      "id": "22d0bc24-fb74-4a87-9c73-5d9b62d36bb7",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-22d0bc24-fb74-4a87-9c73-5d9b62d36bb7"
+                    },
+                    {
+                      "id": "6cc8199b-dde8-4cda-972b-c9913a93c5c7",
+                      "name": "Missing or invalid API key.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-6cc8199b-dde8-4cda-972b-c9913a93c5c7"
+                    },
+                    {
+                      "id": "6422e166-513a-42a4-a12a-6c293bd00a42",
+                      "name": "Object not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-6422e166-513a-42a4-a12a-6c293bd00a42"
+                    },
+                    {
+                      "id": "a2f0e87f-a7c3-457c-86a0-4979c97bba89",
+                      "name": "Rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:time",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":time"
+                          ],
+                          "variable": [
+                            {
+                              "key": "time"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-a2f0e87f-a7c3-457c-86a0-4979c97bba89"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:15.000Z",
+                  "updatedAt": "2026-10-22T01:57:15.000Z",
+                  "uid": "35240-3307ef12-f214-4c75-8350-34ed9a0cd9f3"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "10d255bb-d6fc-435b-a789-820fb8a99cd9",
+              "createdAt": "2026-10-22T01:57:15.000Z",
+              "updatedAt": "2026-10-22T01:57:15.000Z",
+              "uid": "35240-10d255bb-d6fc-435b-a789-820fb8a99cd9"
+            },
+            {
+              "name": "{token}",
+              "item": [
+                {
+                  "name": "download",
+                  "item": [
+                    {
+                      "name": "VirusTotal Download a File Published in the File Feed",
+                      "id": "22260dfc-542b-45e5-b4c8-9960cec7de8e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/feeds/files/:token/download",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "feeds",
+                            "files",
+                            ":token",
+                            "download"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6fe095e8-7f8a-460e-a52d-d122b1ebe873",
+                              "key": "token",
+                              "value": "<string>",
+                              "description": "(Required) Download token. It can be found inside the file's properties in the file feed."
+                            }
+                          ]
+                        },
+                        "description": "> \ud83d\udea7 Special privileges required\n>\n> File feeds endpoints are only available to users with a File feeds license. For this particular endpoint, download file privilege is also required. Contact us for more information.\n\nEach JSON object contained in the file feed packages include a URL to this API endpoint to download the corresponding file. The link only works during the feed's lifetime, which is 7 days. Check /feeds/files/{time} for more information."
+                      },
+                      "response": [
+                        {
+                          "id": "0819618f-8e5a-4f2d-94df-f4cfae059d1e",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/files/:token/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "files",
+                                ":token",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "token"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:15.000Z",
+                          "updatedAt": "2026-10-22T01:57:15.000Z",
+                          "uid": "35240-0819618f-8e5a-4f2d-94df-f4cfae059d1e"
+                        },
+                        {
+                          "id": "ce758a58-9d09-4216-be5f-b70122719f81",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/feeds/files/:token/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "feeds",
+                                "files",
+                                ":token",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "token"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:15.000Z",
+                          "updatedAt": "2026-10-22T01:57:15.000Z",
+                          "uid": "35240-ce758a58-9d09-4216-be5f-b70122719f81"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:15.000Z",
+                      "updatedAt": "2026-10-22T01:57:15.000Z",
+                      "uid": "35240-22260dfc-542b-45e5-b4c8-9960cec7de8e"
+                    }
+                  ],
+                  "id": "45de8a46-f2b6-4eff-88eb-778d5c23550d",
+                  "createdAt": "2026-10-22T01:57:15.000Z",
+                  "updatedAt": "2026-10-22T01:57:15.000Z",
+                  "uid": "35240-45de8a46-f2b6-4eff-88eb-778d5c23550d"
+                }
+              ],
+              "id": "f6f73979-40ef-4256-9fd0-81f9cdd40d67",
+              "createdAt": "2026-10-22T01:57:15.000Z",
+              "updatedAt": "2026-10-22T01:57:15.000Z",
+              "uid": "35240-f6f73979-40ef-4256-9fd0-81f9cdd40d67"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "140e4302-a78f-48c1-8b5f-307cfeb080e9",
-          "name": "VirusTotal Get a Per-minute File Feed Batch",
-          "request": {
-            "name": "VirusTotal Get a Per-minute File Feed Batch",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nWith this endpoint you can download an individual one-minute batch by providing a `time` consisting of a string with format `YYYYMMDDhhmm`. Time `201912010802` will return the batch corresponding to December 1st, 2019 08:02 UTC. You can download batches up to 7 days old, and the most recent batch has always a 60 minutes lag respecting to the current time. This means that if the current time in UTC is `T` you can download batch `T-60m` but not `T-59m` or any more recent.\n\nSuccessful calls to this endpoint will return a `302` redirect response to a URL from which the final batch file will be downloaded.\n\n> 🚧 Missing batches\n> \n> Missing batches are rare, but still can happen occasionally. This doesn't mean that you are losing any files in the feed, it just means that no batches were generated on a specific minute. The client code should be ready to accept a `404` error while retrieving a batch and proceed with the following one. However, receiving multiple `404` errors in a row for consecutive batches shouldn't happen and should be treated as an error condition.\n\nThe downloaded file is a bzip2 compressed UTF-8 text file contains one JSON structure per line, where the structure represents a file object as returned by the [GET /files/{id}](https://gtidocs.virustotal.com/reference/file-info) endpoint. Besides the standard attributes usually found in all file objects, two additional context attributes are also included: `download_url` and `submitter`. The `download_url` attribute is a link that can be used to download the file itself, while `submitter` is a dictionary with lossy-ciphered non-identifiable information about who submitted the file to Google Threat Intelligence. Notice however that `submitter` is not present in all files, it will be absent when files are submitted via the web interface without triggering a new analysis due to recent submissions, or when files are re-analyzed by Google TI without being submitted by some external user.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "feeds",
-                "files",
-                ":time"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "time",
-                  "description": "(Required) A string in format YYYYMMDDhhmm"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "8a4e2d7f-986e-447f-8629-aa44d490a9fe",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d1f5eb4d-2217-4b03-8cac-cefcf83d495b",
-              "name": "Bad request.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7a5a6dc5-3c60-4481-a2cd-9b64c2a1c301",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2879f8dd-05d4-4d34-be26-64b8a0e12a6e",
-              "name": "Object not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "14f9865e-34ec-4343-bc4c-ae1b70924c5c",
-              "name": "Rate limit or quota exceeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":time"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "time",
-                      "description": "(Required) A string in format YYYYMMDDhhmm"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b7a3fb4d-c0ce-46b1-ab3d-445fff1186b1",
-          "name": "VirusTotal Download a File Published in the File Feed",
-          "request": {
-            "name": "VirusTotal Download a File Published in the File Feed",
-            "description": {
-              "content": "> 🚧 Special privileges required\n> \n> File feeds endpoints are only available to users with a File feeds license. For this particular endpoint, download file privilege is also required. [Contact us](https://www.virustotal.com/gui/contact-us/) for more information.\n\nEach JSON object contained in the file feed packages include a URL to this API endpoint to download the corresponding file. The link only works during the feed's lifetime, which is 7 days. Check [/feeds/files/{time}](https://gtidocs.virustotal.com/reference/feeds-file) for more information.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "feeds",
-                "files",
-                ":token",
-                "download"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "token",
-                  "description": "(Required) Download token. It can be found inside the file's properties in the file feed."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c7ecc7b9-e1bb-40fb-828d-9d149eb20346",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":token",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "token",
-                      "description": "(Required) Download token. It can be found inside the file's properties in the file feed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4c88ea83-c435-4dbe-8ed6-3b6361be307b",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "feeds",
-                    "files",
-                    ":token",
-                    "download"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "token",
-                      "description": "(Required) Download token. It can be found inside the file's properties in the file feed."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "379dbd50-eaac-4e8d-ada7-d9390c8db805",
+          "createdAt": "2026-10-22T01:57:15.000Z",
+          "updatedAt": "2026-10-22T01:57:15.000Z",
+          "uid": "35240-379dbd50-eaac-4e8d-ada7-d9390c8db805"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "3e5dbda9-1e83-48d2-aad0-79e92c6651e6",
+      "createdAt": "2026-10-22T01:57:15.000Z",
+      "updatedAt": "2026-10-22T01:57:15.000Z",
+      "uid": "35240-3e5dbda9-1e83-48d2-aad0-79e92c6651e6"
     }
   ],
   "auth": {
@@ -691,25 +709,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "cd474006-0d2c-4fdc-a6f6-91f447bf2e0e",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Feeds - File intelligence feed API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

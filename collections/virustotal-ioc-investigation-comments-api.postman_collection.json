@@ -1,1336 +1,1323 @@
 {
+  "info": {
+    "_postman_id": "9ec32de9-d311-42f3-9baa-1a6763369036",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:57:53.000Z",
+    "updatedAt": "2026-10-22T01:57:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9ec32de9-d311-42f3-9baa-1a6763369036"
+  },
   "item": [
     {
-      "id": "58fbd48e-b668-44bc-900c-5e5cb34d4ef4",
-      "name": "IoC Investigation - Comments",
-      "description": {
-        "content": "IoC Investigation - Comments",
-        "type": "text/plain"
-      },
+      "name": "comments",
       "item": [
         {
-          "id": "4f0efcc4-4543-4447-9393-bd4da82debeb",
-          "name": "VirusTotal Get Latest Comments",
-          "request": {
-            "name": "VirusTotal Get Latest Comments",
-            "description": {
-              "content": "This endpoint retrieves information about the latest comments added to Google Threat Intelligence.  \nYou can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).\n\n```json Response example\n{\n  \"meta\": {\n    \"cursor\": \"Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB\"\n  },\n  \"data\": [\n    {\n      \"attributes\": {\n        \"votes\": {\n          \"positive\": 0,\n          \"abuse\": 0,\n          \"negative\": 0\n        },\n        \"tags\": [\n          \"_:api\",\n          \"_:public\",\n          \"aicc\",\n          \"monitorapp\",\n          \"malware\"\n        ],\n        \"text\": \"#aicc #monitorapp #malware\",\n        \"html\": \"#aicc #monitorapp #malware\",\n        \"date\": 1619424604\n      },\n      \"type\": \"comment\",\n      \"id\": \"u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\",\n      \"links\": {\n        \"self\": \"https://www.virustotal.com/api/v3/comments/u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&limit=1\",\n    \"next\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&cursor=Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB&limit=1\"\n  }\n}\n```\n",
-              "type": "text/plain"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Object Descriptors Related to a Comment",
+                      "id": "8d4834e2-e5c5-4691-a1e8-9f25f473dde9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b9ac3c1c-f416-4406-81f0-dcc8a2f4cb4e",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Comment identifier"
+                            },
+                            {
+                              "id": "7e588bed-97f5-4aaa-bdbf-c5869d3c035d",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /comments/{id}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "029fa73f-57ea-4481-826b-9f850ad5195d",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/comments/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "comments",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:54.000Z",
+                          "updatedAt": "2026-10-22T01:57:54.000Z",
+                          "uid": "35240-029fa73f-57ea-4481-826b-9f850ad5195d"
+                        },
+                        {
+                          "id": "62c0b5d7-b5f8-4ad8-9aa0-1009cb5dc8ad",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/comments/:id/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "comments",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:57:54.000Z",
+                          "updatedAt": "2026-10-22T01:57:54.000Z",
+                          "uid": "35240-62c0b5d7-b5f8-4ad8-9aa0-1009cb5dc8ad"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-8d4834e2-e5c5-4691-a1e8-9f25f473dde9"
+                    }
+                  ],
+                  "id": "07ccb7fd-ef4a-4dea-92e7-f3a24e400593",
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-07ccb7fd-ef4a-4dea-92e7-f3a24e400593"
+                }
+              ],
+              "id": "2d329ac6-0619-4680-a50b-a6f1743eee20",
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-2d329ac6-0619-4680-a50b-a6f1743eee20"
             },
+            {
+              "name": "vote",
+              "item": [
+                {
+                  "name": "VirusTotal Add a Vote to a Comment",
+                  "id": "08d71bcb-a0ec-489f-a392-65a550d8005c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id/vote",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id",
+                        "vote"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d28e8ef1-90fa-4d7e-8649-f3ee8b273e71",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Comment ID"
+                        }
+                      ]
+                    },
+                    "description": "```json Example response\n{\n\"data\": {\n\"abuse\": 0,\n\"negative\": 0,\n\"positive\": 1\n}\n}\n```"
+                  },
+                  "response": [
+                    {
+                      "id": "5bd8e064-e666-45b4-91d3-71ba1ea20fa7",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/vote",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            "vote"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-5bd8e064-e666-45b4-91d3-71ba1ea20fa7"
+                    },
+                    {
+                      "id": "1adc9ee2-9906-4a39-a565-09c58df5a5ab",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/vote",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            "vote"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-1adc9ee2-9906-4a39-a565-09c58df5a5ab"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-08d71bcb-a0ec-489f-a392-65a550d8005c"
+                }
+              ],
+              "id": "7bb63493-4935-40dd-b8ff-f4a0c17e3b21",
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-7bb63493-4935-40dd-b8ff-f4a0c17e3b21"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to a Comment",
+                  "id": "d3d8dbd7-8582-42fe-8063-accd072cec93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id/:relationship",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id",
+                        ":relationship"
+                      ],
+                      "variable": [
+                        {
+                          "id": "001bbd00-8bd1-4132-b0c7-6a53d9a59fb0",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Comment identifier"
+                        },
+                        {
+                          "id": "031b07f4-64f3-47b3-af3d-d0d9e4b27b3d",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.\n\nAll available relationships are documented in the Comment API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "b573ef0a-b028-4d61-9cc3-a58cf63eed77",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-b573ef0a-b028-4d61-9cc3-a58cf63eed77"
+                    },
+                    {
+                      "id": "89737a2b-15b7-423b-a0a3-bccd13cbf9a7",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-89737a2b-15b7-423b-a0a3-bccd13cbf9a7"
+                    },
+                    {
+                      "id": "2103132f-45b0-47da-a471-74610ed87bf2",
+                      "name": "Missing or invalid API key.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-2103132f-45b0-47da-a471-74610ed87bf2"
+                    },
+                    {
+                      "id": "016c0ba3-5507-4a94-abfb-ca0865ff62f1",
+                      "name": "Object not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-016c0ba3-5507-4a94-abfb-ca0865ff62f1"
+                    },
+                    {
+                      "id": "cffc1056-a540-4d68-aa44-802f67c90d1c",
+                      "name": "Rate limit or quota exceeded.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/comments/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "comments",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:57:54.000Z",
+                      "updatedAt": "2026-10-22T01:57:54.000Z",
+                      "uid": "35240-cffc1056-a540-4d68-aa44-802f67c90d1c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-d3d8dbd7-8582-42fe-8063-accd072cec93"
+                }
+              ],
+              "id": "d8a7e154-788e-4f20-9c40-d2ccdabd3290",
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-d8a7e154-788e-4f20-9c40-d2ccdabd3290"
+            },
+            {
+              "name": "VirusTotal Delete a Comment",
+              "id": "cd95232e-cb37-41e4-974a-6394a25acdc4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8ef57205-5cbb-41f4-bc28-3cf004549714",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Comment ID"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "03163c21-c08a-4358-8312-8ef45217768e",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-03163c21-c08a-4358-8312-8ef45217768e"
+                },
+                {
+                  "id": "00a5a8e9-fa02-479a-83e7-e12986dd00a9",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-00a5a8e9-fa02-479a-83e7-e12986dd00a9"
+                }
+              ],
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-cd95232e-cb37-41e4-974a-6394a25acdc4"
+            },
+            {
+              "name": "VirusTotal Get a Comment Object",
+              "id": "fccddf2f-787a-4732-a3a0-7d72f01d9dac",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/comments/:id?relationships=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Relationship name (see [table](ref:comment-object#relationships))",
+                      "key": "relationships",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "996caef7-edef-478b-b339-31b62500aa95",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Comment ID"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "23559927-65a9-4a57-ac04-5d4fe56834d8",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id?relationships=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Relationship name (see [table](ref:comment-object#relationships))",
+                          "key": "relationships",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-23559927-65a9-4a57-ac04-5d4fe56834d8"
+                },
+                {
+                  "id": "07ad4dac-43ce-488f-9ed3-1d6db6a65725",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:id?relationships=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Relationship name (see [table](ref:comment-object#relationships))",
+                          "key": "relationships",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:57:54.000Z",
+                  "updatedAt": "2026-10-22T01:57:54.000Z",
+                  "uid": "35240-07ad4dac-43ce-488f-9ed3-1d6db6a65725"
+                }
+              ],
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-fccddf2f-787a-4732-a3a0-7d72f01d9dac"
+            }
+          ],
+          "id": "80758124-0fce-4901-bf17-cab5d8b2aff0",
+          "createdAt": "2026-10-22T01:57:54.000Z",
+          "updatedAt": "2026-10-22T01:57:54.000Z",
+          "uid": "35240-80758124-0fce-4901-bf17-cab5d8b2aff0"
+        },
+        {
+          "name": "VirusTotal Get Latest Comments",
+          "id": "d52f42b2-6cbf-457e-a9d2-2ab939089010",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/comments?limit=10&filter=<string>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "comments"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Number of items to retrieve",
                   "key": "limit",
-                  "value": "10",
-                  "description": "Number of items to retrieve"
+                  "value": "10"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter returned elements",
                   "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter returned elements"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Continuation cursor",
                   "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
+                  "value": "<string>"
                 }
               ]
-            }
+            },
+            "description": "This endpoint retrieves information about the latest comments added to Google Threat Intelligence.\nYou can do some filtering over those comments, and get only those that contains a certain tag inside (e.g. filter=tag:malware).\n\n```json Response example\n{\n\"meta\": {\n\"cursor\": \"Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB\"\n},\n\"data\": [\n{\n\"attributes\": {\n\"votes\": {\n\"positive\": 0,\n\"abuse\": 0,\n\"negative\": 0\n},\n\"tags\": [\n\"_:api\",\n\"_:public\",\n\"aicc\",\n\"monitorapp\",\n\"malware\"\n],\n\"text\": \"#aicc #monitorapp #malware\",\n\"html\": \"#aicc #monitorapp #malware\",\n\"date\": 1619424604\n},\n\"type\": \"comment\",\n\"id\": \"u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\",\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/comments/u-011915942db556bbab5137f761efe61fed2b00598fea900360b800b193a7bf31-d94d7c8a\"\n}\n}\n],\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&limit=1\",\n\"next\": \"https://www.virustotal.com/api/v3/comments?filter=tag%3Amalware&cursor=Cs8BChEKBGRhdGUSCQiCnsTiupvwAhK1AWoRc352aXJ1c3RvdGFsY2xvdWRynwELEgNVUkwiQDAxMTkxNTk0MmRiNTU2YmJhYjUxMzdmNzYxZWZlNjFmZWQyYjAwNTk4ZmVhOTAwMzYwYjgwMGIxOTNhN2JmMzEMCxIHQ29tbWVudCJJMDExOTE1OTQyZGI1NTZiYmFiNTEzN2Y3NjFlZmU2MWZlZDJiMDA1OThmZWE5MDAzNjBiODAwYjE5M2E3YmYzMS1kOTRkN2M4YQwYACAB&limit=1\"\n}\n}\n```"
           },
           "response": [
             {
-              "id": "683364a0-825b-4a80-81da-f6089c1917ad",
+              "id": "357f58f5-5b68-4dc9-8f4d-3de1ad6b00e7",
               "name": "200",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "comments"
-                  ],
+                  "raw": "{{baseUrl}}/comments?limit=10&filter=<string>&cursor=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "comments"
+                  ],
                   "query": [
                     {
+                      "description": "Number of items to retrieve",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Filter returned elements",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-357f58f5-5b68-4dc9-8f4d-3de1ad6b00e7"
             },
             {
-              "id": "aa353a8b-4d91-4f75-89b7-4c15894e3409",
+              "id": "4c6d423d-2be2-4477-b10d-1b1870606b78",
               "name": "400",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "comments"
-                  ],
+                  "raw": "{{baseUrl}}/comments?limit=10&filter=<string>&cursor=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "comments"
+                  ],
                   "query": [
                     {
+                      "description": "Number of items to retrieve",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Filter returned elements",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "27919e6c-0225-42d7-b292-2ce67245927d",
-          "name": "VirusTotal Delete a Comment",
-          "request": {
-            "name": "VirusTotal Delete a Comment",
-            "description": {
-              "content": "VirusTotal Delete a Comment",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Comment ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "1fbb5fb8-b8b5-4920-a195-f5a2d4d1c2e5",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0e489f27-782a-4ee8-82f4-698e9cc90a63",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8e1aa172-4606-4e07-b57b-e665132763ff",
-          "name": "VirusTotal Get a Comment Object",
-          "request": {
-            "name": "VirusTotal Get a Comment Object",
-            "description": {
-              "content": "VirusTotal Get a Comment Object",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "relationships",
-                  "value": "<string>",
-                  "description": "Relationship name (see [table](ref:comment-object#relationships))"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Comment ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "49129456-4030-45a1-921f-856dda8da1e8",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "relationships",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1bbf98a4-0208-4df6-a7ad-c70b1cfb7e17",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "relationships",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f2f4c02a-097b-45fa-b4ea-a0b212307fb7",
-          "name": "VirusTotal Get Object Descriptors Related to a Comment",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a Comment",
-            "description": {
-              "content": "This endpoint is the same as [/comments/{id}/{relationship}](https://gtidocs.virustotal.com/reference/comments-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Comment identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "b272d249-e004-4c87-ba4e-70962c30d848",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4ed35685-b0df-4711-91c9-d8f3f4949eef",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f4d45ce6-c806-4811-bfed-51b308235da0",
-          "name": "VirusTotal Add a Vote to a Comment",
-          "request": {
-            "name": "VirusTotal Add a Vote to a Comment",
-            "description": {
-              "content": "```json Example response\n{\n    \"data\": {\n        \"abuse\": 0,\n        \"negative\": 0,\n        \"positive\": 1\n    }\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":id",
-                "vote"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Comment ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "d3ebf035-7151-40e5-abfc-8402a8f63310",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    "vote"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6c7337c6-763e-4b80-9a5c-2bdf33ad441a",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    "vote"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T01:57:54.000Z",
+              "updatedAt": "2026-10-22T01:57:54.000Z",
+              "uid": "35240-4c6d423d-2be2-4477-b10d-1b1870606b78"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "72a5f06a-cc55-49a6-807b-d37a94023a98",
-          "name": "VirusTotal Get Objects Related to a Comment",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a Comment",
-            "description": {
-              "content": "Comment objects are related to other objects in the Google Threat Intelligence dataset. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationships endpoint.\n\nAll available relationships are documented in the [Comment](https://gtidocs.virustotal.com/reference/comment-object) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Comment identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c8704db9-b17e-4ed1-9582-c3199b3fa630",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2acf21c5-8589-4cec-a1dd-817925bfe235",
-              "name": "Bad request.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6a6fca67-f44a-488d-85ad-53aa346c5a2e",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4aebbb26-69f0-4ffa-9f6a-f71bcd445b75",
-              "name": "Object not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5495bbc8-d2f5-4721-b798-9c13016c7af9",
-              "name": "Rate limit or quota exceeded.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "comments",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Comment identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:comment-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"Resource not found\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:57:54.000Z",
+          "updatedAt": "2026-10-22T01:57:54.000Z",
+          "uid": "35240-d52f42b2-6cbf-457e-a9d2-2ab939089010"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "015bb2ac-790f-45d9-b1ee-2b86b583c1e5",
+      "createdAt": "2026-10-22T01:57:54.000Z",
+      "updatedAt": "2026-10-22T01:57:54.000Z",
+      "uid": "35240-015bb2ac-790f-45d9-b1ee-2b86b583c1e5"
     }
   ],
   "auth": {
@@ -1338,25 +1325,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "2b23ed5e-ae2d-49e4-8382-0a1752184320",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Comments API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

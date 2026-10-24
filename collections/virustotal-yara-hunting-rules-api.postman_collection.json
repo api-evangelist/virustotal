@@ -1,762 +1,761 @@
 {
+  "info": {
+    "_postman_id": "c7a57b48-ce4d-493f-8359-212d42997921",
+    "name": "VirusTotal API v3 - YARA Hunting (Livehunt, Retrohunt, IoC\u2026",
+    "description": "Livehunt, Retrohunt, the IoC Stream, and crowdsourced YARA rules \u2014 VirusTotal's hunting and notification surface.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:00:01.000Z",
+    "updatedAt": "2026-10-22T02:00:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7a57b48-ce4d-493f-8359-212d42997921"
+  },
   "item": [
     {
-      "id": "ca134154-94d5-42d1-ba35-a2987e32e490",
-      "name": "YARA Hunting - Rules",
-      "description": {
-        "content": "YARA Hunting - Rules",
-        "type": "text/plain"
-      },
+      "name": "yara_rules",
       "item": [
         {
-          "id": "2ac67727-1ebf-440e-a2c0-af143826e1b3",
-          "name": "VirusTotal List Crowdsourced YARA Rules",
-          "request": {
-            "name": "VirusTotal List Crowdsourced YARA Rules",
-            "description": {
-              "content": "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\t\"meta\": {\n\t\t\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\n\t},\n\t\"data\": [\n\t\t{\n\t\t\t\"attributes\": {\n\t\t\t\t\"name\": \"PK_AXA_fun\",\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"AXA\"\n\t\t\t\t],\n\t\t\t\t\"matches\": 0,\n\t\t\t\t\"author\": \"Thomas Damonneville\",\n\t\t\t\t\"enabled\": true,\n\t\t\t\t\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n    meta:\\n        description = \\\"Phishing Kit impersonating AXA banque\\\"\\n        licence = \\\"GPL-3.0\\\"\\n        author = \\\"Thomas Damonneville\\\"\\n        reference = \\\"\\\"\\n        date = \\\"2023-05-02\\\"\\n        comment = \\\"Phishing Kit - AXA - using a fun.php page\\\"\\n\\n    strings:\\n        // the zipfile working on\\n        $zip_file = { 50 4b 03 04 }\\n        $spec_dir = \\\"css\\\"\\n        $spec_dir2 = \\\"images\\\"\\n        // specific file found in PhishingKit\\n        $spec_file = \\\"detail.html\\\"\\n        $spec_file2 = \\\"fun.php\\\"\\n        $spec_file3 = \\\"fin.html\\\"\\n        $spec_file4 = \\\"axa_pp_blanc.min.css\\\"\\n\\n    condition:\\n        // look for the ZIP header\\n        uint32(0) == 0x04034b50 and\\n        // make sure we have a local file header\\n        $zip_file and\\n        // check for file\\n        all of ($spec_file*) and\\n        all of ($spec_dir*)\\n}\",\n\t\t\t\t\"creation_date\": 1682985600,\n\t\t\t\t\"meta\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"description\",\n\t\t\t\t\t\t\"value\": \"Phishing Kit impersonating AXA banque\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"licence\",\n\t\t\t\t\t\t\"value\": \"GPL-3.0\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"author\",\n\t\t\t\t\t\t\"value\": \"Thomas Damonneville\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"reference\",\n\t\t\t\t\t\t\"value\": \"\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"date\",\n\t\t\t\t\t\t\"value\": \"2023-05-02\"\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"key\": \"comment\",\n\t\t\t\t\t\t\"value\": \"Phishing Kit - AXA - using a fun.php page\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"last_modification_date\": 1683185194\n\t\t\t},\n\t\t\t\"type\": \"yara_rule\",\n\t\t\t\"id\": \"003e1c51ef|PK_AXA_fun\",\n\t\t\t\"links\": {\n\t\t\t\t\"self\": \"https://www.virustotal.com/api/v3/yara_rules/003e1c51ef|PK_AXA_fun\"\n\t\t\t}\n\t\t}\n\t],\n\t\"links\": {\n\t\t\"self\": \"https://www.virustotal.com/api/v3/yara_rules?limit=1\",\n\t\t\"next\": \"https://www.virustotal.com/api/v3/yara_rules?cursor=Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB&limit=1\"\n\t}\n}\n```\n\nThe `filter` parameter allows to filter the rules according to the values of certain attributes. For example you can get only the enabled rules with `enabled:true`. With `name:foo` and `foo` you can search for rules having the word \"foo\" in their names or in their meta values. Notice however that this only works with full words (words delimited by non-alphanumeric characters), if the rule's name is \"foobar\" it won't appear if you filter with `name:foo`. You can combine multiple filters separating them with spaces, for example: `filter=enabled:true name:foo`.\n\nAll the accepted filters are: `author`, `creation_date`, `enabled`, `included_date`, `last_modification_date`, `name`, `tag`, `threat_category`.\n\nThe `order` parameters control the order in which rulesets are returned, accepted orders are: `matches`, `creation_date`, `included_date` and `modification_date`. You can prepend `+` and `-` suffixes to specify ascending and descending orders (examples: `name-`, `creation_date+`, ). If not suffix is specified the order is ascending by default.\n",
-              "type": "text/plain"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule",
+                      "id": "b43e5cab-d8e6-430b-8ad5-91a0ec7f54ea",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/yara_rules/:id/relationships/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "yara_rules",
+                            ":id",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "id": "35f0308a-0bd3-415b-aad4-ac32b5ac43b9",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Rule identifier"
+                            },
+                            {
+                              "id": "e8cf763e-906c-4028-806d-99eb87c20973",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "Same as /yara_rules/{id}/{relationships} except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "3d3a78d8-a5b6-428c-9483-da88d42babaa",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/yara_rules/:id/relationships/:relationship",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "yara_rules",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T02:00:02.000Z",
+                          "updatedAt": "2026-10-22T02:00:02.000Z",
+                          "uid": "35240-3d3a78d8-a5b6-428c-9483-da88d42babaa"
+                        },
+                        {
+                          "id": "ab9db433-8615-4eec-aad0-c50de2136c6c",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/yara_rules/:id/relationships/:relationship",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "yara_rules",
+                                ":id",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T02:00:02.000Z",
+                          "updatedAt": "2026-10-22T02:00:02.000Z",
+                          "uid": "35240-ab9db433-8615-4eec-aad0-c50de2136c6c"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:00:02.000Z",
+                      "updatedAt": "2026-10-22T02:00:02.000Z",
+                      "uid": "35240-b43e5cab-d8e6-430b-8ad5-91a0ec7f54ea"
+                    }
+                  ],
+                  "id": "1c9267a5-132d-477f-bb18-15e290cdda39",
+                  "createdAt": "2026-10-22T02:00:02.000Z",
+                  "updatedAt": "2026-10-22T02:00:02.000Z",
+                  "uid": "35240-1c9267a5-132d-477f-bb18-15e290cdda39"
+                }
+              ],
+              "id": "d691699a-818c-498f-b4f3-d44df09c2810",
+              "createdAt": "2026-10-22T02:00:02.000Z",
+              "updatedAt": "2026-10-22T02:00:02.000Z",
+              "uid": "35240-d691699a-818c-498f-b4f3-d44df09c2810"
             },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to a Crowdsourced YARA Rule",
+                  "id": "0a2c5061-7e86-43c4-bb19-631425a7a1c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/yara_rules/:id/:relationship",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "yara_rules",
+                        ":id",
+                        ":relationship"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6ba75b95-52a8-4fa8-b252-47497bd14fc0",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Rule identifier"
+                        },
+                        {
+                          "id": "c65ee2b5-7a82-4fd2-ad1a-ab64d4b8eada",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "YARA rule objects have relationships to other objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nThe relationships supported by YARA rule objects are documented in the YARA Rules API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "3020841c-19a7-4ebb-afa4-878495772878",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/yara_rules/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "yara_rules",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T02:00:02.000Z",
+                      "updatedAt": "2026-10-22T02:00:02.000Z",
+                      "uid": "35240-3020841c-19a7-4ebb-afa4-878495772878"
+                    },
+                    {
+                      "id": "f04bde51-ef8f-4170-a557-a33c83b0dffc",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/yara_rules/:id/:relationship",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "yara_rules",
+                            ":id",
+                            ":relationship"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T02:00:02.000Z",
+                      "updatedAt": "2026-10-22T02:00:02.000Z",
+                      "uid": "35240-f04bde51-ef8f-4170-a557-a33c83b0dffc"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:00:02.000Z",
+                  "updatedAt": "2026-10-22T02:00:02.000Z",
+                  "uid": "35240-0a2c5061-7e86-43c4-bb19-631425a7a1c5"
+                }
+              ],
+              "id": "8fb06f20-cb2c-4276-bf66-b2b731daa03e",
+              "createdAt": "2026-10-22T02:00:02.000Z",
+              "updatedAt": "2026-10-22T02:00:02.000Z",
+              "uid": "35240-8fb06f20-cb2c-4276-bf66-b2b731daa03e"
+            },
+            {
+              "name": "VirusTotal Get a Crowdsourced YARA Rule",
+              "id": "98be3866-7c3e-4fc9-a232-d4f7269ec1e7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/yara_rules/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "yara_rules",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0a6bb2e8-1db9-41b7-9192-9e6a486bcfea",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Rule identifier"
+                    }
+                  ]
+                },
+                "description": "Returns a YARA rule object."
+              },
+              "response": [
+                {
+                  "id": "e86c190e-8c1f-4354-8d9e-afee74fd2af5",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/yara_rules/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "yara_rules",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T02:00:02.000Z",
+                  "updatedAt": "2026-10-22T02:00:02.000Z",
+                  "uid": "35240-e86c190e-8c1f-4354-8d9e-afee74fd2af5"
+                },
+                {
+                  "id": "d52c6951-a844-4960-a982-e32ed6120b76",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/yara_rules/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "yara_rules",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T02:00:02.000Z",
+                  "updatedAt": "2026-10-22T02:00:02.000Z",
+                  "uid": "35240-d52c6951-a844-4960-a982-e32ed6120b76"
+                }
+              ],
+              "createdAt": "2026-10-22T02:00:02.000Z",
+              "updatedAt": "2026-10-22T02:00:02.000Z",
+              "uid": "35240-98be3866-7c3e-4fc9-a232-d4f7269ec1e7"
+            }
+          ],
+          "id": "c0e57d19-4d42-4c22-b087-6ed1509215ea",
+          "createdAt": "2026-10-22T02:00:02.000Z",
+          "updatedAt": "2026-10-22T02:00:02.000Z",
+          "uid": "35240-c0e57d19-4d42-4c22-b087-6ed1509215ea"
+        },
+        {
+          "name": "VirusTotal List Crowdsourced YARA Rules",
+          "id": "ed694362-91c1-4ecd-8de5-d37489c942d0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-apikey",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/yara_rules?limit=10&filter=<string>&order=<string>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "yara_rules"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Maximum number of rules to retrieve",
                   "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of rules to retrieve"
+                  "value": "10"
                 },
                 {
-                  "disabled": false,
+                  "description": "Return the rules matching the given criteria only",
                   "key": "filter",
-                  "value": "<string>",
-                  "description": "Return the rules matching the given criteria only"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Sort order",
                   "key": "order",
-                  "value": "<string>",
-                  "description": "Sort order"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Continuation cursor",
                   "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
+                  "value": "<string>"
                 }
               ]
-            }
+            },
+            "description": "This endpoint lists the different Google Threat Intelligence's Crowdsourced YARA rules.\n\n```json Example response\n{\n\"meta\": {\n\"cursor\": \"Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB\"\n},\n\"data\": [\n{\n\"attributes\": {\n\"name\": \"PK_AXA_fun\",\n\"tags\": [\n\"AXA\"\n],\n\"matches\": 0,\n\"author\": \"Thomas Damonneville\",\n\"enabled\": true,\n\"rule\": \"rule PK_AXA_fun : AXA\\n{\\n meta:\\n description = \\\"Phishing Kit impersonating AXA banque\\\"\\n licence = \\\"GPL-3.0\\\"\\n author = \\\"Thomas Damonneville\\\"\\n reference = \\\"\\\"\\n date = \\\"2023-05-02\\\"\\n comment = \\\"Phishing Kit - AXA - using a fun.php page\\\"\\n\\n strings:\\n // the zipfile working on\\n $zip_file = { 50 4b 03 04 }\\n $spec_dir = \\\"css\\\"\\n $spec_dir2 = \\\"images\\\"\\n // specific file found in PhishingKit\\n $spec_file = \\\"detail.html\\\"\\n $spec_file2 = \\\"fun.php\\\"\\n $spec_file3 = \\\"fin.html\\\"\\n $spec_file4 = \\\"axa_pp_blanc.min.css\\\"\\n\\n condition:\\n // look for the ZIP header\\n uint32(0) == 0x04034b50 and\\n // make sure we have a local file header\\n $zip_file and\\n // check for file\\n all of ($spec_file*) and\\n all of ($spec_dir*)\\n}\",\n\"creation_date\": 1682985600,\n\"meta\": [\n{\n\"key\": \"description\",\n\"value\": \"Phishing Kit impersonating AXA banque\"\n},\n{\n\"key\": \"licence\",\n\"value\": \"GPL-3.0\"\n},\n{\n\"key\": \"author\",\n\"value\": \"Thomas Damonneville\"\n},\n{\n\"key\": \"reference\",\n\"value\": \"\"\n},\n{\n\"key\": \"date\",\n\"value\": \"2023-05-02\"\n},\n{\n\"key\": \"comment\",\n\"value\": \"Phishing Kit - AXA - using a fun.php page\"\n}\n],\n\"last_modification_date\": 1683185194\n},\n\"type\": \"yara_rule\",\n\"id\": \"003e1c51ef|PK_AXA_fun\",\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/yara_rules/003e1c51ef|PK_AXA_fun\"\n}\n}\n],\n\"links\": {\n\"self\": \"https://www.virustotal.com/api/v3/yara_rules?limit=1\",\n\"next\": \"https://www.virustotal.com/api/v3/yara_rules?cursor=Ck8KDwoCbG0SCQjdvIy9kdv-AhI4ahFzfnZpcnVzdG90YWxjbG91ZHIjCxIIWWFyYVJ1bGUiFTAwM2UxYzUxZWZ8UEtfQVhBX2Z1bgwYACAB&limit=1\"\n}\n}\n```\n\nThe `filter` parameter allows to filter the rules according to the values of certain attributes. For example you can get only the enabled rules with `enabled:true`. With `name:foo` and `foo` you can search for rules having the word \"foo\" in their names or in their meta values. Notice however that this only works with full words (words delimited by non-alphanumeric characters), if the rule's name is \"foobar\" it won't appear if you filter with `name:foo`. You can combine multiple filters separating them with spaces, for example: `filter=enabled:true name:foo`.\n\nAll the accepted filters are: `author`, `creation_date`, `enabled`, `included_date`, `last_modification_date`, `name`, `tag`, `threat_category`.\n\nThe `order` parameters control the order in which rulesets are returned, accepted orders are: `matches`, `creation_date`, `included_date` and `modification_date`. You can prepend `+` and `-` suffixes to specify ascending and descending orders (examples: `name-`, `creation_date+`, ). If not suffix is specified the order is ascending by default."
           },
           "response": [
             {
-              "id": "b0fc26c6-0a77-4127-a621-bad606e2b060",
+              "id": "048caf44-2af9-4ac9-8f05-7a67fb8b7fd8",
               "name": "200",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "yara_rules"
-                  ],
+                  "raw": "{{baseUrl}}/yara_rules?limit=10&filter=<string>&order=<string>&cursor=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "yara_rules"
+                  ],
                   "query": [
                     {
+                      "description": "Maximum number of rules to retrieve",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Return the rules matching the given criteria only",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Sort order",
                       "key": "order",
                       "value": "<string>"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T02:00:02.000Z",
+              "updatedAt": "2026-10-22T02:00:02.000Z",
+              "uid": "35240-048caf44-2af9-4ac9-8f05-7a67fb8b7fd8"
             },
             {
-              "id": "ad4575d9-a736-4557-bf43-9b23b1d1f3c9",
+              "id": "6105afd1-527a-4975-ac50-37aa6956f6c5",
               "name": "400",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-apikey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "yara_rules"
-                  ],
+                  "raw": "{{baseUrl}}/yara_rules?limit=10&filter=<string>&order=<string>&cursor=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "yara_rules"
+                  ],
                   "query": [
                     {
+                      "description": "Maximum number of rules to retrieve",
                       "key": "limit",
                       "value": "10"
                     },
                     {
+                      "description": "Return the rules matching the given criteria only",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Sort order",
                       "key": "order",
                       "value": "<string>"
                     },
                     {
+                      "description": "Continuation cursor",
                       "key": "cursor",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "\"{}\"",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-10-22T02:00:02.000Z",
+              "updatedAt": "2026-10-22T02:00:02.000Z",
+              "uid": "35240-6105afd1-527a-4975-ac50-37aa6956f6c5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "57310c5f-8086-45e6-8b49-ba1aeac52d6e",
-          "name": "VirusTotal Get a Crowdsourced YARA Rule",
-          "request": {
-            "name": "VirusTotal Get a Crowdsourced YARA Rule",
-            "description": {
-              "content": "Returns a [YARA rule](https://gtidocs.virustotal.com/reference/yara-rule-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "yara_rules",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Rule identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "7a94ba15-eb00-4693-8101-775f6435ab8e",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e82250b6-3caa-4ae3-941c-1c3d8580c32e",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5d368095-7167-4bb2-8130-a872b3162277",
-          "name": "VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule",
-          "request": {
-            "name": "VirusTotal Get Objects Descriptors Related to a Crowdsourced YARA Rule",
-            "description": {
-              "content": "Same as [/yara_rules/{id}/{relationships}](https://gtidocs.virustotal.com/reference/crowdsourced-yara-rule-relationship-endpoint) except it returns just the related object's descriptor (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "yara_rules",
-                ":id",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Rule identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "94db75b2-2b54-4b51-83aa-c988ec4716f1",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b50f9a79-e9ea-4450-ae39-3167a9325e39",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ca75de94-bf22-4730-b6c5-ea271f98cb00",
-          "name": "VirusTotal Get Objects Related to a Crowdsourced YARA Rule",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a Crowdsourced YARA Rule",
-            "description": {
-              "content": "YARA rule objects have relationships to other objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nThe relationships supported by YARA rule objects are documented in the [YARA Rules](https://gtidocs.virustotal.com/reference/yara-rule-object#relationships) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "yara_rules",
-                ":id",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Rule identifier"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "4c98977e-b86a-47c7-a43d-c91de406dd14",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d72daeb8-803f-4091-ab1a-947817188133",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "yara_rules",
-                    ":id",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Rule identifier"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:yara-rule-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:00:02.000Z",
+          "updatedAt": "2026-10-22T02:00:02.000Z",
+          "uid": "35240-ed694362-91c1-4ecd-8de5-d37489c942d0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "id": "e59041f1-8bdf-42e2-bc74-52a38f9e5972",
+      "createdAt": "2026-10-22T02:00:02.000Z",
+      "updatedAt": "2026-10-22T02:00:02.000Z",
+      "uid": "35240-e59041f1-8bdf-42e2-bc74-52a38f9e5972"
     }
   ],
   "auth": {
@@ -764,25 +763,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "652dacd6-0278-4889-ba6a-25efde6b78b7",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management YARA Hunting - Rules API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }

@@ -1,107 +1,1332 @@
 {
+  "info": {
+    "_postman_id": "92cc96fc-1f02-49e9-a22b-c1d4a4498175",
+    "name": "VirusTotal API v3 - IoC Investigation IoC Investigation\u2026",
+    "description": "Investigate files, URLs, IP addresses, and domains. Submit and analyse samples, retrieve reports, get comments and votes, view sandbox behaviour, traverse the relationships graph.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:58:00.000Z",
+    "updatedAt": "2026-10-22T01:58:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-92cc96fc-1f02-49e9-a22b-c1d4a4498175"
+  },
   "item": [
     {
-      "id": "abc36b07-c3ed-413f-b595-10115549dac4",
-      "name": "IoC Investigation - Domains & Resolutions",
-      "description": {
-        "content": "IoC Investigation - Domains & Resolutions",
-        "type": "text/plain"
-      },
+      "name": "domains",
       "item": [
         {
-          "id": "01640247-007b-4842-940b-87bb5f5ab8ca",
-          "name": "VirusTotal Get a Domain Report",
-          "request": {
-            "name": "VirusTotal Get a Domain Report",
-            "description": {
-              "content": "Returns a [Domain](https://gtidocs.virustotal.com/reference/domains-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) Domain name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                "key": "x-tool",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{domain}",
+          "item": [
             {
-              "id": "c30b8280-250c-45f7-9343-460031d7d74f",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "comments",
+              "item": [
+                {
+                  "name": "VirusTotal Get Comments on a Domain",
+                  "id": "090ba019-ea5a-45ef-9650-6ce193e2b8cd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain/comments?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain",
+                        "comments"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of comments to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "756b4995-782e-499c-a7eb-1ecd6fe2218f",
+                          "key": "domain",
+                          "value": "<string>",
+                          "description": "(Required) Domain name"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Comment objects."
+                  },
+                  "response": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
+                      "id": "b46e5a3e-0651-44ec-bc35-8ce99093095e",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-b46e5a3e-0651-44ec-bc35-8ce99093095e"
+                    },
+                    {
+                      "id": "06e1fb8d-2979-4bbf-b9b3-88e68c82d4d8",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/comments?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "comments"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of comments to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-06e1fb8d-2979-4bbf-b9b3-88e68c82d4d8"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-090ba019-ea5a-45ef-9650-6ce193e2b8cd"
+                },
+                {
+                  "name": "VirusTotal Add a Comment to a Domain",
+                  "id": "4d85c2a2-d6f2-4493-9cfe-1aa4e874f940",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain/comments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain",
+                        "comments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "96e01b4f-f161-4400-823c-e8ab3b3cf44c",
+                          "key": "domain",
+                          "value": "<string>",
+                          "description": "(Required) Domain name"
+                        }
+                      ]
+                    },
+                    "description": "With this endpoint you can post a comment for a given domain. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"comment\",\n\"attributes\": {\n\"text\": \"Lorem #ipsum dolor sit ...\"\n}\n}\n}\n```\n\nReturns a Comment object."
+                  },
+                  "response": [
+                    {
+                      "id": "39cc028b-1717-4beb-879b-d3e5c8a3bcb6",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-39cc028b-1717-4beb-879b-d3e5c8a3bcb6"
+                    },
+                    {
+                      "id": "1a310991-e41b-4919-959a-e9004f3ca982",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/comments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "comments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-1a310991-e41b-4919-959a-e9004f3ca982"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-4d85c2a2-d6f2-4493-9cfe-1aa4e874f940"
+                }
+              ],
+              "id": "01ed76b5-dab7-4ccc-993b-c1d4c5f008df",
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-01ed76b5-dab7-4ccc-993b-c1d4c5f008df"
+            },
+            {
+              "name": "relationships",
+              "item": [
+                {
+                  "name": "{relationship}",
+                  "item": [
+                    {
+                      "name": "VirusTotal Get Object Descriptors Related to a Domain",
+                      "id": "086f5366-bfe3-4035-8f9d-5925f39ab30d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "apikey",
+                          "apikey": [
+                            {
+                              "key": "key",
+                              "value": "x-apikey",
+                              "type": "string"
+                            },
+                            {
+                              "key": "value",
+                              "value": "{{apiKey}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "in",
+                              "value": "header",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/relationships/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "relationships",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "bb6c0e27-264b-497c-a799-d9b2a197c765",
+                              "key": "domain",
+                              "value": "<string>",
+                              "description": "(Required) Domain name"
+                            },
+                            {
+                              "id": "2173ddd6-14fa-4fc1-9289-ce038ccb9fc5",
+                              "key": "relationship",
+                              "value": "<string>",
+                              "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
+                            }
+                          ]
+                        },
+                        "description": "This endpoint is the same as /domains/{domain}/{relationship} except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "be134d4f-3ded-4433-a546-152d3805f58e",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/domains/:domain/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "domains",
+                                ":domain",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "domain"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:00.000Z",
+                          "updatedAt": "2026-10-22T01:58:00.000Z",
+                          "uid": "35240-be134d4f-3ded-4433-a546-152d3805f58e"
+                        },
+                        {
+                          "id": "4fc24621-e3d6-4e07-941e-dc0e5dae5030",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-apikey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/domains/:domain/relationships/:relationship?limit=10&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "domains",
+                                ":domain",
+                                "relationships",
+                                ":relationship"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Maximum number of related objects to retrieve",
+                                  "key": "limit",
+                                  "value": "10"
+                                },
+                                {
+                                  "description": "Continuation cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "domain"
+                                },
+                                {
+                                  "key": "relationship"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:58:00.000Z",
+                          "updatedAt": "2026-10-22T01:58:00.000Z",
+                          "uid": "35240-4fc24621-e3d6-4e07-941e-dc0e5dae5030"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-086f5366-bfe3-4035-8f9d-5925f39ab30d"
+                    }
+                  ],
+                  "id": "2586f073-96a9-46c9-b507-09d0dfd06188",
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-2586f073-96a9-46c9-b507-09d0dfd06188"
+                }
+              ],
+              "id": "d1edde0b-d62c-40a4-8ff9-6b8b7810903c",
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-d1edde0b-d62c-40a4-8ff9-6b8b7810903c"
+            },
+            {
+              "name": "votes",
+              "item": [
+                {
+                  "name": "VirusTotal Get Votes on a Domain",
+                  "id": "ec901fb2-0501-4ce3-a6ed-64352ed6de51",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain/votes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain",
+                        "votes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "22577096-11b5-474b-99b5-559160da6d61",
+                          "key": "domain",
+                          "value": "<string>",
+                          "description": "(Required) domain parameter"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of Vote objects."
+                  },
+                  "response": [
+                    {
+                      "id": "61888eba-574f-4799-aa87-8d7e8221ff58",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-61888eba-574f-4799-aa87-8d7e8221ff58"
+                    },
+                    {
+                      "id": "46660bc1-fccf-47fd-8be1-f32b9eb6a2db",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-46660bc1-fccf-47fd-8be1-f32b9eb6a2db"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-ec901fb2-0501-4ce3-a6ed-64352ed6de51"
+                },
+                {
+                  "name": "VirusTotal Add a Vote to a Domain",
+                  "id": "ef9de292-e4e8-489d-aec8-256558c138c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain/votes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain",
+                        "votes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c2a7e9ca-a583-4c77-9d74-de841957da70",
+                          "key": "domain",
+                          "value": "<string>",
+                          "description": "(Required) hostname or domain name"
+                        }
+                      ]
+                    },
+                    "description": "With this endpoint you can post a vote for a given domain. The body for the POST request must be the JSON representation of a vote object. Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n\"data\": {\n\"type\": \"vote\",\n\"attributes\": {\n\"verdict\": \"harmless\"\n}\n}\n}\n```\n\nReturns a votes object."
+                  },
+                  "response": [
+                    {
+                      "id": "924b76b1-c07a-4243-a8ae-da42c042b5f4",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-924b76b1-c07a-4243-a8ae-da42c042b5f4"
+                    },
+                    {
+                      "id": "5de8addf-fd7a-433d-bb13-7df14b8cd79e",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-5de8addf-fd7a-433d-bb13-7df14b8cd79e"
+                    },
+                    {
+                      "id": "51b6622e-3199-4a68-ba1c-31ab7d408d36",
+                      "name": "409",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/votes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            "votes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-51b6622e-3199-4a68-ba1c-31ab7d408d36"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-ef9de292-e4e8-489d-aec8-256558c138c1"
+                }
+              ],
+              "id": "38d0b18f-e3d1-4081-b195-b7edadb1a085",
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-38d0b18f-e3d1-4081-b195-b7edadb1a085"
+            },
+            {
+              "name": "{relationship}",
+              "item": [
+                {
+                  "name": "VirusTotal Get Objects Related to a Domain",
+                  "id": "13848d34-2022-46d1-929e-83528ed652a1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-apikey",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain/:relationship?limit=10&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain",
+                        ":relationship"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of related objects to retrieve",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Continuation cursor",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "77e3ceae-0716-4389-b934-a7aa362fd974",
+                          "key": "domain",
+                          "value": "<string>",
+                          "description": "(Required) Domain name"
+                        },
+                        {
+                          "id": "22b4b15b-a930-454a-a5bb-2271244667d5",
+                          "key": "relationship",
+                          "value": "<string>",
+                          "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
+                        }
+                      ]
+                    },
+                    "description": "Domain objects have number of relationships to other Domains and objects. As mentioned in the Relationships section, those related objects can be retrieved by sending `GET` requests to the relationship URL.\n\nAll available relationships are documented in the domain API object page."
+                  },
+                  "response": [
+                    {
+                      "id": "af7a54d0-8527-4ffe-8322-0e3f634bb71f",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-af7a54d0-8527-4ffe-8322-0e3f634bb71f"
+                    },
+                    {
+                      "id": "5e12949c-468e-412b-84e5-5f7532b1bfa5",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-apikey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/domains/:domain/:relationship?limit=10&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "domains",
+                            ":domain",
+                            ":relationship"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of related objects to retrieve",
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Continuation cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "domain"
+                            },
+                            {
+                              "key": "relationship"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-10-22T01:58:00.000Z",
+                      "updatedAt": "2026-10-22T01:58:00.000Z",
+                      "uid": "35240-5e12949c-468e-412b-84e5-5f7532b1bfa5"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-13848d34-2022-46d1-929e-83528ed652a1"
+                }
+              ],
+              "id": "911a909a-7506-45a6-995c-68d17ef53e78",
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-911a909a-7506-45a6-995c-68d17ef53e78"
+            },
+            {
+              "name": "VirusTotal Get a Domain Report",
+              "id": "9b7bca47-873c-48b0-8a9e-1705e0815ff8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
                     "key": "x-tool",
                     "value": "<string>"
@@ -111,1518 +1336,323 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a8f20590-4f7b-45fd-bd9a-dc7d6faaf19e",
-              "name": "400",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/domains/:domain",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "domains",
                     ":domain"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "149c406c-521e-4a89-8644-7130cb46868f",
                       "key": "domain",
+                      "value": "<string>",
                       "description": "(Required) Domain name"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
-                    "key": "x-tool",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns a Domain object."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "72c2c652-d597-498e-afa6-9e654d3182fc",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain"
+                      ],
+                      "variable": [
+                        {
+                          "key": "domain"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": \"\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-72c2c652-d597-498e-afa6-9e654d3182fc"
+                },
+                {
+                  "id": "6216d1c7-8f30-48ba-879d-a8dc71520f41",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "The name of your tool or service. This is required to obtain the gti_assesment data",
+                        "key": "x-tool",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/domains/:domain",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "domains",
+                        ":domain"
+                      ],
+                      "variable": [
+                        {
+                          "key": "domain"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-6216d1c7-8f30-48ba-879d-a8dc71520f41"
                 }
               ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-9b7bca47-873c-48b0-8a9e-1705e0815ff8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e3b763a2-f761-48b5-a2e9-8213171c5a31",
-          "name": "VirusTotal Get Comments on a Domain",
-          "request": {
-            "name": "VirusTotal Get Comments on a Domain",
-            "description": {
-              "content": "Returns a list of [Comment](https://gtidocs.virustotal.com/reference/comment-object) objects.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of comments to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) Domain name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "875f101f-8f02-42c3-a926-1f73adf0f107",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d5fe6824-8a72-4df5-a9fd-157ebebe4cb1",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dbc51d12-5023-46f4-a814-01cbefa38f4f",
-          "name": "VirusTotal Add a Comment to a Domain",
-          "request": {
-            "name": "VirusTotal Add a Comment to a Domain",
-            "description": {
-              "content": "With this endpoint you can post a comment for a given domain. The body for the POST request must be the JSON representation of a comment object. Notice however that you don't need to provide an ID for the object, as they are automatically generated for new comments.\n\nAny word starting with # in your comment's text will be considered a tag, and added to the comment's tag attribute.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"comment\",\n    \"attributes\": {\n    \t\"text\": \"Lorem #ipsum dolor sit ...\"\n    }\n  }\n}\n```\n\nReturns a [Comment](https://gtidocs.virustotal.com/reference/comment-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                "comments"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) Domain name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "2f81b91d-fa90-43cc-aa4d-0009812d2f80",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8bb60d9d-0f3a-473a-9404-01ec0b77514e",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "comments"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"comment\\\", \\\"attributes\\\": {\\\"text\\\": \\\"Lorem ipsum dolor sit ...\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1f3744b0-f8e6-480a-a96e-d7b8e7de1070",
-          "name": "VirusTotal Get Object Descriptors Related to a Domain",
-          "request": {
-            "name": "VirusTotal Get Object Descriptors Related to a Domain",
-            "description": {
-              "content": "This endpoint is the same as [/domains/{domain}/{relationship}](https://gtidocs.virustotal.com/reference/domains-relationships) except it returns just the related object's IDs (and context attributes, if any) instead of returning all attributes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                "relationships",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) Domain name"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "f817dd8e-ad23-41cf-b9f3-e4d116ba9860",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "984da6b4-3c31-4cf6-a3d2-8f60681dcf51",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "relationships",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "892d64d3-5b36-473a-b6e9-b5527d929c30",
-          "name": "VirusTotal Get Votes on a Domain",
-          "request": {
-            "name": "VirusTotal Get Votes on a Domain",
-            "description": {
-              "content": "Returns a list of [Vote](https://gtidocs.virustotal.com/reference/vote-object) objects.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) domain parameter"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "60e0c0a2-f043-4240-823c-8aaa6b4ac4f3",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) domain parameter"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a727fd24-6038-4071-bd07-1982d0dcae64",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) domain parameter"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d6b87d14-cded-4ce3-ae85-a3decc116f41",
-          "name": "VirusTotal Add a Vote to a Domain",
-          "request": {
-            "name": "VirusTotal Add a Vote to a Domain",
-            "description": {
-              "content": "With this endpoint you can post a vote for a given domain. The body for the POST request must be the JSON representation of a [vote object](https://gtidocs.virustotal.com/reference/vote-object). Note however that you don't need to provide an ID for the object, as they are automatically generated for new votes.\n\nThe verdict attribute must have be either harmless or malicious.\n\n```json Example request\n{\n  \"data\": {\n    \"type\": \"vote\",\n    \"attributes\": {\n    \t\"verdict\": \"harmless\"\n    }\n  }\n}\n```\n\nReturns a [votes](https://gtidocs.virustotal.com/reference/vote-object) object.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                "votes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) hostname or domain name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c7c498ea-13d7-4d25-8f7e-100689cdf178",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) hostname or domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "205fb34a-ec43-4cd9-8acc-4164327758ff",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) hostname or domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c9640b06-8045-449f-b331-9313f10ccaed",
-              "name": "409",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    "votes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) hostname or domain name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"data\": \"{\\\"type\\\": \\\"vote\\\", \\\"attributes\\\": {\\\"verdict\\\": \\\"harmless\\\"}}\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": \\\"AlreadyExistsError\\\",\\n    \\\"message\\\": \\\"User \\\\\\\"username\\\\\\\" already voted \\\\\\\"harmless\\\\\\\" for this domain\\\"\\n  }\\n}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "908a43c7-2cb1-4d59-8fc7-06290f9ed97e",
-          "name": "VirusTotal Get Objects Related to a Domain",
-          "request": {
-            "name": "VirusTotal Get Objects Related to a Domain",
-            "description": {
-              "content": "Domain objects have number of relationships to other Domains and objects. As mentioned in the [Relationships](https://gtidocs.virustotal.com/reference/relationships) section, those related objects can be retrieved by sending `GET` requests to the relationship URL. \n\nAll available relationships are documented in the [domain](https://gtidocs.virustotal.com/reference/domains-object) API object page.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "domains",
-                ":domain",
-                ":relationship"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Maximum number of related objects to retrieve"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Continuation cursor"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "domain",
-                  "description": "(Required) Domain name"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "relationship",
-                  "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "300f80f6-0f74-480d-964b-1893cd4f31eb",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "db6fdbdc-99ed-4f45-b8ee-0d0fba843708",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "domains",
-                    ":domain",
-                    ":relationship"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "10"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "domain",
-                      "description": "(Required) Domain name"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "relationship",
-                      "description": "(Required) Relationship name (see [table](ref:domains-object#relationships))"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b474f151-851a-45e0-8253-75ec75f84dd9",
-          "name": "VirusTotal Get a DNS Resolution Object",
-          "request": {
-            "name": "VirusTotal Get a DNS Resolution Object",
-            "description": {
-              "content": "This endpoint retrieves a [Resolution](https://gtidocs.virustotal.com/reference/resolution-object) object by its ID. A resolution object ID is made by appending the IP and the domain it resolves to together.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "resolutions",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resolution object ID."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "x-apikey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "6e2a5992-b6cd-47f9-8769-30983e0986f7",
-              "name": "200",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "resolutions",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resolution object ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2430416c-32c2-4df1-90d0-5af55f85ae87",
-              "name": "400",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "resolutions",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resolution object ID."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "x-apikey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "\"{}\"",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8961b3ac-52ce-4051-ad3f-5be3c2ede5e2",
+          "createdAt": "2026-10-22T01:58:00.000Z",
+          "updatedAt": "2026-10-22T01:58:00.000Z",
+          "uid": "35240-8961b3ac-52ce-4051-ad3f-5be3c2ede5e2"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
+      "id": "12aa7b3b-ac7f-4b7a-a7e2-75b4ba621069",
+      "createdAt": "2026-10-22T01:58:00.000Z",
+      "updatedAt": "2026-10-22T01:58:00.000Z",
+      "uid": "35240-12aa7b3b-ac7f-4b7a-a7e2-75b4ba621069"
+    },
     {
-      "type": "string",
-      "value": "https://www.virustotal.com/api/v3",
-      "key": "baseUrl"
+      "name": "resolutions",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "VirusTotal Get a DNS Resolution Object",
+              "id": "9fbd7b70-6ae2-4630-89a2-d97600eb32ed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-apikey",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resolutions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resolutions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d60f1fc0-b3cc-407e-a13a-318d1ea21523",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resolution object ID."
+                    }
+                  ]
+                },
+                "description": "This endpoint retrieves a Resolution object by its ID. A resolution object ID is made by appending the IP and the domain it resolves to together."
+              },
+              "response": [
+                {
+                  "id": "39724a38-2fe1-40d6-a542-6f6daa9b71c3",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resolutions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resolutions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-39724a38-2fe1-40d6-a542-6f6daa9b71c3"
+                },
+                {
+                  "id": "5973f063-d488-413c-bfbc-6aff3aa594f4",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-apikey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resolutions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resolutions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:58:00.000Z",
+                  "updatedAt": "2026-10-22T01:58:00.000Z",
+                  "uid": "35240-5973f063-d488-413c-bfbc-6aff3aa594f4"
+                }
+              ],
+              "createdAt": "2026-10-22T01:58:00.000Z",
+              "updatedAt": "2026-10-22T01:58:00.000Z",
+              "uid": "35240-9fbd7b70-6ae2-4630-89a2-d97600eb32ed"
+            }
+          ],
+          "id": "4281a3c9-3a25-412b-bbd6-d92859e36e22",
+          "createdAt": "2026-10-22T01:58:00.000Z",
+          "updatedAt": "2026-10-22T01:58:00.000Z",
+          "uid": "35240-4281a3c9-3a25-412b-bbd6-d92859e36e22"
+        }
+      ],
+      "id": "31d9b53f-35e9-4d97-93a4-e5e3cb86e812",
+      "createdAt": "2026-10-22T01:58:00.000Z",
+      "updatedAt": "2026-10-22T01:58:00.000Z",
+      "uid": "35240-31d9b53f-35e9-4d97-93a4-e5e3cb86e812"
     }
   ],
   "auth": {
@@ -1630,25 +1660,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "x-apikey"
+        "value": "x-apikey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d5c0d78d-6526-406e-8a65-21f32f651aaf",
-    "name": "VirusTotal API v3 - Access Control Access Control - Group Management IoC Investigation - Domains & Resolutions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Manage users, groups, service accounts, API quotas, and overall account usage in VirusTotal / Google Threat Intelligence.\n\nContact Support:\n Name: VirusTotal / Google Threat Intelligence",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.virustotal.com/api/v3"
     }
-  }
+  ]
 }
